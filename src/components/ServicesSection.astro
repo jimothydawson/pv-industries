@@ -1,0 +1,324 @@
+---
+// Services section data
+const sectionData = {
+  subtitle: "02",
+  title: "A comprehensive set of services",
+  browseAllLink: "/services",
+  services: [
+    {
+      id: 1,
+      title: "Solar Panel Collection",
+      description: "We arrange convenient collection or drop-off services for your end-of-life solar panels across Australia.",
+      icon: "🚛",
+      link: "/services/collection"
+    },
+    {
+      id: 2,
+      title: "Panel Disassembly",
+      description: "Professional separation of frames, junction boxes, and cables using specialized equipment and techniques.",
+      icon: "🔧",
+      link: "/services/disassembly"
+    },
+    {
+      id: 3,
+      title: "Material Recovery",
+      description: "Advanced processes to recover valuable materials including glass, aluminum, silver, and other precious metals.",
+      icon: "♻️",
+      link: "/services/recovery"
+    },
+    {
+      id: 4,
+      title: "Sustainable Disposal",
+      description: "Environmentally responsible disposal of non-recoverable materials, ensuring zero waste to landfill.",
+      icon: "🌱",
+      link: "/services/disposal"
+    }
+  ]
+};
+---
+
+<section class="services-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <div class="header-content">
+        <div class="subtitle-wrapper">
+          <div class="subtitle">{sectionData.subtitle}</div>
+          <div class="subtitle-divider"></div>
+        </div>
+        <h2 class="section-title">{sectionData.title}</h2>
+      </div>
+      <div class="header-action">
+        <a href={sectionData.browseAllLink} class="button button-secondary dark">
+          Browse all services
+        </a>
+      </div>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="services-grid">
+      {sectionData.services.map((service, index) => (
+        <div class="service-card" style={`animation-delay: ${index * 0.1}s`}>
+          <a href={service.link} class="service-link">
+            <div class="service-content">
+              <div class="service-icon">
+                <span class="icon-emoji">{service.icon}</span>
+              </div>
+              <div class="service-text">
+                <h3 class="service-title">{service.title}</h3>
+                <p class="service-description">{service.description}</p>
+              </div>
+            </div>
+            <div class="service-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="service-divider"></div>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-200);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .services-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    z-index: -1;
+  }
+
+  /* Section Header */
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    margin-bottom: var(--space-16);
+  }
+
+  @media (min-width: 768px) {
+    .section-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  .header-content {
+    max-width: 525px;
+  }
+
+  @media (min-width: 768px) {
+    .header-content {
+      max-width: 450px;
+    }
+  }
+
+  .subtitle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .subtitle-divider {
+    height: 2px;
+    background: var(--color-primary);
+    flex: 1;
+    max-width: 60px;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .header-action {
+    flex-shrink: 0;
+  }
+
+  /* Services Grid */
+  .services-grid {
+    display: grid;
+    gap: 0;
+  }
+
+  .service-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .service-link {
+    display: block;
+    position: relative;
+    padding: var(--space-8);
+    background: var(--color-neutral-100);
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--transition-normal);
+    border-bottom: 1px solid var(--color-neutral-300);
+  }
+
+  .service-link:hover {
+    background: var(--color-neutral-50);
+    transform: translateX(8px);
+  }
+
+  .service-link:hover .service-arrow {
+    transform: translateX(4px);
+    color: var(--color-primary);
+  }
+
+  .service-link:hover .service-icon {
+    transform: scale(1.1);
+  }
+
+  .service-content {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-6);
+    margin-right: var(--space-12);
+  }
+
+  .service-icon {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-neutral-200);
+    border-radius: var(--radius-xl);
+    transition: all var(--transition-normal);
+  }
+
+  .icon-emoji {
+    font-size: 2rem;
+    filter: grayscale(100%);
+    transition: filter var(--transition-normal);
+  }
+
+  .service-link:hover .icon-emoji {
+    filter: grayscale(0%);
+  }
+
+  .service-text {
+    flex: 1;
+    max-width: 584px;
+  }
+
+  .service-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0 0 var(--space-3) 0;
+  }
+
+  .service-description {
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .service-arrow {
+    position: absolute;
+    top: 50%;
+    right: var(--space-8);
+    transform: translateY(-50%);
+    color: var(--color-neutral-400);
+    transition: all var(--transition-normal);
+  }
+
+  .service-divider {
+    position: absolute;
+    bottom: 0;
+    left: var(--space-8);
+    right: var(--space-8);
+    height: 1px;
+    background: var(--color-neutral-300);
+  }
+
+  .service-card:last-child .service-divider {
+    display: none;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .services-section {
+      padding: var(--space-16) 0;
+    }
+
+    .service-content {
+      flex-direction: column;
+      gap: var(--space-4);
+      margin-right: var(--space-8);
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+    }
+
+    .icon-emoji {
+      font-size: 1.5rem;
+    }
+
+    .service-link {
+      padding: var(--space-6);
+    }
+
+    .service-arrow {
+      right: var(--space-6);
+    }
+
+    .service-divider {
+      left: var(--space-6);
+      right: var(--space-6);
+    }
+  }
+
+  /* Animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .service-card {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .service-link:hover {
+      transform: none;
+    }
+
+    .service-link:hover .service-arrow {
+      transform: translateY(-50%);
+    }
+
+    .service-link:hover .service-icon {
+      transform: none;
+    }
+  }
+</style>

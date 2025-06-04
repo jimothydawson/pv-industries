@@ -1,0 +1,34 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import HeroSection from '../components/HeroSection.astro';
+import FutureSection from '../components/FutureSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import HowWeRecycleSection from '../components/HowWeRecycleSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import TestimonialsSection from '../components/TestimonialsSection.astro';
+import PartnersSection from '../components/PartnersSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import NewsSection from '../components/NewsSection.astro';
+
+const pageTitle = "Home - PV Industries";
+const pageDescription = "PV Industries is leading the way in solar panel recycling in Australia.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Header />
+  <main>
+    <HeroSection />
+    <FutureSection />
+    <ServicesSection />
+    <ProcessSection />
+    <HowWeRecycleSection />
+    <CtaSection />
+    <TestimonialsSection />
+    <PartnersSection />
+    <ContactSection />
+    <NewsSection />
+  </main>
+</Layout>

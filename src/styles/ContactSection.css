@@ -1,0 +1,184 @@
+/* Modern ContactSection Styles */
+.contact-section {
+  position: relative; /* For background element */
+  color: #fff; /* Default text color for this section, assuming dark background */
+}
+
+/* .section-padding is assumed to be a global class or defined in Layout.astro */
+
+.contact-section-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #34495e; /* Dark blue-grey background */
+  /* Optional: Add a subtle pattern or image */
+  /* background-image: url('path/to/contact-bg.jpg'); */
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* Behind content */
+}
+
+.contact-section .container.contact-container { /* Added .contact-container for specificity */
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative; /* Ensure content is above background */
+  z-index: 1;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 3rem; /* Space between form and details */
+  align-items: flex-start; /* Align columns to the top */
+}
+
+.contact-form-column h3,
+.contact-details-column h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.contact-form-column .form-description,
+.contact-details-column .contact-intro-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: #e0e0e0; /* Light grey for descriptive text */
+}
+
+.contact-form-wrapper {
+  background-color: rgba(255, 255, 255, 0.05); /* Very subtle light background for form area */
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.form-placeholder {
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  padding: 1.5rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+.form-placeholder p {
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+}
+.form-placeholder textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background-color: rgba(0,0,0,0.2);
+  color: #fff;
+  min-height: 80px;
+  box-sizing: border-box; /* Ensure padding and border don't increase width */
+}
+.form-placeholder .form-submit-button.button-primary { /* Assuming .button-primary is global */
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+}
+
+
+.contact-info-blocks {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-info-block {
+  display: flex;
+  align-items: flex-start; /* Align icon with text block */
+  gap: 1rem;
+}
+
+.contact-block-icon {
+  width: 30px; /* Adjust icon size */
+  height: 30px;
+  margin-top: 0.1rem; /* Slight adjustment for alignment */
+  filter: invert(80%) sepia(100%) saturate(400%) hue-rotate(350deg) brightness(100%) contrast(100%); /* Orange tint for icons */
+}
+
+.contact-block-text strong {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #fff;
+}
+
+.contact-block-text a,
+.contact-block-text span {
+  display: block;
+  color: #d0d0d0;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-bottom: 0.2rem;
+}
+
+.contact-block-text a:hover {
+  color: #ffa500; /* Accent color on hover */
+  text-decoration: underline;
+}
+
+.contact-social-links {
+  margin-top: 2.5rem;
+}
+
+.contact-social-links strong {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: #fff;
+}
+
+.social-icons-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons-row a {
+  color: #d0d0d0;
+  font-size: 1.5rem; /* Adjust icon size */
+  transition: color 0.3s ease;
+}
+
+.social-icons-row a:hover {
+  color: #ffa500; /* Accent color on hover */
+}
+
+.home-contact-anchor { /* If this ID is used for specific styling or scroll target */
+  /* Add styles if needed, or it can just be an anchor point */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) { /* Tablet */
+  .contact-grid {
+    grid-template-columns: 1fr; /* Stack columns on tablet */
+    gap: 2.5rem;
+  }
+  .contact-form-column, .contact-details-column {
+    max-width: 600px; /* Limit width when stacked */
+    margin: 0 auto; /* Center stacked columns */
+  }
+}
+
+@media (max-width: 768px) { /* Mobile */
+  /* .section-padding adjustments are global if defined in Layout.astro */
+
+  .contact-form-column h3,
+  .contact-details-column h2 {
+    font-size: 1.6rem;
+  }
+  .contact-form-wrapper {
+    padding: 1.5rem;
+  }
+}

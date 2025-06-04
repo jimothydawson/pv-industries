@@ -1,0 +1,225 @@
+/* Modern Header Styles */
+.site-header {
+  background-color: #333; /* Dark background for a modern look */
+  padding: 1rem 0;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensure header stays on top */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px; /* Consistent container width */
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 40px; /* Adjust as needed */
+  display: block;
+}
+
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap; /* Ensure links stay on one line */
+}
+
+.main-nav li {
+  margin-left: 1.5rem;
+}
+
+.main-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.main-nav a:hover,
+.main-nav a:focus {
+  color: #ffa500; /* Accent color on hover/focus */
+}
+
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ffa500; /* Accent color for underline */
+  transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a:focus::after {
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.header-contact-info {
+  margin-right: 1.5rem;
+  font-size: 0.9rem;
+}
+.header-contact-info a {
+  color: #eee;
+  text-decoration: none;
+}
+.header-contact-info a:hover {
+  color: #ffa500;
+}
+
+
+.nav-toggle {
+  display: none; /* Hidden by default, shown on mobile */
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem; /* Size of hamburger icon */
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.hamburger-icon {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: #fff;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 2px;
+  background-color: #fff;
+  left: 0;
+  transition: transform 0.3s ease, top 0.3s ease, bottom 0.3s ease;
+}
+
+.hamburger-icon::before {
+  top: -8px;
+}
+
+.hamburger-icon::after {
+  bottom: -8px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .main-nav {
+    display: none; /* Hidden by default on mobile */
+    position: absolute;
+    top: 100%; /* Position below the header */
+    left: 0;
+    width: 100%;
+    background-color: #333; /* Same as header background */
+    flex-direction: column;
+    padding: 1rem 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  }
+
+  .main-nav.open {
+    display: flex; /* Show when toggled */
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .main-nav li {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .main-nav a {
+    display: block;
+    padding: 1rem;
+    border-bottom: 1px solid #444; /* Separator for nav items */
+  }
+  .main-nav li:last-child a {
+    border-bottom: none;
+  }
+
+  .main-nav a::after { /* Remove underline animation on mobile for cleaner look */
+    display: none;
+  }
+
+  .nav-toggle {
+    display: block; /* Show hamburger icon */
+  }
+
+  .desktop-only {
+    display: none !important; /* Hide elements meant for desktop */
+  }
+  .mobile-only {
+    display: block !important; /* Show elements meant for mobile in nav */
+  }
+  .main-nav .mobile-only {
+    display: list-item !important;
+  }
+  .main-nav .header-cta a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #ffa500;
+    color: #fff;
+    border-radius: 4px;
+  }
+  .main-nav .header-cta a:hover {
+    background-color: #e69500;
+  }
+
+
+  /* Hamburger animation when open */
+  /* Note: In Astro, if .main-nav.open is controlled by JS that adds/removes the class,
+     this CSS might need adjustment if the .nav-toggle is not a direct sibling
+     or if the structure changes significantly. The '+' combinator relies on direct sibling relationship.
+     If .main-nav is not a sibling of .header-actions .nav-toggle, this specific animation part might not work as is.
+     A common approach in Astro for such dynamic classes is to have the script directly toggle classes on the hamburger icon elements too.
+  */
+  .main-nav.open + .header-actions .nav-toggle .hamburger-icon {
+    background-color: transparent; /* Middle line disappears */
+  }
+
+  .main-nav.open + .header-actions .nav-toggle .hamburger-icon::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+
+  .main-nav.open + .header-actions .nav-toggle .hamburger-icon::after {
+    transform: rotate(-45deg);
+    bottom: 0;
+  }
+}
+
+/* Hide mobile-only by default on larger screens */
+.mobile-only {
+  display: none !important;
+}

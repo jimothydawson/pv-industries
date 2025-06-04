@@ -1,0 +1,360 @@
+---
+// Partners section data
+const sectionData = {
+  subtitle: "06",
+  title: "Our Partners",
+  partners: [
+    {
+      name: "Sydney Landscape",
+      logo: "/images/2.-Sydney-Landscape.png",
+      alt: "Sydney Landscape"
+    },
+    {
+      name: "UTS ISF",
+      logo: "/images/PartnerLogo_UTS-ISF_335x250.png",
+      alt: "UTS Institute for Sustainable Futures"
+    },
+    {
+      name: "CSIRO",
+      logo: "/images/CSIRO-logo.jpeg",
+      alt: "CSIRO"
+    },
+    {
+      name: "John Holland",
+      logo: "/images/John_Holland_Logo-1536x506.png",
+      alt: "John Holland"
+    },
+    {
+      name: "Greentech",
+      logo: "/images/Greentech_Logo_PNG-1536x377.png",
+      alt: "Greentech"
+    },
+    {
+      name: "City of Newcastle",
+      logo: "/images/City_of_Newcastle_Horizontal_RGB_cropped-1536x433.jpeg",
+      alt: "City of Newcastle"
+    },
+    {
+      name: "Circular Australia",
+      logo: "/images/Circular-Australia_Master_Horizontal_10-min-768x384.png",
+      alt: "Circular Australia"
+    },
+    {
+      name: "Partner 8",
+      logo: "/images/1590062364580.jpeg",
+      alt: "Partner 8"
+    }
+  ]
+};
+---
+
+<section class="partners-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <div class="header-content">
+        <div class="subtitle-wrapper">
+          <div class="subtitle-divider left show-tablet"></div>
+          <div class="subtitle">{sectionData.subtitle}</div>
+          <div class="subtitle-divider"></div>
+        </div>
+        <h2 class="section-title">{sectionData.title}</h2>
+      </div>
+    </div>
+
+    <!-- Partners Slider -->
+    <div class="partners-slider">
+      <div class="slider-container">
+        <div class="slider-track" id="partners-track">
+          {sectionData.partners.map((partner, index) => (
+            <div class="partner-slide" style={`animation-delay: ${index * 0.1}s`}>
+              <div class="partner-logo">
+                <img 
+                  src={partner.logo} 
+                  alt={partner.alt}
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          ))}
+          <!-- Duplicate slides for seamless loop -->
+          {sectionData.partners.map((partner, index) => (
+            <div class="partner-slide duplicate" style={`animation-delay: ${(index + sectionData.partners.length) * 0.1}s`}>
+              <div class="partner-logo">
+                <img 
+                  src={partner.logo} 
+                  alt={partner.alt}
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .partners-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+    overflow: hidden;
+  }
+
+  /* Section Header */
+  .section-header {
+    margin-bottom: var(--space-16);
+    max-width: 680px;
+  }
+
+  @media (min-width: 768px) {
+    .section-header {
+      max-width: 600px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .header-content {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .subtitle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .subtitle-wrapper {
+      justify-content: center;
+    }
+  }
+
+  .subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .subtitle-divider {
+    height: 2px;
+    background: var(--color-primary);
+    flex: 1;
+    max-width: 60px;
+  }
+
+  .subtitle-divider.left {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .subtitle-divider.left.show-tablet {
+      display: block;
+    }
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  /* Partners Slider */
+  .partners-slider {
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  }
+
+  .slider-container {
+    overflow: hidden;
+    position: relative;
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-lg);
+    height: 120px;
+  }
+
+  .slider-container::before,
+  .slider-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 120px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .slider-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--color-neutral-100) 0%, rgba(255,255,255,0) 100%);
+  }
+
+  .slider-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--color-neutral-100) 0%, rgba(255,255,255,0) 100%);
+  }
+
+  .slider-track {
+    display: flex;
+    width: calc(200px * 16); /* 8 partners × 2 for seamless loop */
+    animation: scroll 20s linear infinite; /* Faster on mobile */
+  }
+
+  @media (min-width: 768px) {
+    .slider-track {
+      width: calc(250px * 16); /* 8 partners × 2 for seamless loop */
+      animation: scroll 40s linear infinite; /* Original speed on desktop */
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-250px * 8)); /* 8 partners */
+    }
+  }
+
+  .partner-slide {
+    flex: 0 0 auto;
+    width: 200px;
+    height: 120px;
+  }
+
+  @media (min-width: 768px) {
+    .partner-slide {
+      width: 250px;
+    }
+    
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(calc(-250px * 8)); /* 8 partners */
+      }
+    }
+  }
+
+  .partner-logo {
+    background: var(--color-neutral-100);
+    border: 1px solid var(--color-neutral-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    height: 120px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-normal);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .partner-logo:hover {
+    border-color: var(--color-neutral-300);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .partner-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.7);
+    transition: filter var(--transition-normal);
+  }
+
+  .partner-logo:hover img {
+    filter: grayscale(0%) opacity(1);
+  }
+
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .partners-section {
+      padding: var(--space-16) 0;
+    }
+
+    .section-header {
+      margin-bottom: var(--space-12);
+    }
+
+    .slider-track {
+      gap: var(--space-6);
+    }
+
+    .partner-slide {
+      width: 180px;
+    }
+
+    .partner-logo {
+      height: 100px;
+      padding: var(--space-4);
+    }
+  }
+
+  /* Animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .header-content,
+    .partners-slider,
+    .partner-slide {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .slider-track {
+      animation: none;
+    }
+
+    .partner-logo:hover {
+      transform: none;
+    }
+
+    .slider-btn:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  // Partners slider functionality - continuous auto-scroll only
+  const partnersTrack = document.getElementById('partners-track');
+
+  function pauseAnimation() {
+    if (partnersTrack) {
+      partnersTrack.style.animationPlayState = 'paused';
+    }
+  }
+
+  function resumeAnimation() {
+    if (partnersTrack) {
+      partnersTrack.style.animationPlayState = 'running';
+    }
+  }
+
+  // Handle visibility change (pause when tab is not active)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      pauseAnimation();
+    } else {
+      resumeAnimation();
+    }
+  });
+</script>

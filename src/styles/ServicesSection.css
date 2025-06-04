@@ -1,0 +1,137 @@
+/* Modern ServicesSection Styles */
+.services-section {
+  background-color: #ffffff; /* White background */
+}
+
+/* .section-padding is assumed to be a global class or defined in Layout.astro */
+
+.services-section .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section-header-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  gap: 1rem; /* Space between header and button if they wrap */
+}
+
+.section-header-main .section-number {
+  display: block;
+  font-size: 1rem;
+  color: #ffa500; /* Accent color */
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.section-header-main h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0; /* Remove default margin */
+}
+
+.view-all-services.button-secondary {
+  white-space: nowrap; /* Prevent button text from wrapping */
+  /* Assuming .button-secondary styles are globally available */
+}
+
+.services-grid {
+  display: grid;
+  /* The original CSS had this commented out, implying a single column (list-like).
+     If a multi-column grid is desired, uncomment and adjust grid-template-columns.
+     For example: grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+  gap: 1.5rem; /* Space between service cards */
+}
+
+.service-card {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9; /* Light background for cards */
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e0e0e0; /* Subtle border */
+}
+
+.service-card:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* Enhanced shadow on hover */
+}
+
+.service-card-icon-wrapper {
+  margin-right: 1.5rem;
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.service-card-icon {
+  width: 60px; /* Adjust icon size as needed */
+  height: 60px;
+  object-fit: contain; /* Ensure icon is not distorted */
+  filter: grayscale(100%); /* As per original style */
+  transition: filter 0.3s ease;
+}
+
+.service-card:hover .service-card-icon {
+  filter: grayscale(0%); /* Colorize icon on hover */
+}
+
+.service-card-content h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.service-card-content p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
+  margin: 0;
+}
+
+.service-card-arrow {
+  margin-left: auto; /* Push arrow to the right */
+  font-size: 1.5rem;
+  color: #ffa500; /* Accent color for arrow */
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-card-arrow {
+  transform: translateX(5px); /* Move arrow slightly on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) { /* Tablet and Mobile */
+  .section-header-inline {
+    flex-direction: column;
+    align-items: flex-start; /* Align to start when stacked */
+    text-align: left; /* Align text to left */
+  }
+  .section-header-main h2 {
+    font-size: 2rem;
+  }
+  .view-all-services.button-secondary {
+    align-self: flex-start; /* Align button to start */
+    margin-top: 1rem;
+  }
+
+  .service-card {
+    flex-direction: column; /* Stack icon and content on mobile */
+    align-items: flex-start; /* Align items to the start */
+    text-align: left;
+  }
+  .service-card-icon-wrapper {
+    margin-right: 0;
+    margin-bottom: 1rem; /* Space below icon when stacked */
+  }
+  .service-card-arrow {
+    display: none; /* Optionally hide arrow on mobile for cleaner look */
+  }
+}

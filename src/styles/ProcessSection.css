@@ -1,0 +1,125 @@
+/* Modern ProcessSection Styles */
+.process-section {
+  background-color: #f0f4f8; /* A slightly different light background */
+}
+
+/* .section-padding is assumed to be a global class or defined in Layout.astro */
+
+.process-section .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.process-section .section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.process-section .section-number { /* Assuming .section-number is styled globally or in Layout.astro */
+  display: block;
+  font-size: 1rem;
+  color: #ffa500; /* Accent color */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.process-section .section-header h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.process-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+  gap: 2rem; /* Space between step cards */
+  margin-bottom: 3rem; /* Space before action buttons */
+}
+
+.process-step-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  text-align: left; /* Align text to left within card */
+  position: relative;
+  overflow: hidden; /* For the background number */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process-step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.step-card-number-bg {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 4rem; /* Large background number */
+  font-weight: 700;
+  color: #e9ecef; /* Very light grey, almost transparent */
+  z-index: 0;
+  line-height: 1;
+  user-select: none; /* Prevent text selection */
+}
+
+.step-card-content {
+  position: relative; /* To stay above the background number */
+  z-index: 1;
+}
+
+.step-card-number-inline {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffa500; /* Accent color */
+  margin-bottom: 0.75rem;
+  background-color: #fff3e0; /* Light orange background for number */
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.process-step-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0; /* Remove default margin */
+  line-height: 1.4;
+}
+
+.process-actions {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  /* Assuming .button-primary and .button-secondary styles are globally available */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) { /* Mobile */
+  .process-section .section-header h2 {
+    font-size: 2rem;
+  }
+  .process-steps-grid {
+    grid-template-columns: 1fr; /* Stack cards on mobile */
+    gap: 1.5rem;
+  }
+  .process-step-card {
+    padding: 1.5rem 1rem;
+  }
+  .step-card-number-bg {
+    font-size: 3.5rem;
+  }
+  .process-step-card h3 {
+    font-size: 1.15rem;
+  }
+  .process-actions .button-primary,
+  .process-actions .button-secondary {
+    width: 100%;
+    max-width: 280px;
+  }
+}

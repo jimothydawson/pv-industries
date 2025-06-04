@@ -1,0 +1,119 @@
+/* Modern FutureSection Styles */
+.future-section {
+  background-color: #f9f9f9; /* Light grey background for differentiation */
+}
+
+/* Common padding for sections - can be global or per-section */
+.section-padding {
+  padding: 4rem 0;
+}
+
+.future-section .container {
+  max-width: 1100px; /* Slightly adjusted container for this section */
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-number {
+  display: block;
+  font-size: 1rem;
+  color: #ffa500; /* Accent color */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.section-header h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.future-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 3rem; /* Space between text and image */
+  align-items: center; /* Vertically align items */
+}
+
+.future-text-content p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.future-text-content p:last-of-type {
+  margin-bottom: 2rem; /* More space before buttons */
+}
+
+.future-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Assuming .button-primary and .button-secondary are globally styled
+   or defined in a global stylesheet linked in Layout.astro.
+   If not, their styles need to be available.
+   Example for local definition if needed:
+.future-actions .button-primary { ... }
+.future-actions .button-secondary { ... }
+*/
+
+.future-image-content {
+  text-align: center; /* Center image if it's smaller than the column */
+}
+
+.future-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; /* Soften edges */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) { /* Tablet and below */
+  .future-content-grid {
+    grid-template-columns: 1fr; /* Stack columns */
+    gap: 2.5rem;
+  }
+
+  .future-image-content {
+    order: -1; /* Image appears above text on mobile */
+    margin-bottom: 1rem; /* Space below image when stacked */
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  .future-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) { /* Mobile */
+  .section-padding { /* This might be better as a global class if used often */
+    padding: 3rem 0;
+  }
+  .section-header h2 {
+    font-size: 1.8rem;
+  }
+  .future-text-content p {
+    font-size: 0.95rem;
+  }
+  .future-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  .future-actions .button-primary,
+  .future-actions .button-secondary {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+}

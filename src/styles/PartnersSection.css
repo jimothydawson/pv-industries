@@ -1,0 +1,112 @@
+/* Modern PartnersSection Styles */
+.partners-section {
+  background-color: #ffffff; /* White background */
+}
+
+/* .section-padding is assumed to be a global class or defined in Layout.astro */
+
+.partners-section .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.partners-section .section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.partners-section .section-number {
+  display: block;
+  font-size: 1rem;
+  color: #ffa500; /* Accent color */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.partners-section .section-header h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.partners-logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid for logos */
+  gap: 2.5rem; /* Generous gap for visual separation */
+  align-items: center; /* Vertically align logos if they have different heights */
+  justify-items: center; /* Horizontally center logos within their grid cells */
+}
+
+.partner-logo-item {
+  display: flex; /* For centering image if needed, though justify-items on grid helps */
+  justify-content: center;
+  align-items: center;
+  height: 80px; /* Fixed height for logo containers to help alignment */
+}
+
+.partner-logo-image {
+  max-width: 100%; /* Ensure logo fits within its container */
+  max-height: 100%; /* Ensure logo fits within its container */
+  object-fit: contain; /* Maintain aspect ratio, don't crop */
+  filter: grayscale(100%); /* Start logos in grayscale */
+  opacity: 0.7; /* Slightly transparent for a softer look */
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.partner-logo-item:hover .partner-logo-image {
+  filter: grayscale(0%); /* Show color on hover */
+  opacity: 1; /* Full opacity on hover */
+}
+
+/* Optional: Styles for slider navigation if you implement a slider */
+.partners-slider-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.5rem;
+  gap: 1rem;
+}
+
+.partners-slider-navigation .nav-button {
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.partners-slider-navigation .nav-button:hover {
+  background-color: #ffa500;
+  color: #fff;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .partners-section .section-header h2 {
+    font-size: 2rem;
+  }
+  .partners-logo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Smaller minmax for mobile */
+    gap: 2rem;
+  }
+  .partner-logo-item {
+    height: 60px; /* Smaller height for logos on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .partners-logo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Even smaller for very small screens */
+    gap: 1.5rem;
+  }
+}

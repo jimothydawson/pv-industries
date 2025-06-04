@@ -1,0 +1,20 @@
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_5538_57167)">
+<g opacity="0.4" filter="url(#filter0_f_5538_57167)">
+<path d="M14.9991 27.1193C8.51794 27.1193 3.25195 23.8787 3.25195 23.8787V5.24518C3.25195 5.24518 9.32809 6.86548 14.9991 6.86548V27.1193ZM14.9991 27.1193C21.4804 27.1193 26.7463 23.8787 26.7463 23.8787V5.24518" stroke="#8DC1FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15 6.86545C19.0508 6.86545 21.8863 3.62485 21.8863 3.62485V23.4736C21.8863 23.4736 19.0508 26.7142 15 26.7142" stroke="#2388FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path d="M14.9991 26.7472C8.51794 26.7472 3.25195 23.5066 3.25195 23.5066V4.87314C3.25195 4.87314 9.32809 6.49344 14.9991 6.49344V26.7472ZM14.9991 26.7472C21.4804 26.7472 26.7463 23.5066 26.7463 23.5066V4.87314" stroke="#8DC1FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15 6.49341C19.0508 6.49341 21.8863 3.25281 21.8863 3.25281V23.1015C21.8863 23.1015 19.0508 26.3421 15 26.3421" stroke="#2388FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<filter id="filter0_f_5538_57167" x="0.501953" y="0.874817" width="28.9941" height="28.9944" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="1" result="effect1_foregroundBlur_5538_57167"/>
+</filter>
+<clipPath id="clip0_5538_57167">
+<rect width="30" height="30" fill="white"/>
+</clipPath>
+</defs>
+</svg>

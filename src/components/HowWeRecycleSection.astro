@@ -1,0 +1,393 @@
+---
+// How We Recycle section data
+const sectionData = {
+  subtitle: "04",
+  title: "How we recycle solar panels",
+  description: "",
+  video: {
+    thumbnail: "/images/exceptional-quality-that-cant-be-beaten-image-industrial-x-webflow-template.jpg",
+    url: "https://www.youtube.com/watch?v=HcTYG_k8nf4",
+    alt: "How we recycle solar panels - Video thumbnail"
+  }
+};
+---
+
+<section class="how-we-recycle-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <div class="header-content">
+        <div class="subtitle-wrapper">
+          <div class="subtitle">{sectionData.subtitle}</div>
+          <div class="subtitle-divider"></div>
+        </div>
+        <h2 class="section-title">{sectionData.title}</h2>
+      </div>
+      <div class="header-description">
+        {sectionData.description && (
+          <p>{sectionData.description}</p>
+        )}
+      </div>
+    </div>
+
+    <!-- Video Section -->
+    <div class="video-section">
+      <div class="video-container">
+        <div class="video-wrapper">
+          <img 
+            src={sectionData.video.thumbnail} 
+            alt={sectionData.video.alt}
+            class="video-thumbnail"
+            loading="lazy"
+          />
+          <div class="video-overlay">
+            <button 
+              class="play-button" 
+              aria-label="Play video"
+              data-video-url={sectionData.video.url}
+            >
+              <svg class="play-icon" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="40" fill="rgba(255, 255, 255, 0.9)"/>
+                <path d="M32 25L55 40L32 55V25Z" fill="#1e293b"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Modal -->
+  <div class="video-modal" id="video-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close video">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="video-embed-container">
+        <iframe 
+          id="video-iframe"
+          width="100%" 
+          height="100%" 
+          frameborder="0" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-we-recycle-section {
+    padding: var(--space-20) 0 0;
+    background: var(--color-neutral-100);
+    overflow: hidden;
+  }
+
+  /* Section Header */
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    margin-bottom: var(--space-16);
+  }
+
+  @media (min-width: 768px) {
+    .section-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  }
+
+  .header-content {
+    max-width: 600px;
+  }
+
+  @media (min-width: 768px) {
+    .header-content {
+      max-width: 450px;
+    }
+  }
+
+  .subtitle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .subtitle-divider {
+    height: 2px;
+    background: var(--color-primary);
+    flex: 1;
+    max-width: 60px;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .header-description {
+    max-width: 550px;
+  }
+
+  .header-description p {
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Video Section */
+  .video-section {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  }
+
+  .video-container {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--color-neutral-900);
+  }
+
+  .video-wrapper {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .video-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-normal);
+  }
+
+  .video-container:hover .video-overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .video-container:hover .video-thumbnail {
+    transform: scale(1.05);
+  }
+
+  .play-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    border-radius: 50%;
+  }
+
+  .play-button:hover {
+    transform: scale(1.1);
+  }
+
+  .play-button:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 4px;
+  }
+
+  .play-icon {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  }
+
+  /* Video Modal */
+  .video-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+  }
+
+  .video-modal.active {
+    display: flex;
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    aspect-ratio: 16 / 9;
+    background: var(--color-neutral-900);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--color-neutral-100);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    z-index: 10;
+  }
+
+  .modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .video-embed-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .how-we-recycle-section {
+      padding: var(--space-16) 0 0;
+    }
+
+    .section-header {
+      margin-bottom: var(--space-12);
+      gap: var(--space-6);
+    }
+
+    .modal-content {
+      margin: var(--space-4);
+    }
+
+    .modal-close {
+      top: -40px;
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  /* Animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .video-section {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .video-container:hover .video-thumbnail {
+      transform: none;
+    }
+
+    .play-button:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  // Video modal functionality
+  const playButton = document.querySelector('.play-button');
+  const videoModal = document.getElementById('video-modal');
+  const modalClose = document.querySelector('.modal-close');
+  const modalBackdrop = document.querySelector('.modal-backdrop');
+  const videoIframe = document.getElementById('video-iframe');
+
+  function openVideoModal(videoUrl) {
+    if (!videoModal || !videoIframe) return;
+    
+    // Convert YouTube URL to embed URL
+    const videoId = videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
+    if (videoId) {
+      const embedUrl = `https://www.youtube.com/embed/${videoId[1]}?autoplay=1&rel=0`;
+      videoIframe.src = embedUrl;
+    }
+    
+    videoModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVideoModal() {
+    if (!videoModal || !videoIframe) return;
+    
+    videoModal.classList.remove('active');
+    videoIframe.src = '';
+    document.body.style.overflow = '';
+  }
+
+  // Event listeners
+  if (playButton) {
+    playButton.addEventListener('click', () => {
+      const videoUrl = playButton.getAttribute('data-video-url');
+      if (videoUrl) {
+        openVideoModal(videoUrl);
+      }
+    });
+  }
+
+  if (modalClose) {
+    modalClose.addEventListener('click', closeVideoModal);
+  }
+
+  if (modalBackdrop) {
+    modalBackdrop.addEventListener('click', closeVideoModal);
+  }
+
+  // Close modal on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && videoModal?.classList.contains('active')) {
+      closeVideoModal();
+    }
+  });
+
+  // Prevent modal content clicks from closing modal
+  const modalContent = document.querySelector('.modal-content');
+  if (modalContent) {
+    modalContent.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+</script>

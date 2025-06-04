@@ -1,0 +1,324 @@
+---
+// Future section data
+const sectionData = {
+  subtitle: "01",
+  title: "The future of solar recycling",
+  content: [
+    "In Australia, almost one in three households have rooftop solar, and large utility scale installations are constantly being connected to the grid. Solar systems installed by early adopters of the technology are ageing, and many owners will often find it is more cost effective to upgrade their systems to a newer, more powerful one. Often solar panels fail while others are damaged by storms, fire or even during transportation and installation. Solar panel recycling is a sustainable alternative to landfill.",
+    "There are numerous economic and environmental benefits to solar panel recycling. Not only does it prevent toxic leachates from entering soil and groundwater, the recovered materials can be reused, supporting local manufacturers by improving efficiency and increasing security of future supply."
+  ],
+  image: {
+    src: "/images/Screen-Shot-2024-04-29-at-4.48.35-pm.png",
+    alt: "Solar panel recycling process"
+  },
+  actions: [
+    { text: "Contact us", href: "#quote", primary: true },
+    { text: "Our Process", href: "#process", primary: false }
+  ]
+};
+---
+
+<section id="future" class="future-section">
+  <div class="section-background"></div>
+  
+  <div class="container">
+    <div class="future-grid">
+      <!-- Content Column -->
+      <div class="content-column">
+        <div class="content-wrapper">
+          <div class="rich-text">
+            {sectionData.content.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      <!-- Title Column -->
+      <div class="title-column">
+        <div class="subtitle-wrapper">
+          <div class="subtitle">{sectionData.subtitle}</div>
+          <div class="subtitle-divider"></div>
+        </div>
+        <h2 class="section-title">{sectionData.title}</h2>
+        
+        <!-- Actions Wrapper -->
+        <div class="actions-wrapper">
+          {sectionData.actions.map((action) => (
+            <a
+              href={action.href}
+              class={`button ${action.primary ? 'button-primary' : 'button-secondary dark'}`}
+            >
+              {action.text}
+              {action.primary && (
+                <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Image Column -->
+      <div class="image-column">
+        <div class="image-container">
+          <img
+            src={sectionData.image.src}
+            alt={sectionData.image.alt}
+            class="section-image"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .future-section {
+    position: relative;
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+    overflow: hidden;
+  }
+
+  .section-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    z-index: -1;
+  }
+
+  .future-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    align-items: flex-start;
+  }
+
+  @media (min-width: 768px) {
+    .future-grid {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: var(--space-16);
+    }
+    
+    .content-column,
+    .title-column {
+      flex: 1;
+    }
+    
+    .image-column {
+      flex: 0 0 100%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .future-grid {
+      gap: var(--space-20);
+    }
+    
+    .content-column,
+    .title-column {
+      flex: 1;
+    }
+    
+    .image-column {
+      flex: 0 0 100%;
+    }
+  }
+
+  /* Content Column */
+  .content-column {
+    order: 2;
+  }
+
+  @media (min-width: 768px) {
+    .content-column {
+      order: 1;
+    }
+  }
+
+  .content-wrapper {
+    max-width: 650px;
+  }
+
+  @media (min-width: 768px) {
+    .content-wrapper {
+      max-width: none;
+    }
+  }
+
+  .rich-text {
+    margin-top: var(--space-4);
+  }
+
+  .rich-text p {
+    color: var(--color-neutral-700);
+    line-height: 1.7;
+    margin-bottom: var(--space-6);
+  }
+
+  .rich-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Title Column */
+  .title-column {
+    order: 1;
+    max-width: 480px;
+  }
+
+  @media (min-width: 768px) {
+    .title-column {
+      order: 2;
+    }
+  }
+
+  .subtitle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .subtitle-divider {
+    height: 2px;
+    background: var(--color-primary);
+    flex: 1;
+    max-width: 60px;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  /* Image Column */
+  .image-column {
+    order: 3;
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 768px) {
+    .image-column {
+      order: 3;
+      grid-column: 1 / -1;
+    }
+  }
+
+  .image-container {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--color-neutral-200);
+  }
+
+  .section-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--transition-slow);
+  }
+
+  .image-container:hover .section-image {
+    transform: scale(1.02);
+  }
+
+  /* Actions Column */
+  .actions-column {
+    order: 4;
+    max-width: 480px;
+  }
+
+  @media (min-width: 768px) {
+    .actions-column {
+      order: 4;
+      grid-column: 2;
+    }
+  }
+
+  .actions-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .actions-wrapper {
+      margin-top: var(--space-8);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .future-section {
+      padding: var(--space-16) 0;
+    }
+    
+    .future-grid {
+      gap: var(--space-8);
+    }
+    
+    .actions-wrapper {
+      flex-direction: column;
+    }
+    
+    .button {
+      justify-content: center;
+    }
+  }
+
+  /* Animation on scroll */
+  .content-column,
+  .title-column,
+  .image-column,
+  .actions-column {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .title-column {
+    animation-delay: 0.1s;
+  }
+
+  .content-column {
+    animation-delay: 0.2s;
+  }
+
+  .image-column {
+    animation-delay: 0.3s;
+  }
+
+  .actions-column {
+    animation-delay: 0.4s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .content-column,
+    .title-column,
+    .image-column,
+    .actions-column {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+</style>

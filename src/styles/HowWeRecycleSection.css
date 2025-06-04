@@ -1,0 +1,206 @@
+/* Modern HowWeRecycleSection Styles */
+.how-recycle-section {
+  background-color: #ffffff; /* White background */
+}
+
+/* .section-padding is assumed to be a global class or defined in Layout.astro */
+
+.how-recycle-section .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section-header-split {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; /* Adjust ratio as needed */
+  gap: 2rem;
+  align-items: start; /* Align items to the top of their grid area */
+  margin-bottom: 3rem;
+}
+
+.section-header-split .header-text .section-number {
+  display: block;
+  font-size: 1rem;
+  color: #ffa500; /* Accent color */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.section-header-split .header-text h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.section-header-split .header-paragraph p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #555;
+  margin: 0; /* Or adjust top margin if needed */
+  padding-top: 0.25rem; /* Align baseline with h2 if desired */
+}
+
+.video-player-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* Max width for the video player area */
+  margin: 0 auto; /* Center the video player */
+  border-radius: 8px;
+  overflow: hidden; /* Ensures play button overlay is contained */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.video-thumbnail-container {
+  position: relative;
+  cursor: pointer;
+  display: block; /* Ensure it takes up space */
+}
+
+.video-thumbnail-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+  object-fit: cover;
+}
+
+.play-button-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3); /* Dark overlay */
+  transition: background-color 0.3s ease;
+}
+
+.video-thumbnail-container:hover .play-button-overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Darker overlay on hover */
+}
+
+.play-button-icon {
+  width: 80px; /* Adjust size as needed */
+  height: 80px;
+  transition: transform 0.3s ease;
+}
+
+.video-thumbnail-container:hover .play-button-icon {
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Video Modal Styles */
+.video-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85); /* Darker overlay for modal */
+  display: flex; /* Hidden by default, shown by JS */
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Ensure modal is on top */
+  padding: 1rem;
+  opacity: 0; /* Hidden by default, transition opacity */
+  visibility: hidden; /* Hidden by default */
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.video-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0s linear 0s;
+}
+
+
+.video-modal-content {
+  position: relative;
+  background-color: #000; /* Black background for video player */
+  padding: 0; /* No padding around iframe container */
+  border-radius: 8px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  width: 90%;
+  max-width: 960px; /* Max width for the video */
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.video-modal-overlay.active .video-modal-content {
+    transform: scale(1);
+}
+
+.close-video-button {
+  position: absolute;
+  top: -35px; /* Position above the video modal */
+  right: 0px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.5rem; /* Large close icon */
+  font-weight: 300;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.25rem;
+}
+.close-video-button:hover {
+  color: #ffa500;
+}
+
+.video-iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px; /* Ensure iframe also has rounded corners if content has them */
+}
+
+.video-iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none; /* Remove iframe border */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .section-header-split {
+    grid-template-columns: 1fr; /* Stack header text and paragraph */
+    gap: 1rem;
+    text-align: center; /* Center header content on mobile */
+  }
+  .section-header-split .header-text h2 {
+    font-size: 2rem;
+  }
+  .section-header-split .header-paragraph p {
+    font-size: 0.95rem;
+    padding-top: 0;
+  }
+  .play-button-icon {
+    width: 60px;
+    height: 60px;
+  }
+  .video-modal-content {
+    width: 95%;
+  }
+  .close-video-button {
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

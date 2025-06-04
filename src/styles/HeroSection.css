@@ -1,0 +1,241 @@
+/* Modern HeroSection Styles */
+.hero-section {
+  position: relative;
+  color: #fff; /* White text on dark background */
+  padding: 4rem 0; /* Generous padding */
+  min-height: 70vh; /* Minimum height to ensure impact */
+  display: flex;
+  align-items: center;
+  text-align: center; /* Center align text by default */
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /*
+    The original path '../assets/solar-panel-bg.svg' is relative to the CSS file in the React structure.
+    In Astro, if 'solar-panel-bg.svg' is moved to the `public/assets/` directory,
+    the path would become '/assets/solar-panel-bg.svg'.
+    Or, Astro's asset handling can import it. For now, I'll use a placeholder or assume it's in public.
+    Let's assume it will be in `public/assets/solar-panel-bg.svg` for the Astro version.
+  */
+  background-image: url('/assets/solar-panel-bg.svg'); /* Adjusted path for Astro public dir */
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* Behind content */
+  /* Opacity is handled within the SVG, or can be adjusted here if needed */
+}
+
+.hero-content-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem; /* Space between main content, stats, and contact details */
+}
+
+.hero-main-content h1 {
+  font-size: 2.8rem; /* Large, impactful heading */
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
+  max-width: 600px; /* Keep subtitle readable */
+  color: #f0f0f0; /* Slightly off-white for subtitle */
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.hero-actions .button-primary,
+.hero-actions .button-secondary {
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  /* Assuming .button-primary and .button-secondary global styles exist or are defined elsewhere */
+}
+.hero-actions .button-secondary {
+  background-color: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.hero-actions .button-secondary:hover {
+  background-color: #fff;
+  color: #333; /* Match hero background color or a dark theme color */
+}
+
+
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  margin-top: 1rem; /* Space above stats */
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 150px; /* Minimum width for each stat */
+}
+
+.stat-number {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #ffa500; /* Accent color for numbers */
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #e0e0e0;
+  margin-top: 0.25rem;
+}
+
+.hero-contact-details {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-around; /* Distribute contact items */
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 900px; /* Max width for contact section */
+  margin-top: 1.5rem; /* Space above contact details */
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.2); /* Subtle background for this section */
+  border-radius: 8px;
+}
+
+.contact-info-item,
+.newsletter-signup {
+  display: flex;
+  align-items: flex-start; /* Align icon with text block */
+  gap: 0.8rem;
+  text-align: left;
+  flex: 1; /* Allow items to grow and fill space */
+  min-width: 250px; /* Minimum width before wrapping */
+}
+
+.contact-icon {
+  width: 24px; /* Adjust icon size */
+  height: 24px;
+  margin-top: 0.2rem; /* Align with first line of text */
+}
+
+.contact-info-item strong,
+.newsletter-signup strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #fff;
+}
+
+.contact-link {
+  display: block;
+  color: #d0d0d0;
+  font-size: 0.9rem;
+  text-decoration: none;
+  margin-bottom: 0.2rem;
+}
+
+.contact-link:hover {
+  color: #ffa500; /* Accent color on hover */
+  text-decoration: underline;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.newsletter-form input[type="email"] {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #444;
+  color: #fff;
+  flex-grow: 1;
+}
+.newsletter-form input[type="email"]::placeholder {
+  color: #aaa;
+}
+
+.newsletter-form .button-primary.small {
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  /* Assuming .button-primary global style exists */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 3rem 0;
+    min-height: auto; /* Adjust height for smaller screens */
+  }
+
+  .hero-main-content h1 {
+    font-size: 2.2rem; /* Smaller heading on mobile */
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    flex-direction: column; /* Stack buttons on mobile */
+    width: 100%;
+    max-width: 300px; /* Limit width of stacked buttons */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-actions .button-primary,
+  .hero-actions .button-secondary {
+    width: 100%;
+  }
+
+
+  .hero-stats {
+    gap: 1.5rem;
+  }
+  .stat-item {
+    min-width: 120px;
+  }
+  .stat-number {
+    font-size: 1.8rem;
+  }
+
+  .hero-contact-details {
+    flex-direction: column;
+    align-items: center; /* Center items when stacked */
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  .contact-info-item, .newsletter-signup {
+    width: 100%;
+    max-width: 350px; /* Max width for centered items */
+    text-align: center;
+    align-items: center;
+  }
+  .contact-icon {
+    margin-top: 0;
+  }
+  .newsletter-form {
+    flex-direction: column;
+  }
+  .newsletter-form .button-primary.small {
+    width: 100%;
+  }
+}

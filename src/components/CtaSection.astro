@@ -1,0 +1,238 @@
+---
+// CTA section data
+const ctaData = {
+  title: "Ready to recycle your solar panels?",
+  description: "Join the sustainable future with our comprehensive solar panel recycling services.",
+  primaryAction: {
+    text: "Get a Quote",
+    href: "/contact"
+  },
+  secondaryAction: {
+    text: "Learn More",
+    href: "/about"
+  }
+};
+---
+
+<section class="cta-section">
+  <div class="cta-background">
+    <div class="cta-pattern"></div>
+  </div>
+  
+  <div class="container">
+    <div class="cta-content">
+      <div class="cta-text">
+        <h2 class="cta-title">{ctaData.title}</h2>
+        <p class="cta-description">{ctaData.description}</p>
+      </div>
+      
+      <div class="cta-actions">
+        <a href={ctaData.primaryAction.href} class="button button-primary">
+          {ctaData.primaryAction.text}
+          <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href={ctaData.secondaryAction.href} class="button button-secondary">
+          {ctaData.secondaryAction.text}
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Decorative Elements -->
+  <div class="cta-decoration top-right">
+    <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+      <circle cx="60" cy="60" r="2" fill="currentColor" opacity="0.3"/>
+      <circle cx="80" cy="40" r="1.5" fill="currentColor" opacity="0.2"/>
+      <circle cx="40" cy="80" r="1" fill="currentColor" opacity="0.4"/>
+      <circle cx="90" cy="70" r="1.5" fill="currentColor" opacity="0.25"/>
+      <circle cx="30" cy="30" r="1" fill="currentColor" opacity="0.35"/>
+    </svg>
+  </div>
+  
+  <div class="cta-decoration bottom-left">
+    <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="1.5" fill="currentColor" opacity="0.3"/>
+      <circle cx="70" cy="30" r="1" fill="currentColor" opacity="0.2"/>
+      <circle cx="30" cy="70" r="2" fill="currentColor" opacity="0.4"/>
+      <circle cx="80" cy="80" r="1" fill="currentColor" opacity="0.25"/>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    position: relative;
+    padding: var(--space-24) 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-neutral-100);
+    overflow: hidden;
+  }
+
+  .cta-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+  }
+
+  .cta-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px, 30px 30px;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  }
+
+  .cta-text {
+    margin-bottom: var(--space-10);
+  }
+
+  .cta-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 var(--space-6) 0;
+    color: var(--color-neutral-100);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+
+  .button-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-neutral-100);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+  }
+
+  .button-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+  }
+
+  /* Decorative Elements */
+  .cta-decoration {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 1s forwards;
+  }
+
+  .cta-decoration.top-right {
+    top: var(--space-8);
+    right: var(--space-8);
+    animation-delay: 1.2s;
+  }
+
+  .cta-decoration.bottom-left {
+    bottom: var(--space-8);
+    left: var(--space-8);
+    animation-delay: 1.4s;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .cta-section {
+      padding: var(--space-20) 0;
+    }
+
+    .cta-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .button {
+      justify-content: center;
+      min-width: 200px;
+    }
+
+    .cta-decoration {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cta-section {
+      padding: var(--space-16) 0;
+    }
+
+    .cta-text {
+      margin-bottom: var(--space-8);
+    }
+  }
+
+  /* Animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .cta-content,
+    .cta-decoration {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .cta-pattern {
+      animation: none;
+    }
+
+    .button-secondary:hover {
+      transform: none;
+    }
+  }
+</style>
