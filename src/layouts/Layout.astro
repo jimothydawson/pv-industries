@@ -314,10 +314,10 @@ const {
   </style>
   
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MT4NZEQ816"></script>
-  <script>
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-MT4NZEQ816"></script>
+  <script is:inline>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){window.dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-MT4NZEQ816');
   </script>

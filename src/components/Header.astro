@@ -322,8 +322,6 @@ const contactEmail = 'contact@pvindustries.com.au';
 
   // Header scroll effect
   if (header) {
-    let lastScrollY = window.scrollY;
-    
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
       
@@ -332,16 +330,14 @@ const contactEmail = 'contact@pvindustries.com.au';
       } else {
         header.classList.remove('scrolled');
       }
-      
-      lastScrollY = currentScrollY;
     });
   }
 
   // Close mobile menu when clicking outside
   document.addEventListener('click', (e) => {
     if (mobileNav && mobileMenuButton) {
-      const isClickInsideNav = mobileNav.contains(e.target);
-      const isClickOnButton = mobileMenuButton.contains(e.target);
+      const isClickInsideNav = mobileNav.contains(e.target as Node);
+      const isClickOnButton = mobileMenuButton.contains(e.target as Node);
       
       if (!isClickInsideNav && !isClickOnButton && mobileNav.classList.contains('open')) {
         mobileNav.classList.remove('open');

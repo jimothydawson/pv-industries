@@ -67,12 +67,12 @@ const sectionData = {
         </svg>
       </button>
       <div class="video-embed-container">
-        <iframe 
+        <iframe
           id="video-iframe"
-          width="100%" 
-          height="100%" 
-          frameborder="0" 
-          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          width="100%"
+          height="100%"
+          style="border: 0;"
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
           allowfullscreen
         ></iframe>
       </div>
@@ -336,14 +336,14 @@ const sectionData = {
   const modalBackdrop = document.querySelector('.modal-backdrop');
   const videoIframe = document.getElementById('video-iframe');
 
-  function openVideoModal(videoUrl) {
+  function openVideoModal(videoUrl: string) {
     if (!videoModal || !videoIframe) return;
     
     // Convert YouTube URL to embed URL
     const videoId = videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
     if (videoId) {
       const embedUrl = `https://www.youtube.com/embed/${videoId[1]}?autoplay=1&rel=0`;
-      videoIframe.src = embedUrl;
+      (videoIframe as HTMLIFrameElement).src = embedUrl;
     }
     
     videoModal.classList.add('active');
@@ -354,7 +354,7 @@ const sectionData = {
     if (!videoModal || !videoIframe) return;
     
     videoModal.classList.remove('active');
-    videoIframe.src = '';
+    (videoIframe as HTMLIFrameElement).src = '';
     document.body.style.overflow = '';
   }
 

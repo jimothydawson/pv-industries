@@ -390,11 +390,11 @@ const sectionData = {
     });
     
     // Update button states
-    if (prevBtn) prevBtn.disabled = currentSlide === 0;
-    if (nextBtn) nextBtn.disabled = currentSlide === totalSlides - 1;
+    if (prevBtn) (prevBtn as HTMLButtonElement).disabled = currentSlide === 0;
+    if (nextBtn) (nextBtn as HTMLButtonElement).disabled = currentSlide === totalSlides - 1;
   }
 
-  function goToSlide(slideIndex) {
+  function goToSlide(slideIndex: number) {
     currentSlide = Math.max(0, Math.min(slideIndex, totalSlides - 1));
     updateSlider();
   }
@@ -427,7 +427,7 @@ const sectionData = {
   });
 
   // Auto-play (optional)
-  let autoPlayInterval;
+  let autoPlayInterval: number;
   
   function startAutoPlay() {
     autoPlayInterval = setInterval(() => {
