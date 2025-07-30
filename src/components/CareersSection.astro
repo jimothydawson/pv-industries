@@ -1,7 +1,15 @@
 ---
+// Props interface
+export interface Props {
+  sectionNumber?: string;
+}
+
+// Get props with default value
+const { sectionNumber = "05" } = Astro.props;
+
 // Careers Section component - "Join the PV Industries Team"
 const sectionData = {
-  subtitle: "05",
+  subtitle: sectionNumber.toString().padStart(2, '0'),
   title: "Join the PV Industries Team",
   description: "Are you passionate about renewable energy, sustainability, and creating real change? We're always looking for motivated, values-driven individuals to join our team across Australia.",
   careerAreas: [

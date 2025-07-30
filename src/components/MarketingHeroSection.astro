@@ -3,6 +3,8 @@
 const heroData = {
   h1: "PV Industries – Australia's Leader in Solar Panel Recycling",
   h2: "Closing the Loop on Solar Sustainability",
+  h3: "At PV Industries, we're on a mission to make solar truly sustainable. As Australia's leading solar panel recycling and resource recovery company, we provide safe, compliant, and environmentally responsible solutions for residential installers, commercial solar providers, utility-scale projects, and government sectors.",
+  body: "From collection and logistics to clean material processing and circular economy partnerships, we help you responsibly manage end-of-life solar equipment—and transform waste into new opportunity.",
   contactEmail: "contact@pvindustries.com.au",
   locations: [
     { name: "New South Wales", mapLink: "https://www.google.com/maps" },
@@ -20,6 +22,8 @@ const heroData = {
       <div class="hero-text-content">
         <h1 class="hero-h1">{heroData.h1}</h1>
         <h2 class="hero-h2">{heroData.h2}</h2>
+        <h3 class="hero-h3">{heroData.h3}</h3>
+        <p class="hero-body">{heroData.body}</p>
       </div>
       
       <div class="hero-actions">
@@ -156,9 +160,27 @@ const heroData = {
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     font-weight: 500;
     line-height: 1.2;
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4);
     animation: fadeInUp 0.8s ease-out 0.1s both;
     color: var(--color-primary);
+  }
+
+  .hero-h3 {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: var(--space-4);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+    color: var(--color-neutral-200);
+  }
+
+  .hero-body {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+    color: var(--color-neutral-300);
   }
 
   .hero-actions {

@@ -5,13 +5,13 @@ const testimonialsData = {
   testimonials: [
     {
       quote: "PV Industries helped us recycle a large volume of solar panels quickly and professionally. They handled everything—logistics, documentation, and processing. An excellent partner for the long term.",
-      author: "Nathan W.",
-      role: "Commercial Solar Contractor"
+      name: "Nathan W.",
+      title: "Commercial Solar Contractor"
     },
     {
       quote: "As a council, finding a sustainable and compliant solution for solar panel waste was critical. PV Industries delivered on every level.",
-      author: "Alicia T.",
-      role: "Local Government Sustainability Officer"
+      name: "Alicia T.",
+      title: "Local Government Sustainability Officer"
     }
   ]
 };
@@ -25,38 +25,26 @@ const testimonialsData = {
     
     <div class="testimonials-grid">
       {testimonialsData.testimonials.map((testimonial, index) => (
-        <div class="testimonial-card" data-aos="fade-up" data-aos-delay={index * 150}>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay={index * 100}>
           <div class="quote-icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-              <path d="M3 21C3 17.4 3 14.8 3 13.2C3 8.5 6.5 5 11.2 5C11.6 5 12 5.4 12 5.8V7.2C12 7.6 11.6 8 11.2 8C8.1 8 6 10.1 6 13.2C6 13.7 6.4 14.1 6.9 14.1H9C10.1 14.1 11 15 11 16.1V19C11 20.1 10.1 21 9 21H6C4.3 21 3 19.7 3 18V21Z" fill="currentColor"/>
-              <path d="M13 21C13 17.4 13 14.8 13 13.2C13 8.5 16.5 5 21.2 5C21.6 5 22 5.4 22 5.8V7.2C22 7.6 21.6 8 21.2 8C18.1 8 16 10.1 16 13.2C16 13.7 16.4 14.1 16.9 14.1H19C20.1 14.1 21 15 21 16.1V19C21 20.1 20.1 21 19 21H16C14.3 21 13 19.7 13 18V21Z" fill="currentColor"/>
+              <path d="M3 21C3 17.4 3 14.2 3 12C3 7 7 3 12 3C17 3 21 7 21 12V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 18C9 16.3 7.7 15 6 15C4.3 15 3 16.3 3 18C3 19.7 4.3 21 6 21C7.7 21 9 19.7 9 18Z" fill="currentColor"/>
+              <path d="M21 18C21 16.3 19.7 15 18 15C16.3 15 15 16.3 15 18C15 19.7 16.3 21 18 21C19.7 21 21 19.7 21 18Z" fill="currentColor"/>
             </svg>
           </div>
           
-          <blockquote class="testimonial-quote">
-            "{testimonial.quote}"
-          </blockquote>
-          
-          <div class="testimonial-author">
-            <div class="author-avatar">
-              <span class="author-initials">
-                {testimonial.author.split(' ').map(name => name[0]).join('')}
-              </span>
-            </div>
-            <div class="author-info">
-              <div class="author-name">– {testimonial.author}</div>
-              <div class="author-details">
-                <span class="author-role">{testimonial.role}</span>
+          <div class="testimonial-content">
+            <blockquote class="testimonial-quote">
+              "{testimonial.quote}"
+            </blockquote>
+            
+            <div class="testimonial-attribution">
+              <div class="client-info">
+                <span class="client-name">– {testimonial.name}</span>
+                <span class="client-title">{testimonial.title}</span>
               </div>
             </div>
-          </div>
-          
-          <div class="rating">
-            {[...Array(5)].map(() => (
-              <svg class="star" width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-              </svg>
-            ))}
           </div>
         </div>
       ))}
@@ -67,7 +55,7 @@ const testimonialsData = {
 <style>
   .testimonials-section {
     padding: var(--space-20) 0;
-    background: var(--color-neutral-50);
+    background: var(--color-neutral-100);
   }
 
   .container {
@@ -98,108 +86,76 @@ const testimonialsData = {
   @media (min-width: 768px) {
     .testimonials-grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-10);
     }
   }
 
   .testimonial-card {
-    background: var(--color-neutral-100);
-    border-radius: var(--radius-lg);
+    background: var(--color-neutral-50);
+    border-radius: var(--radius-xl);
     padding: var(--space-8);
     border: 1px solid var(--color-neutral-200);
     transition: all var(--transition-normal);
     position: relative;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    height: 100%;
   }
 
   .testimonial-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     border-color: var(--color-primary-light);
   }
 
   .quote-icon {
-    color: var(--color-primary-light);
-    margin-bottom: var(--space-4);
-    opacity: 0.7;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-6);
+    flex-shrink: 0;
+  }
+
+  .testimonial-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .testimonial-quote {
     font-size: var(--font-size-lg);
-    line-height: 1.6;
     color: var(--color-neutral-700);
+    line-height: 1.6;
+    font-style: italic;
     margin: 0 0 var(--space-6) 0;
     flex: 1;
-    font-style: italic;
   }
 
-  .testimonial-author {
+  .testimonial-attribution {
+    margin-top: auto;
+  }
+
+  .client-info {
     display: flex;
-    align-items: center;
-    gap: var(--space-4);
-    margin-bottom: var(--space-4);
+    flex-direction: column;
+    gap: var(--space-1);
   }
 
-  .author-avatar {
-    width: 48px;
-    height: 48px;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .author-initials {
-    color: var(--color-neutral-100);
-    font-weight: 600;
+  .client-name {
     font-size: var(--font-size-base);
-  }
-
-  .author-info {
-    flex: 1;
-  }
-
-  .author-name {
     font-weight: 600;
     color: var(--color-neutral-900);
-    margin-bottom: var(--space-1);
-    font-size: var(--font-size-base);
   }
 
-  .author-details {
+  .client-title {
     font-size: var(--font-size-sm);
     color: var(--color-neutral-600);
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    flex-wrap: wrap;
-  }
-
-  .author-role {
     font-weight: 500;
-  }
-
-  .company-separator {
-    color: var(--color-neutral-400);
-  }
-
-  .author-company {
-    color: var(--color-primary);
-    font-weight: 500;
-  }
-
-  .rating {
-    display: flex;
-    gap: var(--space-1);
-    color: var(--color-accent);
-  }
-
-  .star {
-    width: 16px;
-    height: 16px;
   }
 
   /* Animation keyframes */
@@ -216,22 +172,21 @@ const testimonialsData = {
 
   /* Responsive adjustments */
   @media (max-width: 767px) {
+    .testimonials-grid {
+      gap: var(--space-6);
+    }
+    
     .testimonial-card {
       padding: var(--space-6);
     }
     
+    .quote-icon {
+      width: 40px;
+      height: 40px;
+    }
+    
     .testimonial-quote {
       font-size: var(--font-size-base);
-    }
-    
-    .author-details {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-1);
-    }
-    
-    .company-separator {
-      display: none;
     }
   }
 </style>

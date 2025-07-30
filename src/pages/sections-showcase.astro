@@ -1,0 +1,233 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Import all section components
+import AboutHeroSection from '../components/AboutHeroSection.astro';
+import AlternateHeroSection from '../components/AlternateHeroSection.astro';
+import AlternateTestimonialsSection from '../components/AlternateTestimonialsSection.astro';
+import CareersSection from '../components/CareersSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import CoreServicesSection from '../components/CoreServicesSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import FutureSection from '../components/FutureSection.astro';
+import HeroSection from '../components/HeroSection.astro';
+import HowWeRecycleSection from '../components/HowWeRecycleSection.astro';
+import ImpactStatsSection from '../components/ImpactStatsSection.astro';
+import IndustriesSection from '../components/IndustriesSection.astro';
+import MarketingCommitmentSection from '../components/MarketingCommitmentSection.astro';
+import MarketingCoreServicesSection from '../components/MarketingCoreServicesSection.astro';
+import MarketingHeroSection from '../components/MarketingHeroSection.astro';
+import MarketingImpactSection from '../components/MarketingImpactSection.astro';
+import MarketingIndustriesServedSection from '../components/MarketingIndustriesServedSection.astro';
+import MarketingIndustrySolutionsSection from '../components/MarketingIndustrySolutionsSection.astro';
+import MarketingIntroSection from '../components/MarketingIntroSection.astro';
+import MarketingTestimonialsSection from '../components/MarketingTestimonialsSection.astro';
+import MarketingWhyChooseSection from '../components/MarketingWhyChooseSection.astro';
+import MarketingWorkWithUsSection from '../components/MarketingWorkWithUsSection.astro';
+import NewsSection from '../components/NewsSection.astro';
+import PartnersBecomePartnerSection from '../components/PartnersBecomePartnerSection.astro';
+import PartnersCircularEconomySection from '../components/PartnersCircularEconomySection.astro';
+import PartnersHeroSection from '../components/PartnersHeroSection.astro';
+import PartnersMaterialsSection from '../components/PartnersMaterialsSection.astro';
+import PartnersSection from '../components/PartnersSection.astro';
+import PartnersTestimonialsSection from '../components/PartnersTestimonialsSection.astro';
+import PartnersValueCreationSection from '../components/PartnersValueCreationSection.astro';
+import PartnersWhoWeWorkWithSection from '../components/PartnersWhoWeWorkWithSection.astro';
+import PartnersWhyPartnerSection from '../components/PartnersWhyPartnerSection.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import StorySection from '../components/StorySection.astro';
+import SustainabilityCommitmentSection from '../components/SustainabilityCommitmentSection.astro';
+import TeamCultureSection from '../components/TeamCultureSection.astro';
+import TeamHeroSection from '../components/TeamHeroSection.astro';
+import TeamSection from '../components/TeamSection.astro';
+import TeamTestimonialsSection from '../components/TeamTestimonialsSection.astro';
+import TeamValuesSection from '../components/TeamValuesSection.astro';
+import TestimonialsSection from '../components/TestimonialsSection.astro';
+import ValuesSection from '../components/ValuesSection.astro';
+import WhyChooseSection from '../components/WhyChooseSection.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="All Sections Showcase - PV Industries" description="A comprehensive showcase of all section components used throughout the PV Industries website.">
+  <Header />
+  
+  <!-- Page Introduction -->
+  <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+    <div class="container text-center">
+      <h1 class="text-5xl font-bold mb-6">All Sections Showcase</h1>
+      <p class="text-xl max-w-3xl mx-auto">
+        This page presents every section component used throughout the PV Industries website, 
+        displayed from top to bottom for comprehensive review and testing.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section Divider Component -->
+  <div class="section-divider">
+    <div class="container">
+      <h2 class="section-title">Hero Sections</h2>
+    </div>
+  </div>
+
+  <!-- Hero Sections -->
+  <HeroSection />
+  <AlternateHeroSection />
+  <AboutHeroSection />
+  <MarketingHeroSection />
+  <PartnersHeroSection />
+  <TeamHeroSection />
+
+  <div class="section-divider">
+    <div class="container">
+      <h2 class="section-title">Introduction & Story Sections</h2>
+    </div>
+  </div>
+
+  <!-- Introduction & Story Sections -->
+  <MarketingIntroSection />
+  <StorySection />
+  <FutureSection />
+
+  <div class="section-divider">
+    <div class="container">
+      <h2 class="section-title">Services & Solutions Sections</h2>
+    </div>
+  </div>
+
+  <!-- Services & Solutions Sections -->
+  <CoreServicesSection />
+  <MarketingCoreServicesSection />
+  <ServicesSection />
+  <MarketingIndustrySolutionsSection />
+  <HowWeRecycleSection />
+  <ProcessSection />
+
+  <div class="section-divider">
+    <div class="container">
+      <h2 class="section-title">Industries & Impact Sections</h2>
+    </div>
+  </div>
+
+  <!-- Industries & Impact Sections -->
+  <IndustriesSection />
+  <MarketingIndustriesServedSection />
+  <ImpactStatsSection />
+  <MarketingImpactSection />
+
+  <div class="section-divider">
+    <div class="container">
+      <h2 class="section-title">Why Choose & Values Sections</h2>
+    </div>
+  </div>
+
+  <!-- Why Choose & Values Sections -->
+  <WhyChooseSection />
+  <MarketingWhyChooseSection />
+  <ValuesSection />
+  <TeamValuesSection />
+
+  <div class="section-divider">
+    <div class="container">
+      <h2 class="section-title">Sustainability & Commitment Sections</h2>
+    </div>
+  </div>
+
+  <!-- Sustainability & Commitment Sections -->
+  <SustainabilityCommitmentSection />
+  <MarketingCommitmentSection />
+
+  <div class="section-divider">
+    <div class="container">
+      <h2 class="section-title">Partners Sections</h2>
+    </div>
+  </div>
+
+  <!-- Partners Sections -->
+  <PartnersSection />
+  <PartnersWhyPartnerSection />
+  <PartnersWhoWeWorkWithSection />
+  <PartnersCircularEconomySection />
+  <PartnersMaterialsSection />
+  <PartnersValueCreationSection />
+  <PartnersBecomePartnerSection />
+
+  <div class="section-divider">
+    <div class="container">
+      <h2 class="section-title">Team Sections</h2>
+    </div>
+  </div>
+
+  <!-- Team Sections -->
+  <TeamSection />
+  <TeamCultureSection />
+  <CareersSection />
+
+  <div class="section-divider">
+    <div class="container">
+      <h2 class="section-title">Testimonials Sections</h2>
+    </div>
+  </div>
+
+  <!-- Testimonials Sections -->
+  <TestimonialsSection />
+  <AlternateTestimonialsSection />
+  <MarketingTestimonialsSection />
+  <PartnersTestimonialsSection />
+  <TeamTestimonialsSection />
+
+  <div class="section-divider">
+    <div class="container">
+      <h2 class="section-title">Contact & CTA Sections</h2>
+    </div>
+  </div>
+
+  <!-- Contact & CTA Sections -->
+  <ContactSection />
+  <CtaSection />
+  <MarketingWorkWithUsSection />
+
+  <div class="section-divider">
+    <div class="container">
+      <h2 class="section-title">News Section</h2>
+    </div>
+  </div>
+
+  <!-- News Section -->
+  <NewsSection />
+
+  <!-- End of Showcase -->
+  <section class="py-16 bg-gray-100 text-center">
+    <div class="container">
+      <h2 class="text-3xl font-bold mb-4">End of Sections Showcase</h2>
+      <p class="text-lg text-gray-600 mb-8">
+        You have now seen all section components used throughout the PV Industries website.
+      </p>
+      <a href="/" class="button button-primary">Return to Home</a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .section-divider {
+    background: linear-gradient(135deg, #fdb500 0%, #e6a200 100%);
+    padding: 2rem 0;
+    margin: 3rem 0;
+  }
+  
+  .section-title {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .page-wrapper {
+    min-height: 100vh;
+  }
+</style>

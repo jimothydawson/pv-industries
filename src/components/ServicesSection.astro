@@ -1,7 +1,15 @@
 ---
+// Props interface
+export interface Props {
+  sectionNumber?: string;
+}
+
+// Get props with default value
+const { sectionNumber = "02" } = Astro.props;
+
 // Services section data
 const sectionData = {
-  subtitle: "02",
+  subtitle: sectionNumber.toString().padStart(2, '0'),
   title: "A comprehensive set of services",
   browseAllLink: "/services",
   services: [
@@ -218,12 +226,12 @@ const sectionData = {
 
   .icon-emoji {
     font-size: 2rem;
-    filter: grayscale(100%);
+    filter: sepia(100%) hue-rotate(8deg) saturate(500%) brightness(1.1);
     transition: filter var(--transition-normal);
   }
 
   .service-link:hover .icon-emoji {
-    filter: grayscale(0%);
+    filter: sepia(100%) hue-rotate(8deg) saturate(500%) brightness(1.1);
   }
 
   .service-text {

@@ -1,7 +1,15 @@
 ---
+// Props interface
+export interface Props {
+  sectionNumber?: string;
+}
+
+// Get props with default value
+const { sectionNumber = "01" } = Astro.props;
+
 // Future section data
 const sectionData = {
-  subtitle: "01",
+  subtitle: sectionNumber.toString().padStart(2, '0'),
   title: "The future of solar recycling",
   content: [
     "In Australia, almost one in three households have rooftop solar, and large utility scale installations are constantly being connected to the grid. Solar systems installed by early adopters of the technology are ageing, and many owners will often find it is more cost effective to upgrade their systems to a newer, more powerful one. Often solar panels fail while others are damaged by storms, fire or even during transportation and installation. Solar panel recycling is a sustainable alternative to landfill.",

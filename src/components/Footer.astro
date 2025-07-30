@@ -65,20 +65,18 @@
         </div>
         
         <div class="newsletter-form-wrapper">
-          <form class="newsletter-form">
-            <div class="form-input-wrapper">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
-                required 
-                class="newsletter-input"
-                aria-label="Email address"
-              />
-              <button type="submit" class="newsletter-button">
-                Subscribe
-              </button>
+          <!-- Brevo Newsletter Signup Placeholder -->
+          <div class="contact-block newsletter-block brevo-signup-placeholder">
+            <h4 class="newsletter-title">Stay up to date</h4>
+            <div class="brevo-placeholder-content">
+              <p class="brevo-placeholder-text">
+                Brevo signup form will be integrated here
+              </p>
+              <div class="brevo-placeholder-box">
+                <span class="brevo-placeholder-label">Brevo Form Placeholder</span>
+              </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -295,6 +293,66 @@
     margin-top: var(--space-6);
   }
 
+  /* Contact Block Styles (matching MarketingHeroSection) */
+  .contact-block {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all var(--transition-normal);
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .contact-block:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* Newsletter Block */
+  .newsletter-block {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* Brevo Placeholder Styles */
+  .brevo-signup-placeholder {
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .brevo-placeholder-content {
+    text-align: center;
+  }
+
+  .brevo-placeholder-text {
+    color: var(--color-neutral-300);
+    font-size: var(--font-size-sm);
+    margin: 0 0 var(--space-3) 0;
+    font-style: italic;
+  }
+
+  .brevo-placeholder-box {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brevo-placeholder-label {
+    color: var(--color-neutral-400);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Legacy form styles (can be removed once Brevo form is implemented) */
   .form-input-wrapper {
     position: relative;
     display: flex;

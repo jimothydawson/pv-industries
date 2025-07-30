@@ -1,7 +1,15 @@
 ---
+// Props interface
+export interface Props {
+  sectionNumber?: string;
+}
+
+// Get props with default value
+const { sectionNumber = "07" } = Astro.props;
+
 // News section data
 const sectionData = {
-  subtitle: "07",
+  subtitle: sectionNumber.toString().padStart(2, '0'),
   title: "News & articles",
   description: "",
   browseAllLink: "/news",

@@ -1,7 +1,15 @@
 ---
+// Props interface
+export interface Props {
+  sectionNumber?: string;
+}
+
+// Get props with default value
+const { sectionNumber = "03" } = Astro.props;
+
 // Process section data
 const sectionData = {
-  subtitle: "03",
+  subtitle: sectionNumber.toString().padStart(2, '0'),
   title: "Our solar recycling process",
   description: "",
   steps: [

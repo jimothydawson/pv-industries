@@ -1,8 +1,9 @@
 ---
 // About Hero Section component
 const sectionData = {
-  title: "About us",
-  description: "How do we capture the valuable resources from the fastest growing waste stream in Australia? This is the question we are here to solve.",
+  title: "Meet the Team Behind PV Industries",
+  subheading: "Powered by People, Driven by Purpose",
+  description: "At PV Industries, our strength lies in our people. We're a passionate, diverse, and experienced team united by a common goal: creating a cleaner, more sustainable future through responsible solar recycling.",
   primaryButton: {
     text: "Join us",
     href: "/contact"
@@ -24,6 +25,7 @@ const sectionData = {
       <div class="hero-text">
         <div class="hero-title-wrapper">
           <h1 class="hero-title">{sectionData.title}</h1>
+          <h2 class="hero-subheading">{sectionData.subheading}</h2>
         </div>
         
         <div class="hero-grid">
@@ -99,6 +101,14 @@ const sectionData = {
     font-weight: 600;
     color: var(--color-neutral-900);
     line-height: 1.1;
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .hero-subheading {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 500;
+    color: var(--color-primary);
+    line-height: 1.2;
     margin: 0;
   }
 

@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Import all the marketing components for the new home page design
+import MarketingHeroSection from '../components/MarketingHeroSection.astro';
+import MarketingCoreServicesSection from '../components/MarketingCoreServicesSection.astro';
+import MarketingIndustrySolutionsSection from '../components/MarketingIndustrySolutionsSection.astro';
+import MarketingWhyChooseSection from '../components/MarketingWhyChooseSection.astro';
+import MarketingIndustriesServedSection from '../components/MarketingIndustriesServedSection.astro';
+import MarketingImpactSection from '../components/MarketingImpactSection.astro';
+import MarketingTestimonialsSection from '../components/MarketingTestimonialsSection.astro';
+import SustainabilityCommitmentSection from '../components/SustainabilityCommitmentSection.astro';
+import MarketingWorkWithUsSection from '../components/MarketingWorkWithUsSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+---
+
+<Layout title="PV Industries – Australia's Leader in Solar Panel Recycling">
+  <Header />
+  
+  <main>
+    <!-- Hero Section: Full-width image background with overlay -->
+    <MarketingHeroSection />
+    
+    <!-- Core Services: 3-column feature grid (Light gray background) -->
+    <MarketingCoreServicesSection />
+    
+    <!-- Industry Solutions: 2x2 compact grid (White background) -->
+    <MarketingIndustrySolutionsSection />
+    
+    <!-- Why Choose: 4-feature grid (Light gray background) -->
+    <MarketingWhyChooseSection />
+    
+    <!-- Industries We Serve: Horizontal link cards (White background) -->
+    <MarketingIndustriesServedSection />
+    
+    <!-- Impact & Stats: Split layout with map (Light gradient background) -->
+    <MarketingImpactSection />
+    
+    <!-- Testimonials: 2-column quote cards (White background) -->
+    <MarketingTestimonialsSection />
+    
+    <!-- Sustainability: Image + text split (Light gray background) -->
+    <SustainabilityCommitmentSection />
+    
+    <!-- Work With Us CTA: Full-width centered CTA (Dark gradient background) -->
+    <MarketingWorkWithUsSection />
+    
+    <!-- Contact Form: Form + info split (Light gray background) -->
+    <ContactSection />
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  /* Global styles for the improved home page */
+  main {
+    overflow-x: hidden;
+  }
+
+  /* Ensure smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Add some spacing between sections for visual breathing room */
+  main > :global(section:not(:last-child)) {
+    margin-bottom: 0;
+  }
+
+  /* Ensure consistent section spacing */
+  main > :global(section) {
+    position: relative;
+  }
+
+  /* Add subtle transitions for section backgrounds */
+  main > :global(section) {
+    transition: background-color 0.3s ease;
+  }
+</style>
+</Layout>
