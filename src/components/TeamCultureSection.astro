@@ -1,0 +1,271 @@
+---
+// Team Culture Section component - "Who We Are"
+const sectionData = {
+  subtitle: "02",
+  title: "Who We Are",
+  description: "",
+  cultureItems: [
+    {
+      icon: "/images/leadership-icon-industrial-x-webflow-template.svg",
+      title: "Sustainability Advocates",
+      description: "We're driven by the belief that clean energy should never come at the cost of the environment. Our team is committed to closing the loop on solar waste and building smarter, circular systems for the future."
+    },
+    {
+      icon: "/images/innovation-icon-industrial-x-webflow-template.svg",
+      title: "Industry Experts",
+      description: "With backgrounds in renewable energy, waste management, logistics, environmental science, and engineering, our multidisciplinary team brings deep knowledge and hands-on experience to every project."
+    },
+    {
+      icon: "/images/quality-icon-industrial-x-webflow-template.svg",
+      title: "Problem Solvers",
+      description: "Every job is different, and we thrive on that. Whether it's a complex utility-scale solar decommissioning or a community recycling initiative, we approach each challenge with creativity and precision."
+    },
+    {
+      icon: "/images/teamwork-icon-industrial-x-webflow-template.svg",
+      title: "Collaborators",
+      description: "At PV Industries, we don't work in silos. We collaborate across teams—and with our customers—to deliver tailored solutions that exceed expectations."
+    }
+  ]
+};
+---
+
+<section class="team-culture-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <div class="header-content">
+        <div class="subtitle-wrapper">
+          <div class="subtitle-divider left"></div>
+          <div class="subtitle">{sectionData.subtitle}</div>
+          <div class="subtitle-divider"></div>
+        </div>
+        
+        <div class="title-wrapper">
+          <h2 class="section-title">{sectionData.title}</h2>
+        </div>
+        
+        {sectionData.description && (
+          <div class="section-description">
+            <p>{sectionData.description}</p>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- Culture Grid -->
+    <div class="culture-grid">
+      {sectionData.cultureItems.map((item, index) => (
+        <div class="culture-card" style={`animation-delay: ${index * 0.1}s`}>
+          <div class="culture-icon">
+            <img src={item.icon} alt={`${item.title} Icon`} />
+          </div>
+          
+          <div class="culture-content">
+            <h3 class="culture-title">{item.title}</h3>
+            <p class="culture-description">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .team-culture-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+    overflow: hidden;
+  }
+
+  /* Section Header */
+  .section-header {
+    margin-bottom: var(--space-12);
+    max-width: 612px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    .section-header {
+      max-width: 450px;
+    }
+  }
+
+  .header-content {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .subtitle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .subtitle-divider {
+    height: 2px;
+    background: var(--color-primary);
+    flex: 1;
+    max-width: 60px;
+  }
+
+  .subtitle-divider.left {
+    display: block;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .section-description {
+    margin-top: var(--space-6);
+  }
+
+  .section-description p {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Culture Grid */
+  .culture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-8);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  }
+
+  @media (max-width: 767px) {
+    .culture-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+
+  .culture-card {
+    background: var(--color-neutral-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    text-align: center;
+    transition: all var(--transition-normal);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .culture-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .culture-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    border-radius: var(--radius-md);
+    transition: transform var(--transition-normal);
+  }
+
+  .culture-card:hover .culture-icon {
+    transform: scale(1.1);
+  }
+
+  .culture-icon img {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
+  }
+
+  .culture-content {
+    text-align: center;
+  }
+
+  .culture-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0 0 var(--space-4);
+  }
+
+  .culture-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .team-culture-section {
+      padding: var(--space-16) 0;
+    }
+
+    .section-header {
+      margin-bottom: var(--space-10);
+    }
+
+    .culture-card {
+      padding: var(--space-6);
+    }
+
+    .culture-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: var(--space-5);
+    }
+
+    .culture-icon img {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  /* Animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .header-content,
+    .culture-grid,
+    .culture-card {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .culture-card:hover {
+      transform: none;
+    }
+
+    .culture-card:hover .culture-icon {
+      transform: none;
+    }
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

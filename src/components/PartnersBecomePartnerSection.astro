@@ -1,0 +1,296 @@
+---
+import MaterialsIcon from './icons/MaterialsIcon.astro';
+import LeadershipIcon from './icons/LeadershipIcon.astro';
+import InnovationIcon from './icons/InnovationIcon.astro';
+import PinIcon from './icons/PinIcon.astro';
+import ArrowRightIcon from './icons/ArrowRightIcon.astro';
+import DownloadIcon from './icons/DownloadIcon.astro';
+
+// Partners Become a Partner section following the exact script structure
+const becomePartnerData = {
+  h2: "Become a Partner",
+  body: "Ready to join Australia's leading solar panel recycling network? Partner with PV Industries to access sustainable materials, support circular economy goals, and drive innovation in your industry.",
+  benefits: [
+    {
+      h3: "Access to Quality Materials",
+      body: "Secure a reliable supply of high-quality recycled materials for your manufacturing processes.",
+      icon: "materials"
+    },
+    {
+      h3: "Sustainability Leadership",
+      body: "Demonstrate environmental leadership and meet sustainability targets with certified recycled content.",
+      icon: "leadership"
+    },
+    {
+      h3: "Innovation Opportunities",
+      body: "Collaborate on R&D projects and develop innovative applications for recycled solar panel materials.",
+      icon: "innovation"
+    },
+    {
+      h3: "Local Supply Chain",
+      body: "Reduce supply chain risks and support Australian manufacturing with locally sourced materials.",
+      icon: "local"
+    }
+  ],
+  cta: {
+    h3: "Ready to Partner With Us?",
+    body: "Contact our partnerships team to discuss how we can support your sustainability goals and material requirements.",
+    primaryButton: "Start Partnership Discussion",
+    secondaryButton: "Download Partnership Guide"
+  }
+};
+---
+
+<section class="become-partner-section" id="become-partner">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{becomePartnerData.h2}</h2>
+      <p class="section-intro">{becomePartnerData.body}</p>
+    </div>
+    
+    <div class="benefits-grid">
+      {becomePartnerData.benefits.map((benefit, index) => (
+        <div class="benefit-card" data-aos="fade-up" data-aos-delay={index * 150}>
+          <div class="benefit-icon">
+            {benefit.icon === "materials" && <MaterialsIcon />}
+            {benefit.icon === "leadership" && <LeadershipIcon />}
+            {benefit.icon === "innovation" && <InnovationIcon />}
+            {benefit.icon === "local" && <PinIcon />}
+          </div>
+          
+          <div class="benefit-content">
+            <h3 class="benefit-title">{benefit.h3}</h3>
+            <p class="benefit-body">{benefit.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="cta-section" data-aos="fade-up" data-aos-delay="600">
+      <div class="cta-content">
+        <h3 class="cta-title">{becomePartnerData.cta.h3}</h3>
+        <p class="cta-body">{becomePartnerData.cta.body}</p>
+        
+        <div class="cta-buttons">
+          <a href="/contact" class="btn btn-primary">
+            {becomePartnerData.cta.primaryButton}
+            <ArrowRightIcon />
+          </a>
+          <a href="#" class="btn btn-secondary">
+            {becomePartnerData.cta.secondaryButton}
+            <DownloadIcon />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .become-partner-section {
+    padding: var(--space-20) 0;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary-light));
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .section-intro {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-16);
+  }
+
+  @media (min-width: 768px) {
+    .benefits-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .benefit-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all var(--transition-normal);
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+    backdrop-filter: blur(10px);
+  }
+
+  .benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .benefit-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .benefit-content {
+    flex: 1;
+  }
+
+  .benefit-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-3);
+  }
+
+  .benefit-body {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .cta-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .cta-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta-body {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin-bottom: var(--space-8);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    border: 2px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-neutral-100);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-primary);
+    color: var(--color-neutral-100);
+    transform: translateY(-2px);
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .section-header {
+      text-align: left;
+    }
+    
+    .benefit-card {
+      flex-direction: column;
+      text-align: center;
+      padding: var(--space-6);
+    }
+    
+    .benefit-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto;
+    }
+    
+    .cta-section {
+      padding: var(--space-8);
+      text-align: left;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .btn {
+      justify-content: center;
+    }
+  }
+</style>

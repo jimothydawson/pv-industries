@@ -1,0 +1,205 @@
+---
+// Story section component
+const sectionData = {
+  subtitle: "02",
+  title: "Closing the loop on solar",
+  description: "PV Industries is an Australian owned recycling company aiming to minimise Australia's environmental footprint. Our goal is to stop solar panel waste from being sent to landfill by collecting and recycling as many end of life solar panels as possible and supplying the recovered material to local manufacturers. We provide solar panel and photovoltaic system waste services including decommissioning, collection and recycling for residential and commercial customers. PV Industries are leading solar panel recycling in Australia, working with prominent universities and government organisations to develop processing technology and comprehensive solutions.",
+  button: {
+    text: "Join us",
+    href: "/contact"
+  },
+  image: {
+    src: "/images/stitch.jpeg",
+    alt: "Solar panel recycling process"
+  }
+};
+---
+
+<section class="story-section">
+  <div class="container">
+    <div class="story-grid">
+      <!-- Image -->
+      <div class="story-image-wrapper">
+        <div class="story-image">
+          <img 
+            src={sectionData.image.src} 
+            alt={sectionData.image.alt}
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="story-content">
+        <div class="story-text">
+          <div class="subtitle-wrapper">
+            <div class="subtitle">{sectionData.subtitle}</div>
+            <div class="subtitle-divider"></div>
+          </div>
+          
+          <h2 class="story-title">{sectionData.title}</h2>
+          
+          <div class="story-description">
+            <p>{sectionData.description}</p>
+            
+            <div class="story-button">
+              <a href={sectionData.button.href} class="button button-primary">
+                {sectionData.button.text}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .story-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-900);
+    color: var(--color-neutral-100);
+  }
+
+  .story-grid {
+    display: grid;
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .story-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+    }
+  }
+
+  /* Image */
+  .story-image-wrapper {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .story-image {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--color-neutral-800);
+  }
+
+  .story-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--transition-slow);
+  }
+
+  .story-image:hover img {
+    transform: scale(1.02);
+  }
+
+  /* Content */
+  .story-content {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  }
+
+  .story-text {
+    max-width: 646px;
+  }
+
+  @media (max-width: 767px) {
+    .story-text {
+      max-width: 500px;
+    }
+  }
+
+  .subtitle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .subtitle-divider {
+    height: 2px;
+    background: var(--color-primary);
+    flex: 1;
+    max-width: 60px;
+  }
+
+  .story-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-neutral-100);
+    line-height: 1.2;
+    margin: 0 0 var(--space-4);
+  }
+
+  .story-description {
+    max-width: 612px;
+  }
+
+  .story-description p {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-300);
+    line-height: 1.6;
+    margin: 0 0 var(--space-8);
+  }
+
+  .story-button {
+    display: flex;
+  }
+
+  .story-button .button {
+    justify-content: flex-start;
+  }
+
+  /* Grid order for mobile */
+  @media (max-width: 767px) {
+    .story-content {
+      order: -1;
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .story-section {
+      padding: var(--space-16) 0;
+    }
+
+    .story-grid {
+      gap: var(--space-10);
+    }
+
+    .story-description p {
+      margin-bottom: var(--space-6);
+    }
+  }
+
+  /* Animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .story-image-wrapper,
+    .story-content {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .story-image:hover img {
+      transform: none;
+    }
+  }
+</style>

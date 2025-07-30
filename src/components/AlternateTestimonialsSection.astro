@@ -1,0 +1,384 @@
+---
+// Alternate Testimonials section data with new marketing content
+const testimonialsData = {
+  title: "What Our Clients Say",
+  subtitle: "Trusted by Leading Organizations Across Australia",
+  description: "Don't just take our word for it. Hear from the organizations who have experienced the PV Industries difference firsthand.",
+  testimonials: [
+    {
+      quote: "PV Industries transformed our approach to solar panel end-of-life management. Their comprehensive service and transparent reporting gave us complete confidence in our sustainability commitments.",
+      author: "Sarah Mitchell",
+      role: "Sustainability Director",
+      company: "GreenTech Solutions",
+      image: "/images/testimonials/sarah-mitchell.jpg",
+      rating: 5
+    },
+    {
+      quote: "The professionalism and expertise of the PV Industries team is unmatched. They handled our large-scale decommissioning project flawlessly, exceeding all our expectations for both service and environmental outcomes.",
+      author: "David Chen",
+      role: "Operations Manager",
+      company: "Solar Energy Australia",
+      image: "/images/testimonials/david-chen.jpg",
+      rating: 5
+    },
+    {
+      quote: "As a solar installer, partnering with PV Industries has been a game-changer for our business. Our customers love knowing their panels will be responsibly recycled at end-of-life.",
+      author: "Emma Rodriguez",
+      role: "Managing Director",
+      company: "Sunshine Solar Installations",
+      image: "/images/testimonials/emma-rodriguez.jpg",
+      rating: 5
+    },
+    {
+      quote: "PV Industries' commitment to innovation and sustainability aligns perfectly with our corporate values. Their 95% material recovery rate is industry-leading and demonstrates real environmental leadership.",
+      author: "Michael Thompson",
+      role: "Environmental Compliance Officer",
+      company: "EcoTech Industries",
+      image: "/images/testimonials/michael-thompson.jpg",
+      rating: 5
+    },
+    {
+      quote: "The nationwide collection service and flexible scheduling made the entire process seamless. PV Industries truly understands the needs of large commercial operations.",
+      author: "Lisa Wang",
+      role: "Facilities Manager",
+      company: "Metro Commercial Properties",
+      image: "/images/testimonials/lisa-wang.jpg",
+      rating: 5
+    },
+    {
+      quote: "Working with PV Industries has helped us achieve our zero-waste-to-landfill goals. Their detailed reporting and certification process exceeded our compliance requirements.",
+      author: "James Patterson",
+      role: "Sustainability Coordinator",
+      company: "Australian Manufacturing Corp",
+      image: "/images/testimonials/james-patterson.jpg",
+      rating: 5
+    }
+  ]
+};
+---
+
+<section class="testimonials-section" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{testimonialsData.title}</h2>
+      <h3 class="section-subtitle">{testimonialsData.subtitle}</h3>
+      <p class="section-description">{testimonialsData.description}</p>
+    </div>
+    
+    <div class="testimonials-grid">
+      {testimonialsData.testimonials.map((testimonial, index) => (
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay={index * 100}>
+          <div class="testimonial-content">
+            <div class="testimonial-rating">
+              {Array.from({ length: testimonial.rating }, (_, i) => (
+                <svg key={i} class="star-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 1L10.09 5.26L15 6L11.5 9.74L12.18 15L8 12.77L3.82 15L4.5 9.74L1 6L5.91 5.26L8 1Z" fill="currentColor"/>
+                </svg>
+              ))}
+            </div>
+            
+            <blockquote class="testimonial-quote">
+              "{testimonial.quote}"
+            </blockquote>
+            
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img 
+                  src={testimonial.image} 
+                  alt={`${testimonial.author} - ${testimonial.role}`}
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                />
+                <div class="avatar-fallback" style="display: none;">
+                  <span>{testimonial.author.split(' ').map(n => n[0]).join('')}</span>
+                </div>
+              </div>
+              <div class="author-info">
+                <h4 class="author-name">{testimonial.author}</h4>
+                <p class="author-role">{testimonial.role}</p>
+                <p class="author-company">{testimonial.company}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="testimonials-cta">
+      <div class="cta-content">
+        <h3 class="cta-title">Join Our Growing Community of Satisfied Clients</h3>
+        <p class="cta-description">Experience the PV Industries difference and become part of Australia's sustainable solar future.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#HomeContact" class="button button-primary">
+          Get Your Quote
+          <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="/meet-the-team" class="button button-secondary">
+          Meet Our Team
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .section-subtitle {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+  }
+
+  .section-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-16);
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .testimonial-card {
+    background: var(--color-neutral-50);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    border: 1px solid var(--color-neutral-200);
+    transition: all var(--transition-normal);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--color-primary-light);
+  }
+
+  .testimonial-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .testimonial-rating {
+    display: flex;
+    gap: var(--space-1);
+    margin-bottom: var(--space-4);
+    color: var(--color-primary);
+  }
+
+  .star-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .testimonial-quote {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin: 0 0 var(--space-6) 0;
+    flex: 1;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: auto;
+  }
+
+  .author-avatar {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+
+  .author-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-neutral-200);
+  }
+
+  .avatar-fallback {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-neutral-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+  }
+
+  .author-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .author-name {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-1);
+  }
+
+  .author-role {
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-600);
+    margin-bottom: var(--space-1);
+  }
+
+  .author-company {
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  .testimonials-cta {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    text-align: center;
+    color: var(--color-neutral-100);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      padding: var(--space-6) var(--space-8);
+    }
+  }
+
+  .cta-content {
+    margin-bottom: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .cta-content {
+      margin-bottom: 0;
+      flex: 1;
+      margin-right: var(--space-8);
+    }
+  }
+
+  .cta-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    color: var(--color-neutral-100);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-200);
+    line-height: 1.6;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .cta-actions {
+      flex-direction: row;
+      gap: var(--space-4);
+    }
+  }
+
+  .cta-actions .button {
+    background: var(--color-neutral-100);
+    color: var(--color-primary);
+    border: 2px solid var(--color-neutral-100);
+  }
+
+  .cta-actions .button:hover {
+    background: transparent;
+    color: var(--color-neutral-100);
+  }
+
+  .cta-actions .button-secondary {
+    background: transparent;
+    color: var(--color-neutral-100);
+    border: 2px solid var(--color-neutral-100);
+  }
+
+  .cta-actions .button-secondary:hover {
+    background: var(--color-neutral-100);
+    color: var(--color-primary);
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -1,0 +1,345 @@
+---
+// Why Choose PV Industries section data
+const whyChooseData = {
+  title: "Why Choose PV Industries",
+  subtitle: "Australia's Most Trusted Solar Recycling Partner",
+  description: "We combine cutting-edge technology, proven expertise, and unwavering commitment to sustainability to deliver the most comprehensive solar recycling solutions in Australia.",
+  reasons: [
+    {
+      icon: "award",
+      title: "Industry Leadership",
+      description: "As Australia's pioneer in solar panel recycling, we've set the standards that others follow. Our proven track record speaks for itself.",
+      stats: "200+ satisfied customers"
+    },
+    {
+      icon: "shield",
+      title: "Compliance & Certification",
+      description: "Fully licensed and certified operations ensuring complete regulatory compliance and peace of mind for all stakeholders.",
+      stats: "100% compliant operations"
+    },
+    {
+      icon: "recycle",
+      title: "Advanced Technology",
+      description: "State-of-the-art processing facilities with proprietary technology that achieves industry-leading 95% material recovery rates.",
+      stats: "95% material recovery"
+    },
+    {
+      icon: "truck",
+      title: "National Coverage",
+      description: "Comprehensive collection and logistics network covering all major Australian cities and regional areas with flexible scheduling.",
+      stats: "Australia-wide service"
+    },
+    {
+      icon: "leaf",
+      title: "Environmental Impact",
+      description: "Zero landfill guarantee with transparent reporting on environmental benefits and carbon footprint reduction.",
+      stats: "Zero landfill guarantee"
+    },
+    {
+      icon: "support",
+      title: "Expert Support",
+      description: "Dedicated customer support team with deep industry knowledge to guide you through every step of the recycling process.",
+      stats: "24/7 expert support"
+    }
+  ]
+};
+---
+
+<section class="why-choose-section" id="why-choose">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{whyChooseData.title}</h2>
+      <h3 class="section-subtitle">{whyChooseData.subtitle}</h3>
+      <p class="section-description">{whyChooseData.description}</p>
+    </div>
+    
+    <div class="reasons-grid">
+      {whyChooseData.reasons.map((reason, index) => (
+        <div class="reason-card" data-aos="fade-up" data-aos-delay={index * 100}>
+          <div class="reason-icon">
+            {reason.icon === "award" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9C6 7.34315 7.34315 6 9 6H15C16.6569 6 18 7.34315 18 9C18 10.6569 16.6569 12 15 12H9C7.34315 12 6 10.6569 6 9Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 12V22L8 20L12 18L16 20L12 22V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {reason.icon === "shield" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M12 22S8 18 8 12V7L12 5L16 7V12C16 18 12 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {reason.icon === "recycle" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M7 6H17L19.5 3.5L21 5L19 7H7L5 5L6.5 3.5L7 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17 6V16C17 17.1 16.1 18 15 18H9C7.9 18 7 17.1 7 16V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 11V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14 11V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {reason.icon === "truck" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M1 3H15V13H1V3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 8H20L23 11V16H16V8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="5.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="2"/>
+                <circle cx="18.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            )}
+            {reason.icon === "leaf" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2C17 7 14.5 8 13.3 8.9C12.2 9.8 11 15.5 11 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.8 19.5C14 18.3 15 16.8 15 15C15 12.8 13.2 11 11 11C8.8 11 7 12.8 7 15C7 16.8 8 18.3 9.2 19.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {reason.icon === "support" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 9H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 13H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+          </div>
+          
+          <div class="reason-content">
+            <h4 class="reason-title">{reason.title}</h4>
+            <p class="reason-description">{reason.description}</p>
+            <div class="reason-stat">{reason.stats}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="section-cta">
+      <div class="cta-content">
+        <h3 class="cta-title">Ready to Partner with Australia's Solar Recycling Leader?</h3>
+        <p class="cta-description">Join hundreds of satisfied customers who trust PV Industries for their solar panel recycling needs.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#HomeContact" class="button button-primary">
+          Get Your Quote Today
+          <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="/meet-the-team" class="button button-secondary">
+          Meet Our Team
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-choose-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .section-subtitle {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+  }
+
+  .section-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-16);
+  }
+
+  @media (min-width: 768px) {
+    .reasons-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .reasons-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .reason-card {
+    background: var(--color-neutral-50);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--color-neutral-200);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reason-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--color-primary-light);
+  }
+
+  .reason-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .reason-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reason-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-3);
+  }
+
+  .reason-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+    flex: 1;
+  }
+
+  .reason-stat {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .section-cta {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-xl);
+    padding: var(--space-12);
+    text-align: center;
+    color: var(--color-neutral-100);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+  }
+
+  @media (min-width: 768px) {
+    .section-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      padding: var(--space-8) var(--space-12);
+    }
+  }
+
+  .cta-content {
+    margin-bottom: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .cta-content {
+      margin-bottom: 0;
+      flex: 1;
+      margin-right: var(--space-8);
+    }
+  }
+
+  .cta-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    color: var(--color-neutral-100);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-200);
+    line-height: 1.6;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .cta-actions {
+      flex-direction: row;
+      gap: var(--space-4);
+    }
+  }
+
+  .cta-actions .button {
+    background: var(--color-neutral-100);
+    color: var(--color-primary);
+    border: 2px solid var(--color-neutral-100);
+  }
+
+  .cta-actions .button:hover {
+    background: transparent;
+    color: var(--color-neutral-100);
+  }
+
+  .cta-actions .button-secondary {
+    background: transparent;
+    color: var(--color-neutral-100);
+    border: 2px solid var(--color-neutral-100);
+  }
+
+  .cta-actions .button-secondary:hover {
+    background: var(--color-neutral-100);
+    color: var(--color-primary);
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

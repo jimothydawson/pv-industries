@@ -1,0 +1,30 @@
+---
+// src/pages/meet-the-team.astro
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import TeamHeroSection from '../components/TeamHeroSection.astro';
+import TeamSection from '../components/TeamSection.astro';
+import TeamValuesSection from '../components/TeamValuesSection.astro';
+import TeamCultureSection from '../components/TeamCultureSection.astro';
+import TeamTestimonialsSection from '../components/TeamTestimonialsSection.astro';
+import CareersSection from '../components/CareersSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import Footer from '../components/Footer.astro';
+
+const pageTitle = "Meet the Team - PV Industries";
+const pageDescription = "Meet the passionate team behind PV Industries. Learn about our people, values, and culture as we lead Australia in solar panel recycling and circular economy solutions.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Header />
+  <main>
+    <TeamHeroSection />
+    <TeamSection />
+    <TeamCultureSection />
+    <TeamValuesSection />
+    <TeamTestimonialsSection />
+    <CareersSection />
+    <ContactSection />
+  </main>
+  <Footer />
+</Layout>

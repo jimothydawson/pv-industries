@@ -1,0 +1,501 @@
+---
+// Sustainability Commitment section data
+const sustainabilityData = {
+  title: "Our Commitment to Sustainability",
+  subtitle: "Leading Australia's Circular Economy Revolution",
+  description: "At PV Industries, sustainability isn't just what we do—it's who we are. Every decision we make is guided by our unwavering commitment to environmental stewardship and creating a truly circular economy for solar energy.",
+  commitments: [
+    {
+      icon: "target",
+      title: "Zero Waste to Landfill",
+      description: "We guarantee that 100% of solar panels processed through our facilities are diverted from landfill sites.",
+      metric: "100% Diversion Rate",
+      details: [
+        "Comprehensive material recovery processes",
+        "Alternative disposal methods for non-recyclable components",
+        "Detailed tracking and reporting systems",
+        "Third-party verification and certification"
+      ]
+    },
+    {
+      icon: "cycle",
+      title: "Circular Economy Integration",
+      description: "Recovered materials are reintegrated into new solar panel manufacturing, creating a true circular economy.",
+      metric: "95% Material Recovery",
+      details: [
+        "High-purity silicon extraction",
+        "Precious metal recovery (silver, copper)",
+        "Aluminum frame processing",
+        "Glass recycling for new applications"
+      ]
+    },
+    {
+      icon: "leaf",
+      title: "Carbon Neutral Operations",
+      description: "Our facilities operate with net-zero carbon emissions through renewable energy and carbon offset programs.",
+      metric: "Net Zero Emissions",
+      details: [
+        "100% renewable energy powered facilities",
+        "Carbon offset programs for transportation",
+        "Energy-efficient processing equipment",
+        "Continuous emissions monitoring"
+      ]
+    }
+  ],
+  initiatives: [
+    {
+      title: "Research & Development",
+      description: "Continuous investment in innovative recycling technologies to improve efficiency and environmental outcomes.",
+      icon: "research"
+    },
+    {
+      title: "Industry Collaboration",
+      description: "Working with manufacturers, installers, and policymakers to establish industry-wide sustainability standards.",
+      icon: "collaboration"
+    },
+    {
+      title: "Education & Awareness",
+      description: "Promoting awareness about solar panel recycling and sustainable practices throughout the industry.",
+      icon: "education"
+    },
+    {
+      title: "Future Innovation",
+      description: "Developing next-generation recycling processes to handle emerging solar technologies and materials.",
+      icon: "innovation"
+    }
+  ]
+};
+---
+
+<section class="sustainability-section" id="sustainability">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{sustainabilityData.title}</h2>
+      <h3 class="section-subtitle">{sustainabilityData.subtitle}</h3>
+      <p class="section-description">{sustainabilityData.description}</p>
+    </div>
+    
+    <!-- Main Commitments -->
+    <div class="commitments-grid">
+      {sustainabilityData.commitments.map((commitment, index) => (
+        <div class="commitment-card" data-aos="fade-up" data-aos-delay={index * 100}>
+          <div class="commitment-header">
+            <div class="commitment-icon">
+              {commitment.icon === "target" && (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="2" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              )}
+              {commitment.icon === "cycle" && (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              )}
+              {commitment.icon === "leaf" && (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2C17 7 14.5 8 13.3 8.9C12.2 9.8 11 15.5 11 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12.8 19.5C14 18.3 15 16.8 15 15C15 12.8 13.2 11 11 11C8.8 11 7 12.8 7 15C7 16.8 8 18.3 9.2 19.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              )}
+            </div>
+            <div class="commitment-metric">{commitment.metric}</div>
+          </div>
+          
+          <div class="commitment-content">
+            <h4 class="commitment-title">{commitment.title}</h4>
+            <p class="commitment-description">{commitment.description}</p>
+            
+            <ul class="commitment-details">
+              {commitment.details.map((detail) => (
+                <li class="commitment-detail">
+                  <svg class="detail-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  {detail}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Additional Initiatives -->
+    <div class="initiatives-section">
+      <h3 class="initiatives-title">Sustainability Initiatives</h3>
+      <div class="initiatives-grid">
+        {sustainabilityData.initiatives.map((initiative, index) => (
+          <div class="initiative-card" data-aos="fade-up" data-aos-delay={index * 100}>
+            <div class="initiative-icon">
+              {initiative.icon === "research" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M21 21L16.514 16.506L21 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M16.5 16.5L21 21L16.5 16.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              )}
+              {initiative.icon === "collaboration" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M23 21V19C23 18.1645 22.7155 17.3541 22.2094 16.6977C21.7033 16.0414 20.9999 15.5735 20.2 15.3613" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M16 3.13C16.8003 3.3422 17.5037 3.81014 18.0098 4.46645C18.5159 5.12277 18.8004 5.93317 18.8004 6.76875C18.8004 7.60433 18.5159 8.41473 18.0098 9.07105C17.5037 9.72736 16.8003 10.1953 16 10.4075" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              )}
+              {initiative.icon === "education" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M22 10V6C22 5.46957 21.7893 4.96086 21.4142 4.58579C21.0391 4.21071 20.5304 4 20 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V10C2 10.5304 2.21071 11.0391 2.58579 11.4142C2.96086 11.7893 3.46957 12 4 12H20C20.5304 12 21.0391 11.7893 21.4142 11.4142C21.7893 11.0391 22 10.5304 22 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6 12V16C6 16.5304 6.21071 17.0391 6.58579 17.4142C6.96086 17.7893 7.46957 18 8 18H16C16.5304 18 17.0391 17.7893 17.4142 17.4142C17.7893 17.0391 18 16.5304 18 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 12V18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              )}
+              {initiative.icon === "innovation" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              )}
+            </div>
+            <div class="initiative-content">
+              <h4 class="initiative-title">{initiative.title}</h4>
+              <p class="initiative-description">{initiative.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Final CTA -->
+    <div class="sustainability-cta">
+      <div class="cta-content">
+        <h3 class="cta-title">Partner with Australia's Sustainability Leader</h3>
+        <p class="cta-description">Join us in creating a truly sustainable future for solar energy. Together, we can close the loop on solar sustainability and build a circular economy that benefits everyone.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#HomeContact" class="button button-primary">
+          Start Your Sustainability Journey
+          <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="/about" class="button button-secondary">
+          Learn About Our Mission
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sustainability-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-50);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .section-subtitle {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+  }
+
+  .section-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  .commitments-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    margin-bottom: var(--space-20);
+  }
+
+  @media (min-width: 1024px) {
+    .commitments-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .commitment-card {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    border: 1px solid var(--color-neutral-200);
+    transition: all var(--transition-normal);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .commitment-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--color-primary-light);
+  }
+
+  .commitment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+  }
+
+  .commitment-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .commitment-metric {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: right;
+  }
+
+  .commitment-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .commitment-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-3);
+  }
+
+  .commitment-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin-bottom: var(--space-6);
+    flex: 1;
+  }
+
+  .commitment-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .commitment-detail {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-700);
+  }
+
+  .commitment-detail:last-child {
+    margin-bottom: 0;
+  }
+
+  .detail-icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .initiatives-section {
+    margin-bottom: var(--space-16);
+  }
+
+  .initiatives-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: var(--space-12);
+    color: var(--color-neutral-900);
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+  }
+
+  .initiatives-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .initiatives-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  .initiative-card {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    border: 1px solid var(--color-neutral-200);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    transition: all var(--transition-normal);
+  }
+
+  .initiative-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--color-primary-light);
+  }
+
+  .initiative-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .initiative-content {
+    flex: 1;
+  }
+
+  .initiative-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-2);
+  }
+
+  .initiative-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+  }
+
+  .sustainability-cta {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    text-align: center;
+    color: var(--color-neutral-100);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+  }
+
+  @media (min-width: 768px) {
+    .sustainability-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      padding: var(--space-6) var(--space-8);
+    }
+  }
+
+  .cta-content {
+    margin-bottom: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .cta-content {
+      margin-bottom: 0;
+      flex: 1;
+      margin-right: var(--space-8);
+    }
+  }
+
+  .cta-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    color: var(--color-neutral-100);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-200);
+    line-height: 1.6;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .cta-actions {
+      flex-direction: row;
+      gap: var(--space-4);
+    }
+  }
+
+  .cta-actions .button {
+    background: var(--color-neutral-100);
+    color: var(--color-primary);
+    border: 2px solid var(--color-neutral-100);
+  }
+
+  .cta-actions .button:hover {
+    background: transparent;
+    color: var(--color-neutral-100);
+  }
+
+  .cta-actions .button-secondary {
+    background: transparent;
+    color: var(--color-neutral-100);
+    border: 2px solid var(--color-neutral-100);
+  }
+
+  .cta-actions .button-secondary:hover {
+    background: var(--color-neutral-100);
+    color: var(--color-primary);
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

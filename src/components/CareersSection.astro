@@ -1,0 +1,408 @@
+---
+// Careers Section component - "Join the PV Industries Team"
+const sectionData = {
+  subtitle: "05",
+  title: "Join the PV Industries Team",
+  description: "Are you passionate about renewable energy, sustainability, and creating real change? We're always looking for motivated, values-driven individuals to join our team across Australia.",
+  careerAreas: [
+    "Environmental & sustainability consulting",
+    "Operations & logistics",
+    "Customer service & project management",
+    "Engineering & technical services",
+    "Administrative and business support"
+  ],
+  contactInfo: {
+    email: "careers@pvindustries.com.au",
+    currentOpenings: "View current openings"
+  },
+  ctaSection: {
+    title: "Want to Work With Us or Join Our Mission?",
+    description: "Whether you're a potential client, partner, or future team member, we'd love to hear from you."
+  }
+};
+---
+
+<section class="careers-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <div class="header-content">
+        <div class="subtitle-wrapper">
+          <div class="subtitle-divider left"></div>
+          <div class="subtitle">{sectionData.subtitle}</div>
+          <div class="subtitle-divider"></div>
+        </div>
+        
+        <div class="title-wrapper">
+          <h2 class="section-title">{sectionData.title}</h2>
+        </div>
+        
+        <div class="section-description">
+          <p class="description-text">{sectionData.description}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Careers Content -->
+    <div class="careers-content">
+      <div class="careers-grid">
+        <!-- Career Areas -->
+        <div class="career-areas">
+          <h3 class="areas-title">Explore careers in:</h3>
+          <ul class="areas-list">
+            {sectionData.careerAreas.map((area) => (
+              <li class="area-item">{area}</li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="career-contact">
+          <div class="contact-card">
+            <h3 class="contact-title">Ready to Apply?</h3>
+            <div class="contact-actions">
+              <a href="#" class="contact-link primary">
+                {sectionData.contactInfo.currentOpenings}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <div class="contact-divider">
+                <span>Or</span>
+              </div>
+              <a href={`mailto:${sectionData.contactInfo.email}`} class="contact-link secondary">
+                Email us at {sectionData.contactInfo.email}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+      <div class="cta-content">
+        <h2 class="cta-title">{sectionData.ctaSection.title}</h2>
+        <p class="cta-description">{sectionData.ctaSection.description}</p>
+        <div class="cta-buttons">
+          <a href="#quote" class="button button-primary">
+            Get in touch
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href={`mailto:${sectionData.contactInfo.email}`} class="button button-secondary">
+            Join our team
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .careers-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-200);
+    overflow: hidden;
+  }
+
+  /* Section Header */
+  .section-header {
+    margin-bottom: var(--space-12);
+    max-width: 612px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    .section-header {
+      max-width: 450px;
+    }
+  }
+
+  .header-content {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .subtitle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .subtitle-divider {
+    height: 2px;
+    background: var(--color-primary);
+    flex: 1;
+    max-width: 60px;
+  }
+
+  .subtitle-divider.left {
+    display: block;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .section-description {
+    margin-top: var(--space-6);
+  }
+
+  .description-text {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* Careers Content */
+  .careers-content {
+    margin-bottom: var(--space-16);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  }
+
+  .careers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  @media (max-width: 767px) {
+    .careers-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+  }
+
+  /* Career Areas */
+  .career-areas {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+  }
+
+  .areas-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0 0 var(--space-6);
+  }
+
+  .areas-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .area-item {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+    padding-left: var(--space-6);
+    position: relative;
+  }
+
+  .area-item:before {
+    content: "•";
+    color: var(--color-primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
+
+  .area-item:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Career Contact */
+  .career-contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-card {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    text-align: center;
+    width: 100%;
+  }
+
+  .contact-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0 0 var(--space-6);
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all var(--transition-normal);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .contact-link.primary {
+    background: var(--color-primary);
+    color: var(--color-neutral-100);
+    font-size: var(--font-size-base);
+  }
+
+  .contact-link.primary:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+  }
+
+  .contact-link.secondary {
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+  }
+
+  .contact-link.secondary:hover {
+    color: var(--color-primary-dark);
+    background: var(--color-neutral-200);
+  }
+
+  .contact-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin: var(--space-2) 0;
+  }
+
+  .contact-divider:before,
+  .contact-divider:after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--color-neutral-300);
+  }
+
+  .contact-divider span {
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-500);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-lg);
+    padding: var(--space-12);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0 0 var(--space-4);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin: 0 0 var(--space-8);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .careers-section {
+      padding: var(--space-16) 0;
+    }
+
+    .section-header {
+      margin-bottom: var(--space-10);
+    }
+
+    .careers-content {
+      margin-bottom: var(--space-12);
+    }
+
+    .career-areas,
+    .contact-card {
+      padding: var(--space-6);
+    }
+
+    .cta-section {
+      padding: var(--space-8);
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  /* Animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .header-content,
+    .careers-content,
+    .cta-section {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .contact-link.primary:hover {
+      transform: none;
+    }
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

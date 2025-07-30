@@ -1,0 +1,227 @@
+---
+// About Hero Section component
+const sectionData = {
+  title: "About us",
+  description: "How do we capture the valuable resources from the fastest growing waste stream in Australia? This is the question we are here to solve.",
+  primaryButton: {
+    text: "Join us",
+    href: "/contact"
+  },
+  secondaryButton: {
+    text: "Our values",
+    href: "#values"
+  },
+  heroImage: {
+    src: "/images/Screen-Shot-2024-03-26-at-10.14.11-pm.png",
+    alt: "PV Industries solar panel recycling facility"
+  }
+};
+---
+
+<section class="about-hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-title-wrapper">
+          <h1 class="hero-title">{sectionData.title}</h1>
+        </div>
+        
+        <div class="hero-grid">
+          <div class="hero-buttons">
+            <a href={sectionData.primaryButton.href} class="button button-primary">
+              {sectionData.primaryButton.text}
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href={sectionData.secondaryButton.href} class="button button-secondary dark">
+              {sectionData.secondaryButton.text}
+            </a>
+          </div>
+          
+          <div class="hero-description">
+            <p>{sectionData.description}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-image-wrapper">
+        <div class="hero-image">
+          <img 
+            src={sectionData.heroImage.src} 
+            alt={sectionData.heroImage.alt}
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-hero-section {
+    padding: var(--space-24) 0 var(--space-20);
+    background: var(--color-neutral-100);
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .hero-text {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-text {
+      max-width: none;
+      margin: 0;
+      text-align: left;
+    }
+  }
+
+  .hero-title-wrapper {
+    margin-bottom: var(--space-12);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: var(--space-8);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  }
+
+  @media (min-width: 768px) {
+    .hero-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12);
+      align-items: start;
+    }
+  }
+
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 480px) {
+    .hero-buttons {
+      flex-direction: row;
+      gap: var(--space-6);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-buttons {
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+  }
+
+  .hero-description {
+    max-width: 612px;
+  }
+
+  .hero-description p {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .hero-image-wrapper {
+    margin-top: var(--space-12);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+  }
+
+  .hero-image {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--color-neutral-200);
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--transition-slow);
+  }
+
+  .hero-image:hover img {
+    transform: scale(1.02);
+  }
+
+  /* Button styles specific to hero */
+  .hero-buttons .button {
+    justify-content: center;
+    min-width: 140px;
+  }
+
+  @media (min-width: 768px) {
+    .hero-buttons .button {
+      justify-content: flex-start;
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .about-hero-section {
+      padding: var(--space-20) 0 var(--space-16);
+      min-height: 70vh;
+    }
+
+    .hero-content {
+      gap: var(--space-10);
+    }
+
+    .hero-title-wrapper {
+      margin-bottom: var(--space-8);
+    }
+
+    .hero-grid {
+      gap: var(--space-6);
+    }
+
+    .hero-description p {
+      font-size: var(--font-size-base);
+    }
+  }
+
+  /* Animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-title-wrapper,
+    .hero-grid,
+    .hero-image-wrapper {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .hero-image:hover img {
+      transform: none;
+    }
+  }
+</style>

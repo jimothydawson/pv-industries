@@ -1,12 +1,41 @@
 ---
-// Header component data
+// Header component data with dropdown structure
 const navigation = [
-  { name: 'Home', href: '/', current: true },
-  { name: 'About', href: '/about' },
-  { name: 'News', href: '/news' },
-  { name: 'Grants', href: '/grants' },
-  { name: 'Media', href: '/media' },
-  { name: 'FAQ', href: '/faq' }
+  {
+    name: 'Home',
+    href: '/',
+    current: true
+  },
+  {
+    name: 'About',
+    href: '/about',
+    dropdown: [
+      { name: 'Team', href: '/meet-the-team' },
+      { name: 'Processes', href: '/processes' },
+      { name: 'Partners', href: '/partners' }
+    ]
+  },
+  {
+    name: 'Industries We Serve',
+    href: '/industries',
+    dropdown: [
+      { name: 'Commercial', href: '/industries/commercial' },
+      { name: 'Utility', href: '/industries/utility' },
+      { name: 'Government', href: '/industries/government' }
+    ]
+  },
+  {
+    name: 'FAQ\'s',
+    href: '/faq'
+  },
+  {
+    name: 'News',
+    href: '/news',
+    dropdown: [
+      { name: 'Articles', href: '/news/articles' },
+      { name: 'Grants', href: '/grants' }
+    ]
+  }
 ];
 
 const contactEmail = 'contact@pvindustries.com.au';
@@ -30,14 +59,32 @@ const contactEmail = 'contact@pvindustries.com.au';
       <nav class="desktop-nav" aria-label="Main navigation">
         <ul class="nav-list">
           {navigation.map((item) => (
-            <li class="nav-item">
-              <a 
-                href={item.href} 
+            <li class={`nav-item ${item.dropdown ? 'has-dropdown' : ''}`}>
+              <a
+                href={item.href}
                 class={`nav-link ${item.current ? 'current' : ''}`}
                 aria-current={item.current ? 'page' : undefined}
+                aria-haspopup={item.dropdown ? 'true' : undefined}
+                aria-expanded={item.dropdown ? 'false' : undefined}
               >
                 {item.name}
+                {item.dropdown && (
+                  <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                )}
               </a>
+              {item.dropdown && (
+                <ul class="dropdown-menu">
+                  {item.dropdown.map((subItem) => (
+                    <li class="dropdown-item">
+                      <a href={subItem.href} class="dropdown-link">
+                        {subItem.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>
@@ -74,12 +121,28 @@ const contactEmail = 'contact@pvindustries.com.au';
       <ul class="mobile-nav-list">
         {navigation.map((item) => (
           <li class="mobile-nav-item">
-            <a 
-              href={item.href} 
-              class={`mobile-nav-link ${item.current ? 'current' : ''}`}
+            <a
+              href={item.href}
+              class={`mobile-nav-link ${item.current ? 'current' : ''} ${item.dropdown ? 'has-dropdown' : ''}`}
             >
               {item.name}
+              {item.dropdown && (
+                <svg class="mobile-dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              )}
             </a>
+            {item.dropdown && (
+              <ul class="mobile-dropdown-menu">
+                {item.dropdown.map((subItem) => (
+                  <li class="mobile-dropdown-item">
+                    <a href={subItem.href} class="mobile-dropdown-link">
+                      {subItem.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))}
         <li class="mobile-nav-item">
@@ -173,6 +236,70 @@ const contactEmail = 'contact@pvindustries.com.au';
     height: 2px;
     background: var(--color-primary);
     border-radius: 1px;
+  }
+
+  /* Dropdown Styles */
+  .nav-item.has-dropdown {
+    position: relative;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .dropdown-icon {
+    transition: transform var(--transition-normal);
+  }
+
+  .nav-item.has-dropdown:hover .dropdown-icon {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-normal);
+    z-index: 1000;
+    list-style: none;
+    padding: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .nav-item.has-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-item {
+    margin: 0;
+  }
+
+  .dropdown-link {
+    display: block;
+    color: var(--color-neutral-200);
+    text-decoration: none;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-normal);
+    font-size: var(--font-size-sm);
+  }
+
+  .dropdown-link:hover {
+    color: var(--color-neutral-100);
+    background: rgba(255, 255, 255, 0.1);
   }
 
   /* Header Actions */
@@ -288,6 +415,47 @@ const contactEmail = 'contact@pvindustries.com.au';
     background: var(--color-primary-dark);
   }
 
+  /* Mobile Dropdown Styles */
+  .mobile-nav-link.has-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobile-dropdown-icon {
+    transition: transform var(--transition-normal);
+  }
+
+  .mobile-nav-item:has(.mobile-dropdown-menu.open) .mobile-dropdown-icon {
+    transform: rotate(180deg);
+  }
+
+  .mobile-dropdown-menu {
+    list-style: none;
+    padding-left: var(--space-4);
+    margin-top: var(--space-2);
+    display: none;
+  }
+
+  .mobile-dropdown-menu.open {
+    display: block;
+  }
+
+  .mobile-dropdown-link {
+    display: block;
+    color: var(--color-neutral-300);
+    text-decoration: none;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-normal);
+    font-size: var(--font-size-sm);
+  }
+
+  .mobile-dropdown-link:hover {
+    color: var(--color-neutral-100);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
   /* Scroll behavior */
   .header.scrolled {
     background: rgba(15, 23, 42, 0.98);
@@ -333,6 +501,34 @@ const contactEmail = 'contact@pvindustries.com.au';
     });
   }
 
+  // Mobile dropdown toggle functionality
+  const mobileDropdownLinks = document.querySelectorAll('.mobile-nav-link.has-dropdown');
+  
+  mobileDropdownLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const dropdownMenu = link.nextElementSibling;
+      
+      if (dropdownMenu && dropdownMenu.classList.contains('mobile-dropdown-menu')) {
+        const isOpen = dropdownMenu.classList.contains('open');
+        
+        // Close all other dropdowns
+        document.querySelectorAll('.mobile-dropdown-menu.open').forEach(menu => {
+          if (menu !== dropdownMenu) {
+            menu.classList.remove('open');
+          }
+        });
+        
+        // Toggle current dropdown
+        if (isOpen) {
+          dropdownMenu.classList.remove('open');
+        } else {
+          dropdownMenu.classList.add('open');
+        }
+      }
+    });
+  });
+
   // Close mobile menu when clicking outside
   document.addEventListener('click', (e) => {
     if (mobileNav && mobileMenuButton) {
@@ -342,6 +538,11 @@ const contactEmail = 'contact@pvindustries.com.au';
       if (!isClickInsideNav && !isClickOnButton && mobileNav.classList.contains('open')) {
         mobileNav.classList.remove('open');
         mobileMenuButton.setAttribute('aria-expanded', 'false');
+        
+        // Close all mobile dropdowns when closing mobile menu
+        document.querySelectorAll('.mobile-dropdown-menu.open').forEach(menu => {
+          menu.classList.remove('open');
+        });
       }
     }
   });

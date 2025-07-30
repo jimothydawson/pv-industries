@@ -1,0 +1,208 @@
+---
+// Partners Circular Economy section following the exact script structure
+const circularEconomyData = {
+  h2: "Supporting Australia's Circular Economy",
+  body: "Our partnerships are fundamental to creating a truly circular economy for solar panel materials in Australia.",
+  features: [
+    {
+      h3: "Closed-Loop Material Flows",
+      body: "We work with partners to establish closed-loop systems where end-of-life solar panels become raw materials for new products, reducing waste and virgin resource consumption.",
+      icon: "loop"
+    },
+    {
+      h3: "Local Supply Chains",
+      body: "By partnering with Australian manufacturers, we're building resilient local supply chains that reduce dependence on imported materials and support domestic industry.",
+      icon: "supply-chain"
+    },
+    {
+      h3: "Innovation Collaboration",
+      body: "We collaborate with partners on R&D projects to develop new applications for recycled materials, creating value-added products and expanding market opportunities.",
+      icon: "innovation"
+    },
+    {
+      h3: "Sustainable Manufacturing",
+      body: "Our partnerships enable manufacturers to meet sustainability targets, reduce carbon footprints, and demonstrate environmental leadership in their industries.",
+      icon: "sustainable"
+    }
+  ]
+};
+---
+
+<section class="circular-economy-section" id="circular-economy">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{circularEconomyData.h2}</h2>
+      <p class="section-intro">{circularEconomyData.body}</p>
+    </div>
+    
+    <div class="features-grid">
+      {circularEconomyData.features.map((feature, index) => (
+        <div class="feature-card" data-aos="fade-up" data-aos-delay={index * 150}>
+          <div class="feature-icon">
+            {feature.icon === "loop" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M17 1L21 5L17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3 11V9C3 7.93913 3.42143 6.92172 4.17157 6.17157C4.92172 5.42143 5.93913 5 7 5H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7 23L3 19L7 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 13V15C21 16.0609 20.5786 17.0783 19.8284 17.8284C19.0783 18.5786 18.0609 19 17 19H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {feature.icon === "supply-chain" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M21 16V8C20.9996 7.64928 20.9071 7.30481 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.27L13 2.27C12.696 2.09446 12.3511 2.00205 12 2.00205C11.6489 2.00205 11.304 2.09446 11 2.27L4 6.27C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64928 3 8V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3.27 6.96L12 12.01L20.73 6.96" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 22.08V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {feature.icon === "innovation" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 2C13.5913 2 15.1174 2.63214 16.2426 3.75736C17.3679 4.88258 18 6.4087 18 8C18 9.5913 17.3679 11.1174 16.2426 12.2426C15.1174 13.3679 13.5913 14 12 14C10.4087 14 8.88258 13.3679 7.75736 12.2426C6.63214 11.1174 6 9.5913 6 8C6 6.4087 6.63214 4.88258 7.75736 3.75736C8.88258 2.63214 10.4087 2 12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 22H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 19H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 14V19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {feature.icon === "sustainable" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 21L12 17L16 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+          </div>
+          
+          <div class="feature-content">
+            <h3 class="feature-title">{feature.h3}</h3>
+            <p class="feature-body">{feature.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .circular-economy-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-50);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .section-intro {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .feature-card {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    border: 1px solid var(--color-neutral-200);
+    transition: all var(--transition-normal);
+    display: flex;
+    gap: var(--space-6);
+    align-items: flex-start;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary-light);
+  }
+
+  .feature-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .feature-content {
+    flex: 1;
+  }
+
+  .feature-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+  }
+
+  .feature-body {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .section-header {
+      text-align: left;
+    }
+    
+    .feature-card {
+      flex-direction: column;
+      text-align: center;
+      padding: var(--space-6);
+    }
+    
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto;
+    }
+  }
+</style>

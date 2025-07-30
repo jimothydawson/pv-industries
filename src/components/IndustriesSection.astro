@@ -1,0 +1,382 @@
+---
+// Industries We Serve section data
+const industriesData = {
+  title: "Industries We Serve",
+  subtitle: "Comprehensive Solar Recycling Across All Sectors",
+  description: "From residential installations to large-scale commercial projects, we provide tailored solar panel recycling solutions for every industry and application.",
+  industries: [
+    {
+      icon: "residential",
+      title: "Residential Solar",
+      description: "Homeowner solar panel recycling services with convenient pickup and transparent reporting for end-of-life residential systems.",
+      features: [
+        "Door-to-door collection",
+        "Homeowner certificates",
+        "Flexible scheduling",
+        "Competitive pricing"
+      ]
+    },
+    {
+      icon: "commercial",
+      title: "Commercial & Industrial",
+      description: "Large-scale recycling solutions for commercial buildings, warehouses, and industrial facilities with bulk processing capabilities.",
+      features: [
+        "Bulk collection services",
+        "Project management",
+        "Compliance documentation",
+        "Volume discounts"
+      ]
+    },
+    {
+      icon: "utility",
+      title: "Utility-Scale Solar",
+      description: "Specialized handling of utility-scale solar farm decommissioning with advanced logistics and processing capabilities.",
+      features: [
+        "Large-scale logistics",
+        "On-site processing",
+        "Regulatory compliance",
+        "Environmental reporting"
+      ]
+    },
+    {
+      icon: "installer",
+      title: "Solar Installers",
+      description: "Partnership programs for solar installation companies to offer comprehensive end-of-life services to their customers.",
+      features: [
+        "Installer partnerships",
+        "Customer referrals",
+        "Technical support",
+        "Marketing materials"
+      ]
+    },
+    {
+      icon: "government",
+      title: "Government & Public",
+      description: "Specialized services for government buildings, schools, and public infrastructure with full compliance and reporting.",
+      features: [
+        "Tender compliance",
+        "Public reporting",
+        "Educational programs",
+        "Sustainability metrics"
+      ]
+    },
+    {
+      icon: "agriculture",
+      title: "Agricultural Solar",
+      description: "Rural and agricultural solar system recycling with understanding of remote locations and farming operations.",
+      features: [
+        "Rural collection",
+        "Agricultural expertise",
+        "Seasonal flexibility",
+        "Farm-friendly service"
+      ]
+    }
+  ]
+};
+---
+
+<section class="industries-section" id="industries">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{industriesData.title}</h2>
+      <h3 class="section-subtitle">{industriesData.subtitle}</h3>
+      <p class="section-description">{industriesData.description}</p>
+    </div>
+    
+    <div class="industries-grid">
+      {industriesData.industries.map((industry, index) => (
+        <div class="industry-card" data-aos="fade-up" data-aos-delay={index * 100}>
+          <div class="industry-icon">
+            {industry.icon === "residential" && (
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="9,22 9,12 15,12 15,22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {industry.icon === "commercial" && (
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M3 21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 21V7L13 2L21 7V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 17V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 17V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {industry.icon === "utility" && (
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {industry.icon === "installer" && (
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M14.7 6.3C16.2 7.8 16.2 10.2 14.7 11.7L11.7 14.7C10.2 16.2 7.8 16.2 6.3 14.7C4.8 13.2 4.8 10.8 6.3 9.3L9.3 6.3C10.8 4.8 13.2 4.8 14.7 6.3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9.7 17.7C8.2 16.2 8.2 13.8 9.7 12.3L12.7 9.3C14.2 7.8 16.6 7.8 18.1 9.3C19.6 10.8 19.6 13.2 18.1 14.7L15.1 17.7C13.6 19.2 11.2 19.2 9.7 17.7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {industry.icon === "government" && (
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M3 21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14 21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18 21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3 9L12 2L21 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {industry.icon === "agriculture" && (
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2C13.5 2 15 3 15 5C15 6.38 14.19 7.5 13 7.93V14C13.5 14 14 14.5 14 15V22H10V15C10 14.5 10.5 14 11 14V7.93C9.81 7.5 9 6.38 9 5C9 3 10.5 2 12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 14C8 12.5 9 11 10.5 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 14C16 12.5 15 11 13.5 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+          </div>
+          
+          <div class="industry-content">
+            <h4 class="industry-title">{industry.title}</h4>
+            <p class="industry-description">{industry.description}</p>
+            
+            <ul class="industry-features">
+              {industry.features.map((feature) => (
+                <li class="industry-feature">
+                  <svg class="feature-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="section-cta">
+      <div class="cta-content">
+        <h3 class="cta-title">Don't See Your Industry Listed?</h3>
+        <p class="cta-description">We work with organizations across all sectors. Contact us to discuss your specific solar recycling needs and how we can help.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#HomeContact" class="button button-primary">
+          Discuss Your Needs
+          <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="/about" class="button button-secondary">
+          Learn About Our Process
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .industries-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-50);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .section-subtitle {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+  }
+
+  .section-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  .industries-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-16);
+  }
+
+  @media (min-width: 768px) {
+    .industries-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .industries-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .industry-card {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--color-neutral-200);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .industry-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--color-primary-light);
+  }
+
+  .industry-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .industry-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .industry-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-3);
+  }
+
+  .industry-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+    flex: 1;
+  }
+
+  .industry-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .industry-feature {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-700);
+  }
+
+  .industry-feature:last-child {
+    margin-bottom: 0;
+  }
+
+  .feature-icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .section-cta {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    text-align: center;
+    border: 1px solid var(--color-neutral-200);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+  }
+
+  @media (min-width: 768px) {
+    .section-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      padding: var(--space-6) var(--space-8);
+    }
+  }
+
+  .cta-content {
+    margin-bottom: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .cta-content {
+      margin-bottom: 0;
+      flex: 1;
+      margin-right: var(--space-8);
+    }
+  }
+
+  .cta-title {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    color: var(--color-neutral-900);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .cta-actions {
+      flex-direction: row;
+      gap: var(--space-4);
+    }
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

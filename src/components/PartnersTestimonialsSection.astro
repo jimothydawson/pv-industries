@@ -1,0 +1,241 @@
+---
+// Partners Testimonials section following the exact script structure
+const testimonialsData = {
+  h2: "What Our Partners Say",
+  testimonials: [
+    {
+      quote: "Working with PV Industries gives us access to quality materials we can trust. Their transparency, consistency, and sustainability credentials make them a standout supplier.",
+      name: "Tom R.",
+      title: "Circular Product Manufacturer",
+      company: "",
+      icon: "manufacturing"
+    },
+    {
+      quote: "Their clean glass and aluminium inputs have helped reduce our production costs while boosting our sustainability metrics. A great partner in the circular economy space.",
+      name: "Sandra P.",
+      title: "Building Materials Company Director",
+      company: "",
+      icon: "construction"
+    }
+  ]
+};
+---
+
+<section class="partners-testimonials-section" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{testimonialsData.h2}</h2>
+    </div>
+    
+    <div class="testimonials-grid">
+      {testimonialsData.testimonials.map((testimonial, index) => (
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay={index * 200}>
+          <div class="testimonial-content">
+            <div class="quote-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M3 21C3 17.4 5.4 15 9 15C9.6 15 10.2 15.1 10.7 15.3C10.3 14.3 9.6 13.4 8.7 12.8C7.8 12.2 6.7 11.9 5.5 11.9V9.9C7.3 9.9 9 10.4 10.4 11.4C11.8 12.4 12.8 13.8 13.2 15.5C13.4 16.2 13.5 16.9 13.5 17.6C13.5 19.9 11.6 21.8 9.3 21.8C6.1 21.8 3.5 19.2 3.5 16C3.5 15.3 3.7 14.6 4 14L3 21Z" fill="currentColor"/>
+                <path d="M15 21C15 17.4 17.4 15 21 15C21.6 15 22.2 15.1 22.7 15.3C22.3 14.3 21.6 13.4 20.7 12.8C19.8 12.2 18.7 11.9 17.5 11.9V9.9C19.3 9.9 21 10.4 22.4 11.4C23.8 12.4 24.8 13.8 25.2 15.5C25.4 16.2 25.5 16.9 25.5 17.6C25.5 19.9 23.6 21.8 21.3 21.8C18.1 21.8 15.5 19.2 15.5 16C15.5 15.3 15.7 14.6 16 14L15 21Z" fill="currentColor"/>
+              </svg>
+            </div>
+            
+            <blockquote class="testimonial-quote">
+              "{testimonial.quote}"
+            </blockquote>
+            
+            <div class="testimonial-author">
+              <div class="author-icon">
+                {testimonial.icon === "manufacturing" && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M2 20H22V22H2V20Z" fill="currentColor"/>
+                    <path d="M4 20V4H6V20H4Z" fill="currentColor"/>
+                    <path d="M8 20V8H10V20H8Z" fill="currentColor"/>
+                    <path d="M12 20V12H14V20H12Z" fill="currentColor"/>
+                    <path d="M16 20V6H18V20H16Z" fill="currentColor"/>
+                    <path d="M20 20V10H22V20H20Z" fill="currentColor"/>
+                  </svg>
+                )}
+                {testimonial.icon === "construction" && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                )}
+                {testimonial.icon === "research" && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21 21L16.514 16.506" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                )}
+              </div>
+              
+              <div class="author-info">
+                <div class="author-name">{testimonial.name}</div>
+                <div class="author-title">{testimonial.title}</div>
+                {testimonial.company && (
+                  <div class="author-company">{testimonial.company}</div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .partners-testimonials-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: 0;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .testimonial-card {
+    background: var(--color-neutral-50);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    border: 1px solid var(--color-neutral-200);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary-light);
+  }
+
+  .testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  }
+
+  .testimonial-content {
+    position: relative;
+  }
+
+  .quote-icon {
+    color: var(--color-primary-light);
+    margin-bottom: var(--space-4);
+    opacity: 0.6;
+  }
+
+  .testimonial-quote {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin: 0 0 var(--space-6) 0;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .author-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .author-info {
+    flex: 1;
+  }
+
+  .author-name {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-1);
+  }
+
+  .author-title {
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-600);
+    margin-bottom: var(--space-1);
+  }
+
+  .author-company {
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .section-header {
+      text-align: left;
+    }
+    
+    .testimonial-card {
+      padding: var(--space-6);
+    }
+    
+    .testimonial-quote {
+      font-size: var(--font-size-base);
+    }
+  }
+</style>

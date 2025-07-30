@@ -1,0 +1,175 @@
+---
+// Partners Why Partner section following the exact script structure
+import CertifiedIcon from './icons/CertifiedIcon.astro';
+import AustraliaIcon from './icons/AustraliaIcon.astro';
+import EnvironmentIcon from './icons/EnvironmentIcon.astro';
+import CollaborationIcon from './icons/CollaborationIcon.astro';
+
+const whyPartnerData = {
+  h2: "Why Partner With PV Industries?",
+  reasons: [
+    {
+      h3: "Certified Clean Materials",
+      body: "We use industry-leading sorting, shredding, and separation technology to deliver clean, contaminant-free materials that meet your input specifications.",
+      icon: "certified"
+    },
+    {
+      h3: "Consistent Supply, Local Sourcing",
+      body: "Our national collection and processing network ensures a reliable supply of materials, reducing dependence on imported raw materials and supporting local manufacturing.",
+      icon: "australia"
+    },
+    {
+      h3: "Environmental Impact",
+      body: "By working with PV Industries, you're helping reduce Australia's reliance on virgin resources, cut carbon emissions, and support national circular economy goals.",
+      icon: "environment"
+    },
+    {
+      h3: "Strategic Collaboration",
+      body: "We actively collaborate with our partners on product development, R&D, and pilot programs to help transform recycled content into viable, scalable innovations.",
+      icon: "collaboration"
+    }
+  ]
+};
+---
+
+<section class="why-partner-section" id="why-partner">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{whyPartnerData.h2}</h2>
+    </div>
+    
+    <div class="reasons-grid">
+      {whyPartnerData.reasons.map((reason, index) => (
+        <div class="reason-card" data-aos="fade-up" data-aos-delay={index * 150}>
+          <div class="reason-icon">
+            {reason.icon === "certified" && <CertifiedIcon />}
+            {reason.icon === "australia" && <AustraliaIcon width={36} height={36} />}
+            {reason.icon === "environment" && <EnvironmentIcon />}
+            {reason.icon === "collaboration" && <CollaborationIcon />}
+          </div>
+          
+          <div class="reason-content">
+            <h3 class="reason-title">{reason.h3}</h3>
+            <p class="reason-body">{reason.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-partner-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-50);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: 0;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .reasons-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .reason-card {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    border: 1px solid var(--color-neutral-200);
+    transition: all var(--transition-normal);
+    display: flex;
+    gap: var(--space-6);
+    align-items: flex-start;
+  }
+
+  .reason-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary-light);
+  }
+
+  .reason-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .reason-content {
+    flex: 1;
+  }
+
+  .reason-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+  }
+
+  .reason-body {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .section-header {
+      text-align: left;
+    }
+    
+    .reason-card {
+      flex-direction: column;
+      text-align: center;
+      padding: var(--space-6);
+    }
+    
+    .reason-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto;
+    }
+  }
+</style>

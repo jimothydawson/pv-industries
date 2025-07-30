@@ -1,0 +1,227 @@
+---
+// Marketing Industry-Specific Solutions section following the exact marketing document structure
+import HomeIcon from './icons/HomeIcon.astro';
+import EnergyIcon from './icons/EnergyIcon.astro';
+import GovernmentIcon from './icons/GovernmentIcon.astro';
+import HandshakeIcon from './icons/HandshakeIcon.astro';
+
+const industryData = {
+  h2: "Industry-Specific Solutions",
+  h3: "Tailored services for:",
+  sectors: [
+    {
+      h4: "Commercial and residential solar installers",
+      linkTo: "/installers",
+      icon: "home"
+    },
+    {
+      h4: "Utility-scale solar farm operators",
+      linkTo: "/utility",
+      icon: "energy"
+    },
+    {
+      h4: "Local, state, and federal government agencies",
+      linkTo: "/government",
+      icon: "government"
+    },
+    {
+      h4: "Recycling and manufacturing partners",
+      linkTo: "/partners",
+      icon: "handshake"
+    }
+  ],
+  processLink: {
+    text: "Explore Our process",
+    linkTo: "/process"
+  }
+};
+---
+
+<section class="industry-solutions-section" id="industry-solutions">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{industryData.h2}</h2>
+      <h3 class="section-subtitle">{industryData.h3}</h3>
+    </div>
+    
+    <div class="sectors-grid">
+      {industryData.sectors.map((sector, index) => (
+        <a href={sector.linkTo} class="sector-card" data-aos="fade-up" data-aos-delay={index * 100}>
+          <div class="sector-icon">
+            {sector.icon === "home" && <HomeIcon />}
+            {sector.icon === "energy" && <EnergyIcon />}
+            {sector.icon === "government" && <GovernmentIcon />}
+            {sector.icon === "handshake" && <HandshakeIcon />}
+          </div>
+          
+          <div class="sector-content">
+            <h4 class="sector-title">{sector.h4}</h4>
+            <div class="sector-arrow">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+    
+    <div class="process-link-section">
+      <a href={industryData.processLink.linkTo} class="process-link">
+        {industryData.processLink.text}
+        <svg class="link-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .industry-solutions-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .section-subtitle {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-neutral-700);
+    margin-bottom: 0;
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+  }
+
+  .sectors-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .sectors-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  .sector-card {
+    background: var(--color-neutral-50);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    border: 1px solid var(--color-neutral-200);
+    transition: all var(--transition-normal);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .sector-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--color-primary-light);
+  }
+
+  .sector-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .sector-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sector-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .sector-arrow {
+    color: var(--color-primary);
+    transition: transform var(--transition-normal);
+  }
+
+  .sector-card:hover .sector-arrow {
+    transform: translateX(4px);
+  }
+
+  .process-link-section {
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+  }
+
+  .process-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    padding: var(--space-3) var(--space-6);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    background: transparent;
+  }
+
+  .process-link:hover {
+    background: var(--color-primary);
+    color: var(--color-neutral-100);
+    transform: translateY(-2px);
+  }
+
+  .link-icon {
+    transition: transform var(--transition-normal);
+  }
+
+  .process-link:hover .link-icon {
+    transform: translateX(2px);
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

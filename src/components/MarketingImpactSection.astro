@@ -1,0 +1,227 @@
+---
+// Marketing Impact section following the exact marketing document structure
+const impactData = {
+  h3: "Our Impact",
+  statistics: [
+    {
+      number: "X,000+",
+      label: "solar panels recycled"
+    },
+    {
+      number: "XX tonnes",
+      label: "of materials diverted from landfill"
+    }
+  ],
+  mapSection: {
+    title: "Australia map:",
+    description: "Service coverage across all major Australian states and regions",
+    partnerInfo: "Supporting over 5+ local manufacturing partners"
+  }
+};
+---
+
+<section class="impact-section" id="impact">
+  <div class="container">
+    <div class="section-header">
+      <h3 class="section-title">{impactData.h3}</h3>
+    </div>
+    
+    <div class="statistics-grid">
+      {impactData.statistics.map((stat, index) => (
+        <div class="stat-card" data-aos="fade-up" data-aos-delay={index * 100}>
+          <div class="stat-content">
+            <span class="stat-number">{stat.number}</span>
+            <span class="stat-label">{stat.label}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="map-section">
+      <div class="map-content">
+        <h4 class="map-title">{impactData.mapSection.title}</h4>
+        <p class="map-description">{impactData.mapSection.description}</p>
+        <p class="partner-info">{impactData.mapSection.partnerInfo}</p>
+      </div>
+      
+      <div class="map-container">
+        <div class="map-placeholder">
+          <img
+            src="/images/Locations_Layout.jpg"
+            alt="Australia map showing PV Industries service coverage across all major Australian states and regions"
+            class="australia-map"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .impact-section {
+    padding: var(--space-20) 0;
+    background: linear-gradient(135deg, var(--color-neutral-50) 0%, var(--color-neutral-100) 100%);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-6);
+    margin-bottom: var(--space-16);
+  }
+
+  .stat-card {
+    background: var(--color-neutral-50);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    text-align: left;
+    border: 1px solid var(--color-neutral-200);
+    transition: all var(--transition-normal);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--color-primary-light);
+  }
+
+  .stat-content {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .stat-number {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-700);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .map-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .map-section {
+      grid-template-columns: 1fr 1.2fr;
+      gap: var(--space-12);
+    }
+  }
+
+  .map-content {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  .map-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-3);
+  }
+
+  .map-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-600);
+    margin-bottom: var(--space-3);
+    line-height: 1.6;
+  }
+
+  .partner-info {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-700);
+    font-weight: 500;
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .map-container {
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+  }
+
+  .map-placeholder {
+    background: var(--color-neutral-50);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    border: 1px solid var(--color-neutral-200);
+    position: relative;
+  }
+
+  .australia-map {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    margin: 0 auto;
+    display: block;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      r: 8;
+      opacity: 0.6;
+    }
+    50% {
+      r: 12;
+      opacity: 0.3;
+    }
+    100% {
+      r: 16;
+      opacity: 0;
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .statistics-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+    
+    .stat-card {
+      padding: var(--space-6);
+    }
+  }
+</style>

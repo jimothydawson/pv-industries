@@ -1,0 +1,373 @@
+---
+// Team Values Section component - "What We Value as a Team"
+const sectionData = {
+  subtitle: "03",
+  title: "What We Value as a Team",
+  description: "Our culture is shaped by shared values that guide how we work with each other, with our customers, and with the environment.",
+  values: [
+    {
+      icon: "/images/security-icon-industrial-x-webflow-template.svg",
+      title: "Trust & Transparency",
+      description: "We believe in honest communication, integrity, and accountability—from our warehouse floor to boardroom meetings."
+    },
+    {
+      icon: "/images/innovation-icon-industrial-x-webflow-template.svg",
+      title: "Innovation",
+      description: "Our team embraces new technologies and smarter ways of working to stay at the forefront of solar panel recycling."
+    },
+    {
+      icon: "/images/quality-icon-industrial-x-webflow-template.svg",
+      title: "Customer Focus",
+      description: "Every department at PV Industries is focused on helping our customers succeed and meeting their sustainability goals."
+    },
+    {
+      icon: "/images/teamwork-icon-industrial-x-webflow-template.svg",
+      title: "Respect & Teamwork",
+      description: "We foster a positive, inclusive, and collaborative environment where everyone is heard, supported, and empowered to make an impact."
+    }
+  ]
+};
+---
+
+<section class="team-values-section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <div class="header-content">
+        <div class="subtitle-wrapper">
+          <div class="subtitle-divider left"></div>
+          <div class="subtitle">{sectionData.subtitle}</div>
+          <div class="subtitle-divider"></div>
+        </div>
+        
+        <div class="title-wrapper">
+          <h2 class="section-title">{sectionData.title}</h2>
+        </div>
+        
+        {sectionData.description && (
+          <div class="section-description">
+            <p>{sectionData.description}</p>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- Values Grid -->
+    <div class="values-grid">
+      {sectionData.values.map((value, index) => (
+        <div class="value-card" style={`animation-delay: ${index * 0.1}s`}>
+          <div class="value-icon">
+            <img src={value.icon} alt={`${value.title} Icon`} />
+          </div>
+          
+          <div class="value-content">
+            <h3 class="value-title">{value.title}</h3>
+            <p class="value-description">{value.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Mission Statement -->
+    <div class="mission-statement">
+      <div class="mission-content">
+        <h2 class="mission-title">Faces Behind the Mission</h2>
+        <p class="mission-description">While we come from different backgrounds, we're united by one mission: To lead Australia in solar panel recycling and circular economy solutions.</p>
+        
+        <div class="mission-details">
+          <h3 class="mission-subtitle">You'll find us:</h3>
+          <ul class="mission-list">
+            <li>Coordinating logistics from our Sydney HQ</li>
+            <li>Conducting site assessments in the field</li>
+            <li>Processing materials at our recycling facilities</li>
+            <li>Collaborating with clients on custom recycling strategies</li>
+            <li>Working behind the scenes to improve safety, compliance, and sustainability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .team-values-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-200);
+    overflow: hidden;
+  }
+
+  /* Section Header */
+  .section-header {
+    margin-bottom: var(--space-12);
+    max-width: 612px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    .section-header {
+      max-width: 450px;
+    }
+  }
+
+  .header-content {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .subtitle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .subtitle-divider {
+    height: 2px;
+    background: var(--color-primary);
+    flex: 1;
+    max-width: 60px;
+  }
+
+  .subtitle-divider.left {
+    display: block;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .section-description {
+    margin-top: var(--space-6);
+  }
+
+  .section-description p {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Values Grid */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-8);
+    margin-bottom: var(--space-16);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  }
+
+  @media (max-width: 767px) {
+    .values-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      margin-bottom: var(--space-12);
+    }
+  }
+
+  .value-card {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    text-align: center;
+    transition: all var(--transition-normal);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .value-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    border-radius: var(--radius-md);
+    transition: transform var(--transition-normal);
+  }
+
+  .value-card:hover .value-icon {
+    transform: scale(1.1);
+  }
+
+  .value-icon img {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
+  }
+
+  .value-content {
+    text-align: center;
+  }
+
+  .value-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0 0 var(--space-4);
+  }
+
+  .value-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Mission Statement */
+  .mission-statement {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-lg);
+    padding: var(--space-12);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+  }
+
+  .mission-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .mission-title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0 0 var(--space-6);
+  }
+
+  .mission-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin: 0 0 var(--space-8);
+  }
+
+  .mission-details {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .mission-subtitle {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0 0 var(--space-4);
+    text-align: center;
+  }
+
+  .mission-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mission-list li {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+    padding-left: var(--space-6);
+    position: relative;
+  }
+
+  .mission-list li:before {
+    content: "•";
+    color: var(--color-primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
+
+  .mission-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .team-values-section {
+      padding: var(--space-16) 0;
+    }
+
+    .section-header {
+      margin-bottom: var(--space-10);
+    }
+
+    .value-card {
+      padding: var(--space-6);
+    }
+
+    .value-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: var(--space-5);
+    }
+
+    .value-icon img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .mission-statement {
+      padding: var(--space-8);
+    }
+
+    .mission-details {
+      text-align: left;
+    }
+  }
+
+  /* Animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .header-content,
+    .values-grid,
+    .value-card,
+    .mission-statement {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .value-card:hover {
+      transform: none;
+    }
+
+    .value-card:hover .value-icon {
+      transform: none;
+    }
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+// Marketing Introduction section with H3 and body text from marketing document
+const introData = {
+  h3: "At PV Industries, we're on a mission to make solar truly sustainable. As Australia's leading solar panel recycling and resource recovery company, we provide safe, compliant, and environmentally responsible solutions for residential installers, commercial solar providers, utility-scale projects, and government sectors.",
+  body: "From collection and logistics to clean material processing and circular economy partnerships, we help you responsibly manage end-of-life solar equipment—and transform waste into new opportunity."
+};
+---
+
+<section class="intro-section" id="intro">
+  <div class="container">
+    <div class="intro-content">
+      <h3 class="intro-title">{introData.h3}</h3>
+      <p class="intro-body">{introData.body}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro-section {
+    padding: var(--space-16) 0;
+    background: var(--color-neutral-50);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .intro-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .intro-title {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .intro-body {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin: 0;
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .intro-section {
+      padding: var(--space-12) 0;
+    }
+    
+    .intro-title {
+      font-size: var(--font-size-xl);
+      text-align: left;
+    }
+    
+    .intro-body {
+      font-size: var(--font-size-base);
+      text-align: left;
+    }
+    
+    .intro-content {
+      text-align: left;
+    }
+  }
+</style>

@@ -1,0 +1,227 @@
+---
+// Partners Who We Work With section following the exact script structure
+const whoWeWorkWithData = {
+  h2: "Who We Work With",
+  body: "We proudly supply clean recycled materials to:",
+  partners: [
+    "Manufacturers producing construction and industrial materials",
+    "Companies developing solar panel or battery components", 
+    "Startups innovating with recycled content-based products",
+    "Government and private sector R&D programs exploring circular manufacturing",
+    "Designers and engineers committed to sustainable material sourcing"
+  ],
+  closingBody: "We're always looking for new collaborations that align with our mission to turn solar waste into valuable resources."
+};
+---
+
+<section class="who-we-work-with-section" id="who-we-work-with">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{whoWeWorkWithData.h2}</h2>
+      <p class="section-intro">{whoWeWorkWithData.body}</p>
+    </div>
+    
+    <div class="partners-grid">
+      {whoWeWorkWithData.partners.map((partner, index) => (
+        <div class="partner-box" data-aos="fade-up" data-aos-delay={index * 100}>
+          <div class="partner-content">
+            <div class="partner-number">{String(index + 1).padStart(2, '0')}</div>
+            <div class="partner-text">
+              <p>{partner}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="closing-statement">
+      <p>{whoWeWorkWithData.closingBody}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .who-we-work-with-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .section-intro {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .partners-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-16);
+  }
+
+  @media (min-width: 768px) {
+    .partners-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .partners-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .partner-box {
+    background: var(--color-neutral-50);
+    border: 2px solid var(--color-neutral-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    overflow: hidden;
+  }
+
+  .partner-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+  }
+
+  .partner-content {
+    text-align: center;
+    width: 100%;
+  }
+
+  .partner-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+    transition: all var(--transition-normal);
+  }
+
+  .partner-box:hover .partner-number {
+    color: var(--color-neutral-100);
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+
+  .partner-text {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all var(--transition-normal);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(20px);
+    width: calc(100% - var(--space-8));
+    padding: var(--space-4);
+  }
+
+  .partner-box:hover .partner-text {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+  }
+
+  .partner-text p {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-100);
+    line-height: 1.4;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .closing-statement {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--space-8);
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+    border-radius: var(--radius-xl);
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+  }
+
+  .closing-statement p {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-100);
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .section-header {
+      text-align: left;
+      margin-bottom: var(--space-12);
+    }
+    
+    .partners-grid {
+      gap: var(--space-3);
+      margin-bottom: var(--space-12);
+    }
+    
+    .partner-box {
+      min-height: 100px;
+      padding: var(--space-4);
+    }
+    
+    .partner-number {
+      font-size: 1.5rem;
+    }
+    
+    .partner-text p {
+      font-size: var(--font-size-sm);
+    }
+    
+    .closing-statement {
+      padding: var(--space-6);
+    }
+    
+    .closing-statement p {
+      font-size: var(--font-size-base);
+    }
+  }
+</style>

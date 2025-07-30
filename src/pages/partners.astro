@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import PartnersHeroSection from '../components/PartnersHeroSection.astro';
+import PartnersSection from '../components/PartnersSection.astro';
+import PartnersValueCreationSection from '../components/PartnersValueCreationSection.astro';
+import PartnersMaterialsSection from '../components/PartnersMaterialsSection.astro';
+import PartnersWhyPartnerSection from '../components/PartnersWhyPartnerSection.astro';
+import PartnersWhoWeWorkWithSection from '../components/PartnersWhoWeWorkWithSection.astro';
+import PartnersCircularEconomySection from '../components/PartnersCircularEconomySection.astro';
+import PartnersTestimonialsSection from '../components/PartnersTestimonialsSection.astro';
+import PartnersBecomePartnerSection from '../components/PartnersBecomePartnerSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Partners - PV Industries">
+  <Header />
+  <main>
+    <PartnersHeroSection />
+    <PartnersSection />
+    <PartnersValueCreationSection />
+    <PartnersMaterialsSection />
+    <PartnersWhyPartnerSection />
+    <PartnersWhoWeWorkWithSection />
+    <PartnersCircularEconomySection />
+    <PartnersTestimonialsSection />
+    <PartnersBecomePartnerSection />
+    <ContactSection />
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    overflow-x: hidden;
+  }
+  
+  /* Ensure smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Add some spacing between sections */
+  main > :global(section:not(:last-child)) {
+    margin-bottom: 0;
+  }
+  
+  /* Ensure proper stacking context */
+  main > :global(section) {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+</Layout>

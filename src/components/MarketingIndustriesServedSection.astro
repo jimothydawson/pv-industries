@@ -1,0 +1,248 @@
+---
+// Marketing Industries We Serve section following the exact marketing document structure
+const industriesData = {
+  h2: "Industries We Serve",
+  description: "We deliver expert, tailored solar recycling services for:",
+  industries: [
+    {
+      title: "Installers – Residential & Commercial",
+      linkTo: "/installers",
+      icon: "installers"
+    },
+    {
+      title: "Utility Providers – Large-scale solar farm operators",
+      linkTo: "/utility-providers",
+      icon: "utility"
+    },
+    {
+      title: "Government – Local councils, state, and federal agencies",
+      linkTo: "/government",
+      icon: "government"
+    },
+    {
+      title: "Partners – Manufacturers using our recycled materials",
+      linkTo: "/partners",
+      icon: "partners"
+    }
+  ],
+  blogLink: {
+    h3: "Learn More About Who We Serve",
+    linkTo: "/blog/who-we-serve"
+  }
+};
+---
+
+<section class="industries-served-section" id="industries-served">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{industriesData.h2}</h2>
+      <p class="section-description">{industriesData.description}</p>
+    </div>
+    
+    <div class="industries-grid">
+      {industriesData.industries.map((industry, index) => (
+        <a href={industry.linkTo} class="industry-card" data-aos="fade-up" data-aos-delay={index * 100}>
+          <div class="industry-icon">
+            {industry.icon === "installers" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="9,22 9,12 15,12 15,22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {industry.icon === "utility" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {industry.icon === "government" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M3 21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14 21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18 21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3 9L12 2L21 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {industry.icon === "partners" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M14.7 6.3C16.2 7.8 16.2 10.2 14.7 11.7L11.7 14.7C10.2 16.2 7.8 16.2 6.3 14.7C4.8 13.2 4.8 10.8 6.3 9.3L9.3 6.3C10.8 4.8 13.2 4.8 14.7 6.3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9.7 17.7C8.2 16.2 8.2 13.8 9.7 12.3L12.7 9.3C14.2 7.8 16.6 7.8 18.1 9.3C19.6 10.8 19.6 13.2 18.1 14.7L15.1 17.7C13.6 19.2 11.2 19.2 9.7 17.7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+          </div>
+          
+          <div class="industry-content">
+            <h3 class="industry-title">{industry.title}</h3>
+            <div class="industry-arrow">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+    
+    <div class="blog-link-section">
+      <a href={industriesData.blogLink.linkTo} class="blog-link">
+        <h3 class="blog-link-title">{industriesData.blogLink.h3}</h3>
+        <svg class="link-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .industries-served-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .section-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-600);
+    margin-bottom: 0;
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+  }
+
+  .industries-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .industries-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  .industry-card {
+    background: var(--color-neutral-50);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    border: 1px solid var(--color-neutral-200);
+    transition: all var(--transition-normal);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .industry-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--color-primary-light);
+  }
+
+  .industry-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .industry-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .industry-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .industry-arrow {
+    color: var(--color-primary);
+    transition: transform var(--transition-normal);
+  }
+
+  .industry-card:hover .industry-arrow {
+    transform: translateX(4px);
+  }
+
+  .blog-link-section {
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+  }
+
+  .blog-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    color: var(--color-primary);
+    transition: all var(--transition-normal);
+    padding: var(--space-3) var(--space-6);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    background: transparent;
+  }
+
+  .blog-link:hover {
+    background: var(--color-primary);
+    color: var(--color-neutral-100);
+    transform: translateY(-2px);
+  }
+
+  .blog-link-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .link-icon {
+    transition: transform var(--transition-normal);
+  }
+
+  .blog-link:hover .link-icon {
+    transform: translateX(2px);
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

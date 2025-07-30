@@ -1,0 +1,174 @@
+---
+// Marketing Why Choose PV Industries section following the exact marketing document structure
+import ReportIcon from './icons/ReportIcon.astro';
+
+const whyChooseData = {
+  h2: "Why Choose PV Industries?",
+  reasons: [
+    {
+      h3: "Fully Licensed & Compliant",
+      body: "Operate with confidence—our processes meet strict regulatory, environmental, and safety standards across Australia.",
+      icon: "shield"
+    },
+    {
+      h3: "100% Responsible Solar Waste Processing",
+      body: "We recover and repurpose glass, silicon, aluminium, copper, and steel to reduce landfill and support new product creation.",
+      icon: "recycle"
+    },
+    {
+      h3: "Transparent Reporting",
+      body: "Get full visibility with compliance documentation, environmental impact reports, and circular economy tracking.",
+      icon: "report"
+    },
+    {
+      h3: "Trusted by Industry Leaders",
+      body: "From councils and commercial contractors to solar EPCs and infrastructure partners, Australia's top energy providers trust PV Industries.",
+      icon: "trust"
+    }
+  ]
+};
+---
+
+<section class="why-choose-section" id="why-choose">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{whyChooseData.h2}</h2>
+    </div>
+    
+    <div class="reasons-grid">
+      {whyChooseData.reasons.map((reason, index) => (
+        <div class="reason-card" data-aos="fade-up" data-aos-delay={index * 100}>
+          <div class="reason-icon">
+            {reason.icon === "shield" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M12 22S8 18 8 12V7L12 5L16 7V12C16 18 12 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {reason.icon === "recycle" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M7 6H17L19.5 3.5L21 5L19 7H7L5 5L6.5 3.5L7 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17 6V16C17 17.1 16.1 18 15 18H9C7.9 18 7 17.1 7 16V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 11V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14 11V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {reason.icon === "report" && <ReportIcon />}
+            {reason.icon === "trust" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9C6 7.34315 7.34315 6 9 6H15C16.6569 6 18 7.34315 18 9C18 10.6569 16.6569 12 15 12H9C7.34315 12 6 10.6569 6 9Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 12V22L8 20L12 18L16 20L12 22V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+          </div>
+          
+          <div class="reason-content">
+            <h3 class="reason-title">{reason.h3}</h3>
+            <p class="reason-body">{reason.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-choose-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-50);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: 0;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .reasons-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .reason-card {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    border: 1px solid var(--color-neutral-200);
+    transition: all var(--transition-normal);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .reason-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--color-primary-light);
+  }
+
+  .reason-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-6);
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .reason-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reason-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+  }
+
+  .reason-body {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -1,0 +1,26 @@
+---
+// src/pages/about.astro
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import AboutHeroSection from '../components/AboutHeroSection.astro';
+import TeamSection from '../components/TeamSection.astro';
+import StorySection from '../components/StorySection.astro';
+import PartnersSection from '../components/PartnersSection.astro';
+import ValuesSection from '../components/ValuesSection.astro';
+import Footer from '../components/Footer.astro';
+
+const pageTitle = "About - PV Industries";
+const pageDescription = "Learn about PV Industries, Australia's leading solar panel recycling company. Discover our mission, values, and commitment to sustainable waste management.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Header />
+  <main>
+    <AboutHeroSection />
+    <TeamSection />
+    <StorySection />
+    <PartnersSection />
+    <ValuesSection />
+  </main>
+  <Footer />
+</Layout>

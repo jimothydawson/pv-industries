@@ -1,0 +1,218 @@
+---
+// Team Hero Section component
+const sectionData = {
+  title: "Meet the Team Behind PV Industries",
+  subtitle: "Powered by People, Driven by Purpose",
+  description: "At PV Industries, our strength lies in our people. We're a passionate, diverse, and experienced team united by a common goal: creating a cleaner, more sustainable future through responsible solar recycling.",
+  secondaryDescription: "From engineers and logistics specialists to customer support and environmental consultants, every member of our team plays a vital role in delivering trusted recycling solutions to businesses, governments, and communities across Australia.",
+  primaryButton: {
+    text: "Join our team",
+    href: "#careers"
+  },
+  secondaryButton: {
+    text: "Meet the team",
+    href: "#team"
+  },
+  heroImage: {
+    src: "/images/Screen-Shot-2024-03-26-at-10.14.11-pm.png",
+    alt: "PV Industries team working together"
+  }
+};
+---
+
+<section class="team-hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-title-wrapper">
+          <h1 class="hero-title">{sectionData.title}</h1>
+          <h2 class="hero-subtitle">{sectionData.subtitle}</h2>
+        </div>
+        
+        <div class="hero-grid">
+          <div class="hero-buttons">
+            <a href={sectionData.primaryButton.href} class="button button-primary">
+              {sectionData.primaryButton.text}
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href={sectionData.secondaryButton.href} class="button button-secondary dark">
+              {sectionData.secondaryButton.text}
+            </a>
+          </div>
+          
+          <div class="hero-description">
+            <p>{sectionData.description}</p>
+            <p>{sectionData.secondaryDescription}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-image-wrapper">
+        <div class="hero-image">
+          <img 
+            src={sectionData.heroImage.src} 
+            alt={sectionData.heroImage.alt}
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .team-hero-section {
+    padding: var(--space-20) 0 var(--space-16);
+    background: var(--color-neutral-100);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: center;
+    min-height: 600px;
+  }
+
+  .hero-text {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .hero-title-wrapper {
+    margin-bottom: var(--space-8);
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    line-height: 1.1;
+    margin: 0 0 var(--space-4);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 500;
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .hero-description {
+    max-width: 500px;
+  }
+
+  .hero-description p {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin: 0 0 var(--space-4);
+  }
+
+  .hero-description p:last-child {
+    margin-bottom: 0;
+  }
+
+  .hero-image-wrapper {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  }
+
+  .hero-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--color-neutral-200);
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--transition-slow);
+  }
+
+  .hero-image:hover img {
+    transform: scale(1.02);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1023px) {
+    .hero-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+      text-align: center;
+    }
+
+    .hero-text {
+      order: 1;
+    }
+
+    .hero-image-wrapper {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .team-hero-section {
+      padding: var(--space-16) 0 var(--space-12);
+    }
+
+    .hero-content {
+      gap: var(--space-10);
+      min-height: auto;
+    }
+
+    .hero-buttons {
+      justify-content: center;
+    }
+
+    .hero-description {
+      max-width: none;
+    }
+
+    .hero-description p {
+      font-size: var(--font-size-base);
+    }
+  }
+
+  /* Animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-text,
+    .hero-image-wrapper {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .hero-image:hover img {
+      transform: none;
+    }
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

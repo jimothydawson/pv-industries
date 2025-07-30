@@ -1,0 +1,173 @@
+---
+import TruckIcon from './icons/TruckIcon.astro';
+
+// Marketing Core Services section following the exact marketing document structure
+const servicesData = {
+  h2: "Our Core Services",
+  services: [
+    {
+      h3: "Solar Panel Recycling",
+      body: "Certified recycling for PV modules, inverters, cabling, and framing. Divert solar waste from landfill with full traceability and reporting.",
+      icon: "recycle"
+    },
+    {
+      h3: "National Collection & Logistics",
+      body: "From single rooftop systems to multi-megawatt solar farms, we provide reliable and scalable pickup and transportation services across Australia.",
+      icon: "truck"
+    },
+    {
+      h3: "Clean Material Recovery",
+      body: "We process end-of-life solar panels into clean, high-quality materials for reuse by our manufacturing partners—supporting circular economy outcomes.",
+      icon: "materials"
+    }
+  ]
+};
+---
+
+<section class="core-services-section" id="core-services">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{servicesData.h2}</h2>
+    </div>
+    
+    <div class="services-grid">
+      {servicesData.services.map((service, index) => (
+        <div class="service-card" data-aos="fade-up" data-aos-delay={index * 100}>
+          <div class="service-icon">
+            {service.icon === "recycle" && (
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                <path d="M7 6H17L19.5 3.5L21 5L19 7H7L5 5L6.5 3.5L7 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17 6V16C17 17.1 16.1 18 15 18H9C7.9 18 7 17.1 7 16V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 11V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14 11V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {service.icon === "truck" && (
+              <TruckIcon width="48" height="48" />
+            )}
+            {service.icon === "materials" && (
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+          </div>
+          
+          <div class="service-content">
+            <h3 class="service-title">{service.h3}</h3>
+            <p class="service-body">{service.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .core-services-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-50);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: 0;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .service-card {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--color-neutral-200);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--color-primary-light);
+  }
+
+  .service-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-6);
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .service-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+  }
+
+  .service-body {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -1,0 +1,463 @@
+---
+// Impact & Statistics section data
+const impactData = {
+  title: "Our Environmental Impact",
+  subtitle: "Making a Real Difference for Australia's Future",
+  description: "Every solar panel we recycle represents a step toward a truly sustainable energy future. See the measurable impact we're making together.",
+  stats: [
+    {
+      number: "500,000",
+      suffix: "+",
+      label: "Solar Panels Recycled",
+      description: "Panels diverted from landfill",
+      icon: "panels"
+    },
+    {
+      number: "95",
+      suffix: "%",
+      label: "Material Recovery Rate",
+      description: "Industry-leading efficiency",
+      icon: "recycle"
+    },
+    {
+      number: "2,500",
+      suffix: "+",
+      label: "Tonnes CO₂ Saved",
+      description: "Carbon emissions prevented",
+      icon: "leaf"
+    },
+    {
+      number: "15,000",
+      suffix: "+",
+      label: "Tonnes Materials Recovered",
+      description: "Silicon, silver, aluminum & glass",
+      icon: "materials"
+    }
+  ],
+  achievements: [
+    {
+      title: "Zero Landfill Guarantee",
+      description: "100% of processed panels diverted from landfill sites across Australia"
+    },
+    {
+      title: "Circular Economy Leader",
+      description: "Recovered materials reintegrated into new solar panel manufacturing"
+    },
+    {
+      title: "Carbon Neutral Operations",
+      description: "Our facilities operate with net-zero carbon emissions"
+    },
+    {
+      title: "Industry Recognition",
+      description: "4 government grants and 2 patents pending for innovative processes"
+    }
+  ]
+};
+---
+
+<section class="impact-stats-section" id="impact">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{impactData.title}</h2>
+      <h3 class="section-subtitle">{impactData.subtitle}</h3>
+      <p class="section-description">{impactData.description}</p>
+    </div>
+    
+    <!-- Main Statistics Grid -->
+    <div class="stats-grid">
+      {impactData.stats.map((stat, index) => (
+        <div class="stat-card" data-aos="fade-up" data-aos-delay={index * 100}>
+          <div class="stat-icon">
+            {stat.icon === "panels" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                <line x1="9" y1="9" x2="9" y2="15" stroke="currentColor" stroke-width="2"/>
+                <line x1="15" y1="9" x2="15" y2="15" stroke="currentColor" stroke-width="2"/>
+                <line x1="9" y1="12" x2="15" y2="12" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            )}
+            {stat.icon === "recycle" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M7 6H17L19.5 3.5L21 5L19 7H7L5 5L6.5 3.5L7 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17 6V16C17 17.1 16.1 18 15 18H9C7.9 18 7 17.1 7 16V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 11V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14 11V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {stat.icon === "leaf" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2C17 7 14.5 8 13.3 8.9C12.2 9.8 11 15.5 11 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.8 19.5C14 18.3 15 16.8 15 15C15 12.8 13.2 11 11 11C8.8 11 7 12.8 7 15C7 16.8 8 18.3 9.2 19.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+            {stat.icon === "materials" && (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+          </div>
+          
+          <div class="stat-content">
+            <div class="stat-number">
+              <span class="stat-value">{stat.number}</span>
+              <span class="stat-suffix">{stat.suffix}</span>
+            </div>
+            <h4 class="stat-label">{stat.label}</h4>
+            <p class="stat-description">{stat.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Achievements Section -->
+    <div class="achievements-section">
+      <h3 class="achievements-title">Key Achievements</h3>
+      <div class="achievements-grid">
+        {impactData.achievements.map((achievement, index) => (
+          <div class="achievement-card" data-aos="fade-up" data-aos-delay={index * 100}>
+            <div class="achievement-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9C6 7.34315 7.34315 6 9 6H15C16.6569 6 18 7.34315 18 9C18 10.6569 16.6569 12 15 12H9C7.34315 12 6 10.6569 6 9Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 12V22L8 20L12 18L16 20L12 22V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="achievement-content">
+              <h4 class="achievement-title">{achievement.title}</h4>
+              <p class="achievement-description">{achievement.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Call to Action -->
+    <div class="impact-cta">
+      <div class="cta-content">
+        <h3 class="cta-title">Be Part of the Solution</h3>
+        <p class="cta-description">Join hundreds of organizations making a positive environmental impact through responsible solar panel recycling.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#HomeContact" class="button button-primary">
+          Start Your Impact Today
+          <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="/about" class="button button-secondary">
+          Learn About Our Process
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .impact-stats-section {
+    padding: var(--space-20) 0;
+    background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+    color: var(--color-neutral-100);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .impact-stats-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="2"/></g></svg>') repeat;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-4);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .section-subtitle {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 500;
+    color: var(--color-neutral-200);
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+  }
+
+  .section-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-200);
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-20);
+  }
+
+  @media (min-width: 640px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    text-align: center;
+    transition: all var(--transition-normal);
+  }
+
+  .stat-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .stat-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-4);
+    color: var(--color-neutral-100);
+  }
+
+  .stat-content {
+    color: var(--color-neutral-100);
+  }
+
+  .stat-number {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: var(--space-1);
+    margin-bottom: var(--space-3);
+  }
+
+  .stat-value {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .stat-suffix {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    color: var(--color-neutral-200);
+  }
+
+  .stat-label {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+    color: var(--color-neutral-100);
+  }
+
+  .stat-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-300);
+    line-height: 1.5;
+  }
+
+  .achievements-section {
+    margin-bottom: var(--space-16);
+  }
+
+  .achievements-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: var(--space-12);
+    color: var(--color-neutral-100);
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+  }
+
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .achievements-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  .achievement-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    transition: all var(--transition-normal);
+  }
+
+  .achievement-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .achievement-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-100);
+    flex-shrink: 0;
+  }
+
+  .achievement-content {
+    flex: 1;
+  }
+
+  .achievement-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+    color: var(--color-neutral-100);
+  }
+
+  .achievement-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-200);
+    line-height: 1.6;
+  }
+
+  .impact-cta {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+  }
+
+  @media (min-width: 768px) {
+    .impact-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      padding: var(--space-6) var(--space-8);
+    }
+  }
+
+  .cta-content {
+    margin-bottom: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .cta-content {
+      margin-bottom: 0;
+      flex: 1;
+      margin-right: var(--space-8);
+    }
+  }
+
+  .cta-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    color: var(--color-neutral-100);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-base);
+    color: var(--color-neutral-200);
+    line-height: 1.6;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .cta-actions {
+      flex-direction: row;
+      gap: var(--space-4);
+    }
+  }
+
+  .cta-actions .button {
+    background: var(--color-neutral-100);
+    color: var(--color-primary);
+    border: 2px solid var(--color-neutral-100);
+  }
+
+  .cta-actions .button:hover {
+    background: transparent;
+    color: var(--color-neutral-100);
+  }
+
+  .cta-actions .button-secondary {
+    background: transparent;
+    color: var(--color-neutral-100);
+    border: 2px solid var(--color-neutral-100);
+  }
+
+  .cta-actions .button-secondary:hover {
+    background: var(--color-neutral-100);
+    color: var(--color-primary);
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

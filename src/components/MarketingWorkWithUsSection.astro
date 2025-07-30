@@ -1,0 +1,81 @@
+---
+// Marketing Work With Us section following the exact marketing script
+const workWithUsData = {
+  h2: "Work With Us",
+  description: "Whether you're managing a small install or a solar farm decommissioning, PV Industries is your trusted partner in responsible solar panel recycling.",
+  h3: "Let's turn end-of-life solar into a new beginning."
+};
+---
+
+<section class="work-with-us-section" id="work-with-us">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{workWithUsData.h2}</h2>
+      <p class="section-description">{workWithUsData.description}</p>
+      <h3 class="section-subtitle">{workWithUsData.h3}</h3>
+    </div>
+  </div>
+</section>
+
+<style>
+  .work-with-us-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-50);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .section-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-700);
+    margin-bottom: var(--space-8);
+    line-height: 1.6;
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+  }
+
+  .section-subtitle {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 0;
+    font-style: italic;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .section-description {
+      font-size: var(--font-size-base);
+    }
+  }
+</style>

@@ -1,0 +1,407 @@
+---
+// Marketing Hero section following the exact marketing document structure
+const heroData = {
+  h1: "PV Industries – Australia's Leader in Solar Panel Recycling",
+  h2: "Closing the Loop on Solar Sustainability",
+  contactEmail: "contact@pvindustries.com.au",
+  locations: [
+    { name: "New South Wales", mapLink: "https://www.google.com/maps" },
+    { name: "Victoria", mapLink: "https://www.google.com/maps" }
+  ]
+};
+---
+
+<section class="hero-section" id="hero">
+  <div class="hero-background"></div>
+  
+  <div class="container hero-container">
+    <!-- Main Hero Content -->
+    <div class="hero-main-content">
+      <div class="hero-text-content">
+        <h1 class="hero-h1">{heroData.h1}</h1>
+        <h2 class="hero-h2">{heroData.h2}</h2>
+      </div>
+      
+      <div class="hero-actions">
+        <a href="#core-services" class="button button-primary">
+          Our Services
+          <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#HomeContact" class="button button-secondary">
+          Get in Touch
+        </a>
+      </div>
+    </div>
+    
+    <!-- Hero Bottom Content -->
+    <div class="hero-bottom-content">
+      <div class="hero-contact-grid">
+        <!-- Contact Info -->
+        <div class="contact-block">
+          <div class="contact-header">
+            <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3 class="contact-title">Contact us</h3>
+          </div>
+          <div class="contact-content">
+            <p class="contact-text">
+              Email: <a href={`mailto:${heroData.contactEmail}`} class="contact-link">{heroData.contactEmail}</a>
+            </p>
+          </div>
+        </div>
+        
+        <!-- Locations -->
+        <div class="contact-block">
+          <div class="contact-header">
+            <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3 class="contact-title">Our locations</h3>
+          </div>
+          <div class="contact-content">
+            {heroData.locations.map((location, index) => (
+              <a href={location.mapLink} target="_blank" rel="noopener noreferrer" class="location-link">
+                {location.name}{index < heroData.locations.length - 1 ? ', ' : ''}
+              </a>
+            ))}
+          </div>
+        </div>
+        
+        <!-- Brevo Newsletter Signup Placeholder -->
+        <div class="contact-block newsletter-block brevo-signup-placeholder">
+          <h3 class="newsletter-title">Stay tuned for more news</h3>
+          <div class="brevo-placeholder-content">
+            <p class="brevo-placeholder-text">
+              Brevo signup form will be integrated here
+            </p>
+            <div class="brevo-placeholder-box">
+              <span class="brevo-placeholder-label">Brevo Form Placeholder</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-bottom-background"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    color: var(--color-neutral-100);
+    overflow: hidden;
+  }
+
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(#0000, #0000), url('/images/Screen-Shot-2024-04-29-at-4.44.53-pm-p-1080.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 1;
+    padding: 80px 16px 64px 16px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .hero-container {
+      padding: 80px 24px 64px 24px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-container {
+      padding: 80px 32px 64px 32px;
+    }
+  }
+
+  .hero-main-content {
+    margin-bottom: var(--space-16);
+    max-width: 900px;
+  }
+
+  .hero-text-content {
+    margin-bottom: var(--space-8);
+  }
+
+  .hero-h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: var(--space-4);
+    animation: fadeInUp 0.8s ease-out;
+    color: var(--color-neutral-100);
+  }
+
+  .hero-h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: var(--space-6);
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+    color: var(--color-primary);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  /* Hero Bottom Content */
+  .hero-bottom-content {
+    position: relative;
+    margin-top: var(--space-20);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+  }
+
+  .hero-contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 768px) {
+    .hero-contact-grid {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 48px;
+    }
+    
+    .contact-block {
+      flex: 1;
+      min-width: calc(50% - 24px);
+    }
+    
+    .newsletter-block {
+      min-width: 300px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .contact-block {
+      min-width: calc(33.333% - 32px);
+    }
+    
+    .newsletter-block {
+      min-width: 320px;
+    }
+  }
+
+  .contact-block {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all var(--transition-normal);
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .contact-block:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .contact-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .contact-title {
+    color: var(--color-neutral-100);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .contact-content {
+    color: var(--color-neutral-100);
+  }
+
+  .contact-link {
+    color: var(--color-neutral-100);
+    text-decoration: none;
+    transition: color var(--transition-normal);
+  }
+
+  .contact-link:hover {
+    color: var(--color-primary);
+  }
+
+  .location-link {
+    color: var(--color-neutral-100);
+    text-decoration: none;
+    transition: color var(--transition-normal);
+  }
+
+  .location-link:hover {
+    color: var(--color-primary);
+  }
+
+  /* Newsletter */
+  .newsletter-block {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 1024px) {
+    .newsletter-block {
+      grid-column: auto;
+    }
+  }
+
+  .newsletter-title {
+    color: var(--color-neutral-100);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .form-input-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 280px;
+  }
+
+  .newsletter-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: transparent;
+    border: none;
+    color: var(--color-neutral-100);
+    font-size: var(--font-size-base);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .newsletter-input::placeholder {
+    color: var(--color-neutral-400);
+  }
+
+  .newsletter-button {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-primary);
+    color: var(--color-neutral-100);
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--transition-normal);
+    white-space: nowrap;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  }
+
+  .newsletter-button:hover {
+    background: var(--color-primary-dark);
+  }
+
+  /* Brevo Placeholder Styles */
+  .brevo-signup-placeholder {
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .brevo-placeholder-content {
+    text-align: center;
+  }
+
+  .brevo-placeholder-text {
+    color: var(--color-neutral-300);
+    font-size: var(--font-size-sm);
+    margin: 0 0 var(--space-3) 0;
+    font-style: italic;
+  }
+
+  .brevo-placeholder-box {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brevo-placeholder-label {
+    color: var(--color-neutral-400);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-bottom-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+    border-radius: var(--radius-xl);
+    z-index: -1;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .hero-container {
+      padding: 64px 16px 64px 16px;
+    }
+    
+    .hero-actions {
+      flex-direction: column;
+    }
+    
+    .button {
+      justify-content: center;
+    }
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
