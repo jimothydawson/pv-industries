@@ -1,0 +1,242 @@
+---
+export interface Props {
+  article: {
+    id: number;
+    title: string;
+    excerpt: string;
+    image: string;
+    category: string;
+    date: string;
+    readTime: string;
+    slug: string;
+  };
+}
+
+const { article } = Astro.props;
+
+// Format date for display
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-AU', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+---
+
+<article class="article-card" data-category={article.category}>
+  <div class="article-image">
+    <img 
+      src={article.image} 
+      alt={article.title}
+      loading="lazy"
+    />
+    <div class="article-category">
+      {article.category}
+    </div>
+  </div>
+  
+  <div class="article-content">
+    <div class="article-meta">
+      <time class="article-date" datetime={article.date}>
+        {formatDate(article.date)}
+      </time>
+      <span class="article-read-time">
+        {article.readTime}
+      </span>
+    </div>
+    
+    <h3 class="article-title">
+      <a href={`/articles/${article.slug}`} class="article-link">
+        {article.title}
+      </a>
+    </h3>
+    
+    <p class="article-excerpt">
+      {article.excerpt}
+    </p>
+    
+    <div class="article-footer">
+      <a href={`/articles/${article.slug}`} class="read-more-link">
+        Read More
+        <svg class="read-more-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .article-card {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--color-neutral-300);
+    height: fit-content;
+  }
+
+  .article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Article Image */
+  .article-image {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+
+  .article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .article-card:hover .article-image img {
+    transform: scale(1.05);
+  }
+
+  .article-category {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    background: var(--color-primary);
+    color: var(--color-neutral-900);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Article Content */
+  .article-content {
+    padding: var(--space-6);
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-500);
+  }
+
+  .article-date {
+    font-weight: 500;
+  }
+
+  .article-read-time::before {
+    content: '•';
+    margin-right: var(--space-2);
+  }
+
+  .article-title {
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .article-link {
+    color: var(--color-neutral-900);
+    text-decoration: none;
+    transition: color var(--transition-normal);
+  }
+
+  .article-link:hover {
+    color: var(--color-secondary);
+  }
+
+  .article-excerpt {
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin-bottom: var(--space-6);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Article Footer */
+  .article-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .read-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-normal);
+  }
+
+  .read-more-link:hover {
+    color: var(--color-primary);
+    gap: var(--space-3);
+  }
+
+  .read-more-icon {
+    transition: transform var(--transition-normal);
+  }
+
+  .read-more-link:hover .read-more-icon {
+    transform: translateX(2px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .article-content {
+      padding: var(--space-5);
+    }
+
+    .article-title {
+      font-size: var(--font-size-lg);
+    }
+
+    .article-meta {
+      margin-bottom: var(--space-3);
+    }
+
+    .article-excerpt {
+      margin-bottom: var(--space-5);
+    }
+  }
+
+  /* Category-specific styling */
+  .article-card[data-category="NEWS"] .article-category {
+    background: var(--color-secondary);
+    color: var(--color-neutral-100);
+  }
+
+  .article-card[data-category="GRANTS"] .article-category {
+    background: #10b981;
+    color: var(--color-neutral-100);
+  }
+
+  .article-card[data-category="IN THE MEDIA"] .article-category {
+    background: #8b5cf6;
+    color: var(--color-neutral-100);
+  }
+
+  /* Animation for filtering */
+  .article-card.hidden {
+    display: none;
+  }
+
+  .article-card:not(.hidden) {
+    display: block;
+  }
+</style>

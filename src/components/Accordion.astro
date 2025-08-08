@@ -1,0 +1,191 @@
+---
+export interface AccordionItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface Props {
+  items: AccordionItem[];
+  className?: string;
+}
+
+const { items, className = '' } = Astro.props;
+---
+
+<div class={`accordion ${className}`}>
+  {items.map((item, index) => (
+    <div class="accordion-item" data-accordion-item>
+      <button 
+        class="accordion-trigger" 
+        aria-expanded="false"
+        aria-controls={`accordion-content-${item.id}`}
+        id={`accordion-trigger-${item.id}`}
+        data-accordion-trigger
+      >
+        <span class="accordion-question">{item.question}</span>
+        <div class="accordion-arrow">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </button>
+      <div 
+        class="accordion-content" 
+        id={`accordion-content-${item.id}`}
+        aria-labelledby={`accordion-trigger-${item.id}`}
+        data-accordion-content
+      >
+        <div class="accordion-answer" set:html={item.answer}></div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .accordion {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .accordion-item {
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-4);
+    background: var(--color-neutral-100);
+    border: 1px solid var(--color-neutral-200);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+  }
+
+  .accordion-item:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .accordion-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-6);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--transition-normal);
+  }
+
+  .accordion-trigger:hover {
+    color: var(--color-primary);
+  }
+
+  .accordion-trigger:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  .accordion-question {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    line-height: 1.4;
+    flex: 1;
+    margin-right: var(--space-4);
+  }
+
+  .accordion-arrow {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-normal);
+    color: var(--color-neutral-600);
+  }
+
+  .accordion-trigger[aria-expanded="true"] .accordion-arrow {
+    transform: rotate(180deg);
+    color: var(--color-primary);
+  }
+
+  .accordion-content {
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    max-height: 0;
+    opacity: 0;
+  }
+
+  .accordion-content.open {
+    max-height: 1000px;
+    opacity: 1;
+  }
+
+  .accordion-answer {
+    padding: 0 var(--space-6) var(--space-6) var(--space-6);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+  }
+
+  .accordion-answer p {
+    margin-bottom: var(--space-4);
+  }
+
+  .accordion-answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .accordion-trigger {
+      padding: var(--space-4);
+    }
+
+    .accordion-question {
+      font-size: var(--font-size-base);
+      margin-right: var(--space-3);
+    }
+
+    .accordion-arrow {
+      width: 20px;
+      height: 20px;
+    }
+
+    .accordion-answer {
+      padding: 0 var(--space-4) var(--space-4) var(--space-4);
+      font-size: var(--font-size-sm);
+    }
+  }
+</style>
+
+<script>
+  // Accordion functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const accordionTriggers = document.querySelectorAll('[data-accordion-trigger]');
+    
+    accordionTriggers.forEach(trigger => {
+      trigger.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        
+        // Close all other accordion items
+        accordionTriggers.forEach(otherTrigger => {
+          if (otherTrigger !== this) {
+            otherTrigger.setAttribute('aria-expanded', 'false');
+            const otherContent = otherTrigger.nextElementSibling;
+            otherContent.classList.remove('open');
+          }
+        });
+        
+        // Toggle current item
+        if (isExpanded) {
+          this.setAttribute('aria-expanded', 'false');
+          content.classList.remove('open');
+        } else {
+          this.setAttribute('aria-expanded', 'true');
+          content.classList.add('open');
+        }
+      });
+    });
+  });
+</script>

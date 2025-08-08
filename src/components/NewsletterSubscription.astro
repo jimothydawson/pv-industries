@@ -1,0 +1,268 @@
+---
+// Newsletter subscription component with Brevo placeholder
+---
+
+<section class="newsletter-subscription">
+  <div class="newsletter-content">
+    <div class="newsletter-text">
+      <h3 class="newsletter-title">Stay Informed</h3>
+      <p class="newsletter-description">
+        Get the latest updates on solar panel recycling, industry news, and sustainability insights 
+        delivered straight to your inbox. Join our community of environmental leaders.
+      </p>
+      <div class="newsletter-features">
+        <div class="feature-item">
+          <svg class="feature-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" fill="currentColor"/>
+          </svg>
+          <span>Monthly industry insights</span>
+        </div>
+        <div class="feature-item">
+          <svg class="feature-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" fill="currentColor"/>
+          </svg>
+          <span>Grant opportunities</span>
+        </div>
+        <div class="feature-item">
+          <svg class="feature-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" fill="currentColor"/>
+          </svg>
+          <span>Unsubscribe anytime</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="newsletter-form">
+      <!-- Brevo Newsletter Signup Placeholder -->
+      <div class="brevo-signup-placeholder">
+        <div class="brevo-placeholder-content">
+          <h4 class="brevo-form-title">Subscribe to Newsletter</h4>
+          <p class="brevo-placeholder-text">
+            Brevo signup form will be integrated here
+          </p>
+          <div class="brevo-placeholder-box">
+            <div class="placeholder-form">
+              <div class="placeholder-input">
+                <span class="placeholder-label">Email Address</span>
+              </div>
+              <div class="placeholder-button">
+                <span class="placeholder-btn-text">Subscribe</span>
+              </div>
+            </div>
+            <div class="brevo-integration-note">
+              <span class="brevo-placeholder-label">Brevo Form Integration Point</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .newsletter-subscription {
+    background: linear-gradient(135deg, var(--color-neutral-900) 0%, var(--color-neutral-800) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .newsletter-subscription::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/images/solar-panels-bg.jpg') center/cover;
+    opacity: 0.05;
+    z-index: 1;
+  }
+
+  .newsletter-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--space-16) var(--space-8);
+  }
+
+  /* Newsletter Text */
+  .newsletter-text {
+    color: var(--color-neutral-100);
+  }
+
+  .newsletter-title {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--space-4);
+    color: var(--color-neutral-100);
+  }
+
+  .newsletter-description {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: var(--color-neutral-300);
+    margin-bottom: var(--space-6);
+  }
+
+  .newsletter-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--color-neutral-200);
+    font-size: var(--font-size-sm);
+  }
+
+  .feature-icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  /* Newsletter Form */
+  .newsletter-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Brevo Placeholder Styles */
+  .brevo-signup-placeholder {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .brevo-placeholder-content {
+    text-align: center;
+  }
+
+  .brevo-form-title {
+    color: var(--color-neutral-100);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+  }
+
+  .brevo-placeholder-text {
+    color: var(--color-neutral-300);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-6);
+    font-style: italic;
+  }
+
+  .brevo-placeholder-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+
+  .placeholder-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+
+  .placeholder-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    color: var(--color-neutral-300);
+    font-size: var(--font-size-sm);
+  }
+
+  .placeholder-button {
+    background: var(--color-primary);
+    color: var(--color-neutral-900);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .brevo-integration-note {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: var(--space-3);
+  }
+
+  .brevo-placeholder-label {
+    color: var(--color-primary);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .newsletter-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      text-align: center;
+      padding: var(--space-12) var(--space-6);
+    }
+
+    .newsletter-text {
+      order: 1;
+    }
+
+    .newsletter-form {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .newsletter-content {
+      padding: var(--space-10) var(--space-4);
+      gap: var(--space-6);
+    }
+
+    .newsletter-title {
+      font-size: var(--font-size-2xl);
+    }
+
+    .newsletter-description {
+      font-size: var(--font-size-base);
+    }
+
+    .brevo-signup-placeholder {
+      padding: var(--space-6);
+    }
+
+    .newsletter-features {
+      justify-content: center;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .newsletter-content {
+      padding: var(--space-8) var(--space-3);
+    }
+
+    .brevo-signup-placeholder {
+      padding: var(--space-5);
+    }
+
+    .brevo-form-title {
+      font-size: var(--font-size-lg);
+    }
+  }
+</style>

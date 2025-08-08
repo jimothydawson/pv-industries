@@ -1,0 +1,274 @@
+---
+export interface Props {
+  article: {
+    id: number;
+    title: string;
+    excerpt: string;
+    image: string;
+    category: string;
+    date: string;
+    readTime: string;
+    slug: string;
+  };
+}
+
+const { article } = Astro.props;
+
+// Format date for display
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-AU', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+---
+
+<article class="featured-article">
+  <div class="featured-content">
+    <div class="featured-text">
+      <div class="featured-meta">
+        <span class="featured-category">
+          {article.category}
+        </span>
+        <div class="featured-details">
+          <time class="featured-date" datetime={article.date}>
+            {formatDate(article.date)}
+          </time>
+          <span class="featured-read-time">
+            {article.readTime}
+          </span>
+        </div>
+      </div>
+      
+      <h2 class="featured-title">
+        <a href={`/articles/${article.slug}`} class="featured-link">
+          {article.title}
+        </a>
+      </h2>
+      
+      <p class="featured-excerpt">
+        {article.excerpt}
+      </p>
+      
+      <div class="featured-actions">
+        <a href={`/articles/${article.slug}`} class="button button-primary">
+          Read Full Article
+          <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    
+    <div class="featured-image">
+      <img 
+        src={article.image} 
+        alt={article.title}
+        loading="eager"
+      />
+      <div class="featured-overlay"></div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .featured-article {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-neutral-300);
+  }
+
+  .featured-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 500px;
+  }
+
+  /* Featured Text */
+  .featured-text {
+    padding: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-6);
+  }
+
+  .featured-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .featured-category {
+    display: inline-block;
+    background: var(--color-primary);
+    color: var(--color-neutral-900);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: fit-content;
+  }
+
+  .featured-details {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-500);
+  }
+
+  .featured-date {
+    font-weight: 500;
+  }
+
+  .featured-read-time::before {
+    content: '•';
+    margin-right: var(--space-2);
+  }
+
+  .featured-title {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .featured-link {
+    color: var(--color-neutral-900);
+    text-decoration: none;
+    transition: color var(--transition-normal);
+  }
+
+  .featured-link:hover {
+    color: var(--color-secondary);
+  }
+
+  .featured-excerpt {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: var(--color-neutral-600);
+    margin: 0;
+  }
+
+  .featured-actions {
+    margin-top: var(--space-2);
+  }
+
+  /* Featured Image */
+  .featured-image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .featured-article:hover .featured-image img {
+    transform: scale(1.05);
+  }
+
+  .featured-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(37, 99, 235, 0.1) 0%,
+      rgba(253, 181, 0, 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+  }
+
+  .featured-article:hover .featured-overlay {
+    opacity: 1;
+  }
+
+  /* Category-specific styling */
+  .featured-article .featured-category {
+    background: var(--color-secondary);
+    color: var(--color-neutral-100);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .featured-content {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .featured-text {
+      padding: var(--space-8);
+      order: 2;
+    }
+
+    .featured-image {
+      order: 1;
+      min-height: 300px;
+    }
+
+    .featured-title {
+      font-size: var(--font-size-3xl);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .featured-text {
+      padding: var(--space-6);
+      gap: var(--space-4);
+    }
+
+    .featured-title {
+      font-size: var(--font-size-2xl);
+    }
+
+    .featured-excerpt {
+      font-size: var(--font-size-base);
+    }
+
+    .featured-meta {
+      gap: var(--space-2);
+    }
+
+    .featured-details {
+      gap: var(--space-3);
+    }
+
+    .featured-image {
+      min-height: 250px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .featured-text {
+      padding: var(--space-5);
+    }
+
+    .featured-title {
+      font-size: var(--font-size-xl);
+    }
+
+    .featured-details {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-1);
+    }
+
+    .featured-read-time::before {
+      display: none;
+    }
+  }
+</style>

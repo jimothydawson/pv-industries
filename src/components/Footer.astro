@@ -53,34 +53,6 @@
       </div>
     </div>
 
-    <!-- Footer Center -->
-    <div class="footer-center">
-      <div class="footer-newsletter">
-        <div class="newsletter-content">
-          <h4 class="newsletter-title">Stay up to date</h4>
-          <p class="newsletter-description">
-            Sign up to our newsletter to receive our latest news and information as we continue to grow. 
-            We only get in touch when it's important and you can unsubscribe at any time.
-          </p>
-        </div>
-        
-        <div class="newsletter-form-wrapper">
-          <!-- Brevo Newsletter Signup Placeholder -->
-          <div class="contact-block newsletter-block brevo-signup-placeholder">
-            <h4 class="newsletter-title">Stay up to date</h4>
-            <div class="brevo-placeholder-content">
-              <p class="brevo-placeholder-text">
-                Brevo signup form will be integrated here
-              </p>
-              <div class="brevo-placeholder-box">
-                <span class="brevo-placeholder-label">Brevo Form Placeholder</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Footer Bottom -->
     <div class="footer-bottom">
       <div class="footer-legal">
@@ -259,136 +231,6 @@
     }
   }
 
-  /* Footer Center */
-  .footer-center {
-    margin-bottom: var(--space-16);
-  }
-
-  .footer-newsletter {
-    max-width: 500px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  @media (min-width: 768px) {
-    .footer-newsletter {
-      max-width: 400px;
-    }
-  }
-
-  .newsletter-title {
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    color: var(--color-neutral-100);
-    margin: 0 0 var(--space-3) 0;
-  }
-
-  .newsletter-description {
-    color: var(--color-neutral-300);
-    line-height: 1.6;
-    margin: 0 0 var(--space-6) 0;
-  }
-
-  .newsletter-form-wrapper {
-    margin-top: var(--space-6);
-  }
-
-  /* Contact Block Styles (matching MarketingHeroSection) */
-  .contact-block {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    padding: 24px;
-    transition: all var(--transition-normal);
-    box-sizing: border-box;
-    width: 100%;
-  }
-
-  .contact-block:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-  }
-
-  /* Newsletter Block */
-  .newsletter-block {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-
-  /* Brevo Placeholder Styles */
-  .brevo-signup-placeholder {
-    border: 2px dashed rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .brevo-placeholder-content {
-    text-align: center;
-  }
-
-  .brevo-placeholder-text {
-    color: var(--color-neutral-300);
-    font-size: var(--font-size-sm);
-    margin: 0 0 var(--space-3) 0;
-    font-style: italic;
-  }
-
-  .brevo-placeholder-box {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-lg);
-    padding: var(--space-4);
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .brevo-placeholder-label {
-    color: var(--color-neutral-400);
-    font-size: var(--font-size-sm);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  /* Legacy form styles (can be removed once Brevo form is implemented) */
-  .form-input-wrapper {
-    position: relative;
-    display: flex;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .newsletter-input {
-    flex: 1;
-    padding: var(--space-3) var(--space-4);
-    background: transparent;
-    border: none;
-    color: var(--color-neutral-100);
-    font-size: var(--font-size-base);
-  }
-
-  .newsletter-input::placeholder {
-    color: var(--color-neutral-400);
-  }
-
-  .newsletter-button {
-    padding: var(--space-3) var(--space-4);
-    background: var(--color-primary);
-    color: var(--color-neutral-100);
-    border: none;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color var(--transition-normal);
-    white-space: nowrap;
-  }
-
-  .newsletter-button:hover {
-    background: var(--color-primary-dark);
-  }
 
   /* Footer Bottom */
   .footer-bottom {
@@ -488,10 +330,6 @@
     }
 
     .footer-top {
-      margin-bottom: var(--space-12);
-    }
-
-    .footer-center {
       margin-bottom: var(--space-12);
     }
 

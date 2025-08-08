@@ -1,0 +1,245 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Accordion from '../components/Accordion.astro';
+
+// FAQ data extracted from the original HTML
+const faqData = [
+  {
+    id: 'who-is-pv-industries',
+    question: 'Who is PV Industries?',
+    answer: '<p>We are an Australian start-up aiming to reduce our environmental footprint and make society better off by diverting solar panel waste from landfill.</p>'
+  },
+  {
+    id: 'why-dispose-solar-panels',
+    question: 'Why do solar panels need to be disposed of? I thought they lasted 25 years?',
+    answer: '<p>There are many reasons someone may need to dispose of solar panels. Solar panels may be damaged during manufacturing, transport or construction. They may also be damaged due to weather (such as hail storms). Some panels might be faulty or problems may occur during use. Rapid advances in technology can make it economically feasible to upgrade to more powerful and efficient systems.</p>'
+  },
+  {
+    id: 'why-recycle-not-landfill',
+    question: 'Why should solar panels be recycled rather than landfilled?',
+    answer: '<p>Solar panels contain hazardous materials which can potentially damage the environment, through the production of leachates in soil, groundwater, rivers and oceans. The materials from solar panels can also be recovered and recycled, such as glass, aluminium and copper. These materials hold economic value and recycling them reduces the need for further production. You can read more on the benefits of recycling in our article here.</p>'
+  },
+  {
+    id: 'what-happens-after-collection',
+    question: 'What happens to the panels once they are collected?',
+    answer: '<p>The panels are transported to the PV Industries MRF, de-framed (if not already) and stored until our recycling plant is operational.</p>'
+  },
+  {
+    id: 'significance-of-deframing',
+    question: 'What is the significance of deframing?',
+    answer: '<p>Firstly, de-framing is a precursor in the recycling process, before the glass and other materials can be recovered. Secondly, de-framed panels take up 7x less space than framed panels and finally, PV Industries are the first (and only) company to have an automated de-framing machine in Australia.</p>'
+  },
+  {
+    id: 'reuse-vs-recycle',
+    question: 'Can solar panels be reused rather than recycled?',
+    answer: '<p>This is a question we are often asked, however, there are several issues reusing second hand panels. Many panels do not meet current standards, they are not eligible for government incentives nor are they covered by any warranties. There are safety concerns and issues with consumer law. Depending on their age, second hand solar panels are likely to already have issues causing a reduction in output.</p><p>We are currently exploring methods for identifying reusable panels and the markets in which they can be used, however, the majority of panels that are being disposed of are either old, damaged or faulty. Our aim is to reduce our community\'s environmental footprint and we strive to do this in the most efficient and beneficial way possible.</p>'
+  },
+  {
+    id: 'victoria-ewaste-ban',
+    question: 'Are solar panels included in Victoria\'s e-waste ban?',
+    answer: '<p>Yes, solar panels are included in the ban. New legislation came into effect in Victoria as of July 1st 2019. As part of that legislation solar panels are no longer accepted in any landfill or bin. PV Industries recycling process gives you the tick of approval needed to comply with the ban!</p>'
+  }
+];
+
+const pageTitle = 'FAQs - PV Industries';
+const pageDescription = 'Frequently asked questions about solar panel recycling, disposal, and PV Industries\' services.';
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Header />
+  
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">Frequently Asked Questions</h1>
+          <p class="hero-description">
+            Find answers to common questions about solar panel recycling, our processes, and services.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="faq-content">
+          <Accordion items={faqData} className="faq-accordion" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2 class="cta-title">Still have questions?</h2>
+          <p class="cta-description">
+            Can't find the answer you're looking for? Get in touch with our team and we'll be happy to help.
+          </p>
+          <div class="cta-actions">
+            <a href="/contact" class="button button-primary">
+              Contact Us
+              <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href="mailto:contact@pvindustries.com.au" class="button button-secondary dark">
+              Email Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .main-content {
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, var(--color-neutral-900) 0%, var(--color-neutral-800) 100%);
+    color: var(--color-neutral-100);
+    padding: var(--space-20) 0 var(--space-16) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/images/solar-panels-pattern.svg') no-repeat center center;
+    background-size: cover;
+    opacity: 0.1;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-5xl);
+    font-weight: 700;
+    margin-bottom: var(--space-6);
+    color: var(--color-neutral-100);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-xl);
+    color: var(--color-neutral-300);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-200);
+  }
+
+  .faq-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: var(--color-neutral-900);
+    padding: var(--space-20) 0;
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-8);
+    opacity: 0.9;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: var(--space-16) 0 var(--space-12) 0;
+    }
+
+    .hero-title {
+      font-size: var(--font-size-4xl);
+    }
+
+    .hero-description {
+      font-size: var(--font-size-lg);
+    }
+
+    .faq-section {
+      padding: var(--space-16) 0;
+    }
+
+    .cta-section {
+      padding: var(--space-16) 0;
+    }
+
+    .cta-title {
+      font-size: var(--font-size-3xl);
+    }
+
+    .cta-description {
+      font-size: var(--font-size-base);
+    }
+
+    .cta-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-actions .button {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: var(--font-size-3xl);
+    }
+
+    .cta-title {
+      font-size: var(--font-size-2xl);
+    }
+  }
+</style>

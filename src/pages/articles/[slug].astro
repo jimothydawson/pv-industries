@@ -1,0 +1,42 @@
+---
+import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
+import { getBlogPostById, getRelatedArticles, convertContentToHTML } from '../../utils/blog.ts';
+
+export async function getStaticPaths() {
+  // Import the blog data to generate static paths
+  const blogData = await import('../../data/blog-posts.json');
+  
+  return blogData.default.posts.map((post) => ({
+    params: { slug: post.id },
+  }));
+}
+
+const { slug } = Astro.params;
+
+// Get the blog post data
+const blogPost = getBlogPostById(slug!);
+
+if (!blogPost) {
+  return Astro.redirect('/404');
+}
+
+// Get related articles
+const relatedArticles = getRelatedArticles(slug!);
+
+// Convert content to HTML
+const htmlContent = convertContentToHTML(blogPost.content);
+
+// Prepare data for the layout
+const layoutProps = {
+  title: blogPost.title,
+  description: blogPost.description,
+  category: blogPost.category,
+  date: blogPost.date,
+  readTime: blogPost.readTime,
+  heroImage: blogPost.heroImage,
+  content: htmlContent,
+  relatedArticles: relatedArticles
+};
+---
+
+<BlogPostLayout {...layoutProps} />

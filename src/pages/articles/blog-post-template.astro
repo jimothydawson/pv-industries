@@ -1,0 +1,102 @@
+---
+import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
+
+// TEMPLATE: Copy this file and modify the content below for new blog posts
+const blogPost = {
+  title: "Your Blog Post Title Here",
+  description: "A brief description of your blog post for SEO and social sharing.",
+  category: "NEWS", // Options: "NEWS", "GRANTS", "IN THE MEDIA"
+  date: "2024-01-01", // Format: YYYY-MM-DD
+  readTime: "5 min read",
+  heroImage: "/images/your-hero-image.jpg", // Path to your hero image
+  content: `
+    <p>Your introduction paragraph goes here. This should provide an overview of what the article will cover.</p>
+
+    <h2>1. First Main Section</h2>
+    <p>Content for your first main section. You can include multiple paragraphs, lists, and other HTML elements.</p>
+
+    <h2>2. Second Main Section</h2>
+    <p>Content for your second main section.</p>
+
+    <h3>Subsection Example</h3>
+    <p>You can use h3 tags for subsections within your main sections.</p>
+
+    <ul>
+      <li>Bullet point example</li>
+      <li>Another bullet point</li>
+      <li>Third bullet point</li>
+    </ul>
+
+    <h2>3. Third Main Section</h2>
+    <p>Continue with your content structure.</p>
+
+    <blockquote>
+      <p>You can include quotes or important callouts using blockquote tags.</p>
+    </blockquote>
+
+    <p>Your conclusion paragraph should summarize the key points and provide a call to action if appropriate.</p>
+  `,
+  relatedArticles: [
+    // Optional: Add related articles here
+    // {
+    //   id: 1,
+    //   title: "Related Article Title",
+    //   excerpt: "Brief description of the related article.",
+    //   image: "/images/related-article-image.jpg",
+    //   category: "NEWS",
+    //   date: "2024-01-01",
+    //   readTime: "3 min read",
+    //   slug: "related-article-slug"
+    // }
+  ]
+};
+---
+
+<BlogPostLayout {...blogPost} />
+
+<!-- 
+INSTRUCTIONS FOR USING THIS TEMPLATE:
+
+1. Copy this file to a new location in src/pages/articles/
+2. Rename the file to match your blog post slug (e.g., "my-new-article.astro")
+3. Update the blogPost object with your content:
+   - title: The main title of your blog post
+   - description: SEO description (keep under 160 characters)
+   - category: Choose from "NEWS", "GRANTS", or "IN THE MEDIA"
+   - date: Publication date in YYYY-MM-DD format
+   - readTime: Estimated reading time
+   - heroImage: Path to your hero image (recommended size: 1600x900px)
+   - content: Your blog post content in HTML format
+
+4. Content formatting tips:
+   - Use <h2> for main sections
+   - Use <h3> for subsections
+   - Use <p> for paragraphs
+   - Use <ul> and <li> for bullet points
+   - Use <ol> and <li> for numbered lists
+   - Use <blockquote> for quotes or callouts
+   - Use <strong> for bold text
+   - Use <em> for italic text
+
+5. Related articles (optional):
+   - Add up to 3 related articles in the relatedArticles array
+   - Each article should have all the required fields
+   - Make sure the slug matches the actual article file name
+
+6. Images:
+   - Place images in the public/images/ directory
+   - Reference them with "/images/filename.jpg"
+   - Optimize images for web (recommended: WebP format, compressed)
+
+7. SEO considerations:
+   - Keep titles under 60 characters
+   - Write compelling descriptions under 160 characters
+   - Use descriptive file names for your article slug
+   - Include relevant keywords naturally in your content
+
+8. After creating your blog post:
+   - Test the page by visiting /articles/your-slug
+   - Check that all images load correctly
+   - Verify the layout looks good on mobile and desktop
+   - Update any navigation or article listing pages if needed
+-->

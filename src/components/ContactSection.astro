@@ -1,4 +1,6 @@
 ---
+import BrevoSignupForm from './BrevoSignupForm.astro';
+
 // Contact section data
 const contactData = {
   title: "Get in touch",
@@ -9,8 +11,7 @@ const contactData = {
     { name: "Facebook", url: "https://www.facebook.com/pvindustriesAUS", icon: "facebook" },
     { name: "Instagram", url: "https://www.instagram.com/pv_industries", icon: "instagram" },
     { name: "LinkedIn", url: "https://www.linkedin.com/company/pv-industries/", icon: "linkedin" }
-  ],
-  formEmbedUrl: "https://55c8f104.sibforms.com/serve/MUIFAI1T4MZntN7O-rMekycXd44Iz-iQGtWh1jYqQaqMCoL6lS5YD8FGgX0e-NuM661SNeqr4stiw2--F27RVu_jsl5hfDaa62Lcog3FCfVk7_1xdy1DaTKdJbSmTBkZcq6d385BcAz4lVx97IuwOo6ttX2Lv1ZobN1tqPhGYCHMn-OMkNXo0LgjJpLvHxpSEdAZlEmVKs2AuBWE"
+  ]
 };
 ---
 
@@ -19,41 +20,7 @@ const contactData = {
     <div class="contact-grid">
       <!-- Contact Form -->
       <div class="contact-form-column">
-        <div class="form-card">
-          <div class="form-content">
-            <!-- Success Message -->
-            <div class="success-message" id="success-message">
-              <div class="success-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <circle cx="24" cy="24" r="24" fill="#10b981"/>
-                  <path d="M16 24L22 30L32 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <div class="success-content">
-                <h3 class="success-title">Thank you! We'll get back to you soon</h3>
-                <p class="success-text">We have received your message and will get back to you as soon as possible. Our team is dedicated to providing the best support and we appreciate your patience.</p>
-              </div>
-            </div>
-
-            <!-- Error Message -->
-            <div class="error-message" id="error-message">
-              <p>Oops! Something went wrong. Please try again.</p>
-            </div>
-
-            <!-- Embedded Form -->
-            <div class="form-embed">
-              <iframe
-                width="540"
-                height="305"
-                src={contactData.formEmbedUrl}
-                allowfullscreen
-                style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;border: 0;overflow: auto;"
-                title="Contact Form"
-              ></iframe>
-            </div>
-          </div>
-          <div class="form-background"></div>
-        </div>
+        <BrevoSignupForm />
       </div>
 
       <!-- Contact Information -->
@@ -190,88 +157,6 @@ const contactData = {
     }
   }
 
-  .form-card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-xl);
-    padding: var(--space-8);
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.8s ease-out 0.2s forwards;
-  }
-
-  .form-content {
-    position: relative;
-    z-index: 2;
-  }
-
-  .form-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
-    border-radius: var(--radius-xl);
-    z-index: 1;
-  }
-
-  /* Success/Error Messages */
-  .success-message,
-  .error-message {
-    display: none;
-    padding: var(--space-6);
-    border-radius: var(--radius-lg);
-    margin-bottom: var(--space-6);
-  }
-
-  .success-message {
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    color: var(--color-neutral-100);
-  }
-
-  .error-message {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    color: var(--color-neutral-100);
-  }
-
-  .success-message.show,
-  .error-message.show {
-    display: block;
-  }
-
-  .success-icon {
-    margin-bottom: var(--space-6);
-  }
-
-  .success-title {
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    margin: 0 0 var(--space-2) 0;
-  }
-
-  .success-text {
-    color: var(--color-neutral-300);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  /* Form Embed */
-  .form-embed {
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--color-neutral-100);
-  }
-
-  .form-embed iframe {
-    width: 100%;
-    min-height: 400px;
-    border: none;
-  }
 
   /* Contact Information */
   .contact-info-column {
@@ -438,9 +323,6 @@ const contactData = {
       gap: var(--space-8);
     }
 
-    .form-card {
-      padding: var(--space-6);
-    }
 
     .info-header {
       margin-bottom: var(--space-8);
@@ -453,7 +335,6 @@ const contactData = {
 
   /* Animation preferences */
   @media (prefers-reduced-motion: reduce) {
-    .form-card,
     .contact-info-content {
       opacity: 1;
       transform: none;

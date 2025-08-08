@@ -1,0 +1,142 @@
+---
+export interface Props {
+  categories: string[];
+}
+
+const { categories } = Astro.props;
+---
+
+<div class="category-filter">
+  <div class="filter-buttons">
+    {categories.map((category, index) => (
+      <button 
+        class={`category-btn ${index === 0 ? 'active' : ''}`}
+        data-category={category}
+        type="button"
+      >
+        {category}
+      </button>
+    ))}
+  </div>
+</div>
+
+<style>
+  .category-filter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .filter-buttons {
+    display: flex;
+    gap: var(--space-2);
+    background: var(--color-neutral-200);
+    padding: var(--space-1);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-neutral-300);
+  }
+
+  .category-btn {
+    padding: var(--space-2) var(--space-4);
+    border: none;
+    background: transparent;
+    color: var(--color-neutral-600);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .category-btn:hover {
+    color: var(--color-neutral-800);
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .category-btn.active {
+    background: var(--color-neutral-100);
+    color: var(--color-neutral-900);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .category-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .category-filter {
+      justify-content: flex-start;
+      width: 100%;
+    }
+
+    .filter-buttons {
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .filter-buttons::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-btn {
+      flex-shrink: 0;
+      padding: var(--space-3) var(--space-4);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .filter-buttons {
+      gap: var(--space-1);
+      padding: var(--space-1);
+    }
+
+    .category-btn {
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--font-size-xs);
+    }
+  }
+
+  /* Animation for active state */
+  .category-btn.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(37, 99, 235, 0.05) 0%,
+      rgba(253, 181, 0, 0.05) 100%
+    );
+    border-radius: var(--radius-md);
+    z-index: -1;
+  }
+
+  /* Category-specific colors */
+  .category-btn[data-category="NEWS"].active {
+    color: var(--color-secondary);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+  }
+
+  .category-btn[data-category="GRANTS"].active {
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .category-btn[data-category="IN THE MEDIA"].active {
+    color: #8b5cf6;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+
+  .category-btn[data-category="ALL"].active {
+    color: var(--color-neutral-900);
+    border: 1px solid var(--color-neutral-400);
+  }
+</style>

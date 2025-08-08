@@ -1,0 +1,291 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FeaturedArticle from '../components/FeaturedArticle.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import CategoryFilter from '../components/CategoryFilter.astro';
+import NewsletterSubscription from '../components/NewsletterSubscription.astro';
+import { getAllBlogPosts, getRecentBlogPosts, getAllCategories } from '../utils/blog.ts';
+
+// Get real blog posts from our JSON data
+const allBlogPosts = getAllBlogPosts();
+
+// Sort posts by date (newest first) and convert to ArticleCard format
+const sortedPosts = allBlogPosts
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+// Use the most recent post as featured article
+const latestPost = sortedPosts[0];
+const featuredArticle = {
+  id: Math.random(),
+  title: latestPost.title,
+  excerpt: latestPost.description,
+  image: latestPost.heroImage,
+  category: latestPost.category,
+  date: latestPost.date,
+  readTime: latestPost.readTime,
+  slug: latestPost.id
+};
+
+// Convert remaining posts to ArticleCard format
+const articles = sortedPosts.slice(1).map((post, index) => ({
+  id: index + 2,
+  title: post.title,
+  excerpt: post.description,
+  image: post.heroImage,
+  category: post.category,
+  date: post.date,
+  readTime: post.readTime,
+  slug: post.id
+}));
+
+// Get all categories and add "ALL" at the beginning
+const blogCategories = getAllCategories();
+const categories = ["ALL", ...blogCategories];
+---
+
+<Layout title="Articles - PV Industries" description="Stay updated with the latest news, insights, and developments in solar panel recycling from PV Industries.">
+  <Header />
+  
+  <main class="articles-page">
+    <!-- Hero Section with Featured Article -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 class="hero-title">Latest News & Insights</h1>
+            <p class="hero-description">
+              Stay informed about the latest developments in solar panel recycling, 
+              industry news, and our ongoing commitment to sustainable energy solutions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="featured-section">
+      <div class="container">
+        <FeaturedArticle article={featuredArticle} />
+      </div>
+    </section>
+
+    <!-- Newsletter Subscription -->
+    <section class="newsletter-section">
+      <div class="container">
+        <NewsletterSubscription />
+      </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="articles-section">
+      <div class="container">
+        <div class="articles-header">
+          <h2 class="articles-title">All Articles</h2>
+          <CategoryFilter categories={categories} />
+        </div>
+        
+        <div class="articles-grid" id="articles-grid">
+          {articles.map((article) => (
+            <ArticleCard article={article} />
+          ))}
+        </div>
+
+        <!-- Load More Button -->
+        <div class="load-more-section">
+          <button class="button button-secondary dark load-more-btn">
+            Load More Articles
+            <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M8 4V12M4 8H12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .articles-page {
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, var(--color-neutral-900) 0%, var(--color-neutral-800) 100%);
+    padding: var(--space-20) 0 var(--space-16);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/images/solar-panels-bg.jpg') center/cover;
+    opacity: 0.1;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-6);
+    font-size: var(--font-size-5xl);
+    font-weight: 700;
+  }
+
+  .hero-description {
+    color: var(--color-neutral-300);
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: var(--space-16) 0 var(--space-12);
+    }
+
+    .hero-title {
+      font-size: var(--font-size-4xl);
+    }
+
+    .hero-description {
+      font-size: var(--font-size-base);
+    }
+  }
+
+  /* Featured Section */
+  .featured-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-200);
+  }
+
+  /* Newsletter Section */
+  .newsletter-section {
+    padding: var(--space-16) 0;
+    background: var(--color-neutral-100);
+  }
+
+  /* Articles Section */
+  .articles-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+  }
+
+  .articles-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-12);
+    gap: var(--space-6);
+  }
+
+  .articles-title {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-3xl);
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .articles-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .articles-title {
+      font-size: var(--font-size-2xl);
+    }
+  }
+
+  /* Articles Grid */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-8);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (max-width: 768px) {
+    .articles-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+
+  /* Load More Section */
+  .load-more-section {
+    text-align: center;
+  }
+
+  .load-more-btn {
+    min-width: 200px;
+  }
+
+  /* Animation for filtered articles */
+  .articles-grid .article-card {
+    transition: all var(--transition-normal);
+  }
+
+  .articles-grid .article-card.hidden {
+    display: none;
+  }
+
+  .articles-grid .article-card:not(.hidden) {
+    display: block;
+  }
+</style>
+
+<script>
+  // Category filtering functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const articleCards = document.querySelectorAll('.article-card');
+
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.dataset.category;
+
+        // Update active button
+        categoryButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        // Filter articles
+        articleCards.forEach(card => {
+          const articleCategory = card.dataset.category;
+          
+          if (category === 'ALL' || articleCategory === category) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Load more functionality (placeholder)
+    const loadMoreBtn = document.querySelector('.load-more-btn');
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', () => {
+        // In a real app, this would load more articles from an API
+        console.log('Loading more articles...');
+      });
+    }
+  });
+</script>
