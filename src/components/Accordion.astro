@@ -164,26 +164,28 @@ const { items, className = '' } = Astro.props;
     const accordionTriggers = document.querySelectorAll('[data-accordion-trigger]');
     
     accordionTriggers.forEach(trigger => {
-      trigger.addEventListener('click', function() {
-        const content = this.nextElementSibling;
+      trigger.addEventListener('click', function(this: HTMLElement) {
+        const content = this.nextElementSibling as HTMLElement;
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
         
         // Close all other accordion items
         accordionTriggers.forEach(otherTrigger => {
           if (otherTrigger !== this) {
             otherTrigger.setAttribute('aria-expanded', 'false');
-            const otherContent = otherTrigger.nextElementSibling;
-            otherContent.classList.remove('open');
+            const otherContent = otherTrigger.nextElementSibling as HTMLElement | null;
+            if (otherContent) {
+              otherContent.classList.remove('open');
+            }
           }
         });
         
         // Toggle current item
         if (isExpanded) {
           this.setAttribute('aria-expanded', 'false');
-          content.classList.remove('open');
+          content?.classList.remove('open');
         } else {
           this.setAttribute('aria-expanded', 'true');
-          content.classList.add('open');
+          content?.classList.add('open');
         }
       });
     });
