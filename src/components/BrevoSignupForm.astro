@@ -2,7 +2,6 @@
 // Brevo form embed URL
 const formEmbedUrl = "https://55c8f104.sibforms.com/serve/MUIFANqmZyGgYORt6VTmfUrSGdFRIdWgjKeFqxZeltUNJX9WN31ZTPkD8SkrTFH0dd2Oe4JP2EBfY-aYfPmeGQMd8D-WCepFIHaN7gkZAHz7k2cM7QPTCwihRPRuTKQ7_SfjkmJWaQq9JC5xznCnbUHq5lcQveKZYtBLjMFuG-2LYuobHvkcYvO3xcaL_RLfr704KdSDgnp1JJR-";
 ---
-<script src="https://www.google.com/recaptcha/api.js?render=6LfFtzkcAAAAAM2dwJW33LNdu0KWm9cUGPAkRCqk"></script>
 
 <div class="form-card">
   <div class="form-content">
@@ -39,24 +38,6 @@ const formEmbedUrl = "https://55c8f104.sibforms.com/serve/MUIFANqmZyGgYORt6VTmfU
   </div>
   <div class="form-background"></div>
 </div>
-
-<script>
-  // Declare grecaptcha as a global variable for TypeScript
-  declare global {
-    interface Window {
-      grecaptcha: any;
-    }
-  }
-  
-  // Wait for iframe to load and reinitialize reCAPTCHA
-  window.addEventListener('load', function() {
-    if (typeof window.grecaptcha !== 'undefined') {
-      window.grecaptcha.ready(function() {
-        console.log('reCAPTCHA ready');
-      });
-    }
-  });
-</script>
 
 <style>
   .form-card {
@@ -155,6 +136,9 @@ const formEmbedUrl = "https://55c8f104.sibforms.com/serve/MUIFANqmZyGgYORt6VTmfU
       opacity: 1;
       transform: none;
       animation: none;
+    }
+  }
+</style>
     }
   }
 </style>
