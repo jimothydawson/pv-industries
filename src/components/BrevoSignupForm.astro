@@ -41,10 +41,17 @@ const formEmbedUrl = "https://55c8f104.sibforms.com/serve/MUIFANqmZyGgYORt6VTmfU
 </div>
 
 <script>
+  // Declare grecaptcha as a global variable for TypeScript
+  declare global {
+    interface Window {
+      grecaptcha: any;
+    }
+  }
+  
   // Wait for iframe to load and reinitialize reCAPTCHA
   window.addEventListener('load', function() {
-    if (typeof grecaptcha !== 'undefined') {
-      grecaptcha.ready(function() {
+    if (typeof window.grecaptcha !== 'undefined') {
+      window.grecaptcha.ready(function() {
         console.log('reCAPTCHA ready');
       });
     }
@@ -148,9 +155,6 @@ const formEmbedUrl = "https://55c8f104.sibforms.com/serve/MUIFANqmZyGgYORt6VTmfU
       opacity: 1;
       transform: none;
       animation: none;
-    }
-  }
-</style>
     }
   }
 </style>
