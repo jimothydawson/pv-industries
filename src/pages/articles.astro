@@ -6,7 +6,7 @@ import FeaturedArticle from '../components/FeaturedArticle.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import CategoryFilter from '../components/CategoryFilter.astro';
 import NewsletterSubscription from '../components/NewsletterSubscription.astro';
-import { getAllBlogPosts, getRecentBlogPosts, getAllCategories } from '../utils/blog.ts';
+import { getAllBlogPosts, getRecentBlogPosts, getAllCategories } from '../utils/blog';
 
 // Get real blog posts from our JSON data
 const allBlogPosts = getAllBlogPosts();
@@ -260,7 +260,7 @@ const categories = ["ALL", ...blogCategories];
 
     categoryButtons.forEach(button => {
       button.addEventListener('click', () => {
-        const category = button.dataset.category;
+        const category = (button as HTMLElement).dataset.category;
 
         // Update active button
         categoryButtons.forEach(btn => btn.classList.remove('active'));
@@ -268,7 +268,7 @@ const categories = ["ALL", ...blogCategories];
 
         // Filter articles
         articleCards.forEach(card => {
-          const articleCategory = card.dataset.category;
+          const articleCategory = (card as HTMLElement).dataset.category;
           
           if (category === 'ALL' || articleCategory === category) {
             card.classList.remove('hidden');
