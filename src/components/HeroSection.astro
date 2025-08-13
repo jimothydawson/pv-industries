@@ -1,4 +1,6 @@
 ---
+import BrevoSignupForm from './BrevoSignupForm.astro';
+
 // Hero section data
 const heroData = {
   title: "Innovative solar waste management & recycling solutions",
@@ -11,7 +13,9 @@ const heroData = {
   contactEmail: "contact@pvindustries.com.au",
   locations: [
     { name: "New South Wales", mapLink: "https://www.google.com/maps" },
-    { name: "Victoria", mapLink: "https://www.google.com/maps" }
+    { name: "Victoria", mapLink: "https://www.google.com/maps" },
+    { name: "Australian Capital Territory", mapLink: "https://www.google.com/maps" },
+    { name: "South Australia", mapLink: "https://www.google.com/maps" }
   ]
 };
 ---
@@ -96,23 +100,7 @@ const heroData = {
         </div>
         
         <!-- Newsletter Signup -->
-        <div class="contact-block newsletter-block">
-          <h3 class="newsletter-title">Stay tuned for more news</h3>
-          <form class="newsletter-form">
-            <div class="form-input-wrapper">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
-                required 
-                class="newsletter-input"
-                aria-label="Email address"
-              />
-              <button type="submit" class="newsletter-button">
-                Subscribe
-              </button>
-            </div>
-          </form>
-        </div>
+        <BrevoSignupForm />
       </div>
       
       <div class="hero-bottom-background"></div>
@@ -317,19 +305,34 @@ const heroData = {
       flex: 1;
       min-width: calc(50% - 24px); /* 2 columns with gap */
     }
-    
-    .newsletter-block {
-      min-width: 300px; /* Ensure newsletter block has enough width */
-    }
   }
 
   @media (min-width: 1024px) {
-    .contact-block {
-      min-width: calc(33.333% - 32px); /* 3 columns with gap */
+    .hero-contact-grid {
+      flex-wrap: nowrap;
+      gap: 32px; /* slightly tighter gap to help fit one row */
+      align-items: stretch;
+      justify-content: space-between;
     }
-    
-    .newsletter-block {
-      min-width: 320px; /* Ensure newsletter block has enough width on desktop */
+
+    /* Make contact and locations blocks narrower so the form fits */
+    .hero-contact-grid .contact-block {
+      flex: 0 0 260px; /* fixed width for each small block */
+      max-width: 280px;
+      min-width: 0; /* allow shrinking below intrinsic width if needed */
+    }
+
+    /* Let the signup form take the remaining space */
+    .hero-contact-grid .form-card {
+      flex: 1 1 0;
+      min-width: 420px; /* ensure usable min width for the form */
+    }
+
+    /* Override with scoped selector to ensure the desired sizes */
+    .hero-contact-grid[data-astro-cid-nlow4r3u] .contact-block[data-astro-cid-nlow4r3u] {
+      flex: 0 0 298px;
+      max-width: 330px;
+      min-width: 0;
     }
   }
 
@@ -390,66 +393,6 @@ const heroData = {
 
   .location-link:hover {
     color: var(--color-primary);
-  }
-
-  /* Newsletter */
-  .newsletter-block {
-    grid-column: 1 / -1;
-  }
-
-  @media (min-width: 1024px) {
-    .newsletter-block {
-      grid-column: auto;
-    }
-  }
-
-  .newsletter-title {
-    color: var(--color-neutral-100);
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    margin: 0 0 var(--space-4) 0;
-  }
-
-  .form-input-wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    min-width: 280px; /* Ensure minimum width for the form */
-  }
-
-  .newsletter-input {
-    width: 100%;
-    padding: var(--space-3) var(--space-4);
-    background: transparent;
-    border: none;
-    color: var(--color-neutral-100);
-    font-size: var(--font-size-base);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .newsletter-input::placeholder {
-    color: var(--color-neutral-400);
-  }
-
-  .newsletter-button {
-    width: 100%;
-    padding: var(--space-3) var(--space-4);
-    background: var(--color-primary);
-    color: var(--color-neutral-100);
-    border: none;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color var(--transition-normal);
-    white-space: nowrap;
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  }
-
-  .newsletter-button:hover {
-    background: var(--color-primary-dark);
   }
 
   .hero-bottom-background {

@@ -1,12 +1,12 @@
 ---
-import BrevoSignupForm from './BrevoSignupForm.astro';
+import ContactForm from './ContactForm.astro';
 
 // Contact section data
 const contactData = {
   title: "Get in touch",
   description: "",
   email: "contact@pvindustries.com.au",
-  locations: ["Sydney", "Melbourne"],
+  locations: ["New South Wales", "Victoria", "ACT", "South Australia"],
   socialLinks: [
     { name: "Facebook", url: "https://www.facebook.com/pvindustriesAUS", icon: "facebook" },
     { name: "Instagram", url: "https://www.instagram.com/pv_industries", icon: "instagram" },
@@ -20,7 +20,7 @@ const contactData = {
     <div class="contact-grid">
       <!-- Contact Form -->
       <div class="contact-form-column">
-        <BrevoSignupForm />
+        <ContactForm />
       </div>
 
       <!-- Contact Information -->

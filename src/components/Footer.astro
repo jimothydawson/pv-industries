@@ -39,18 +39,6 @@
           <h3 class="footer-title">The future of solar recycling</h3>
         </div>
       </div>
-      
-      <div class="footer-actions">
-        <a href="/contact" class="button button-primary">
-          Get a quote
-          <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <a href="/about" class="button button-secondary">
-          Learn more
-        </a>
-      </div>
     </div>
 
     <!-- Footer Bottom -->
@@ -134,7 +122,8 @@
   /* Footer Top */
   .footer-top {
     position: relative;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-8);
     align-items: center;
     margin-bottom: var(--space-16);
@@ -142,9 +131,10 @@
 
   @media (min-width: 768px) {
     .footer-top {
-      grid-template-columns: auto 1fr auto;
-      gap: var(--space-12);
+      flex-direction: row;
+      justify-content: space-between;
       align-items: center;
+      gap: var(--space-12);
     }
   }
 
@@ -199,14 +189,14 @@
 
   .footer-content {
     text-align: center;
-    max-width: 600px;
+    max-width: 200px;
     justify-self: center;
   }
 
   @media (min-width: 768px) {
     .footer-content {
-      max-width: 500px;
-      text-align: center;
+      max-width: 200px;
+      text-align: right;
     }
   }
 
@@ -216,19 +206,6 @@
     color: var(--color-neutral-100);
     margin: 0;
     line-height: 1.2;
-  }
-
-  .footer-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-4);
-    justify-content: center;
-  }
-
-  @media (min-width: 768px) {
-    .footer-actions {
-      justify-content: flex-end;
-    }
   }
 
 
@@ -331,16 +308,6 @@
 
     .footer-top {
       margin-bottom: var(--space-12);
-    }
-
-    .footer-actions {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .button {
-      justify-content: center;
-      min-width: 200px;
     }
   }
 </style>
