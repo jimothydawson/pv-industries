@@ -6,7 +6,8 @@ import FeaturedArticle from '../components/FeaturedArticle.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import CategoryFilter from '../components/CategoryFilter.astro';
 import NewsletterSubscription from '../components/NewsletterSubscription.astro';
-import { getAllBlogPosts, getRecentBlogPosts, getAllCategories } from '../utils/blog';
+import ContactSection from '../components/ContactSection.astro';
+import { getAllBlogPosts, getAllCategories } from '../utils/blog';
 
 // Get real blog posts from our JSON data
 const allBlogPosts = getAllBlogPosts();
@@ -105,6 +106,7 @@ const categories = ["ALL", ...blogCategories];
     </section>
   </main>
 
+  <ContactSection />
   <Footer />
 </Layout>
 

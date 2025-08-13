@@ -1,6 +1,7 @@
 ---
 // Brevo form embed URL
-const formEmbedUrl = "https://55c8f104.sibforms.com/serve/MUIFAFcPShiQLExdxh-wo_T6cECgUYxz0FWX8b-Vklo7P9vosCpksNHhBfXkHlWoeheIA1BHvN-idSKI6ube3lVnGVQKG7S7jdTzha2T1614zBk5yJy1FIFmfHFk43D7DXaM7iYzCWcCjqL8TnxJ8RKTYPN_BvwpPBjHDtrwNSXONXZaY6nZI15ckHcVkPd85N1SStIwKraSB1Tu";
+// Form embed URL for Brevo (unused but kept for reference)
+// const formEmbedUrl = "https://55c8f104.sibforms.com/serve/MUIFAFcPShiQLExdxh-wo_T6cECgUYxz0FWX8b-Vklo7P9vosCpksNHhBfXkHlWoeheIA1BHvN-idSKI6ube3lVnGVQKG7S7jdTzha2T1614zBk5yJy1FIFmfHFk43D7DXaM7iYzCWcCjqL8TnxJ8RKTYPN_BvwpPBjHDtrwNSXONXZaY6nZI15ckHcVkPd85N1SStIwKraSB1Tu";
 ---
 
 <div class="form-card">
@@ -120,7 +121,7 @@ const formEmbedUrl = "https://55c8f104.sibforms.com/serve/MUIFAFcPShiQLExdxh-wo_
     <!-- END - We recommend to place the above code where you want the form in your website html  -->
 
     <!-- START - We recommend to place the below code in footer or bottom of your website html  -->
-    <script>
+    <script is:inline>
       window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
       window.LOCALE = 'en';
       window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
@@ -128,9 +129,6 @@ const formEmbedUrl = "https://55c8f104.sibforms.com/serve/MUIFAFcPShiQLExdxh-wo_
       window.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank. ";
 
       window.GENERIC_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
-
-
-
 
       window.translation = {
         common: {
@@ -141,12 +139,13 @@ const formEmbedUrl = "https://55c8f104.sibforms.com/serve/MUIFAFcPShiQLExdxh-wo_
         }
       };
 
+      // eslint-disable-next-line no-unused-vars
       var AUTOHIDE = Boolean(1);
     </script>
 
-    <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+    <script is:inline defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfFtzkcAAAAAM2dwJW33LNdu0KWm9cUGPAkRCqk&hl=en" async defer></script>
+    <script is:inline src="https://www.google.com/recaptcha/api.js?render=6LfFtzkcAAAAAM2dwJW33LNdu0KWm9cUGPAkRCqk&hl=en" async defer></script>
 
     <!-- END - We recommend to place the above code in footer or bottom of your website html  -->
     <!-- End Brevo Form -->

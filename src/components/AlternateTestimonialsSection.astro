@@ -70,7 +70,7 @@ const testimonialsData = {
         <div class="testimonial-card" data-aos="fade-up" data-aos-delay={index * 100}>
           <div class="testimonial-content">
             <div class="testimonial-rating">
-              {Array.from({ length: testimonial.rating }, (_, i) => (
+              {Array.from({ length: testimonial.rating }, () => (
                 <svg class="star-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M8 1L10.09 5.26L15 6L11.5 9.74L12.18 15L8 12.77L3.82 15L4.5 9.74L1 6L5.91 5.26L8 1Z" fill="currentColor"/>
                 </svg>

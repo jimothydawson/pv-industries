@@ -14,7 +14,7 @@ const { items, className = '' } = Astro.props;
 ---
 
 <div class={`accordion ${className}`}>
-  {items.map((item, index) => (
+  {items.map((item) => (
     <div class="accordion-item" data-accordion-item>
       <button 
         class="accordion-trigger" 

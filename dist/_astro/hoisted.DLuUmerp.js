@@ -1,0 +1,1 @@
+import"./hoisted.BJYPsWGg.js";const n=document.getElementById("partners-track");function t(){n&&(n.style.animationPlayState="paused")}function e(){n&&(n.style.animationPlayState="running")}document.addEventListener("visibilitychange",()=>{document.hidden?t():e()});
