@@ -1,0 +1,714 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ImageTextSection from '../components/ImageTextSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+// Testimonials data for slider
+const testimonialsData = {
+  title: "What Our Customers Are Saying",
+  testimonials: [
+    {
+      id: 1,
+      quote: "As a commercial installer, we needed a scalable and reliable solution. PV Industries handled everything from pickup to compliance reporting. Couldn't be happier.",
+      content: "",
+      author: "Daniel R.",
+      company: "Commercial Solar Operations Manager",
+      image: "/images/avatar-icon.svg"
+    },
+    {
+      id: 2,
+      quote: "Fantastic experience! As a residential installer, I appreciated the easy booking process and their commitment to doing things the right way.",
+      content: "",
+      author: "Mel T.",
+      company: "Solar Installer, QLD",
+      image: "/images/avatar-icon.svg"
+    }
+  ]
+};
+---
+
+<Layout title="Solar Panel Installers - PV Industries" description="Supporting solar installers with responsible solar panel recycling solutions across Australia. Commercial and residential recycling services.">
+  <Header />
+  
+  <main class="solar-installers-page">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">Industries We Service</h1>
+          <h2 class="hero-subtitle">Supporting Solar Installers with Responsible Solar Panel Recycling</h2>
+          <p class="hero-description">
+            At PV Industries, we provide trusted solar panel recycling solutions tailored to both commercial and residential solar installers across Australia. We help you meet sustainability goals while ensuring compliance, safety, and convenience every step of the way.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commercial Solar Installers Section -->
+    <section class="content-section">
+      <div class="container">
+        <ImageTextSection
+          title="Commercial Solar Installers"
+          description="Large-scale solar installations demand a robust and compliant recycling process. At PV Industries, we deliver bulk collection and removal of solar panels and equipment, recycling of PV modules, inverters, and racking systems, detailed waste tracking and compliance documentation, and logistics support for multi-site or remote projects. We understand the scale and time-sensitive nature of commercial solar work. That's why we act as your recycling partner, not just a service provider."
+          image="/images/we-are-building-something-great-image-industrial-x-webflow-template.jpg"
+          imageAlt="Commercial solar installation site"
+          buttonText="Contact Our Team"
+          buttonLink="#contact"
+        />
+      </div>
+    </section>
+
+    <!-- Residential Solar Installers Section -->
+    <section class="content-section">
+      <div class="container">
+        <ImageTextSection
+          title="Residential Solar Installers"
+          description="Residential installers often need flexible, fast, and eco-conscious recycling support. We provide pickup or drop-off options for small-scale projects, faulty panel recycling for new installations, end-of-life system disposal with full traceability, and sustainability reporting to share with your customers. We help you deliver on your environmental commitments with minimal hassle—so you can focus on delivering excellent solar installs."
+          image="/images/quality-metals-crafted-for-you-image-industrial-x-webflow-template.jpg"
+          imageAlt="Residential solar installation"
+          buttonText="Book a Collection"
+          buttonLink="#contact"
+          reverse={true}
+        />
+      </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="values-section">
+      <div class="container">
+        <div class="values-header">
+          <h2 class="values-title">Our Values</h2>
+          <p class="values-intro">
+            At PV Industries, we are driven by strong core values that shape everything we do—from how we work with solar installers, to how we care for the planet:
+          </p>
+        </div>
+
+        <div class="values-grid">
+          <div class="value-card">
+            <h3 class="value-title">Trust Through Transparency</h3>
+            <p class="value-description">
+              We build lasting relationships with our customers, stakeholders, and team members through honesty, integrity, and reliability. You can count on us to do what we say—every time.
+            </p>
+          </div>
+
+          <div class="value-card">
+            <h3 class="value-title">Innovation in Sustainability</h3>
+            <p class="value-description">
+              We're always evolving. By leveraging innovation, we deliver cutting-edge and sustainable solar recycling solutions that meet today's needs while planning for tomorrow.
+            </p>
+          </div>
+
+          <div class="value-card">
+            <h3 class="value-title">Customer-Focused Excellence</h3>
+            <p class="value-description">
+              We listen to your needs and go beyond expectations. Every service we offer is tailored, high-quality, and designed to help you succeed.
+            </p>
+          </div>
+
+          <div class="value-card">
+            <h3 class="value-title">Respect & Collaboration</h3>
+            <p class="value-description">
+              We treat everyone with respect and courtesy, fostering a positive, collaborative environment where success is shared by all.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Trust Us Section -->
+    <section class="content-section">
+      <div class="container">
+        <ImageTextSection
+          title="Why Solar Installers Trust PV Industries"
+          description="Fully licensed solar panel recycling specialists, national pickup and drop-off options, full compliance documentation for environmental audits, 100% responsible processing and recycling, and friendly, expert support team."
+          image="/images/reliable-precise-and-trusted-by-many-image-industrial-x-webflow-template.jpg"
+          imageAlt="Trusted solar recycling partner"
+        />
+      </div>
+    </section>
+
+    <!-- Testimonials Section (Slider form copied from TestimonialsSection.astro) -->
+    <section id="slider" class="testimonials-section">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <div class="header-content">
+            <h2 class="section-title">{testimonialsData.title}</h2>
+          </div>
+        </div>
+
+        <!-- Testimonials Slider -->
+        <div class="testimonials-slider">
+          <div class="slider-container">
+            <div class="slider-track" id="slider-track">
+              {testimonialsData.testimonials.map((testimonial, index) => (
+                <div class="testimonial-slide" data-slide={index}>
+                  <div class="testimonial-image">
+                    <img 
+                      src={testimonial.image} 
+                      alt={`${testimonial.author} - ${testimonial.company}`}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="testimonial-card">
+                    <div class="testimonial-content">
+                      <div class="quote-mark opening">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M9.33333 18.6667C9.33333 16.8257 10.8257 15.3333 12.6667 15.3333C14.5076 15.3333 16 13.841 16 12C16 10.159 14.5076 8.66667 12.6667 8.66667C8.98477 8.66667 6 11.6514 6 15.3333V21.3333C6 23.1743 7.49238 24.6667 9.33333 24.6667H12C13.841 24.6667 15.3333 23.1743 15.3333 21.3333V18.6667H9.33333Z" fill="currentColor"/>
+                          <path d="M22.6667 18.6667C22.6667 16.8257 24.159 15.3333 26 15.3333C27.841 15.3333 29.3333 13.841 29.3333 12C29.3333 10.159 27.841 8.66667 26 8.66667C22.3181 8.66667 19.3333 11.6514 19.3333 15.3333V21.3333C19.3333 23.1743 20.8257 24.6667 22.6667 24.6667H25.3333C27.1743 24.6667 28.6667 23.1743 28.6667 21.3333V18.6667H22.6667Z" fill="currentColor"/>
+                        </svg>
+                      </div>
+                      <h3 class="testimonial-quote">{testimonial.quote}</h3>
+                      {testimonial.content && <p class="testimonial-text">{testimonial.content}</p>}
+                      <div class="quote-mark closing">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M9.33333 18.6667C9.33333 16.8257 10.8257 15.3333 12.6667 15.3333C14.5076 15.3333 16 13.841 16 12C16 10.159 14.5076 8.66667 12.6667 8.66667C8.98477 8.66667 6 11.6514 6 15.3333V21.3333C6 23.1743 7.49238 24.6667 9.33333 24.6667H12C13.841 24.6667 15.3333 23.1743 15.3333 21.3333V18.6667H9.33333Z" fill="currentColor"/>
+                          <path d="M22.6667 18.6667C22.6667 16.8257 24.159 15.3333 26 15.3333C27.841 15.3333 29.3333 13.841 29.3333 12C29.3333 10.159 27.841 8.66667 26 8.66667C22.3181 8.66667 19.3333 11.6514 19.3333 15.3333V21.3333C19.3333 23.1743 20.8257 24.6667 22.6667 24.6667H25.3333C27.1743 24.6667 28.6667 23.1743 28.6667 21.3333V18.6667H22.6667Z" fill="currentColor"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="testimonial-author">
+                      <div class="author-name">{testimonial.author},</div>
+                      <div class="author-company">{testimonial.company}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Slider Controls -->
+          <div class="slider-controls">
+            <button class="slider-btn prev-btn" aria-label="Previous testimonial">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="slider-btn next-btn" aria-label="Next testimonial">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Slider Dots -->
+          <div class="slider-dots">
+            {testimonialsData.testimonials.map((_, index) => (
+              <button 
+                class={`dot ${index === 0 ? 'active' : ''}`} 
+                data-slide={index}
+                aria-label={`Go to testimonial ${index + 1}`}
+              ></button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Testimonials slider functionality (copied from TestimonialsSection.astro)
+      const sliderTrack = document.getElementById('slider-track');
+      const prevBtn = document.querySelector('.prev-btn');
+      const nextBtn = document.querySelector('.next-btn');
+      const dots = document.querySelectorAll('.dot');
+      
+      let currentSlide = 0;
+      const totalSlides = dots.length;
+
+      function updateSlider() {
+        if (!sliderTrack) return;
+        
+        const translateX = -currentSlide * 100;
+        sliderTrack.style.transform = `translateX(${translateX}%)`;
+        
+        // Update dots
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentSlide);
+        });
+        
+        // Update button states
+        if (prevBtn) (prevBtn as HTMLButtonElement).disabled = currentSlide === 0;
+        if (nextBtn) (nextBtn as HTMLButtonElement).disabled = currentSlide === totalSlides - 1;
+      }
+
+      function goToSlide(slideIndex: number) {
+        currentSlide = Math.max(0, Math.min(slideIndex, totalSlides - 1));
+        updateSlider();
+      }
+
+      function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+          currentSlide++;
+          updateSlider();
+        }
+      }
+
+      function prevSlide() {
+        if (currentSlide > 0) {
+          currentSlide--;
+          updateSlider();
+        }
+      }
+
+      // Event listeners
+      if (nextBtn) {
+        nextBtn.addEventListener('click', nextSlide);
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', prevSlide);
+      }
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+      });
+
+      // Auto-play (optional)
+      let autoPlayInterval: number;
+      
+      function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+          if (currentSlide < totalSlides - 1) {
+            nextSlide();
+          } else {
+            goToSlide(0);
+          }
+        }, 5000);
+      }
+
+      function stopAutoPlay() {
+        if (autoPlayInterval) {
+          clearInterval(autoPlayInterval);
+        }
+      }
+
+      // Start auto-play
+      startAutoPlay();
+
+      // Pause auto-play on hover
+      const testimonialSection = document.querySelector('.testimonials-section');
+      if (testimonialSection) {
+        testimonialSection.addEventListener('mouseenter', stopAutoPlay);
+        testimonialSection.addEventListener('mouseleave', startAutoPlay);
+      }
+
+      // Initialize slider
+      updateSlider();
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          prevSlide();
+        } else if (e.key === 'ArrowRight') {
+          nextSlide();
+        }
+      });
+    </script>
+
+    <!-- Final CTA Section -->
+    <section class="content-section">
+      <div class="container">
+        <ImageTextSection
+          title="Work With a Solar Recycling Partner You Can Rely On"
+          description="Whether you're installing new systems or decommissioning old ones, PV Industries is your go-to partner for responsible, efficient solar panel recycling in Australia. Let us help you deliver on your sustainability promise."
+          image="/images/we-are-the-future-of-metallurgy-industry-image-industrial-x-webflow-template.jpg"
+          imageAlt="Solar recycling partnership"
+          buttonText="Get Started Today"
+          buttonLink="#contact"
+          reverse={true}
+        />
+      </div>
+    </section>
+  </main>
+
+  <ContactSection />
+  <Footer />
+</Layout>
+
+<style>
+  .solar-installers-page {
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, var(--color-neutral-900) 0%, var(--color-neutral-800) 100%);
+    padding: var(--space-20) 0 var(--space-16);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/images/circular-solar-phase-2-hero.png') center/cover;
+    opacity: 0.1;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-5xl);
+    font-weight: 700;
+  }
+
+  .hero-subtitle {
+    color: #fdb500;
+    margin-bottom: var(--space-6);
+    font-size: var(--font-size-3xl);
+    font-weight: 600;
+  }
+
+  .hero-description {
+    color: var(--color-neutral-300);
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Content Sections */
+  .content-section {
+    padding: var(--space-20) 0;
+  }
+
+  .content-section:nth-child(even) {
+    background: var(--color-neutral-200);
+  }
+
+  /* Values Section */
+  .values-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+  }
+
+  .values-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto var(--space-16);
+  }
+
+  .values-title {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    margin-bottom: var(--space-6);
+  }
+
+  .values-intro {
+    color: var(--color-neutral-600);
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .value-card {
+    background: var(--color-neutral-100);
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-neutral-300);
+    box-shadow: var(--shadow-md);
+  }
+
+  .value-title {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+  }
+
+  .value-description {
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+  }
+
+  /* Testimonials Section (copied styles from TestimonialsSection.astro) */
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+  .testimonials-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+    overflow: hidden;
+  }
+
+  /* Section Header */
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    max-width: 570px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .header-content {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  /* Testimonials Slider */
+  .testimonials-slider {
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  }
+
+  .slider-container {
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+  }
+
+  .slider-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .testimonial-slide {
+    min-width: 100%;
+    display: grid;
+    gap: var(--space-8);
+    align-items: stretch;
+  }
+
+  @media (min-width: 1024px) {
+    .testimonial-slide {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12);
+    }
+  }
+
+  .testimonial-image {
+    order: 2;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--color-neutral-200);
+    display: flex;
+    min-height: 300px;
+  }
+
+  @media (min-width: 1024px) {
+    .testimonial-image {
+      order: 1;
+      min-height: auto;
+    }
+  }
+
+  .testimonial-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex: 1;
+  }
+
+  .testimonial-card {
+    order: 1;
+    background: var(--color-neutral-900);
+    color: var(--color-neutral-100);
+    padding: var(--space-10);
+    border-radius: var(--radius-xl);
+    position: relative;
+  }
+
+  @media (min-width: 1024px) {
+    .testimonial-card {
+      order: 2;
+    }
+  }
+
+  .testimonial-content {
+    margin-bottom: var(--space-8);
+    position: relative;
+  }
+
+  .quote-mark {
+    font-family: 'Times New Roman', Georgia, 'Playfair Display', 'Crimson Text', serif;
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    line-height: 1;
+    user-select: none;
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+
+  .quote-mark.opening {
+    margin-bottom: var(--space-4);
+  }
+
+  .quote-mark.closing {
+    margin-top: var(--space-4);
+    text-align: right;
+  }
+
+  .testimonial-quote {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-neutral-100);
+    margin: 0 0 var(--space-4) 0;
+    line-height: 1.3;
+  }
+
+  .testimonial-text {
+    color: var(--color-neutral-300);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .testimonial-author {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .author-name {
+    font-weight: 600;
+    color: var(--color-neutral-100);
+    text-transform: uppercase;
+    font-size: var(--font-size-sm);
+  }
+
+  .author-company {
+    color: var(--color-neutral-500);
+    text-transform: uppercase;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+  }
+
+  /* Slider Controls */
+  .slider-controls {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .slider-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-neutral-200);
+    border: none;
+    color: var(--color-neutral-600);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-normal);
+  }
+
+  .slider-btn:hover {
+    background: var(--color-neutral-300);
+    color: var(--color-neutral-800);
+  }
+
+  .slider-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Slider Dots */
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-top: var(--space-6);
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-neutral-300);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+  }
+
+  .dot.active {
+    background: var(--color-primary);
+  }
+
+  .dot:hover {
+    background: var(--color-primary);
+    transform: scale(1.2);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: var(--space-16) 0 var(--space-12);
+    }
+
+    .hero-title {
+      font-size: var(--font-size-4xl);
+    }
+
+    .hero-subtitle {
+      font-size: var(--font-size-2xl);
+    }
+
+    .hero-description {
+      font-size: var(--font-size-base);
+    }
+
+    .content-section {
+      padding: var(--space-16) 0;
+    }
+
+    .values-section {
+      padding: var(--space-16) 0;
+    }
+
+    .values-title {
+      font-size: var(--font-size-3xl);
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .testimonials-section {
+      padding: var(--space-16) 0;
+    }
+
+    .testimonials-title {
+      font-size: var(--font-size-3xl);
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .testimonial-quote {
+      font-size: var(--font-size-base);
+    }
+  }
+</style>

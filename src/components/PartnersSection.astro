@@ -48,9 +48,19 @@ const sectionData = {
       alt: "Circular Australia"
     },
     {
-      name: "Partner 8",
-      logo: "/images/1590062364580.jpeg",
-      alt: "Partner 8"
+      name: "NSW EPA",
+      logo: "/images/epa_logo_coupled_fullcolour_v2.png",
+      alt: "NSW Environment Protection Authority"
+    },
+    {
+      name: "Sustainability Victoria",
+      logo: "/images/Sustainability-Victoria-Logo.png",
+      alt: "Sustainability Victoria"
+    },
+    {
+      name: "Australian Government DISR",
+      logo: "/images/logo_disr.png",
+      alt: "Australian Government Department of Industry, Science and Resources"
     }
   ]
 };
@@ -216,13 +226,13 @@ const sectionData = {
 
   .slider-track {
     display: flex;
-    width: calc(200px * 16); /* 8 partners × 2 for seamless loop */
+    width: calc(200px * 20); /* 10 partners × 2 for seamless loop */
     animation: scroll 20s linear infinite; /* Faster on mobile */
   }
 
   @media (min-width: 768px) {
     .slider-track {
-      width: calc(250px * 16); /* 8 partners × 2 for seamless loop */
+      width: calc(250px * 20); /* 10 partners × 2 for seamless loop */
       animation: scroll 40s linear infinite; /* Original speed on desktop */
     }
   }
@@ -232,7 +242,7 @@ const sectionData = {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(calc(-250px * 8)); /* 8 partners */
+      transform: translateX(calc(-200px * 10)); /* 10 partners on mobile */
     }
   }
 
@@ -252,7 +262,7 @@ const sectionData = {
         transform: translateX(0);
       }
       100% {
-        transform: translateX(calc(-250px * 8)); /* 8 partners */
+        transform: translateX(calc(-250px * 10)); /* 10 partners on desktop */
       }
     }
   }

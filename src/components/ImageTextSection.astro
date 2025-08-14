@@ -1,0 +1,234 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  image: string;
+  imageAlt?: string;
+  buttonText?: string;
+  buttonLink?: string;
+  badge?: string;
+  reverse?: boolean;
+}
+
+const { 
+  title, 
+  description, 
+  image, 
+  imageAlt = "Section image",
+  buttonText,
+  buttonLink,
+  badge,
+  reverse = false
+} = Astro.props;
+---
+
+<section class="image-text-section">
+  <div class="image-text-content" class:list={{ reverse }}>
+    <div class="image-text-text">
+      {badge && (
+        <div class="image-text-badge">
+          {badge}
+        </div>
+      )}
+      
+      <h2 class="image-text-title">
+        {title}
+      </h2>
+      
+      <p class="image-text-description">
+        {description}
+      </p>
+      
+      {buttonText && buttonLink && (
+        <div class="image-text-actions">
+          <a href={buttonLink} class="button button-primary">
+            {buttonText}
+            <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      )}
+    </div>
+    
+    <div class="image-text-image">
+      <img 
+        src={image} 
+        alt={imageAlt}
+        loading="lazy"
+      />
+      <div class="image-text-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .image-text-section {
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-neutral-300);
+  }
+
+  .image-text-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 500px;
+  }
+
+  /* Standard layout: text first, image second */
+  .image-text-text {
+    order: 1;
+  }
+
+  .image-text-image {
+    order: 2;
+  }
+
+  /* Reverse layout: image first, text second */
+  .image-text-content.reverse .image-text-text {
+    order: 2;
+  }
+
+  .image-text-content.reverse .image-text-image {
+    order: 1;
+  }
+
+  /* Text Content */
+  .image-text-text {
+    padding: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-6);
+  }
+
+  .image-text-badge {
+    display: inline-block;
+    background: var(--color-secondary);
+    color: var(--color-neutral-100);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: fit-content;
+  }
+
+  .image-text-title {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    color: var(--color-neutral-900);
+  }
+
+  .image-text-description {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: var(--color-neutral-600);
+    margin: 0;
+  }
+
+  .image-text-actions {
+    margin-top: var(--space-2);
+  }
+
+  /* Image */
+  .image-text-image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image-text-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .image-text-section:hover .image-text-image img {
+    transform: scale(1.05);
+  }
+
+  .image-text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(37, 99, 235, 0.1) 0%,
+      rgba(253, 181, 0, 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+  }
+
+  .image-text-section:hover .image-text-overlay {
+    opacity: 1;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .image-text-content {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .image-text-text {
+      padding: var(--space-8);
+      order: 2;
+    }
+
+    .image-text-image {
+      order: 1;
+      min-height: 300px;
+    }
+
+    /* Override reverse order on mobile for better UX */
+    .image-text-content.reverse .image-text-text {
+      order: 2;
+    }
+
+    .image-text-content.reverse .image-text-image {
+      order: 1;
+    }
+
+    .image-text-title {
+      font-size: var(--font-size-3xl);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .image-text-text {
+      padding: var(--space-6);
+      gap: var(--space-4);
+    }
+
+    .image-text-title {
+      font-size: var(--font-size-2xl);
+    }
+
+    .image-text-description {
+      font-size: var(--font-size-base);
+    }
+
+    .image-text-image {
+      min-height: 250px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .image-text-text {
+      padding: var(--space-5);
+    }
+
+    .image-text-title {
+      font-size: var(--font-size-xl);
+    }
+  }
+</style>

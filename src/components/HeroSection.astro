@@ -3,7 +3,7 @@ import BrevoSignupForm from './BrevoSignupForm.astro';
 
 // Hero section data
 const heroData = {
-  title: "Innovative solar waste management & recycling solutions",
+  title: "The future of solar panel recycling",
   description: "We are leading the way in solar panel recycling in Australia and it is our aim to stop solar panels from entering landfill.",
   stats: [
     { number: "200", suffix: "+", label: "# of customers" },
@@ -100,7 +100,16 @@ const heroData = {
         </div>
         
         <!-- Newsletter Signup -->
-        <BrevoSignupForm />
+        <div class="signup-wrapper">
+          <div class="contact-header">
+            <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M4 5H20C21.1046 5 22 5.89543 22 7V17C22 18.1046 21.1046 19 20 19H4C2.89543 19 2 18.1046 2 17V7C2 5.89543 2.89543 5 4 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 7L12 13L22 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3 class="contact-title">stay tuned for more news</h3>
+          </div>
+          <BrevoSignupForm />
+        </div>
       </div>
       
       <div class="hero-bottom-background"></div>
@@ -323,7 +332,7 @@ const heroData = {
     }
 
     /* Let the signup form take the remaining space */
-    .hero-contact-grid .form-card {
+    .hero-contact-grid .signup-wrapper .form-card {
       flex: 1 1 0;
       min-width: 420px; /* ensure usable min width for the form */
     }
@@ -334,6 +343,14 @@ const heroData = {
       max-width: 330px;
       min-width: 0;
     }
+  }
+
+  /* Signup wrapper should behave like a contact block in layout */
+  .signup-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1 1 0;
   }
 
   .contact-block {

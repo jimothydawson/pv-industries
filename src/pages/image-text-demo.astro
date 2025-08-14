@@ -1,0 +1,182 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ImageTextSection from '../components/ImageTextSection.astro';
+---
+
+<Layout title="Image Text Section Demo - PV Industries" description="Demo page showcasing the reusable ImageTextSection component with different variations.">
+  <Header />
+  
+  <main class="demo-page">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">Image Text Section Component</h1>
+          <p class="hero-description">
+            A reusable component for creating engaging sections with image and text content.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Sections -->
+    <section class="demo-sections">
+      <div class="container">
+        <!-- Standard Layout (Text Left, Image Right) -->
+        <div class="demo-section">
+          <h2 class="demo-section-title">Standard Layout</h2>
+          <ImageTextSection
+            title="Leading Solar Panel Recycling Solutions"
+            description="We are at the forefront of sustainable energy solutions, specializing in the responsible recycling of solar panels. Our advanced technology ensures maximum material recovery while minimizing environmental impact."
+            image="/images/circular-solar-phase-2-hero.png"
+            imageAlt="Solar panels being processed for recycling"
+            badge="Our Expertise"
+            buttonText="Learn More"
+            buttonLink="/about"
+          />
+        </div>
+
+        <!-- Reversed Layout (Image Left, Text Right) -->
+        <div class="demo-section">
+          <h2 class="demo-section-title">Reversed Layout</h2>
+          <ImageTextSection
+            title="State-of-the-Art Processing Facilities"
+            description="Our cutting-edge facilities are equipped with the latest technology to handle solar panel recycling efficiently and safely. We process thousands of panels annually with precision and care."
+            image="/images/check-how-our-process-is-done-image-industrial-x-webflow-template.jpg"
+            imageAlt="Modern recycling facility with advanced equipment"
+            badge="Our Facilities"
+            buttonText="View Facilities"
+            buttonLink="/services"
+            reverse={true}
+          />
+        </div>
+
+        <!-- Without Badge and Button -->
+        <div class="demo-section">
+          <h2 class="demo-section-title">Simple Layout (No Badge/Button)</h2>
+          <ImageTextSection
+            title="Environmental Impact & Sustainability"
+            description="By choosing our recycling services, you're contributing to a more sustainable future. We help reduce waste in landfills and recover valuable materials for reuse in new products."
+            image="/images/birmingham-image-industrial-x-webflow-template.jpg"
+            imageAlt="Environmental impact visualization"
+          />
+        </div>
+
+        <!-- With Badge Only -->
+        <div class="demo-section">
+          <h2 class="demo-section-title">With Badge Only</h2>
+          <ImageTextSection
+            title="Industry Recognition & Certifications"
+            description="Our commitment to excellence has earned us recognition across the industry. We maintain the highest standards of quality and environmental responsibility in all our operations."
+            image="/images/cleveland-image-industrial-x-webflow-template.jpg"
+            imageAlt="Industry awards and certifications"
+            badge="Award Winning"
+            reverse={true}
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .demo-page {
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, var(--color-neutral-900) 0%, var(--color-neutral-800) 100%);
+    padding: var(--space-20) 0 var(--space-16);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/images/solar-panels-bg.jpg') center/cover;
+    opacity: 0.1;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-6);
+    font-size: var(--font-size-5xl);
+    font-weight: 700;
+  }
+
+  .hero-description {
+    color: var(--color-neutral-300);
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Demo Sections */
+  .demo-sections {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-200);
+  }
+
+  .demo-section {
+    margin-bottom: var(--space-16);
+  }
+
+  .demo-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .demo-section-title {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    margin-bottom: var(--space-8);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: var(--space-16) 0 var(--space-12);
+    }
+
+    .hero-title {
+      font-size: var(--font-size-4xl);
+    }
+
+    .hero-description {
+      font-size: var(--font-size-base);
+    }
+
+    .demo-sections {
+      padding: var(--space-16) 0;
+    }
+
+    .demo-section {
+      margin-bottom: var(--space-12);
+    }
+
+    .demo-section-title {
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--space-6);
+    }
+  }
+</style>
