@@ -19,7 +19,7 @@ const sectionData = {
       description: "We're driven by the belief that clean energy should never come at the cost of the environment. Our team is committed to closing the loop on solar waste and building smarter, circular systems for the future."
     },
     {
-      icon: "/images/innovation-icon-industrial-x-webflow-template.svg",
+      icon: "/images/security-icon-industrial-x-webflow-template.svg",
       title: "Industry Experts",
       description: "With backgrounds in renewable energy, waste management, logistics, environmental science, and engineering, our multidisciplinary team brings deep knowledge and hands-on experience to every project."
     },
@@ -79,6 +79,10 @@ const sectionData = {
     overflow: hidden;
   }
 
+  .team-culture-section .container {
+    max-width: 1500px;
+  }
+
   /* Section Header */
   .section-header {
     margin-bottom: var(--space-12);
@@ -123,11 +127,18 @@ const sectionData = {
   /* Culture Grid */
   .culture-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-8);
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  }
+
+  @media (max-width: 1024px) {
+    .culture-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+    }
   }
 
   @media (max-width: 767px) {

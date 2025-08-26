@@ -22,6 +22,16 @@ const sectionData = {
 <section class="about-hero-section">
   <div class="container">
     <div class="hero-content">
+      <div class="hero-image-wrapper">
+        <div class="hero-image">
+          <img 
+            src={sectionData.heroImage.src} 
+            alt={sectionData.heroImage.alt}
+            loading="eager"
+          />
+        </div>
+      </div>
+      
       <div class="hero-text">
         <div class="hero-title-wrapper">
           <h1 class="hero-title">{sectionData.title}</h1>
@@ -44,16 +54,6 @@ const sectionData = {
           <div class="hero-description">
             <p>{sectionData.description}</p>
           </div>
-        </div>
-      </div>
-      
-      <div class="hero-image-wrapper">
-        <div class="hero-image">
-          <img 
-            src={sectionData.heroImage.src} 
-            alt={sectionData.heroImage.alt}
-            loading="eager"
-          />
         </div>
       </div>
     </div>
@@ -160,10 +160,10 @@ const sectionData = {
   }
 
   .hero-image-wrapper {
-    margin-top: var(--space-12);
+    margin-bottom: var(--space-12);
     opacity: 0;
     transform: translateY(30px);
-    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+    animation: fadeInUp 0.8s ease-out forwards;
   }
 
   .hero-image {
@@ -199,12 +199,24 @@ const sectionData = {
   /* Responsive adjustments */
   @media (max-width: 767px) {
     .about-hero-section {
-      padding: var(--space-20) 0 var(--space-16);
+      padding: 0 0 var(--space-16);
       min-height: 70vh;
     }
 
     .hero-content {
       gap: var(--space-10);
+    }
+
+    .hero-image-wrapper {
+      margin-bottom: var(--space-8);
+      margin-left: calc(-1 * var(--space-4));
+      margin-right: calc(-1 * var(--space-4));
+      width: calc(100% + 2 * var(--space-4));
+    }
+
+    .hero-image {
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .hero-title-wrapper {
