@@ -7,6 +7,12 @@ export interface Props {
 // Get props with default value
 const { sectionNumber = "02" } = Astro.props;
 
+// Import service icons
+import TruckIcon from './icons/TruckIcon.astro';
+import SolarPanelIcon from './icons/SolarPanelIcon.astro';
+import MaterialsIcon from './icons/MaterialsIcon.astro';
+import GlobeIcon from './icons/GlobeIcon.astro';
+
 // Services section data
 const sectionData = {
   subtitle: sectionNumber.toString().padStart(2, '0'),
@@ -17,28 +23,28 @@ const sectionData = {
       id: 1,
       title: "Solar Panel Collection",
       description: "We arrange convenient collection or drop-off services for your end-of-life solar panels, inverters and other solar products across Australia.",
-      icon: "🚛",
+      icon: TruckIcon,
       link: "/services/collection"
     },
     {
       id: 2,
       title: "Solar Panel Disassembly",
       description: "Professional separation of frames, junction boxes, and cables using specialized equipment and techniques.",
-      icon: "🔧",
+      icon: SolarPanelIcon,
       link: "/services/disassembly"
     },
     {
       id: 3,
       title: "Material Recovery",
       description: "Advanced processes to recover valuable materials including, aluminium, glass, copper, silver and other precious metals.",
-      icon: "♻️",
+      icon: MaterialsIcon,
       link: "/services/recovery"
     },
     {
       id: 4,
       title: "Sustainable Processing",
       description: "We have developed world-leading recycling processes that maximise diversion from landfill while minimising environmental impact through highly efficient processing.",
-      icon: "🌱",
+      icon: GlobeIcon,
       link: "/services/disposal"
     }
   ]
@@ -68,7 +74,7 @@ const sectionData = {
           <div class="service-link">
             <div class="service-content">
               <div class="service-icon">
-                <span class="icon-emoji">{service.icon}</span>
+                <service.icon />
               </div>
               <div class="service-text">
                 <h3 class="service-title">{service.title}</h3>
@@ -203,10 +209,10 @@ const sectionData = {
     transition: all var(--transition-normal);
   }
 
-  .icon-emoji {
-    font-size: 2rem;
-    filter: sepia(100%) hue-rotate(8deg) saturate(500%) brightness(1.1);
-    transition: filter var(--transition-normal);
+  .service-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   
@@ -259,10 +265,6 @@ const sectionData = {
     .service-icon {
       width: 56px;
       height: 56px;
-    }
-
-    .icon-emoji {
-      font-size: 1.5rem;
     }
 
     .service-link {

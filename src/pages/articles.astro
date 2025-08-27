@@ -241,14 +241,16 @@ const categories = ["ALL", ...blogCategories];
   }
 
   /* Animation for filtered articles */
-  .articles-grid .article-card {
+  .articles-grid .article-card-link {
     transition: all var(--transition-normal);
   }
 
+  .articles-grid .article-card-link.hidden,
   .articles-grid .article-card.hidden {
     display: none;
   }
 
+  .articles-grid .article-card-link:not(.hidden),
   .articles-grid .article-card:not(.hidden) {
     display: block;
   }
@@ -258,7 +260,7 @@ const categories = ["ALL", ...blogCategories];
   // Category filtering functionality
   document.addEventListener('DOMContentLoaded', () => {
     const categoryButtons = document.querySelectorAll('.category-btn');
-    const articleCards = document.querySelectorAll('.article-card');
+    const articleCards = document.querySelectorAll('.article-card-link');
 
     categoryButtons.forEach(button => {
       button.addEventListener('click', () => {
@@ -270,8 +272,8 @@ const categories = ["ALL", ...blogCategories];
 
         // Filter articles
         articleCards.forEach(card => {
-          const articleCategory = (card as HTMLElement).dataset.category;
-          
+          const articleCategory = (card as HTMLElement).dataset.category || (card.querySelector('.article-card') as HTMLElement)?.dataset.category;
+
           if (category === 'ALL' || articleCategory === category) {
             card.classList.remove('hidden');
           } else {
