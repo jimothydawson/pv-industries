@@ -10,7 +10,7 @@ import QualityIcon from '../components/icons/QualityIcon.astro';
 import CollaborationIcon from '../components/icons/CollaborationIcon.astro';
 import AustraliaIcon from '../components/icons/AustraliaIcon.astro';
 import ReportIcon from '../components/icons/ReportIcon.astro';
-import RecycleIcon from '../components/icons/RecycleIcon.astro';
+import GlobeIcon from '../components/icons/GlobeIcon.astro';
 // Testimonials data for grid layout
 const testimonialsData = {
   title: "What Our Customers Are Saying",
@@ -173,7 +173,7 @@ const testimonialsData = {
 
             <div class="trust-item">
               <div class="trust-icon">
-                <RecycleIcon />
+                <GlobeIcon />
               </div>
               <p class="trust-text">100% responsible processing and recycling</p>
             </div>
@@ -248,6 +248,10 @@ const testimonialsData = {
     padding: var(--space-20) 0 var(--space-16);
     position: relative;
     overflow: hidden;
+    height: calc(100vh - 80px);
+    min-height: 600px;
+    display: flex;
+    align-items: center;
   }
 
   .hero-section::before {
@@ -257,8 +261,8 @@ const testimonialsData = {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('/images/circular-solar-phase-2-hero.png') center/cover;
-    opacity: 0.1;
+    background: url('/images/residential-installers.png') center/cover;
+    opacity: 0.25;
     z-index: 1;
   }
 
@@ -443,7 +447,7 @@ const testimonialsData = {
   }
 
   .final-cta {
-    background: var(--color-neutral-900);
+    background: var(--color-primary);
     color: var(--color-neutral-100);
     padding: var(--space-12);
     border-radius: var(--radius-xl);
@@ -740,6 +744,8 @@ const testimonialsData = {
   @media (max-width: 768px) {
     .hero-section {
       padding: var(--space-16) 0 var(--space-12);
+      height: calc(100vh - 70px);
+      min-height: 500px;
     }
 
     .hero-title {

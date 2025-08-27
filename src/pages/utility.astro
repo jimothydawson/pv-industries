@@ -1,0 +1,1026 @@
+---
+// src/pages/utility.astro
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactSection from '../components/ContactSection.astro';
+import CertifiedIcon from '../components/icons/CertifiedIcon.astro';
+import LightbulbIcon from '../components/icons/LightbulbIcon.astro';
+import QualityIcon from '../components/icons/QualityIcon.astro';
+import CollaborationIcon from '../components/icons/CollaborationIcon.astro';
+
+// Testimonials data for grid layout
+const testimonialsData = {
+  title: "Project Testimonials",
+  testimonials: [
+    {
+      quote: "PV Industries was our go-to recycling partner during the decommissioning of a 50MW solar farm in regional NSW. Their logistics planning, attention to safety, and recycling reporting exceeded expectations.",
+      author: "Claire M.",
+      role: "Renewable Asset Manager",
+      image: "/images/avatar-icon.svg"
+    },
+    {
+      quote: "They handled a high-volume panel recovery project for us in remote Queensland with professionalism and speed. Highly recommended for utility-scale solar.",
+      author: "Greg P.",
+      role: "EPC Contractor",
+      image: "/images/avatar-icon.svg"
+    }
+  ]
+};
+
+// Values data
+const valuesData = [
+  {
+    title: "Trust Through Transparency",
+    description: "We maintain clear, honest communication with our utility partners and ensure every stage of recycling is fully documented and compliant.",
+    icon: CertifiedIcon
+  },
+  {
+    title: "Innovation in Sustainability",
+    description: "We apply advanced sorting and recovery technologies to maximise the reuse and recycling of valuable materials.",
+    icon: LightbulbIcon
+  },
+  {
+    title: "Customer-Focused Solutions",
+    description: "We tailor our service to meet your project scope, timeline, and regulatory obligations—delivering cost-effective and efficient outcomes.",
+    icon: QualityIcon
+  },
+  {
+    title: "Respect & Collaboration",
+    description: "Our team works closely with site managers, engineers, and stakeholders to ensure seamless coordination and shared success.",
+    icon: CollaborationIcon
+  }
+];
+---
+
+<Layout title="Utility-Scale Solar Recycling - PV Industries" description="Comprehensive recycling and resource recovery solutions for large-scale solar farms. Supporting Australia's renewable energy infrastructure with responsible solar farm decommissioning.">
+  <Header />
+
+  <main class="utility-page">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">Utility-Scale Solar Recycling Solutions</h1>
+          <h2 class="hero-subtitle">Supporting Australia's Renewable Energy Infrastructure with Responsible Solar Farm Decommissioning</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h3 class="cta-title">Let's Talk Solar Farm Recycling</h3>
+        <p class="cta-description">
+          At PV Industries, we partner with utility service providers, asset owners, and EPC contractors across Australia to deliver comprehensive recycling and resource recovery solutions for large-scale solar farms. Whether you're repowering, decommissioning, or upgrading a utility-scale PV site, our end-to-end service ensures safe, sustainable, and compliant outcomes.
+        </p>
+        <a href="#contact" class="cta-button">Contact Our Commercial Team</a>
+      </div>
+    </section>
+
+    <!-- Utility Services Three-Column Section -->
+    <section class="utility-services-section">
+      <div class="container">
+
+        <!-- Three Column Grid -->
+        <div class="utility-grid">
+          <!-- Services Column -->
+          <div class="grid-column services-column">
+            <div class="column-header">
+              <div class="header-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <h3 class="column-title">Our Services</h3>
+            </div>
+
+            <div class="items-list">
+              <div class="list-item">
+                <div class="item-content">
+                  <h4 class="item-title">On-site assessment and logistics planning</h4>
+                </div>
+                <div class="item-indicator"></div>
+              </div>
+              <div class="list-item">
+                <div class="item-content">
+                  <h4 class="item-title">Safe dismantling and removal of PV modules and infrastructure</h4>
+                </div>
+                <div class="item-indicator"></div>
+              </div>
+              <div class="list-item">
+                <div class="item-content">
+                  <h4 class="item-title">Recycling of panels, inverters, wiring, and structural materials</h4>
+                </div>
+                <div class="item-indicator"></div>
+              </div>
+              <div class="list-item">
+                <div class="item-content">
+                  <h4 class="item-title">Comprehensive reporting for ESG and regulatory compliance</h4>
+                </div>
+                <div class="item-indicator"></div>
+              </div>
+              <div class="list-item">
+                <div class="item-content">
+                  <h4 class="item-title">Circular economy solutions for material recovery and reuse</h4>
+                </div>
+                <div class="item-indicator"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Benefits Column -->
+          <div class="grid-column benefits-column">
+            <div class="column-header">
+              <div class="header-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2"/>
+                </svg>
+        </div>
+              <h3 class="column-title">Why Choose Us</h3>
+      </div>
+
+            <div class="items-list">
+              <div class="list-item">
+                <div class="item-content">
+                  <h4 class="item-title">Licensed and experienced in large-scale decommissioning</h4>
+      </div>
+                <div class="item-indicator"></div>
+              </div>
+              <div class="list-item">
+                <div class="item-content">
+                  <h4 class="item-title">Circular recovery of valuable materials like glass, silicon, and aluminium</h4>
+                </div>
+                <div class="item-indicator"></div>
+              </div>
+              <div class="list-item">
+                <div class="item-content">
+                  <h4 class="item-title">Detailed environmental and compliance reporting</h4>
+                </div>
+                <div class="item-indicator"></div>
+              </div>
+              <div class="list-item">
+                <div class="item-content">
+                  <h4 class="item-title">Australia-wide coverage and on-site capabilities</h4>
+                </div>
+                <div class="item-indicator"></div>
+              </div>
+              <div class="list-item">
+                <div class="item-content">
+                  <h4 class="item-title">Tailored service to meet unique project scopes and deadlines</h4>
+                </div>
+                <div class="item-indicator"></div>
+              </div>
+              <div class="list-item">
+                <div class="item-content">
+                  <h4 class="item-title">We understand the complexities of utility-scale infrastructure</h4>
+                </div>
+                <div class="item-indicator"></div>
+              </div>
+              <div class="list-item">
+                <div class="item-content">
+                  <h4 class="item-title">Work closely with project managers and engineers for smooth, safe execution</h4>
+                </div>
+                <div class="item-indicator"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Information Column -->
+          <div class="grid-column info-column">
+            <div class="column-header">
+              <div class="header-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2C13.1046 2 14 2.89543 14 4V20C14 21.1046 13.1046 22 12 22C10.8954 22 10 21.1046 10 20V4C10 2.89543 10.8954 2 12 2Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M12 6V8" stroke="currentColor" stroke-width="2"/>
+                  <path d="M12 12V14" stroke="currentColor" stroke-width="2"/>
+                  <path d="M12 18V20" stroke="currentColor" stroke-width="2"/>
+                </svg>
+        </div>
+              <h3 class="column-title">Key Information</h3>
+            </div>
+
+            <div class="info-content">
+              <div class="info-block">
+                <h4>End-of-Life Solar Farm Recycling, Done Right</h4>
+                <p>Utility-scale solar farms generate significant volumes of waste at end-of-life, including PV modules, inverters, cabling, mounting frames, and battery systems. Our experienced team manages the entire recycling process with industry-leading traceability and environmental integrity.</p>
+              </div>
+
+              <div class="info-block">
+                <p>We work with solar asset managers, project developers, and grid-scale energy providers to maximise resource recovery and minimise landfill impact.</p>
+              </div>
+
+              <div class="cta-block">
+                <a href="#contact" class="info-cta">
+                  Planning a decommissioning or repowering project?<br>
+                  <strong>Contact us now for a tailored recycling strategy</strong>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+      <div class="values-container">
+        <div class="values-header">
+          <h2 class="values-title">Our Values in Action</h2>
+          <p class="values-intro">
+            At PV Industries, our values guide our work on every project:
+          </p>
+        </div>
+
+        <div class="values-grid">
+          {valuesData.map((value, index) => (
+            <div class="value-card">
+              <div class="value-icon">
+                <value.icon />
+              </div>
+              <h3 class="value-title">{value.title}</h3>
+              <p class="value-description">
+                {value.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+      <div class="container">
+        <!-- Testimonials Grid -->
+        <div class="testimonials-grid">
+          {testimonialsData.testimonials.map((testimonial, index) => (
+            <div class="testimonial-card" style={`animation-delay: ${index * 0.2}s`}>
+              <div class="testimonial-content">
+                <div class="quote-icon">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.33333 18.6667C9.33333 16.8257 10.8257 15.3333 12.6667 15.3333C14.5076 15.3333 16 13.841 16 12C16 10.159 14.5076 8.66667 12.6667 8.66667C8.98477 8.66667 6 11.6514 6 15.3333V21.3333C6 23.1743 7.49238 24.6667 9.33333 24.6667H12C13.841 24.6667 15.3333 23.1743 15.3333 21.3333V18.6667H9.33333Z" fill="currentColor"/>
+                    <path d="M22.6667 18.6667C22.6667 16.8257 24.159 15.3333 26 15.3333C27.841 15.3333 29.3333 13.841 29.3333 12C29.3333 10.159 27.841 8.66667 26 8.66667C22.3181 8.66667 19.3333 11.6514 19.3333 15.3333V21.3333C19.3333 23.1743 20.8257 24.6667 22.6667 24.6667H25.3333C27.1743 24.6667 28.6667 23.1743 28.6667 21.3333V18.6667H22.6667Z" fill="currentColor"/>
+                  </svg>
+                </div>
+
+                <blockquote class="testimonial-quote">
+                  <p>"{testimonial.quote}"</p>
+                </blockquote>
+
+                <div class="testimonial-author">
+                  <div class="author-image">
+                    <img src={testimonial.image} alt={testimonial.author} />
+                  </div>
+                  <div class="author-info">
+                    <cite class="author-name">– {testimonial.author}</cite>
+                    <p class="author-role">{testimonial.role}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h3 class="cta-title">Let's Talk Solar Farm Recycling</h3>
+        <p class="cta-description">
+          If you're planning a solar farm decommissioning, asset repowering, or bulk PV panel recovery, PV Industries has the capacity, expertise, and infrastructure to support your project at every stage.
+        </p>
+        <a href="#contact" class="cta-button">Contact Us Below</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Contact Section -->
+  <ContactSection />
+
+  <Footer />
+</Layout>
+
+<style>
+  .utility-page {
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, var(--color-neutral-900) 0%, var(--color-neutral-800) 100%);
+    padding: var(--space-32) 0 var(--space-20);
+    position: relative;
+    overflow: hidden;
+    height: calc(100vh - 80px);
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/images/aerial-solar-farm.png') center/cover;
+    opacity: 0.25;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-5xl);
+    font-weight: 700;
+  }
+
+  .hero-subtitle {
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-6);
+    font-size: var(--font-size-4xl);
+    font-weight: 600;
+  }
+
+
+
+  /* Utility Services Three-Column Section */
+  .utility-services-section {
+    padding: var(--space-20) 0;
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  /* Three Column Grid */
+  .utility-grid {
+    display: flex;
+    gap: var(--space-8);
+    align-items: stretch;
+    position: relative;
+  }
+
+  .grid-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-neutral-200);
+    position: relative;
+    animation: slideUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  .services-column {
+    animation-delay: 0.1s;
+    border-top: 4px solid var(--color-primary);
+  }
+
+  .benefits-column {
+    animation-delay: 0.3s;
+    border-top: 4px solid var(--color-primary);
+  }
+
+  .info-column {
+    animation-delay: 0.5s;
+    border-top: 4px solid var(--color-primary);
+  }
+
+  /* Column Headers */
+  .column-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: 2px solid var(--color-neutral-100);
+  }
+
+  .header-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .column-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0;
+  }
+
+  /* Items List */
+  .items-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    flex: 1;
+  }
+
+  .list-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .list-item:hover {
+    background: var(--color-neutral-50);
+    transform: translateX(8px);
+  }
+
+  .item-content {
+    flex: 1;
+  }
+
+  .item-title {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .item-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+
+  .list-item:hover .item-indicator {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  /* Key Information Column */
+  .info-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    flex: 1;
+  }
+
+  .info-block {
+    padding: var(--space-4);
+    background: var(--color-neutral-50);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--color-primary);
+  }
+
+  .info-block h4 {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin: 0 0 var(--space-3);
+  }
+
+  .info-block p {
+    color: var(--color-neutral-700);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .cta-block {
+    margin-top: var(--space-6);
+  }
+
+  .info-cta {
+    display: inline-block;
+    background: var(--color-primary);
+    color: var(--color-neutral-100);
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--font-size-base);
+    transition: background var(--transition-normal);
+    text-align: center;
+  }
+
+  .info-cta:hover {
+    background: var(--color-primary-dark);
+  }
+
+  /* Animations */
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Mobile Responsiveness */
+  @media (max-width: 1023px) {
+    .utility-grid {
+      flex-direction: column;
+      gap: var(--space-12);
+    }
+
+    .grid-column {
+      padding: var(--space-6);
+    }
+
+    .column-header {
+      flex-direction: column;
+    text-align: center;
+      gap: var(--space-3);
+    }
+
+    .header-icon {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .utility-services-section {
+      padding: var(--space-16) 0;
+    }
+
+    .container {
+      padding: 0 var(--space-4);
+    }
+
+    .utility-grid {
+      gap: var(--space-8);
+    }
+
+    .grid-column {
+      padding: var(--space-5);
+    }
+
+    .list-item:hover {
+      transform: none;
+    }
+
+    .info-content {
+      gap: var(--space-4);
+    }
+
+    .info-block {
+      padding: var(--space-3);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .grid-column,
+    .list-item {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .list-item:hover {
+      transform: none;
+    }
+  }
+
+  /* Values Section */
+  .values-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+  }
+
+  .values-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  @media (min-width: 640px) {
+    .values-container {
+      padding: 0 var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .values-container {
+      padding: 0 var(--space-8);
+    }
+  }
+
+  .values-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto var(--space-16);
+  }
+
+  .values-title {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    margin-bottom: var(--space-6);
+  }
+
+  .values-intro {
+    color: var(--color-neutral-600);
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-8);
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+
+  .value-card {
+    background: var(--color-neutral-100);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-neutral-300);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .value-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    border-radius: 50%;
+    margin-bottom: var(--space-6);
+    color: white;
+  }
+
+  .value-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .value-title {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+  }
+
+  .value-description {
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  /* Testimonials Section */
+  .testimonials-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+    overflow: hidden;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--space-8);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  }
+
+  .testimonial-card {
+    background: var(--color-neutral-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    transition: all var(--transition-normal);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .testimonial-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .quote-icon {
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    opacity: 0.8;
+  }
+
+  .testimonial-quote {
+    margin: 0 0 var(--space-6);
+  }
+
+  .testimonial-quote p {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-800);
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .author-image {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--color-neutral-300);
+  }
+
+  .author-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .author-info {
+    flex: 1;
+  }
+
+  .author-name {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    font-style: normal;
+    display: block;
+    margin: 0 0 var(--space-1);
+  }
+
+  .author-role {
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-900);
+    color: var(--color-neutral-100);
+    text-align: center;
+  }
+
+  .cta-title {
+    color: var(--color-neutral-100);
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--space-6);
+  }
+
+  .cta-description {
+    color: var(--color-neutral-300);
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    margin-bottom: var(--space-8);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--color-primary);
+    color: var(--color-neutral-100);
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--font-size-base);
+    transition: background var(--transition-normal);
+  }
+
+  .cta-button:hover {
+    background: var(--color-primary-dark);
+  }
+
+
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: var(--space-24) 0 var(--space-16);
+      height: calc(100vh - 70px);
+      min-height: 500px;
+    }
+
+    .hero-section::before {
+      opacity: 0.25;
+    }
+
+    .hero-title {
+      font-size: var(--font-size-4xl);
+    }
+
+    .hero-subtitle {
+      font-size: var(--font-size-2xl);
+    }
+
+    .services-section {
+      padding: var(--space-16) 0;
+    }
+
+    .services-title {
+      font-size: var(--font-size-3xl);
+    }
+
+    .services-description {
+      font-size: var(--font-size-base);
+    }
+
+    .choose-section {
+      padding: var(--space-16) 0;
+    }
+
+    .choose-title {
+      font-size: var(--font-size-2xl);
+    }
+
+    .partnering-section {
+      padding: var(--space-16) 0;
+    }
+
+    .partnering-title {
+      font-size: var(--font-size-2xl);
+    }
+
+    .partnering-content p {
+      font-size: var(--font-size-base);
+    }
+
+    .values-section {
+      padding: var(--space-16) 0;
+    }
+
+    .values-container {
+      max-width: none;
+      padding: 0 var(--container-padding);
+    }
+
+    .values-title {
+      font-size: var(--font-size-3xl);
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      max-width: none;
+      margin: 0;
+    }
+
+    .value-card {
+      padding: var(--space-6);
+    }
+
+    .value-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: var(--space-4);
+    }
+
+    .value-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .testimonials-section {
+      padding: var(--space-16) 0;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .testimonial-card {
+      padding: var(--space-6);
+    }
+
+    .testimonial-quote p {
+      font-size: var(--font-size-base);
+    }
+
+    .author-image {
+      width: 48px;
+      height: 48px;
+    }
+
+    .cta-section {
+      padding: var(--space-16) 0;
+    }
+
+    .cta-title {
+      font-size: var(--font-size-2xl);
+    }
+
+    .cta-description {
+      font-size: var(--font-size-base);
+    }
+
+
+  }
+
+  /* Large Desktop - 4 Column Values Grid */
+  @media (min-width: 1200px) {
+    .values-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-12);
+    }
+
+    .value-card {
+      padding: var(--space-10);
+    }
+
+    .value-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: var(--space-8);
+    }
+
+    .value-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .value-title {
+      font-size: var(--font-size-2xl);
+    }
+  }
+
+  /* Animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .testimonials-grid,
+    .testimonial-card {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .testimonial-card:hover {
+      transform: none;
+    }
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

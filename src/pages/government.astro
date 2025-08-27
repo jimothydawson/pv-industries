@@ -1,0 +1,945 @@
+---
+// Government Solar Recycling Page
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactSection from '../components/ContactSection.astro';
+import CertifiedIcon from '../components/icons/CertifiedIcon.astro';
+import LightbulbIcon from '../components/icons/LightbulbIcon.astro';
+import QualityIcon from '../components/icons/QualityIcon.astro';
+import CollaborationIcon from '../components/icons/CollaborationIcon.astro';
+
+// Government testimonials data
+const testimonialsData = {
+  testimonials: [
+    {
+      quote: "Working with PV Industries made our solar infrastructure replacement program simple and cost-effective. Their team handled the logistics and reporting with professionalism.",
+      author: "Cassandra L.",
+      role: "NSW Local Government Environmental Coordinator"
+    },
+    {
+      quote: "We needed a partner who understood both environmental compliance and tight project budgets. PV Industries delivered on both.",
+      author: "Mark T.",
+      role: "State Energy Efficiency Program Manager"
+    }
+  ]
+};
+
+// Government values data
+const valuesData = [
+  {
+    title: "Transparency & Trust",
+    description: "We provide clear, verifiable reporting and communicate openly with all stakeholders.",
+    icon: CertifiedIcon
+  },
+  {
+    title: "Customer-Focused Innovation",
+    description: "Our services adapt to the needs of government partners, ensuring efficiency, reliability, and alignment with policy goals.",
+    icon: LightbulbIcon
+  },
+  {
+    title: "Commitment to Sustainability",
+    description: "We're proud to help government organisations lead the charge in building a circular, low-waste energy future for Australia.",
+    icon: QualityIcon
+  },
+  {
+    title: "Public Sector Excellence",
+    description: "We understand government procurement, compliance requirements, and the importance of delivering value for taxpayers.",
+    icon: CollaborationIcon
+  }
+];
+---
+
+<Layout title="Government Solar Recycling - PV Industries" description="Cost-effective, compliant solar waste management solutions for councils and government agencies across Australia.">
+  <Header />
+
+  <main class="government-page">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">Solar Recycling Solutions for Government</h1>
+          <h2 class="hero-subtitle">Supporting Councils and Government Agencies with Cost-Effective, Compliant Solar Waste Management</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h3 class="cta-title">Partnering for a Sustainable Public Sector</h3>
+        <p class="cta-description">
+          At PV Industries, we work with local councils, state departments, and federal government entities to deliver cost-efficient and compliant solar panel recycling solutions. As Australia continues its clean energy transition, we help public sector organisations manage end-of-life solar infrastructure responsibly while meeting environmental targets and budget expectations.
+        </p>
+        <a href="#contact" class="cta-button">Speak to Our Government Services Team</a>
+      </div>
+    </section>
+
+    <!-- Government Services Section -->
+    <section class="government-services-section">
+      <div class="container">
+        <div class="services-content">
+          <h2 class="services-title">Why Government Agencies Choose PV Industries</h2>
+          <p class="services-description">
+            Government-led solar programs are accelerating across Australia—but end-of-life solar waste presents a new challenge. Our solutions help you stay ahead of regulatory requirements while managing solar panel waste sustainably and economically.
+          </p>
+
+          <h3 class="services-subtitle">Key Benefits for Government Partners:</h3>
+          <ul class="services-list">
+            <li>Cost-efficient bulk recycling and logistics planning</li>
+            <li>Compliance with EPA and sustainability standards</li>
+            <li>Circular economy outcomes for public asset recovery</li>
+            <li>Nationwide collection and processing capacity</li>
+            <li>Customised services for council facilities, schools, libraries, and housing programs</li>
+          </ul>
+
+          <p class="services-summary">
+            Whether you manage a local solar upgrade scheme, a government housing initiative, or a solar-powered transport hub, PV Industries is equipped to handle your solar waste stream from collection through to final recycling and reporting.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Government Solutions Section -->
+    <section class="government-solutions-section">
+      <div class="container">
+        <div class="solutions-content">
+          <h2 class="solutions-title">Comprehensive Government Solutions</h2>
+
+          <div class="solutions-grid">
+            <!-- Local Councils Column -->
+            <div class="solution-column councils-column">
+              <div class="column-header">
+                <div class="header-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 21V7L12 3L21 7V21M3 21L12 13M3 21H21M21 21L12 13M12 13V21" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <h3 class="column-title">Working with Local Councils</h3>
+              </div>
+
+              <div class="solution-features">
+                <h4>Services Include:</h4>
+                <ul class="features-list">
+                  <li>Bulk solar panel pickup and disposal from transfer stations or depots</li>
+                  <li>End-of-life system collection from public buildings and facilities</li>
+                  <li>Drop-off and collection programs for residents (community recycling programs)</li>
+                  <li>Reporting on waste diversion rates for council sustainability reporting</li>
+                  <li>Public education support, such as materials and signage for solar waste disposal areas</li>
+                </ul>
+
+                <div class="solution-highlight">
+                  <h4>Planning a council-wide solar upgrade or clean-out?</h4>
+                  <p>Let us manage the end-of-life process and reduce long-term disposal costs.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- State & Federal Agencies Column -->
+            <div class="solution-column agencies-column">
+              <div class="column-header">
+                <div class="header-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <h3 class="column-title">Supporting State & Federal Agencies</h3>
+              </div>
+
+              <div class="solution-features">
+                <h4>Services Include:</h4>
+                <ul class="features-list">
+                  <li>Solar panel recovery and recycling for government buildings and energy efficiency programs</li>
+                  <li>Large-scale project decommissioning support (e.g. schools, hospitals, transport infrastructure)</li>
+                  <li>Transparent environmental reporting aligned with state and national frameworks</li>
+                  <li>Support for Circular Economy and Net Zero government targets</li>
+                  <li>Help meet procurement guidelines, ESG goals, and budget expectations</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cost Efficiency & Impact Section -->
+          <div class="impact-section">
+            <h3 class="impact-title">Designed for Cost Efficiency and Long-Term Impact</h3>
+
+            <div class="impact-grid">
+              <div class="impact-category">
+                <h4>Save Time and Reduce Risk</h4>
+                <ul class="impact-list">
+                  <li>Centralised solar waste logistics and disposal</li>
+                  <li>Reduced landfill fees and liability</li>
+                  <li>Trusted partner for long-term public sector contracts</li>
+                </ul>
+              </div>
+
+              <div class="impact-category">
+                <h4>Boost Environmental Performance</h4>
+                <ul class="impact-list">
+                  <li>Recover valuable materials like aluminium, silicon, and glass</li>
+                  <li>Divert solar waste from landfill</li>
+                  <li>Report on emissions reduction and landfill avoidance</li>
+                </ul>
+              </div>
+
+              <div class="impact-category">
+                <h4>Maintain Public Trust</h4>
+                <ul class="impact-list">
+                  <li>Demonstrate environmental leadership</li>
+                  <li>Improve transparency with full waste tracking and audit trails</li>
+                  <li>Support community and industry expectations for responsible resource management</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+      <div class="values-container">
+        <div class="values-header">
+          <h2 class="values-title">Our Values for Public Sector Collaboration</h2>
+          <p class="values-intro">
+            At PV Industries, our values guide our work with government partners:
+          </p>
+        </div>
+
+        <div class="values-grid">
+          {valuesData.map((value, index) => (
+            <div class="value-card">
+              <div class="value-icon">
+                <value.icon />
+              </div>
+              <h3 class="value-title">{value.title}</h3>
+              <p class="value-description">
+                {value.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+      <div class="container">
+        <h2 class="testimonials-title">Government Sector Testimonials</h2>
+        <div class="testimonials-grid">
+          {testimonialsData.testimonials.map((testimonial, index) => (
+            <div class="testimonial-card" style={`animation-delay: ${index * 0.2}s`}>
+              <div class="testimonial-content">
+                <div class="quote-icon">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.33333 18.6667C9.33333 16.8257 10.8257 15.3333 12.6667 15.3333C14.5076 15.3333 16 13.841 16 12C16 10.159 14.5076 8.66667 12.6667 8.66667C8.98477 8.66667 6 11.6514 6 15.3333V21.3333C6 23.1743 7.49238 24.6667 9.33333 24.6667H12C13.841 24.6667 15.3333 23.1743 15.3333 21.3333V18.6667H9.33333Z" fill="currentColor"/>
+                    <path d="M22.6667 18.6667C22.6667 16.8257 24.159 15.3333 26 15.3333C27.841 15.3333 29.3333 13.841 29.3333 12C29.3333 10.159 27.841 8.66667 26 8.66667C22.3181 8.66667 19.3333 11.6514 19.3333 15.3333V21.3333C19.3333 23.1743 20.8257 24.6667 22.6667 24.6667H25.3333C27.1743 24.6667 28.6667 23.1743 28.6667 21.3333V18.6667H22.6667Z" fill="currentColor"/>
+                  </svg>
+                </div>
+
+                <blockquote class="testimonial-quote">
+                  <p>"{testimonial.quote}"</p>
+                </blockquote>
+
+                <div class="testimonial-author">
+                  <div class="author-info">
+                    <cite class="author-name">– {testimonial.author}</cite>
+                    <p class="author-role">{testimonial.role}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h3 class="cta-title">Ready to Partner with PV Industries?</h3>
+        <p class="cta-description">
+          We're here to help government departments and councils meet sustainability targets while keeping costs down. Whether you manage solar for a few buildings or hundreds, our national network and proven expertise make us a smart choice for the public sector.
+        </p>
+        <a href="#contact" class="cta-button">Contact Us Below</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Contact Section -->
+  <ContactSection />
+
+  <Footer />
+</Layout>
+
+<style>
+  .government-page {
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, var(--color-neutral-900) 0%, var(--color-neutral-800) 100%);
+    padding: var(--space-32) 0 var(--space-20);
+    position: relative;
+    overflow: hidden;
+    height: calc(100vh - 80px);
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/images/solar-farm-desert.png') center/cover;
+    opacity: 0.25;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-5xl);
+    font-weight: 700;
+  }
+
+  .hero-subtitle {
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-6);
+    font-size: var(--font-size-4xl);
+    font-weight: 600;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: var(--space-16) 0;
+    background: var(--color-neutral-900);
+    color: var(--color-neutral-100);
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-xl);
+    line-height: 1.7;
+    margin: 0 0 var(--space-8);
+    font-weight: 500;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--color-primary);
+    color: var(--color-neutral-100);
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--font-size-base);
+    transition: all var(--transition-normal);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .cta-button:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Government Services Section */
+  .government-services-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-200);
+  }
+
+  .services-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .services-title {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    margin-bottom: var(--space-6);
+  }
+
+  .services-description {
+    color: var(--color-neutral-700);
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+    margin-bottom: var(--space-8);
+  }
+
+  .services-subtitle {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    margin-bottom: var(--space-6);
+  }
+
+  .services-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--space-8);
+    text-align: left;
+    display: inline-block;
+  }
+
+  .services-list li {
+    color: var(--color-neutral-600);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin-bottom: var(--space-2);
+    padding-left: var(--space-4);
+    position: relative;
+  }
+
+  .services-list li::before {
+    content: '✓';
+    color: var(--color-primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
+
+  .services-summary {
+    color: var(--color-neutral-600);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin-bottom: var(--space-8);
+    font-style: italic;
+  }
+
+  /* Government Solutions Section */
+  .government-solutions-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+  }
+
+  .solutions-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .solutions-title {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    margin-bottom: var(--space-12);
+    text-align: center;
+  }
+
+  .solutions-grid {
+    display: grid;
+    gap: var(--space-8);
+    margin-bottom: var(--space-16);
+  }
+
+  @media (min-width: 1024px) {
+    .solutions-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+    }
+  }
+
+  .solution-column {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-neutral-200);
+  }
+
+  .column-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: 2px solid var(--color-neutral-100);
+  }
+
+  .header-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .column-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin: 0;
+  }
+
+  .solution-features h4 {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin: 0 0 var(--space-4);
+  }
+
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--space-8);
+  }
+
+  .features-list li {
+    color: var(--color-neutral-600);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin-bottom: var(--space-2);
+    padding-left: var(--space-4);
+    position: relative;
+  }
+
+  .features-list li::before {
+    content: '•';
+    color: var(--color-primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
+
+  .solution-highlight {
+    background: var(--color-neutral-50);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--color-primary);
+  }
+
+  .solution-highlight h4 {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    margin: 0 0 var(--space-3);
+  }
+
+  .solution-highlight p {
+    color: var(--color-neutral-700);
+    font-size: var(--font-size-sm);
+    margin: 0;
+  }
+
+  /* Impact Section */
+  .impact-section {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-neutral-200);
+  }
+
+  .impact-title {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--space-12);
+    text-align: center;
+  }
+
+  .impact-grid {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .impact-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .impact-category h4 {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin: 0 0 var(--space-4);
+  }
+
+  .impact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .impact-list li {
+    color: var(--color-neutral-600);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin-bottom: var(--space-2);
+    padding-left: var(--space-4);
+    position: relative;
+  }
+
+  .impact-list li::before {
+    content: '✓';
+    color: var(--color-primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
+
+  /* Values Section */
+  .values-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+  }
+
+  .values-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  @media (min-width: 640px) {
+    .values-container {
+      padding: 0 var(--space-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .values-container {
+      padding: 0 var(--space-8);
+    }
+  }
+
+  .values-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto var(--space-16);
+  }
+
+  .values-title {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    margin-bottom: var(--space-6);
+  }
+
+  .values-intro {
+    color: var(--color-neutral-600);
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-8);
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+
+  .value-card {
+    background: var(--color-neutral-100);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-neutral-300);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .value-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    border-radius: 50%;
+    margin-bottom: var(--space-6);
+    color: white;
+  }
+
+  .value-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .value-title {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+  }
+
+  .value-description {
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  /* Testimonials Section */
+  .testimonials-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+    overflow: hidden;
+  }
+
+  .testimonials-title {
+    color: var(--color-neutral-900);
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--space-12);
+    text-align: center;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--space-8);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  }
+
+  .testimonial-card {
+    background: var(--color-neutral-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    transition: all var(--transition-normal);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .testimonial-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .quote-icon {
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    opacity: 0.8;
+  }
+
+  .testimonial-quote {
+    margin: 0 0 var(--space-6);
+  }
+
+  .testimonial-quote p {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-800);
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .author-info {
+    flex: 1;
+  }
+
+  .author-name {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    font-style: normal;
+    display: block;
+    margin: 0 0 var(--space-1);
+  }
+
+  .author-role {
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: var(--space-24) 0 var(--space-16);
+      height: calc(100vh - 70px);
+      min-height: 500px;
+    }
+
+    .hero-section::before {
+      opacity: 0.25;
+    }
+
+    .hero-title {
+      font-size: var(--font-size-4xl);
+    }
+
+    .hero-subtitle {
+      font-size: var(--font-size-2xl);
+    }
+
+    .cta-description {
+      font-size: var(--font-size-lg);
+    }
+
+    .government-services-section {
+      padding: var(--space-16) 0;
+    }
+
+    .services-title {
+      font-size: var(--font-size-3xl);
+    }
+
+    .services-description {
+      font-size: var(--font-size-base);
+    }
+
+    .government-solutions-section {
+      padding: var(--space-16) 0;
+    }
+
+    .solutions-title {
+      font-size: var(--font-size-3xl);
+    }
+
+    .solutions-grid {
+      gap: var(--space-8);
+    }
+
+    .solution-column {
+      padding: var(--space-6);
+    }
+
+    .column-header {
+      flex-direction: column;
+      text-align: center;
+      gap: var(--space-3);
+    }
+
+    .header-icon {
+      width: 56px;
+      height: 56px;
+    }
+
+    .impact-title {
+      font-size: var(--font-size-2xl);
+    }
+
+    .impact-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .values-section {
+      padding: var(--space-16) 0;
+    }
+
+    .values-container {
+      max-width: none;
+      padding: 0 var(--container-padding);
+    }
+
+    .values-title {
+      font-size: var(--font-size-3xl);
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      max-width: none;
+      margin: 0;
+    }
+
+    .value-card {
+      padding: var(--space-6);
+    }
+
+    .value-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: var(--space-4);
+    }
+
+    .value-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .testimonials-section {
+      padding: var(--space-16) 0;
+    }
+
+    .testimonials-title {
+      font-size: var(--font-size-2xl);
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .testimonial-card {
+      padding: var(--space-6);
+    }
+
+    .testimonial-quote p {
+      font-size: var(--font-size-base);
+    }
+  }
+
+  /* Animation preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .testimonials-grid,
+    .testimonial-card {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .testimonial-card:hover {
+      transform: none;
+    }
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
