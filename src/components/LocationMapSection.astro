@@ -1,0 +1,110 @@
+---
+// Location Map Section component
+---
+
+<section class="location-map-section">
+  <div class="container">
+    <div class="location-content">
+      <!-- Image on the left -->
+      <div class="location-image">
+        <img 
+          src="/images/Locations_Layout.jpg" 
+          alt="PV Industries locations across NSW, VIC and SA" 
+          class="map-image"
+        />
+      </div>
+      
+      <!-- Text content on the right -->
+      <div class="location-text">
+        <h2 class="location-heading">Locations</h2>
+        <p class="location-description">
+          PV Industries is well positioned to service multiple areas across NSW, VIC, ACT and SA through our own sites and a widespread network of partner drop-off locations for all our customers.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .location-map-section {
+    padding: var(--space-20) 0;
+    background: var(--color-neutral-100);
+  }
+
+  .location-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .location-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .map-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .location-text {
+    padding: var(--space-8);
+  }
+
+  .location-heading {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-6);
+    line-height: 1.2;
+  }
+
+  .location-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .location-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+
+    .location-text {
+      order: -1;
+      text-align: center;
+      padding: var(--space-4);
+    }
+
+    .location-image {
+      order: 1;
+    }
+
+    .map-image {
+      max-width: 90%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .location-map-section {
+      padding: var(--space-16) 0;
+    }
+
+    .location-heading {
+      font-size: var(--font-size-2xl);
+    }
+
+    .location-description {
+      font-size: var(--font-size-base);
+    }
+  }
+</style>
