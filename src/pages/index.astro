@@ -10,7 +10,6 @@ import HowWeRecycleSection from '../components/HowWeRecycleSection.astro';
 import CtaSection from '../components/CtaSection.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
 import PartnersSection from '../components/PartnersSection.astro';
-import ContactSection from '../components/ContactSection.astro';
 import NewsSection from '../components/NewsSection.astro';
 import Footer from '../components/Footer.astro';
 import { generateSectionNumbers } from '../utils/sectionUtils';
@@ -46,7 +45,6 @@ const sectionNumbers = generateSectionNumbers(numberedSections);
     <CtaSection />
     <TestimonialsSection sectionNumber={sectionNumbers.TestimonialsSection} />
     <NewsSection sectionNumber={sectionNumbers.NewsSection} />
-    <ContactSection />
   </main>
   <Footer />
 </Layout>
