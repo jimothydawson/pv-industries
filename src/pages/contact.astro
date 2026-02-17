@@ -2,17 +2,17 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import LocationMapSection from '../components/LocationMapSection.astro';
-import ContactSection from '../components/ContactSection.astro';
+import PriceCalculator from '../components/PriceCalculator.astro';
 import Footer from '../components/Footer.astro';
 
-const pageTitle = "Contact Us - PV Industries";
-const pageDescription = "Get in touch with PV Industries for solar panel recycling services. Contact our team for quotes, consultations, and more information.";
+const pageTitle = "Get a Quote - PV Industries";
+const pageDescription = "Get an instant quote for solar panel collection. Calculate your price based on customer type, number of panels, and location.";
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
   <Header />
   <main>
-    <ContactSection />
+    <PriceCalculator />
     <LocationMapSection />
   </main>
   <Footer />
