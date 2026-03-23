@@ -3,7 +3,24 @@ import suburbData from '../data/suburbs.json';
 
 const contactEmail = "contact@pvindustries.com.au";
 
-const locations = ["New South Wales", "Victoria", "ACT", "South Australia"];
+const dropOffLocations = [
+  {
+    state: "NSW",
+    dropOffs: ["Thornleigh", "Newcastle", "Bankstown", "Dubbo", "Gosford"]
+  },
+  {
+    state: "VIC",
+    dropOffs: ["Derrimut"]
+  },
+  {
+    state: "SA",
+    dropOffs: ["Mitcham"]
+  },
+  {
+    state: "ACT",
+    dropOffs: ["Pickup only"]
+  }
+];
 
 const socialLinks = [
   { name: "Facebook", url: "https://www.facebook.com/pvindustriesAUS", icon: "facebook" },
@@ -44,7 +61,7 @@ const socialLinks = [
             <!-- Step 1: Customer Type -->
             <div class="calc-step active" id="step-1">
               <h3 class="step-title">What type of customer are you?</h3>
-              <p class="step-subtitle">Select your customer category to see per-panel pricing.</p>
+              <p class="step-subtitle">Select your customer category to start your quote. Pricing is revealed after you complete the form.</p>
               <div class="type-grid">
                 <button class="type-card" data-type="residential" type="button">
                   <div class="type-icon">
@@ -54,8 +71,8 @@ const socialLinks = [
                     </svg>
                   </div>
                   <span class="type-name">Residential</span>
-                  <span class="type-price">$13.20 / panel</span>
-                  <span class="type-note">inc. GST</span>
+                  <span class="type-price">Instant quote</span>
+                  <span class="type-note">Sydney Metro</span>
                 </button>
                 <button class="type-card" data-type="commercial" type="button">
                   <div class="type-icon">
@@ -68,8 +85,8 @@ const socialLinks = [
                     </svg>
                   </div>
                   <span class="type-name">Commercial</span>
-                  <span class="type-price">$8.80 / panel</span>
-                  <span class="type-note">inc. GST</span>
+                  <span class="type-price">Instant quote</span>
+                  <span class="type-note">Sydney Metro</span>
                 </button>
                 <button class="type-card" data-type="government" type="button">
                   <div class="type-icon">
@@ -81,7 +98,7 @@ const socialLinks = [
                     </svg>
                   </div>
                   <span class="type-name">Government</span>
-                  <span class="type-price">Custom pricing</span>
+                  <span class="type-price">Custom quote</span>
                   <span class="type-note">Contact us</span>
                 </button>
                 <button class="type-card" data-type="utility" type="button">
@@ -95,7 +112,7 @@ const socialLinks = [
                     </svg>
                   </div>
                   <span class="type-name">Utility</span>
-                  <span class="type-price">Custom pricing</span>
+                  <span class="type-price">Custom quote</span>
                   <span class="type-note">Contact us</span>
                 </button>
               </div>
@@ -104,7 +121,7 @@ const socialLinks = [
             <!-- Step 2: Panel Count -->
             <div class="calc-step" id="step-2">
               <h3 class="step-title">How many panels need collecting?</h3>
-              <p class="step-subtitle">Enter the number of solar panels for collection.</p>
+              <p class="step-subtitle">Enter the number of solar panels for collection. Your quote will be revealed after location.</p>
               <div class="panel-input-wrapper">
                 <div class="panel-input-group">
                   <button class="panel-btn panel-minus" type="button" aria-label="Decrease panel count">
@@ -133,7 +150,8 @@ const socialLinks = [
             <!-- Step 3: Location -->
             <div class="calc-step" id="step-3">
               <h3 class="step-title">Where are the panels located?</h3>
-              <p class="step-subtitle">Start typing your suburb or postcode.</p>
+              <p class="step-subtitle">Start typing your suburb or postcode to check if an instant quote is available.</p>
+              <p class="service-note">Instant quotes are currently available for Sydney Metro only. For all other areas, please contact us directly for a tailored quote.</p>
               <div class="location-input-wrapper">
                 <div class="location-input-group">
                   <svg class="location-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -237,17 +255,24 @@ const socialLinks = [
             </div>
 
             <div class="sidebar-block">
-              <div class="sidebar-block-header">
-                <svg class="sidebar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <h3 class="sidebar-block-title">Locations</h3>
-              </div>
               <div class="sidebar-block-content">
-                {locations.map((loc) => (
-                  <p class="loc-text">{loc}</p>
-                ))}
+                <div class="loc-section">
+                  <div class="sidebar-block-header">
+                    <svg class="sidebar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3 class="sidebar-block-title">Drop-off locations</h3>
+                  </div>
+                  {dropOffLocations.map((location) => (
+                    <div class="loc-group">
+                      <p class="loc-text">{location.state}</p>
+                      {location.dropOffs.map((dropOff) => (
+                        <p class="loc-subtext">{dropOff}</p>
+                      ))}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -297,7 +322,7 @@ const socialLinks = [
   <div class="section-bg"></div>
 </section>
 
-<script define:vars={{ SUBURBS: suburbData }}>
+<script is:inline define:vars={{ SUBURBS: suburbData }}>
 (function () {
   /* ───────────────── CONFIG ───────────────── */
   var PVI_LAT = -33.9175;
@@ -513,10 +538,7 @@ const socialLinks = [
       panelHint.textContent = 'For jobs over ' + MAX_PANELS + ' panels, please contact us directly for pricing.';
       panelHint.className = 'panel-hint warning';
     } else {
-      var pricing = PRICING[state.customerType];
-      if (pricing) {
-        panelHint.textContent = 'Gate fee estimate: ' + fmt(pricing.priceIncGst * val) + ' (+ transport)';
-      }
+      panelHint.textContent = 'Your quote will appear after you confirm a Sydney Metro location.';
       panelHint.className = 'panel-hint';
     }
   }
@@ -575,11 +597,11 @@ const socialLinks = [
       if (query && query.length >= 2) {
         var noMatch = document.createElement('div');
         noMatch.className = 'ac-item ac-no-match';
-        noMatch.textContent = 'No NSW locations found — contact us for other states';
+        noMatch.textContent = 'Instant quotes are available for Sydney Metro only — contact us for other areas';
         noMatch.addEventListener('mousedown', function (e) {
           e.preventDefault();
           showEmailResult(
-            'Our quote calculator can't yet provide an estimate for your area. Please contact us directly.'
+            "Our quote calculator can't yet provide an estimate for your area. Please contact us directly."
           );
         });
         dropdown.appendChild(noMatch);
@@ -644,7 +666,7 @@ const socialLinks = [
       noMatchTimer = setTimeout(function () {
         closeDropdown();
         showEmailResult(
-          'We currently service the Greater Sydney and NSW region. For collections outside NSW, please contact us directly.'
+          'For all enquiries outside of Sydney Metro, please contact us directly via the link below.'
         );
       }, 800);
     }
@@ -684,7 +706,7 @@ const socialLinks = [
     if (!state.selectedSuburb) {
       if (q.length >= 2 && searchSuburbs(q).length === 0) {
         showEmailResult(
-          'We currently service the Greater Sydney and NSW region. For collections outside NSW, please contact us directly.'
+          'For all enquiries outside of Sydney Metro, please contact us directly via the link below.'
         );
         return;
       }
@@ -926,6 +948,17 @@ const socialLinks = [
   .step-subtitle {
     color: var(--color-neutral-400);
     margin: 0 0 var(--space-8) 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+  }
+
+  .service-note {
+    margin: calc(var(--space-8) * -0.5) 0 var(--space-6) 0;
+    padding: var(--space-3) var(--space-4);
+    border-left: 3px solid rgba(253, 181, 0, 0.7);
+    border-radius: var(--radius-md);
+    background: rgba(253, 181, 0, 0.08);
+    color: var(--color-neutral-200);
     font-size: var(--font-size-sm);
     line-height: 1.5;
   }
@@ -1366,7 +1399,20 @@ const socialLinks = [
   }
 
   .sidebar-link:hover { color: var(--color-primary); }
-  .loc-text { margin: 0; line-height: 1.6; }
+  .loc-section + .loc-section { margin-top: var(--space-5); }
+  .loc-group + .loc-group { margin-top: var(--space-3); }
+  .loc-text {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--color-neutral-100);
+    font-weight: 500;
+  }
+  .loc-subtext {
+    margin: 0;
+    padding-left: var(--space-4);
+    line-height: 1.6;
+    color: var(--color-neutral-400);
+  }
 
   .sidebar-social { margin-top: var(--space-10); }
 
