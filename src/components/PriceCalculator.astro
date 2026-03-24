@@ -850,7 +850,9 @@ const socialLinks = [
     bookingNotice.classList.toggle('hidden', !bookingNotice.textContent);
 
     bookingNameLabel.textContent = isCustom ? 'Name' : 'Customer Name';
-    bookingBusinessLabel.textContent = isCustom ? 'Company Name' : 'Business Name';
+    bookingBusinessLabel.textContent = isCustom
+      ? ((state.customerType === 'government' || state.customerType === 'utility') ? 'Organisation Name' : 'Company Name')
+      : 'Business Name';
     bookingPhoneLabel.textContent = isCustom ? 'Phone Number' : 'Contact Number';
     bookingBackLabel.textContent = state.bookingOriginStep === 4 ? 'Back to Pickup / Drop-Off Choice' : 'Back';
 
