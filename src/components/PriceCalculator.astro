@@ -29,7 +29,7 @@ const socialLinks = [
 ];
 ---
 
-<section id="contact" class="calculator-section">
+<section id="quote-calculator" class="calculator-section">
   <div class="container">
     <div class="calculator-layout">
 
@@ -61,7 +61,7 @@ const socialLinks = [
             <!-- Step 1: Customer Type -->
             <div class="calc-step active" id="step-1">
               <h3 class="step-title">What type of customer are you?</h3>
-              <p class="step-subtitle">Select your customer category to start your quote. Pricing is revealed after you complete the form.</p>
+              <p class="step-subtitle">Select your customer category to start your quote.</p>
               <div class="type-grid">
                 <button class="type-card" data-type="residential" type="button">
                   <div class="type-icon">
@@ -99,7 +99,7 @@ const socialLinks = [
                   </div>
                   <span class="type-name">Government</span>
                   <span class="type-price">Custom quote</span>
-                  <span class="type-note">Contact us</span>
+                  <span class="type-note">Form below</span>
                 </button>
                 <button class="type-card" data-type="utility" type="button">
                   <div class="type-icon">
@@ -113,7 +113,7 @@ const socialLinks = [
                   </div>
                   <span class="type-name">Utility</span>
                   <span class="type-price">Custom quote</span>
-                  <span class="type-note">Contact us</span>
+                  <span class="type-note">Form below</span>
                 </button>
               </div>
             </div>
@@ -151,7 +151,7 @@ const socialLinks = [
             <div class="calc-step" id="step-3">
               <h3 class="step-title">Where are the panels located?</h3>
               <p class="step-subtitle">Start typing your suburb or postcode to check if an instant quote is available.</p>
-              <p class="service-note">Instant quotes are currently available for Sydney Metro only. For all other areas, please contact us directly for a tailored quote.</p>
+              <p class="service-note">Instant quotes are currently available for Sydney Metro only. For all other areas, scroll down to the form section below for a tailored quote.</p>
               <div class="location-input-wrapper">
                 <div class="location-input-group">
                   <svg class="location-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -217,14 +217,14 @@ const socialLinks = [
             <div class="result-badge info">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
-            <h3 class="result-title">Contact Us Directly</h3>
+            <h3 class="result-title">Tailored Quote Required</h3>
             <p class="result-message" id="email-reason"></p>
-            <p class="result-message">Please email us with your details and we'll provide a tailored quote promptly.</p>
+            <p class="result-message">Scroll down to the form section below and share your project details. We'll get back to you with a tailored quote promptly.</p>
 
             <div class="result-actions">
-              <a class="btn-email" id="btn-email-pvi" href={`mailto:${contactEmail}`}>
+              <a class="btn-email" id="btn-email-pvi" href="#contact">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Email PV Industries
+                Scroll to Form Section
               </a>
               <button class="btn-restart" id="btn-restart-email" type="button">Get New Quote</button>
             </div>
@@ -441,15 +441,7 @@ const socialLinks = [
   function showEmailResult(reason) {
     resultQuote.classList.remove('visible');
     document.getElementById('email-reason').textContent = reason;
-
-    var subject = 'Collection Enquiry';
-    var body = 'Hi PV Industries,%0D%0A%0D%0A';
-    if (state.customerType) body += 'Customer type: ' + state.customerType + '%0D%0A';
-    if (state.panelCount) body += 'Number of panels: ' + state.panelCount + '%0D%0A';
-    if (state.selectedSuburb) body += 'Location: ' + state.selectedSuburb.name + ' ' + state.selectedSuburb.postcode + '%0D%0A';
-    body += '%0D%0APlease provide a quote for collection.%0D%0A%0D%0AThank you';
-    document.getElementById('btn-email-pvi').href =
-      'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + body;
+    document.getElementById('btn-email-pvi').href = '#contact';
 
     resultEmail.classList.add('visible');
   }
@@ -535,7 +527,7 @@ const socialLinks = [
       panelHint.textContent = 'Please enter at least 1 panel.';
       panelHint.className = 'panel-hint error';
     } else if (val > MAX_PANELS) {
-      panelHint.textContent = 'For jobs over ' + MAX_PANELS + ' panels, please contact us directly for pricing.';
+      panelHint.textContent = 'For jobs over ' + MAX_PANELS + ' panels, scroll down to the form section below for tailored pricing.';
       panelHint.className = 'panel-hint warning';
     } else {
       panelHint.textContent = 'Your quote will appear after you confirm a Sydney Metro location.';
@@ -597,11 +589,11 @@ const socialLinks = [
       if (query && query.length >= 2) {
         var noMatch = document.createElement('div');
         noMatch.className = 'ac-item ac-no-match';
-        noMatch.textContent = 'Instant quotes are available for Sydney Metro only — contact us for other areas';
+        noMatch.textContent = 'Instant quotes are available for Sydney Metro only — use the form below for other areas';
         noMatch.addEventListener('mousedown', function (e) {
           e.preventDefault();
           showEmailResult(
-            "Our quote calculator can't yet provide an estimate for your area. Please contact us directly."
+            "Our quote calculator can't yet provide an estimate for your area. Scroll down to the form section below and we'll prepare a tailored quote."
           );
         });
         dropdown.appendChild(noMatch);
@@ -647,7 +639,7 @@ const socialLinks = [
       showEmailResult(
         'Your location (' + s.name + ') is approximately ' +
         formatDistance(drive.roadKm) + ' from PV Industries, which is outside our standard collection radius of ' +
-        MAX_DISTANCE_KM + ' km. Please get in touch for a custom quote.'
+        MAX_DISTANCE_KM + ' km. Scroll down to the form section below for a custom quote.'
       );
     }
   }
@@ -666,7 +658,7 @@ const socialLinks = [
       noMatchTimer = setTimeout(function () {
         closeDropdown();
         showEmailResult(
-          'For all enquiries outside of Sydney Metro, please contact us directly via the link below.'
+          'For all enquiries outside of Sydney Metro, scroll down to the form section below and we will provide a tailored quote.'
         );
       }, 800);
     }
@@ -706,7 +698,7 @@ const socialLinks = [
     if (!state.selectedSuburb) {
       if (q.length >= 2 && searchSuburbs(q).length === 0) {
         showEmailResult(
-          'For all enquiries outside of Sydney Metro, please contact us directly via the link below.'
+          'For all enquiries outside of Sydney Metro, scroll down to the form section below and we will provide a tailored quote.'
         );
         return;
       }
@@ -725,7 +717,7 @@ const socialLinks = [
       showEmailResult(
         'Your location (' + state.selectedSuburb.name + ') is approximately ' +
         formatDistance(drive.roadKm) + ' from PV Industries, which is outside our standard collection radius of ' +
-        MAX_DISTANCE_KM + ' km. Please get in touch for a custom quote.'
+        MAX_DISTANCE_KM + ' km. Scroll down to the form section below for a custom quote.'
       );
       return;
     }

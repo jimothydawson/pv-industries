@@ -9,7 +9,6 @@ import ProcessSection from '../components/ProcessSection.astro';
 import HowWeRecycleSection from '../components/HowWeRecycleSection.astro';
 import CtaSection from '../components/CtaSection.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
-import PartnersSection from '../components/PartnersSection.astro';
 import NewsSection from '../components/NewsSection.astro';
 import Footer from '../components/Footer.astro';
 import { generateSectionNumbers } from '../utils/sectionUtils';
@@ -18,9 +17,7 @@ const pageTitle = "PV Industries – Australia's Leader in Solar Panel Recycling
 const pageDescription = "PV Industries is leading the way in solar panel recycling in Australia.";
 
 // Define the order of numbered sections (excluding Hero and CTA sections)
-// PartnersSection should be the first numbered section (second on the page)
 const numberedSections = [
-  'PartnersSection',
   'FutureSection',
   'ServicesSection',
   'ProcessSection',
@@ -37,7 +34,6 @@ const sectionNumbers = generateSectionNumbers(numberedSections);
   <Header />
   <main>
     <HeroSection />
-    <PartnersSection sectionNumber={sectionNumbers.PartnersSection} />
     <FutureSection sectionNumber={sectionNumbers.FutureSection} />
     <ServicesSection sectionNumber={sectionNumbers.ServicesSection} />
     <ProcessSection sectionNumber={sectionNumbers.ProcessSection} />

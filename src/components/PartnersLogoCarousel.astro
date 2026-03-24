@@ -1,0 +1,276 @@
+---
+export interface Props {
+  variant?: 'default' | 'heroGrid';
+}
+
+const { variant = 'default' } = Astro.props;
+
+const partners = [
+  {
+    name: "Sydney Landscape",
+    logo: "/images/2.-Sydney-Landscape.png",
+    alt: "Sydney Landscape"
+  },
+  {
+    name: "UTS ISF",
+    logo: "/images/PartnerLogo_UTS-ISF_335x250.png",
+    alt: "UTS Institute for Sustainable Futures"
+  },
+  {
+    name: "CSIRO",
+    logo: "/images/CSIRO-logo.jpeg",
+    alt: "CSIRO"
+  },
+  {
+    name: "John Holland",
+    logo: "/images/John_Holland_Logo-1536x506.png",
+    alt: "John Holland"
+  },
+  {
+    name: "Greentech",
+    logo: "/images/Greentech_Logo_PNG-1536x377.png",
+    alt: "Greentech"
+  },
+  {
+    name: "City of Newcastle",
+    logo: "/images/City_of_Newcastle_Horizontal_RGB_cropped-1536x433.jpeg",
+    alt: "City of Newcastle"
+  },
+  {
+    name: "Circular Australia",
+    logo: "/images/Circular-Australia_Master_Horizontal_10-min-768x384.png",
+    alt: "Circular Australia"
+  },
+  {
+    name: "NSW EPA",
+    logo: "/images/epa_logo_coupled_fullcolour_v2.png",
+    alt: "NSW Environment Protection Authority"
+  },
+  {
+    name: "Sustainability Victoria",
+    logo: "/images/Sustainability-Victoria-Logo.png",
+    alt: "Sustainability Victoria"
+  },
+  {
+    name: "Australian Government DISR",
+    logo: "/images/logo_disr.png",
+    alt: "Australian Government Department of Industry, Science and Resources"
+  }
+];
+---
+
+<div class:list={['partners-carousel', `partners-carousel-${variant}`]}>
+  {variant === 'heroGrid' ? (
+    <div class="grid-viewport">
+      <div class="grid-track">
+        {partners.map((partner) => (
+          <div class="grid-card">
+            <div class="partner-logo">
+              <img src={partner.logo} alt={partner.alt} loading="lazy" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ) : (
+    <div class="carousel-viewport">
+      <div class="carousel-track" data-partners-track>
+        {partners.map((partner) => (
+          <div class="partner-slide">
+            <div class="partner-logo">
+              <img src={partner.logo} alt={partner.alt} loading="lazy" />
+            </div>
+          </div>
+        ))}
+        {partners.map((partner) => (
+          <div class="partner-slide duplicate" aria-hidden="true">
+            <div class="partner-logo">
+              <img src={partner.logo} alt="" loading="lazy" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  .partners-carousel {
+    width: 100%;
+  }
+
+  .carousel-viewport {
+    overflow: hidden;
+    position: relative;
+    border-radius: var(--radius-lg);
+  }
+
+  .carousel-viewport::before,
+  .carousel-viewport::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 72px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .carousel-track {
+    display: flex;
+    width: calc(180px * 20);
+    animation: partners-scroll-mobile 24s linear infinite;
+  }
+
+  .partner-slide {
+    flex: 0 0 auto;
+    width: 180px;
+    height: 92px;
+    padding: 0 var(--space-2);
+  }
+
+  .partner-logo {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    box-sizing: border-box;
+    transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal), background-color var(--transition-normal);
+  }
+
+  .partner-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: filter var(--transition-normal), opacity var(--transition-normal);
+  }
+
+  .grid-viewport {
+    width: 100%;
+  }
+
+  .grid-track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .grid-card .partner-logo {
+    min-height: 86px;
+    background: var(--color-neutral-100);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .grid-card .partner-logo img {
+    filter: grayscale(100%) opacity(0.72);
+  }
+
+  @media (min-width: 768px) {
+    .grid-track {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  .partners-carousel-default .carousel-viewport {
+    background: var(--color-neutral-100);
+  }
+
+  .partners-carousel-default .carousel-viewport::before {
+    left: 0;
+    background: linear-gradient(to right, var(--color-neutral-100) 0%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .partners-carousel-default .carousel-viewport::after {
+    right: 0;
+    background: linear-gradient(to left, var(--color-neutral-100) 0%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .partners-carousel-default .partner-logo {
+    background: var(--color-neutral-100);
+    border: 1px solid var(--color-neutral-200);
+  }
+
+  .partners-carousel-default .partner-logo:hover {
+    border-color: var(--color-neutral-300);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .partners-carousel-default .partner-logo img {
+    filter: grayscale(100%) opacity(0.72);
+  }
+
+  .partners-carousel-default .partner-logo:hover img {
+    filter: grayscale(0%) opacity(1);
+  }
+
+  @media (min-width: 768px) {
+    .carousel-track {
+      width: calc(220px * 20);
+      animation: partners-scroll-desktop 34s linear infinite;
+    }
+
+    .partner-slide {
+      width: 220px;
+    }
+  }
+
+  @keyframes partners-scroll-mobile {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-180px * 10));
+    }
+  }
+
+  @keyframes partners-scroll-desktop {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-220px * 10));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .carousel-viewport::before,
+    .carousel-viewport::after {
+      width: 48px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+      animation: none;
+    }
+
+    .partner-logo {
+      transition: none;
+    }
+
+    .partners-carousel-default .partner-logo:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  const partnerTracks = document.querySelectorAll<HTMLElement>('[data-partners-track]');
+
+  function setPartnerTrackState(state: 'paused' | 'running') {
+    partnerTracks.forEach((track) => {
+      track.style.animationPlayState = state;
+    });
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    setPartnerTrackState(document.hidden ? 'paused' : 'running');
+  });
+</script>

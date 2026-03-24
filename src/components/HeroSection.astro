@@ -1,10 +1,12 @@
 ---
 import BrevoSignupForm from './BrevoSignupForm.astro';
+import PartnersLogoCarousel from './PartnersLogoCarousel.astro';
 
 // Hero section data
 const heroData = {
-  title: "The future of solar panel recycling",
-  description: "We are leading the way in solar panel recycling in Australia and it is our aim to stop solar panels from entering landfill.",
+  titlePrefix: "Solar panel recycling & collection across",
+  titleSuffix: "NSW, VIC, SA and ACT",
+  description: "Leading the way in solar panel recycling",
   stats: [
     { number: "200", suffix: "+", label: "# of customers" },
     { number: "4", suffix: "", label: "# government grants awarded" },
@@ -27,7 +29,11 @@ const heroData = {
     <!-- Main Hero Content -->
     <div class="hero-main-content">
       <div class="hero-text-content">
-        <h1 class="hero-title">{heroData.title}</h1>
+        <h1 class="hero-title">
+          {heroData.titlePrefix}
+          <br />
+          <span class="hero-title-secondary">{heroData.titleSuffix}</span>
+        </h1>
       </div>
       
       <div class="hero-middle-content">
@@ -43,25 +49,29 @@ const heroData = {
             </div>
           ))}
         </div>
-        
-        <!-- Description and Actions -->
-        <div class="hero-description-section">
-          <p class="hero-description">{heroData.description}</p>
-          <div class="hero-actions">
-            <a href="#HomeContact" class="button button-primary">
-              Contact Us
-              <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-            <a href="#future" class="button button-secondary">
-              Learn more
-            </a>
-          </div>
+      </div>
+
+      <div class="hero-description-section">
+        <p class="hero-description">{heroData.description}</p>
+        <div class="hero-actions">
+          <a href="/contact" class="button button-primary">
+            Contact Us
+            <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#future" class="button button-secondary">
+            Learn more
+          </a>
         </div>
       </div>
     </div>
     
+    <div class="hero-partners-band">
+      <p class="hero-partners-label">Trusted by councils, researchers and circular economy partners</p>
+      <PartnersLogoCarousel />
+    </div>
+
     <!-- Hero Bottom Content -->
     <div class="hero-bottom-content">
       <div class="hero-contact-grid">
@@ -154,12 +164,12 @@ const heroData = {
   }
 
   .hero-main-content {
-    margin-bottom: var(--space-16);
+    margin-bottom: var(--space-10);
   }
 
   .hero-text-content {
-    max-width: 730px;
-    margin-bottom: var(--space-10);
+    max-width: 100%;
+    margin-bottom: var(--space-6);
   }
 
   @media (max-width: 767px) {
@@ -169,7 +179,7 @@ const heroData = {
   }
 
   .hero-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2.15rem, 3.8vw, 3.15rem);
     font-weight: 600;
     line-height: 1.1;
     margin-bottom: 0;
@@ -177,38 +187,33 @@ const heroData = {
     color: var(--color-neutral-100);
   }
 
-  .hero-middle-content {
-    display: flex;
-    flex-direction: column;
-    gap: 48px; /* var(--space-12) = 48px */
+  .hero-title-secondary {
+    display: inline-block;
   }
 
-  @media (min-width: 1024px) {
-    .hero-middle-content {
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 64px; /* var(--space-16) = 64px */
-    }
+  .hero-middle-content {
+    margin: 0 auto;
+    width: 100%;
   }
 
   /* Stats */
   .hero-stats {
     display: flex;
     flex-direction: column;
-    gap: 32px; /* var(--space-8) = 2rem = 32px */
+    gap: 24px;
     animation: fadeInUp 0.8s ease-out 0.2s both;
   }
 
   @media (min-width: 640px) {
     .hero-stats {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      width: 100%;
     }
     
     .hero-stat {
-      flex: 1;
-      min-width: 200px;
+      min-width: 0;
     }
   }
 
@@ -222,11 +227,17 @@ const heroData = {
     }
   }
 
+  @media (min-width: 1024px) {
+    .hero-stats {
+      min-width: 520px;
+    }
+  }
+
   .stat-label {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     font-weight: 500;
     color: var(--color-neutral-100);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
   }
 
   .stat-number {
@@ -243,20 +254,22 @@ const heroData = {
   }
 
   .stat-value {
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-size: clamp(2.2rem, 3.5vw, 3rem);
     font-weight: 600;
     line-height: 1;
   }
 
   .stat-suffix {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
     font-weight: 600;
     color: var(--color-primary);
   }
 
   /* Description and Actions */
   .hero-description-section {
-    max-width: 600px;
+    max-width: 680px;
+    margin: var(--space-8) auto 0;
+    text-align: center;
     animation: fadeInUp 0.8s ease-out 0.4s both;
   }
 
@@ -267,9 +280,9 @@ const heroData = {
   }
 
   .hero-description {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     color: var(--color-neutral-100);
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-6);
     line-height: 1.6;
   }
 
@@ -277,12 +290,27 @@ const heroData = {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-4);
+    justify-content: center;
+  }
+
+  .hero-partners-band {
+    margin-top: var(--space-8);
+    animation: fadeInUp 0.8s ease-out 0.55s both;
+  }
+
+  .hero-partners-label {
+    margin: 0 0 var(--space-4) 0;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
   }
 
   /* Hero Bottom Content */
   .hero-bottom-content {
     position: relative;
-    margin-top: var(--space-20);
+    margin-top: var(--space-8);
     animation: fadeInUp 0.8s ease-out 0.6s both;
   }
 
@@ -429,6 +457,10 @@ const heroData = {
     
     .hero-actions {
       flex-direction: column;
+    }
+
+    .hero-partners-band {
+      margin-top: var(--space-6);
     }
     
     .button {
