@@ -56,7 +56,7 @@ const socialLinks = [
             <div class="progress-line"><span class="progress-fill"></span></div>
             <div class="progress-step" data-prog="4">
               <span class="step-dot">4</span>
-              <span class="step-label">Options</span>
+              <span class="step-label">Quote</span>
             </div>
             <div class="progress-line"><span class="progress-fill"></span></div>
             <div class="progress-step" data-prog="5">
@@ -131,7 +131,7 @@ const socialLinks = [
             <!-- Step 2: Panel Count -->
             <div class="calc-step" id="step-2">
               <h3 class="step-title">How many panels need collecting?</h3>
-              <p class="step-subtitle">Enter the number of solar panels for collection. Your quote will be revealed after location.</p>
+              <p class="step-subtitle">Enter the number of solar panels for collection.</p>
               <div class="panel-input-wrapper">
                 <div class="panel-input-group">
                   <button class="panel-btn panel-minus" type="button" aria-label="Decrease panel count">
@@ -266,6 +266,7 @@ const socialLinks = [
               <input type="hidden" name="form-name" id="booking-form-name" value="collection-quote-request" />
               <input type="hidden" name="bot-field" />
               <input type="hidden" name="requestType" id="booking-request-type" value="Collection" />
+              <input type="hidden" name="inquiryReason" id="booking-inquiry-reason" value="" />
               <input type="hidden" name="quotedSuburb" id="booking-quoted-suburb" value="" />
               <input type="hidden" name="quotedDistance" id="booking-quoted-distance" value="" />
               <input type="hidden" name="gateFee" id="booking-gate-fee" value="" />
@@ -274,12 +275,12 @@ const socialLinks = [
 
               <div class="booking-form-grid">
                 <label class="booking-field">
-                  <span class="booking-label">Customer Name</span>
+                  <span class="booking-label" id="booking-name-label">Customer Name</span>
                   <input class="booking-input" type="text" name="customerName" autocomplete="name" required />
                 </label>
 
                 <label class="booking-field hidden" id="field-business-name">
-                  <span class="booking-label">Business Name</span>
+                  <span class="booking-label" id="booking-business-label">Business Name</span>
                   <input class="booking-input" type="text" name="businessName" autocomplete="organization" />
                 </label>
 
@@ -289,7 +290,7 @@ const socialLinks = [
                 </label>
 
                 <label class="booking-field">
-                  <span class="booking-label">Contact Number</span>
+                  <span class="booking-label" id="booking-phone-label">Contact Number</span>
                   <input class="booking-input" type="tel" name="contactNumber" autocomplete="tel" required />
                 </label>
 
@@ -324,7 +325,7 @@ const socialLinks = [
               <div class="step-actions step-actions--form">
                 <button class="btn-back" id="btn-back-to-quote-options" type="button">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                  Back to Pickup / Drop-Off Choice
+                  <span id="booking-back-label">Back to Pickup / Drop-Off Choice</span>
                 </button>
                 <button class="btn-next btn-submit" id="btn-submit-booking" type="submit">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -358,6 +359,7 @@ const socialLinks = [
             <input type="hidden" name="form-name" value="collection-quote-request" />
             <input type="text" name="bot-field" />
             <input type="text" name="requestType" />
+            <input type="text" name="inquiryReason" />
             <input type="text" name="customerName" />
             <input type="text" name="businessName" />
             <input type="text" name="collectionAddress" />
@@ -378,6 +380,28 @@ const socialLinks = [
             <input type="hidden" name="form-name" value="bankstown-dropoff-request" />
             <input type="text" name="bot-field" />
             <input type="text" name="requestType" />
+            <input type="text" name="inquiryReason" />
+            <input type="text" name="customerName" />
+            <input type="text" name="businessName" />
+            <input type="text" name="collectionAddress" />
+            <input type="text" name="contactNumber" />
+            <input type="email" name="email" />
+            <input type="text" name="panelCount" />
+            <input type="text" name="customerType" />
+            <input type="text" name="abn" />
+            <input type="text" name="preferredDropOffDate" />
+            <input type="text" name="quotedSuburb" />
+            <input type="text" name="quotedDistance" />
+            <input type="text" name="gateFee" />
+            <input type="text" name="transportFee" />
+            <input type="text" name="quoteTotal" />
+          </form>
+
+          <form name="custom-quote-request" data-netlify="true" netlify-honeypot="bot-field" hidden>
+            <input type="hidden" name="form-name" value="custom-quote-request" />
+            <input type="text" name="bot-field" />
+            <input type="text" name="requestType" />
+            <input type="text" name="inquiryReason" />
             <input type="text" name="customerName" />
             <input type="text" name="businessName" />
             <input type="text" name="collectionAddress" />
@@ -506,15 +530,24 @@ const socialLinks = [
     commercial:  { label: 'Commercial',  priceIncGst: 8.80 }
   };
 
+  function getCustomerTypeLabel(type) {
+    if (type === 'government') return 'Government';
+    if (type === 'utility') return 'Utility';
+    return PRICING[type] ? PRICING[type].label : '';
+  }
+
   /* ───────────────── STATE ────────────────── */
   var state = {
     step: 1,
     customerType: null,
     panelCount: 10,
+    panelCountEntered: false,
     selectedSuburb: null,
     distanceKm: null,
     driveMins: null,
     bookingMode: null,
+    bookingOriginStep: 4,
+    customInquiryReason: '',
     quoteTotals: null
   };
 
@@ -543,12 +576,17 @@ const socialLinks = [
   var bookingTitle = document.getElementById('booking-form-title');
   var bookingIntro = document.getElementById('booking-form-intro');
   var bookingNotice = document.getElementById('booking-form-notice');
+  var bookingNameLabel = document.getElementById('booking-name-label');
+  var bookingBusinessLabel = document.getElementById('booking-business-label');
+  var bookingPhoneLabel = document.getElementById('booking-phone-label');
+  var bookingBackLabel = document.getElementById('booking-back-label');
   var bookingFormStatus = document.getElementById('booking-form-status');
   var bookingPanelCount = document.getElementById('booking-panel-count');
   var bookingCustomerType = document.getElementById('booking-customer-type');
   var collectionAddressField = document.getElementById('field-collection-address');
   var bookingFormName = document.getElementById('booking-form-name');
   var bookingRequestType = document.getElementById('booking-request-type');
+  var bookingInquiryReason = document.getElementById('booking-inquiry-reason');
   var bookingQuotedSuburb = document.getElementById('booking-quoted-suburb');
   var bookingQuotedDistance = document.getElementById('booking-quoted-distance');
   var bookingGateFee = document.getElementById('booking-gate-fee');
@@ -610,6 +648,13 @@ const socialLinks = [
     return mins <= 15 ? '<15 min' : formatTime(mins);
   }
 
+  function shouldShowSkippedMidSteps(stepNumber) {
+    return stepNumber === 5 &&
+      state.bookingMode === 'custom' &&
+      state.bookingOriginStep === 1 &&
+      (state.customerType === 'government' || state.customerType === 'utility');
+  }
+
   /* ───────────────── NAVIGATION ──────────── */
   function showStep(n) {
     if (n === 5 && !state.bookingMode) {
@@ -623,13 +668,16 @@ const socialLinks = [
     steps.forEach(function (el) {
       el.classList.toggle('active', el.id === 'step-' + n);
     });
+    var skipMidSteps = shouldShowSkippedMidSteps(n);
     progSteps.forEach(function (el) {
       var s = parseInt(el.getAttribute('data-prog'), 10);
-      el.classList.toggle('active', s <= n);
-      el.classList.toggle('completed', s < n);
+      var isSkipped = skipMidSteps && s > 1 && s < 5;
+      el.classList.toggle('skipped', isSkipped);
+      el.classList.toggle('active', !isSkipped && (skipMidSteps ? (s === 1 || s === 5) : s <= n));
+      el.classList.toggle('completed', !isSkipped && (skipMidSteps ? s === 1 : s < n));
     });
     progFills.forEach(function (el, i) {
-      el.classList.toggle('filled', i < n - 1);
+      el.classList.toggle('filled', !skipMidSteps && i < n - 1);
     });
 
     if (n === 4) {
@@ -653,21 +701,18 @@ const socialLinks = [
     stepsWrapper.classList.remove('hidden');
   }
 
-  function showEmailResult(reason) {
-    state.bookingMode = null;
-    hideWizard();
-    document.getElementById('email-reason').textContent = reason;
+  function configurePanelCountField(isReadonly, isRequired, value) {
+    bookingPanelCount.readOnly = isReadonly;
+    bookingPanelCount.required = !!isRequired;
+    bookingPanelCount.classList.toggle('booking-input--readonly', isReadonly);
+    bookingPanelCount.value = value == null ? '' : String(value);
+  }
 
-    var subject = 'Collection Enquiry';
-    var body = 'Hi PV Industries,%0D%0A%0D%0A';
-    if (state.customerType) body += 'Customer type: ' + state.customerType + '%0D%0A';
-    if (state.panelCount) body += 'Number of panels: ' + state.panelCount + '%0D%0A';
-    if (state.selectedSuburb) body += 'Location: ' + state.selectedSuburb.name + ' ' + state.selectedSuburb.postcode + '%0D%0A';
-    body += '%0D%0APlease provide a quote for collection.%0D%0A%0D%0AThank you';
-    document.getElementById('btn-email-pvi').href =
-      'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + body;
-
-    resultEmail.classList.add('visible');
+  function showCustomInquiryForm(reason, originStep) {
+    state.bookingMode = 'custom';
+    state.bookingOriginStep = originStep;
+    state.customInquiryReason = reason;
+    showStep(5);
   }
 
   function showQuoteResult(gateFee, transportFee, total) {
@@ -684,6 +729,8 @@ const socialLinks = [
       dropOffTotal: dropOffTotal
     };
     state.bookingMode = null;
+    state.bookingOriginStep = 4;
+    state.customInquiryReason = '';
 
     document.getElementById('result-summary').textContent =
       pricing.label + ' quote for ' + state.panelCount + ' panel' + (state.panelCount !== 1 ? 's' : '') +
@@ -728,7 +775,9 @@ const socialLinks = [
   }
 
   function getBookingFormName(mode) {
-    return mode === 'dropoff' ? 'bankstown-dropoff-request' : 'collection-quote-request';
+    if (mode === 'dropoff') return 'bankstown-dropoff-request';
+    if (mode === 'custom') return 'custom-quote-request';
+    return 'collection-quote-request';
   }
 
   function populateBookingHiddenFields(mode) {
@@ -736,16 +785,19 @@ const socialLinks = [
     var driveEst = state.distanceKm !== null ? estimateDrive(state.distanceKm) : null;
 
     bookingFormName.value = getBookingFormName(mode);
-    bookingRequestType.value = isDropOff ? 'Bankstown Drop-Off' : 'Collection';
+    bookingRequestType.value = mode === 'custom'
+      ? 'Custom Quote Request'
+      : (isDropOff ? 'Bankstown Drop-Off' : 'Collection');
+    bookingInquiryReason.value = mode === 'custom' ? state.customInquiryReason : '';
     bookingQuotedSuburb.value = state.selectedSuburb
       ? state.selectedSuburb.name + ' ' + state.selectedSuburb.postcode
       : '';
     bookingQuotedDistance.value = driveEst ? formatDistance(driveEst.roadKm) : '';
-    bookingGateFee.value = state.quoteTotals ? fmt(state.quoteTotals.gateFee) : '';
-    bookingTransportFee.value = state.quoteTotals
+    bookingGateFee.value = state.quoteTotals && mode !== 'custom' ? fmt(state.quoteTotals.gateFee) : '';
+    bookingTransportFee.value = state.quoteTotals && mode !== 'custom'
       ? (isDropOff ? '$0.00' : fmt(state.quoteTotals.transportFee))
       : '';
-    bookingQuoteTotal.value = state.quoteTotals
+    bookingQuoteTotal.value = state.quoteTotals && mode !== 'custom'
       ? (isDropOff ? fmt(state.quoteTotals.dropOffTotal) : fmt(state.quoteTotals.collectionTotal))
       : '';
   }
@@ -775,39 +827,58 @@ const socialLinks = [
   function syncBookingStep() {
     if (!state.bookingMode) return;
 
-    var pricing = PRICING[state.customerType];
+    var customerTypeLabel = getCustomerTypeLabel(state.customerType);
     var isCommercial = state.customerType === 'commercial';
     var isDropOff = state.bookingMode === 'dropoff';
+    var isCustom = state.bookingMode === 'custom';
 
     resultEmail.classList.remove('visible');
 
-    bookingTitle.textContent = isDropOff ? 'Request Bankstown Drop-Off' : 'Book Collection';
-    bookingIntro.textContent = isDropOff
-      ? 'Complete this form and our sales team will email an invoice shortly for your Bankstown drop-off.'
-      : 'Complete this form and we will email your collection request to the PV Industries sales team.';
-    bookingNotice.textContent = isDropOff
-      ? 'The invoice will be issued shortly. The specific Bankstown drop-off address will be provided once payment is received.'
-      : '';
-    bookingNotice.classList.toggle('hidden', !isDropOff);
+    bookingTitle.textContent = isCustom
+      ? 'Request a Tailored Quote'
+      : (isDropOff ? 'Request Bankstown Drop-Off' : 'Book Collection');
+    bookingIntro.textContent = isCustom
+      ? 'Complete this form and our sales team will contact you with a tailored quote.'
+      : (isDropOff
+          ? 'Complete this form and our sales team will email an invoice shortly for your Bankstown drop-off.'
+          : 'Complete this form and we will email your collection request to the PV Industries sales team.');
+    bookingNotice.textContent = isCustom
+      ? state.customInquiryReason
+      : (isDropOff
+          ? 'The invoice will be issued shortly. The specific Bankstown drop-off address will be provided once payment is received.'
+          : '');
+    bookingNotice.classList.toggle('hidden', !bookingNotice.textContent);
 
-    bookingPanelCount.value = String(state.panelCount);
-    bookingCustomerType.value = pricing.label;
+    bookingNameLabel.textContent = isCustom ? 'Name' : 'Customer Name';
+    bookingBusinessLabel.textContent = isCustom ? 'Company Name' : 'Business Name';
+    bookingPhoneLabel.textContent = isCustom ? 'Phone Number' : 'Contact Number';
+    bookingBackLabel.textContent = state.bookingOriginStep === 4 ? 'Back to Pickup / Drop-Off Choice' : 'Back';
+
+    configurePanelCountField(
+      !isCustom,
+      false,
+      state.panelCountEntered ? state.panelCount : ''
+    );
+    bookingCustomerType.value = customerTypeLabel;
     populateBookingHiddenFields(state.bookingMode);
     setBookingFormStatus();
 
-    toggleConditionalField(collectionAddressField, 'collectionAddress', !isDropOff, !isDropOff);
-    toggleConditionalField(businessField, 'businessName', isCommercial, false);
-    toggleConditionalField(abnField, 'abn', isCommercial, false);
+    toggleConditionalField(collectionAddressField, 'collectionAddress', !isDropOff && !isCustom, !isDropOff && !isCustom);
+    toggleConditionalField(businessField, 'businessName', isCustom || isCommercial, false);
+    toggleConditionalField(abnField, 'abn', !isCustom && isCommercial, false);
     toggleConditionalField(dropOffDateField, 'preferredDropOffDate', isDropOff, isDropOff);
   }
 
   function resetCalculator() {
     state.customerType = null;
     state.panelCount = 10;
+    state.panelCountEntered = false;
     state.selectedSuburb = null;
     state.distanceKm = null;
     state.driveMins = null;
     state.bookingMode = null;
+    state.bookingOriginStep = 4;
+    state.customInquiryReason = '';
     state.quoteTotals = null;
 
     panelInput.value = '10';
@@ -830,8 +901,9 @@ const socialLinks = [
       var type = this.getAttribute('data-type');
       if (type === 'government' || type === 'utility') {
         state.customerType = type;
-        showEmailResult(
-          'For ' + type + ' projects, we provide customised pricing tailored to your requirements.'
+        showCustomInquiryForm(
+          'For ' + getCustomerTypeLabel(type).toLowerCase() + ' projects, we provide customised pricing tailored to your requirements.',
+          1
         );
         return;
       }
@@ -876,9 +948,11 @@ const socialLinks = [
       return;
     }
     state.panelCount = val;
+    state.panelCountEntered = true;
     if (val > MAX_PANELS) {
-      showEmailResult(
-        'For collections of more than ' + MAX_PANELS + ' panels, we provide customised pricing.'
+      showCustomInquiryForm(
+        'For collections of more than ' + MAX_PANELS + ' panels, we provide customised pricing.',
+        2
       );
       return;
     }
@@ -914,8 +988,9 @@ const socialLinks = [
         noMatch.textContent = 'Instant quotes are available for Sydney Metro only — contact us for other areas';
         noMatch.addEventListener('mousedown', function (e) {
           e.preventDefault();
-          showEmailResult(
-            "Our quote calculator can't yet provide an estimate for your area. Please contact us directly."
+          showCustomInquiryForm(
+            "Our quote calculator can't yet provide an estimate for your area. Please complete the form below and our sales team will contact you.",
+            3
           );
         });
         dropdown.appendChild(noMatch);
@@ -958,10 +1033,11 @@ const socialLinks = [
     if (drive.roadKm > MAX_DISTANCE_KM) {
       state.distanceKm = straightKm;
       state.driveMins = drive.mins;
-      showEmailResult(
+      showCustomInquiryForm(
         'Your location (' + s.name + ') is approximately ' +
         formatDistance(drive.roadKm) + ' from PV Industries, which is outside our standard collection radius of ' +
-        MAX_DISTANCE_KM + ' km. Please get in touch for a custom quote.'
+        MAX_DISTANCE_KM + ' km. Please complete the form below and our sales team will provide a custom quote.',
+        3
       );
     }
   }
@@ -979,8 +1055,9 @@ const socialLinks = [
     if (q.length >= 3 && results.length === 0) {
       noMatchTimer = setTimeout(function () {
         closeDropdown();
-        showEmailResult(
-          'For all enquiries outside of Sydney Metro, please contact us directly via the link below.'
+        showCustomInquiryForm(
+          'For all enquiries outside of Sydney Metro, please complete the form below and our sales team will contact you.',
+          3
         );
       }, 800);
     }
@@ -1019,8 +1096,9 @@ const socialLinks = [
     var q = locInput.value.trim();
     if (!state.selectedSuburb) {
       if (q.length >= 2 && searchSuburbs(q).length === 0) {
-        showEmailResult(
-          'For all enquiries outside of Sydney Metro, please contact us directly via the link below.'
+        showCustomInquiryForm(
+          'For all enquiries outside of Sydney Metro, please complete the form below and our sales team will contact you.',
+          3
         );
         return;
       }
@@ -1036,10 +1114,11 @@ const socialLinks = [
     state.driveMins = drive.mins;
 
     if (drive.roadKm > MAX_DISTANCE_KM) {
-      showEmailResult(
+      showCustomInquiryForm(
         'Your location (' + state.selectedSuburb.name + ') is approximately ' +
         formatDistance(drive.roadKm) + ' from PV Industries, which is outside our standard collection radius of ' +
-        MAX_DISTANCE_KM + ' km. Please get in touch for a custom quote.'
+        MAX_DISTANCE_KM + ' km. Please complete the form below and our sales team will provide a custom quote.',
+        3
       );
       return;
     }
@@ -1087,7 +1166,7 @@ const socialLinks = [
   });
   btnBackToQuoteOptions.addEventListener('click', function () {
     setBookingFormStatus();
-    showStep(4);
+    showStep(state.bookingOriginStep);
   });
   bookingForm.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -1106,17 +1185,23 @@ const socialLinks = [
       if (!response.ok) throw new Error('Request failed');
 
       bookingForm.reset();
-      bookingPanelCount.value = String(state.panelCount);
-      bookingCustomerType.value = PRICING[state.customerType].label;
+      configurePanelCountField(
+        state.bookingMode !== 'custom',
+        false,
+        state.panelCountEntered ? state.panelCount : ''
+      );
+      bookingCustomerType.value = getCustomerTypeLabel(state.customerType);
       populateBookingHiddenFields(state.bookingMode);
-      toggleConditionalField(collectionAddressField, 'collectionAddress', state.bookingMode !== 'dropoff', state.bookingMode !== 'dropoff');
-      toggleConditionalField(businessField, 'businessName', state.customerType === 'commercial', false);
-      toggleConditionalField(abnField, 'abn', state.customerType === 'commercial', false);
+      toggleConditionalField(collectionAddressField, 'collectionAddress', state.bookingMode !== 'dropoff' && state.bookingMode !== 'custom', state.bookingMode !== 'dropoff' && state.bookingMode !== 'custom');
+      toggleConditionalField(businessField, 'businessName', state.bookingMode === 'custom' || state.customerType === 'commercial', false);
+      toggleConditionalField(abnField, 'abn', state.bookingMode !== 'custom' && state.customerType === 'commercial', false);
       toggleConditionalField(dropOffDateField, 'preferredDropOffDate', state.bookingMode === 'dropoff', state.bookingMode === 'dropoff');
 
       setBookingFormStatus(
         'success',
-        state.bookingMode === 'dropoff'
+        state.bookingMode === 'custom'
+          ? 'Your enquiry has been sent. Our sales team will be in touch shortly.'
+          : state.bookingMode === 'dropoff'
           ? 'Your Bankstown drop-off request has been sent. Our sales team will issue the invoice shortly.'
           : 'Your collection request has been sent. Our sales team will be in touch shortly.'
       );
@@ -1243,6 +1328,18 @@ const socialLinks = [
   .progress-step.active .step-label,
   .progress-step.completed .step-label {
     color: var(--color-neutral-100);
+  }
+
+  .progress-step.skipped .step-dot {
+    border-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.2);
+    background: transparent;
+  }
+
+  .progress-step.skipped .step-label {
+    color: rgba(255, 255, 255, 0.24);
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
   }
 
   .progress-line {
