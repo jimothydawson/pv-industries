@@ -53,6 +53,16 @@ const socialLinks = [
               <span class="step-dot">3</span>
               <span class="step-label">Location</span>
             </div>
+            <div class="progress-line"><span class="progress-fill"></span></div>
+            <div class="progress-step" data-prog="4">
+              <span class="step-dot">4</span>
+              <span class="step-label">Quote</span>
+            </div>
+            <div class="progress-line"><span class="progress-fill"></span></div>
+            <div class="progress-step" data-prog="5">
+              <span class="step-dot">5</span>
+              <span class="step-label">Details</span>
+            </div>
           </div>
 
           <!-- Steps Wrapper -->
@@ -121,7 +131,7 @@ const socialLinks = [
             <!-- Step 2: Panel Count -->
             <div class="calc-step" id="step-2">
               <h3 class="step-title">How many panels need collecting?</h3>
-              <p class="step-subtitle">Enter the number of solar panels for collection. Your quote will be revealed after location.</p>
+              <p class="step-subtitle">Enter the number of solar panels for collection.</p>
               <div class="panel-input-wrapper">
                 <div class="panel-input-group">
                   <button class="panel-btn panel-minus" type="button" aria-label="Decrease panel count">
@@ -175,41 +185,156 @@ const socialLinks = [
                 </button>
               </div>
             </div>
+            <!-- Step 4: Quote Options -->
+            <div class="calc-step" id="step-4">
+              <h3 class="step-title">Choose your quote option</h3>
+              <p class="step-subtitle" id="result-summary"></p>
 
-          </div>
+              <div class="quote-options-grid">
+                <article class="quote-option-card quote-option-selectable" id="option-collection" data-option="collection" tabindex="0" role="button" aria-pressed="false">
+                  <div class="quote-option-head">
+                    <h4 class="quote-option-title">Collection Quote</h4>
+                    <span class="quote-option-pill">Pickup</span>
+                  </div>
+                  <p class="quote-option-summary" id="collection-summary"></p>
 
-          <!-- Quote Result -->
-          <div class="calc-result" id="result-quote">
-            <div class="result-badge success">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <h3 class="result-title">Your Collection Quote</h3>
-            <p class="result-subtitle" id="result-summary"></p>
+                  <div class="quote-breakdown">
+                    <div class="quote-row">
+                      <span class="quote-label">Gate fee <span class="quote-detail" id="r-gate-detail"></span></span>
+                      <span class="quote-value" id="r-gate-fee"></span>
+                    </div>
+                    <div class="quote-row">
+                      <span class="quote-label">Transport fee <span class="quote-detail" id="r-transport-detail"></span></span>
+                      <span class="quote-value" id="r-transport-fee"></span>
+                    </div>
+                    <div class="quote-divider"></div>
+                    <div class="quote-row total">
+                      <span class="quote-label">Total</span>
+                      <span class="quote-value" id="r-total"></span>
+                    </div>
+                    <p class="quote-gst-note">All prices include GST. Transport includes 15% toll allowance.</p>
+                  </div>
+                </article>
 
-            <div class="quote-breakdown">
-              <div class="quote-row">
-                <span class="quote-label">Gate fee <span class="quote-detail" id="r-gate-detail"></span></span>
-                <span class="quote-value" id="r-gate-fee"></span>
+                <article class="quote-option-card quote-option-card--dropoff quote-option-selectable" id="option-dropoff" data-option="dropoff" tabindex="0" role="button" aria-pressed="false">
+                  <div class="quote-option-head">
+                    <h4 class="quote-option-title">Bankstown Drop-Off Quote</h4>
+                    <span class="quote-option-pill">Drop-Off</span>
+                  </div>
+                  <p class="quote-option-summary">Drop your panels to Bankstown after invoice payment is received.</p>
+
+                  <div class="quote-breakdown">
+                    <div class="quote-row">
+                      <span class="quote-label">Gate fee <span class="quote-detail" id="r-dropoff-gate-detail"></span></span>
+                      <span class="quote-value" id="r-dropoff-gate-fee"></span>
+                    </div>
+                    <div class="quote-row">
+                      <span class="quote-label">Transport fee</span>
+                      <span class="quote-value quote-value--muted">Not required</span>
+                    </div>
+                    <div class="quote-divider"></div>
+                    <div class="quote-row total">
+                      <span class="quote-label">Total</span>
+                      <span class="quote-value" id="r-dropoff-total"></span>
+                    </div>
+                    <p class="quote-gst-note">All prices include GST. Invoice and exact drop-off address are issued after payment.</p>
+                  </div>
+                </article>
               </div>
-              <div class="quote-row">
-                <span class="quote-label">Transport fee <span class="quote-detail" id="r-transport-detail"></span></span>
-                <span class="quote-value" id="r-transport-fee"></span>
+
+              <p class="option-selection-note" id="option-selection-note">Select Collection or Bankstown Drop-Off to continue.</p>
+
+              <div class="step-actions">
+                <button class="btn-back" data-goto="3" type="button">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  Back
+                </button>
+                <button class="btn-next" id="btn-step4-next" type="button" disabled>
+                  Continue
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
               </div>
-              <div class="quote-divider"></div>
-              <div class="quote-row total">
-                <span class="quote-label">Total</span>
-                <span class="quote-value" id="r-total"></span>
-              </div>
-              <p class="quote-gst-note">All prices include GST. Transport includes 15% toll allowance.</p>
             </div>
 
-            <div class="result-actions">
-              <a class="btn-book" id="btn-book" href="#">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Book Collection
-              </a>
-              <button class="btn-restart" id="btn-restart-quote" type="button">Get New Quote</button>
+            <!-- Step 5: Booking Request Form -->
+            <div class="calc-step" id="step-5">
+              <h3 class="step-title" id="booking-form-title">Book Collection</h3>
+              <p class="step-subtitle" id="booking-form-intro"></p>
+              <p class="result-message booking-form-notice hidden" id="booking-form-notice"></p>
+
+              <form class="booking-form" id="booking-request-form" method="POST" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" id="booking-form-name" value="collection-quote-request" />
+              <input type="hidden" name="bot-field" />
+              <input type="hidden" name="requestType" id="booking-request-type" value="Collection" />
+              <input type="hidden" name="inquiryReason" id="booking-inquiry-reason" value="" />
+              <input type="hidden" name="quotedSuburb" id="booking-quoted-suburb" value="" />
+              <input type="hidden" name="quotedDistance" id="booking-quoted-distance" value="" />
+              <input type="hidden" name="gateFee" id="booking-gate-fee" value="" />
+              <input type="hidden" name="transportFee" id="booking-transport-fee" value="" />
+              <input type="hidden" name="quoteTotal" id="booking-quote-total" value="" />
+
+              <div class="booking-form-grid">
+                <label class="booking-field">
+                  <span class="booking-label" id="booking-name-label">Customer Name</span>
+                  <input class="booking-input" type="text" name="customerName" autocomplete="name" required />
+                </label>
+
+                <label class="booking-field hidden" id="field-business-name">
+                  <span class="booking-label" id="booking-business-label">Business Name</span>
+                  <input class="booking-input" type="text" name="businessName" autocomplete="organization" />
+                </label>
+
+                <label class="booking-field booking-field--full" id="field-collection-address">
+                  <span class="booking-label" id="booking-address-label">Collection Address</span>
+                  <input class="booking-input" type="text" name="collectionAddress" autocomplete="street-address" required />
+                </label>
+
+                <label class="booking-field">
+                  <span class="booking-label" id="booking-phone-label">Contact Number</span>
+                  <input class="booking-input" type="tel" name="contactNumber" autocomplete="tel" required />
+                </label>
+
+                <label class="booking-field">
+                  <span class="booking-label">Email</span>
+                  <input class="booking-input" type="email" name="email" autocomplete="email" required />
+                </label>
+
+                <label class="booking-field">
+                  <span class="booking-label">Number of Panels</span>
+                  <input class="booking-input booking-input--readonly" id="booking-panel-count" type="text" name="panelCount" readonly />
+                </label>
+
+                <label class="booking-field">
+                  <span class="booking-label">Customer Type</span>
+                  <input class="booking-input booking-input--readonly" id="booking-customer-type" type="text" name="customerType" readonly />
+                </label>
+
+                <label class="booking-field hidden" id="field-abn">
+                  <span class="booking-label">ABN</span>
+                  <input class="booking-input" type="text" name="abn" inputmode="numeric" />
+                </label>
+
+                <label class="booking-field booking-field--date hidden" id="field-dropoff-date">
+                  <span class="booking-label">Preferred Drop-Off Date</span>
+                  <input class="booking-input" type="date" name="preferredDropOffDate" />
+                </label>
+              </div>
+
+              <p class="booking-form-status hidden" id="booking-form-status" aria-live="polite"></p>
+
+              <div class="step-actions step-actions--form">
+                <button class="btn-back" id="btn-back-to-quote-options" type="button">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  <span id="booking-back-label">Back to Pickup / Drop-Off Choice</span>
+                </button>
+                <button class="btn-next btn-submit" id="btn-submit-booking" type="submit">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  Send Request
+                </button>
+              </div>
+              </form>
             </div>
+
           </div>
 
           <!-- Email / Large Job Result -->
@@ -229,6 +354,69 @@ const socialLinks = [
               <button class="btn-restart" id="btn-restart-email" type="button">Get New Quote</button>
             </div>
           </div>
+
+          <form name="collection-quote-request" data-netlify="true" netlify-honeypot="bot-field" hidden>
+            <input type="hidden" name="form-name" value="collection-quote-request" />
+            <input type="text" name="bot-field" />
+            <input type="text" name="requestType" />
+            <input type="text" name="inquiryReason" />
+            <input type="text" name="customerName" />
+            <input type="text" name="businessName" />
+            <input type="text" name="collectionAddress" />
+            <input type="text" name="contactNumber" />
+            <input type="email" name="email" />
+            <input type="text" name="panelCount" />
+            <input type="text" name="customerType" />
+            <input type="text" name="abn" />
+            <input type="text" name="preferredDropOffDate" />
+            <input type="text" name="quotedSuburb" />
+            <input type="text" name="quotedDistance" />
+            <input type="text" name="gateFee" />
+            <input type="text" name="transportFee" />
+            <input type="text" name="quoteTotal" />
+          </form>
+
+          <form name="bankstown-dropoff-request" data-netlify="true" netlify-honeypot="bot-field" hidden>
+            <input type="hidden" name="form-name" value="bankstown-dropoff-request" />
+            <input type="text" name="bot-field" />
+            <input type="text" name="requestType" />
+            <input type="text" name="inquiryReason" />
+            <input type="text" name="customerName" />
+            <input type="text" name="businessName" />
+            <input type="text" name="collectionAddress" />
+            <input type="text" name="contactNumber" />
+            <input type="email" name="email" />
+            <input type="text" name="panelCount" />
+            <input type="text" name="customerType" />
+            <input type="text" name="abn" />
+            <input type="text" name="preferredDropOffDate" />
+            <input type="text" name="quotedSuburb" />
+            <input type="text" name="quotedDistance" />
+            <input type="text" name="gateFee" />
+            <input type="text" name="transportFee" />
+            <input type="text" name="quoteTotal" />
+          </form>
+
+          <form name="custom-quote-request" data-netlify="true" netlify-honeypot="bot-field" hidden>
+            <input type="hidden" name="form-name" value="custom-quote-request" />
+            <input type="text" name="bot-field" />
+            <input type="text" name="requestType" />
+            <input type="text" name="inquiryReason" />
+            <input type="text" name="customerName" />
+            <input type="text" name="businessName" />
+            <input type="text" name="collectionAddress" />
+            <input type="text" name="contactNumber" />
+            <input type="email" name="email" />
+            <input type="text" name="panelCount" />
+            <input type="text" name="customerType" />
+            <input type="text" name="abn" />
+            <input type="text" name="preferredDropOffDate" />
+            <input type="text" name="quotedSuburb" />
+            <input type="text" name="quotedDistance" />
+            <input type="text" name="gateFee" />
+            <input type="text" name="transportFee" />
+            <input type="text" name="quoteTotal" />
+          </form>
 
         </div>
       </div>
@@ -332,6 +520,7 @@ const socialLinks = [
   var HOURLY_RATE = 100;
   var TOLL_MULTIPLIER = 1.15;
   var LOADING_MINS_PER_PANEL = 1.5;
+  var MIN_TRANSPORT_MINS = 30;
   var ROAD_FACTOR = 1.5;
   var AVG_SPEED_KPH = 35;
   var CONTACT_EMAIL = 'contact@pvindustries.com.au';
@@ -341,14 +530,25 @@ const socialLinks = [
     commercial:  { label: 'Commercial',  priceIncGst: 8.80 }
   };
 
+  function getCustomerTypeLabel(type) {
+    if (type === 'government') return 'Government';
+    if (type === 'utility') return 'Utility';
+    return PRICING[type] ? PRICING[type].label : '';
+  }
+
   /* ───────────────── STATE ────────────────── */
   var state = {
     step: 1,
     customerType: null,
     panelCount: 10,
+    panelCountEntered: false,
     selectedSuburb: null,
     distanceKm: null,
-    driveMins: null
+    driveMins: null,
+    bookingMode: null,
+    bookingOriginStep: 4,
+    customInquiryReason: '',
+    quoteTotals: null
   };
 
   /* ───────────────── DOM REFS ─────────────── */
@@ -365,11 +565,37 @@ const socialLinks = [
   var locHint     = document.getElementById('location-hint');
   var dropdown    = document.getElementById('autocomplete-dropdown');
   var btnQuote    = document.getElementById('btn-get-quote');
-  var resultQuote = document.getElementById('result-quote');
   var resultEmail = document.getElementById('result-email');
-  var backBtns    = document.querySelectorAll('.btn-back');
+  var backBtns    = document.querySelectorAll('.btn-back[data-goto]');
   var calcProgress = document.querySelector('.calc-progress');
   var stepsWrapper = document.querySelector('.calc-steps-wrapper');
+  var optionCards = document.querySelectorAll('.quote-option-selectable');
+  var btnStep4Next = document.getElementById('btn-step4-next');
+  var optionSelectionNote = document.getElementById('option-selection-note');
+  var bookingForm = document.getElementById('booking-request-form');
+  var bookingTitle = document.getElementById('booking-form-title');
+  var bookingIntro = document.getElementById('booking-form-intro');
+  var bookingNotice = document.getElementById('booking-form-notice');
+  var bookingNameLabel = document.getElementById('booking-name-label');
+  var bookingBusinessLabel = document.getElementById('booking-business-label');
+  var bookingPhoneLabel = document.getElementById('booking-phone-label');
+  var bookingBackLabel = document.getElementById('booking-back-label');
+  var bookingFormStatus = document.getElementById('booking-form-status');
+  var bookingPanelCount = document.getElementById('booking-panel-count');
+  var bookingCustomerType = document.getElementById('booking-customer-type');
+  var collectionAddressField = document.getElementById('field-collection-address');
+  var bookingFormName = document.getElementById('booking-form-name');
+  var bookingRequestType = document.getElementById('booking-request-type');
+  var bookingInquiryReason = document.getElementById('booking-inquiry-reason');
+  var bookingQuotedSuburb = document.getElementById('booking-quoted-suburb');
+  var bookingQuotedDistance = document.getElementById('booking-quoted-distance');
+  var bookingGateFee = document.getElementById('booking-gate-fee');
+  var bookingTransportFee = document.getElementById('booking-transport-fee');
+  var bookingQuoteTotal = document.getElementById('booking-quote-total');
+  var businessField = document.getElementById('field-business-name');
+  var abnField = document.getElementById('field-abn');
+  var dropOffDateField = document.getElementById('field-dropoff-date');
+  var btnBackToQuoteOptions = document.getElementById('btn-back-to-quote-options');
 
   /* ───────────────── HELPERS ──────────────── */
   function fmt(n) {
@@ -406,25 +632,62 @@ const socialLinks = [
     return h + ' hr' + (m > 0 ? ' ' + m + ' min' : '');
   }
 
+  function getMinimumAppliedRoundTripMins(driveMins) {
+    return Math.max(driveMins * 2, MIN_TRANSPORT_MINS);
+  }
+
+  function getMinimumAppliedDriveMins(driveMins) {
+    return Math.max(driveMins, MIN_TRANSPORT_MINS / 2);
+  }
+
+  function formatMinimumDisplayDistance(km) {
+    return km < 10 ? '<10 km' : formatDistance(km);
+  }
+
+  function formatMinimumDisplayTime(mins) {
+    return mins <= 15 ? '<15 min' : formatTime(mins);
+  }
+
+  function shouldShowSkippedMidSteps(stepNumber) {
+    return stepNumber === 5 &&
+      state.bookingMode === 'custom' &&
+      state.bookingOriginStep === 1 &&
+      (state.customerType === 'government' || state.customerType === 'utility');
+  }
+
   /* ───────────────── NAVIGATION ──────────── */
   function showStep(n) {
+    if (n === 5 && !state.bookingMode) {
+      n = 4;
+    }
+
     state.step = n;
+    showWizard();
+    hideResults();
+
     steps.forEach(function (el) {
       el.classList.toggle('active', el.id === 'step-' + n);
     });
+    var skipMidSteps = shouldShowSkippedMidSteps(n);
     progSteps.forEach(function (el) {
       var s = parseInt(el.getAttribute('data-prog'), 10);
-      el.classList.toggle('active', s <= n);
-      el.classList.toggle('completed', s < n);
+      var isSkipped = skipMidSteps && s > 1 && s < 5;
+      el.classList.toggle('skipped', isSkipped);
+      el.classList.toggle('active', !isSkipped && (skipMidSteps ? (s === 1 || s === 5) : s <= n));
+      el.classList.toggle('completed', !isSkipped && (skipMidSteps ? s === 1 : s < n));
     });
     progFills.forEach(function (el, i) {
-      el.classList.toggle('filled', i < n - 1);
+      el.classList.toggle('filled', !skipMidSteps && i < n - 1);
     });
-    hideResults();
+
+    if (n === 4) {
+      updateQuoteOptionSelection();
+    } else if (n === 5) {
+      syncBookingStep();
+    }
   }
 
   function hideResults() {
-    resultQuote.classList.remove('visible');
     resultEmail.classList.remove('visible');
   }
 
@@ -438,66 +701,198 @@ const socialLinks = [
     stepsWrapper.classList.remove('hidden');
   }
 
-  function showEmailResult(reason) {
-    resultQuote.classList.remove('visible');
-    document.getElementById('email-reason').textContent = reason;
-    document.getElementById('btn-email-pvi').href = '#contact';
+  function configurePanelCountField(isReadonly, isRequired, value) {
+    bookingPanelCount.readOnly = isReadonly;
+    bookingPanelCount.required = !!isRequired;
+    bookingPanelCount.classList.toggle('booking-input--readonly', isReadonly);
+    bookingPanelCount.value = value == null ? '' : String(value);
+  }
 
-    resultEmail.classList.add('visible');
+  function showCustomInquiryForm(reason, originStep) {
+    state.bookingMode = 'custom';
+    state.bookingOriginStep = originStep;
+    state.customInquiryReason = reason;
+    showStep(5);
   }
 
   function showQuoteResult(gateFee, transportFee, total) {
-    steps.forEach(function (el) { el.classList.remove('active'); });
-    hideWizard();
     resultEmail.classList.remove('visible');
-    resultQuote.classList.remove('visible');
 
     var pricing = PRICING[state.customerType];
     var driveEst = estimateDrive(state.distanceKm);
+    var dropOffTotal = gateFee;
+
+    state.quoteTotals = {
+      gateFee: gateFee,
+      transportFee: transportFee,
+      collectionTotal: total,
+      dropOffTotal: dropOffTotal
+    };
+    state.bookingMode = null;
+    state.bookingOriginStep = 4;
+    state.customInquiryReason = '';
 
     document.getElementById('result-summary').textContent =
-      pricing.label + ' collection of ' + state.panelCount + ' panel' + (state.panelCount !== 1 ? 's' : '') +
-      ' — ' + state.selectedSuburb.name + ' (' + formatDistance(driveEst.roadKm) + ', ~' + formatTime(driveEst.mins) + ' drive)';
+      pricing.label + ' quote for ' + state.panelCount + ' panel' + (state.panelCount !== 1 ? 's' : '') +
+      ' — ' + state.selectedSuburb.name + ' (' + formatMinimumDisplayDistance(driveEst.roadKm) + ', ' + formatMinimumDisplayTime(getMinimumAppliedDriveMins(driveEst.mins)) + ' drive)';
+    document.getElementById('collection-summary').textContent =
+      'We collect from ' + state.selectedSuburb.name + ' and include transport in this quote.';
 
     document.getElementById('r-gate-detail').textContent =
       '(' + state.panelCount + ' × ' + fmt(pricing.priceIncGst) + ')';
     document.getElementById('r-gate-fee').textContent = fmt(gateFee);
+    var roundTripMinsWithMinimum = getMinimumAppliedRoundTripMins(driveEst.mins);
     document.getElementById('r-transport-detail').textContent =
-      '(~' + formatTime(driveEst.mins * 2) + ' round trip + loading)';
+      '(~' + formatTime(roundTripMinsWithMinimum) + ' round trip minimum + loading)';
     document.getElementById('r-transport-fee').textContent = fmt(transportFee);
     document.getElementById('r-total').textContent = fmt(total);
+    document.getElementById('r-dropoff-gate-detail').textContent =
+      '(' + state.panelCount + ' × ' + fmt(pricing.priceIncGst) + ')';
+    document.getElementById('r-dropoff-gate-fee').textContent = fmt(gateFee);
+    document.getElementById('r-dropoff-total').textContent = fmt(dropOffTotal);
+    updateQuoteOptionSelection();
+    showStep(4);
+  }
 
-    var subject = 'Collection Booking — ' + state.panelCount + ' panels — ' + fmt(total);
-    var body = 'Hi PV Industries,%0D%0A%0D%0A';
-    body += 'I would like to book a solar panel collection.%0D%0A%0D%0A';
-    body += 'Customer type: ' + pricing.label + '%0D%0A';
-    body += 'Number of panels: ' + state.panelCount + '%0D%0A';
-    body += 'Location: ' + state.selectedSuburb.name + ' ' + state.selectedSuburb.postcode + '%0D%0A';
-    body += 'Estimated distance: ' + formatDistance(driveEst.roadKm) + '%0D%0A%0D%0A';
-    body += 'Quoted price: ' + fmt(total) + '%0D%0A';
-    body += '  Gate fee: ' + fmt(gateFee) + '%0D%0A';
-    body += '  Transport fee: ' + fmt(transportFee) + '%0D%0A%0D%0A';
-    body += 'Please confirm availability and next steps.%0D%0A%0D%0AThank you';
-    document.getElementById('btn-book').href =
-      'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + body;
+  function toggleConditionalField(wrapper, inputName, shouldShow, shouldRequire) {
+    var input = bookingForm.elements[inputName];
+    wrapper.classList.toggle('hidden', !shouldShow);
+    if (input) {
+      input.required = !!shouldRequire;
+      if (!shouldShow) input.value = '';
+    }
+  }
 
-    resultQuote.classList.add('visible');
+  function setBookingFormStatus(type, message) {
+    if (!message) {
+      bookingFormStatus.textContent = '';
+      bookingFormStatus.className = 'booking-form-status hidden';
+      return;
+    }
+
+    bookingFormStatus.textContent = message;
+    bookingFormStatus.className = 'booking-form-status booking-form-status--' + type;
+  }
+
+  function getBookingFormName(mode) {
+    if (mode === 'dropoff') return 'bankstown-dropoff-request';
+    if (mode === 'custom') return 'custom-quote-request';
+    return 'collection-quote-request';
+  }
+
+  function populateBookingHiddenFields(mode) {
+    var isDropOff = mode === 'dropoff';
+    var driveEst = state.distanceKm !== null ? estimateDrive(state.distanceKm) : null;
+
+    bookingFormName.value = getBookingFormName(mode);
+    bookingRequestType.value = mode === 'custom'
+      ? 'Custom Quote Request'
+      : (isDropOff ? 'Bankstown Drop-Off' : 'Collection');
+    bookingInquiryReason.value = mode === 'custom' ? state.customInquiryReason : '';
+    bookingQuotedSuburb.value = state.selectedSuburb
+      ? state.selectedSuburb.name + ' ' + state.selectedSuburb.postcode
+      : '';
+    bookingQuotedDistance.value = driveEst ? formatDistance(driveEst.roadKm) : '';
+    bookingGateFee.value = state.quoteTotals && mode !== 'custom' ? fmt(state.quoteTotals.gateFee) : '';
+    bookingTransportFee.value = state.quoteTotals && mode !== 'custom'
+      ? (isDropOff ? '$0.00' : fmt(state.quoteTotals.transportFee))
+      : '';
+    bookingQuoteTotal.value = state.quoteTotals && mode !== 'custom'
+      ? (isDropOff ? fmt(state.quoteTotals.dropOffTotal) : fmt(state.quoteTotals.collectionTotal))
+      : '';
+  }
+
+  function encodeFormData(formData) {
+    return Array.from(formData.entries()).map(function (entry) {
+      return encodeURIComponent(entry[0]) + '=' + encodeURIComponent(entry[1]);
+    }).join('&');
+  }
+
+  function updateQuoteOptionSelection() {
+    optionCards.forEach(function (card) {
+      var isSelected = card.getAttribute('data-option') === state.bookingMode;
+      card.classList.toggle('selected', isSelected);
+      card.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+    });
+
+    btnStep4Next.disabled = !state.bookingMode;
+    optionSelectionNote.textContent = state.bookingMode
+      ? (state.bookingMode === 'dropoff'
+          ? 'Bankstown Drop-Off selected. Continue to enter your request details.'
+          : 'Collection selected. Continue to enter your request details.')
+      : 'Select Collection or Bankstown Drop-Off to continue.';
+    optionSelectionNote.className = state.bookingMode ? 'option-selection-note active' : 'option-selection-note';
+  }
+
+  function syncBookingStep() {
+    if (!state.bookingMode) return;
+
+    var customerTypeLabel = getCustomerTypeLabel(state.customerType);
+    var isCommercial = state.customerType === 'commercial';
+    var isDropOff = state.bookingMode === 'dropoff';
+    var isCustom = state.bookingMode === 'custom';
+
+    resultEmail.classList.remove('visible');
+
+    bookingTitle.textContent = isCustom
+      ? 'Request a Tailored Quote'
+      : (isDropOff ? 'Request Bankstown Drop-Off' : 'Book Collection');
+    bookingIntro.textContent = isCustom
+      ? 'Complete this form and our sales team will contact you with a tailored quote.'
+      : (isDropOff
+          ? 'Complete this form and our sales team will email an invoice shortly for your Bankstown drop-off.'
+          : 'Complete this form and we will email your collection request to the PV Industries sales team.');
+    bookingNotice.textContent = isCustom
+      ? state.customInquiryReason
+      : (isDropOff
+          ? 'The invoice will be issued shortly. The specific Bankstown drop-off address will be provided once payment is received.'
+          : '');
+    bookingNotice.classList.toggle('hidden', !bookingNotice.textContent);
+
+    bookingNameLabel.textContent = isCustom ? 'Name' : 'Customer Name';
+    bookingBusinessLabel.textContent = isCustom
+      ? ((state.customerType === 'government' || state.customerType === 'utility') ? 'Organisation Name' : 'Company Name')
+      : 'Business Name';
+    bookingPhoneLabel.textContent = isCustom ? 'Phone Number' : 'Contact Number';
+    bookingBackLabel.textContent = state.bookingOriginStep === 4 ? 'Back to Pickup / Drop-Off Choice' : 'Back';
+
+    configurePanelCountField(
+      !isCustom,
+      false,
+      state.panelCountEntered ? state.panelCount : ''
+    );
+    bookingCustomerType.value = customerTypeLabel;
+    populateBookingHiddenFields(state.bookingMode);
+    setBookingFormStatus();
+
+    toggleConditionalField(collectionAddressField, 'collectionAddress', !isDropOff && !isCustom, !isDropOff && !isCustom);
+    toggleConditionalField(businessField, 'businessName', isCustom || isCommercial, false);
+    toggleConditionalField(abnField, 'abn', !isCustom && isCommercial, false);
+    toggleConditionalField(dropOffDateField, 'preferredDropOffDate', isDropOff, isDropOff);
   }
 
   function resetCalculator() {
     state.customerType = null;
     state.panelCount = 10;
+    state.panelCountEntered = false;
     state.selectedSuburb = null;
     state.distanceKm = null;
     state.driveMins = null;
+    state.bookingMode = null;
+    state.bookingOriginStep = 4;
+    state.customInquiryReason = '';
+    state.quoteTotals = null;
 
     panelInput.value = '10';
     locInput.value = '';
     panelHint.textContent = '';
     locHint.textContent = '';
+    bookingForm.reset();
+    setBookingFormStatus();
     closeDropdown();
 
     typeCards.forEach(function (c) { c.classList.remove('selected'); });
+    updateQuoteOptionSelection();
     showWizard();
     showStep(1);
   }
@@ -508,8 +903,9 @@ const socialLinks = [
       var type = this.getAttribute('data-type');
       if (type === 'government' || type === 'utility') {
         state.customerType = type;
-        showEmailResult(
-          'For ' + type + ' projects, we provide customised pricing tailored to your requirements.'
+        showCustomInquiryForm(
+          'For ' + getCustomerTypeLabel(type).toLowerCase() + ' projects, we provide customised pricing tailored to your requirements.',
+          1
         );
         return;
       }
@@ -554,9 +950,11 @@ const socialLinks = [
       return;
     }
     state.panelCount = val;
+    state.panelCountEntered = true;
     if (val > MAX_PANELS) {
-      showEmailResult(
-        'For collections of more than ' + MAX_PANELS + ' panels, we provide customised pricing.'
+      showCustomInquiryForm(
+        'For collections of more than ' + MAX_PANELS + ' panels, we provide customised pricing.',
+        2
       );
       return;
     }
@@ -592,8 +990,9 @@ const socialLinks = [
         noMatch.textContent = 'Instant quotes are available for Sydney Metro only — use the form below for other areas';
         noMatch.addEventListener('mousedown', function (e) {
           e.preventDefault();
-          showEmailResult(
-            "Our quote calculator can't yet provide an estimate for your area. Scroll down to the form section below and we'll prepare a tailored quote."
+          showCustomInquiryForm(
+            "Our quote calculator can't yet provide an estimate for your area. Please complete the form below and our sales team will contact you.",
+            3
           );
         });
         dropdown.appendChild(noMatch);
@@ -636,10 +1035,11 @@ const socialLinks = [
     if (drive.roadKm > MAX_DISTANCE_KM) {
       state.distanceKm = straightKm;
       state.driveMins = drive.mins;
-      showEmailResult(
+      showCustomInquiryForm(
         'Your location (' + s.name + ') is approximately ' +
         formatDistance(drive.roadKm) + ' from PV Industries, which is outside our standard collection radius of ' +
-        MAX_DISTANCE_KM + ' km. Scroll down to the form section below for a custom quote.'
+        MAX_DISTANCE_KM + ' km. Please complete the form below and our sales team will provide a custom quote.',
+        3
       );
     }
   }
@@ -657,8 +1057,9 @@ const socialLinks = [
     if (q.length >= 3 && results.length === 0) {
       noMatchTimer = setTimeout(function () {
         closeDropdown();
-        showEmailResult(
-          'For all enquiries outside of Sydney Metro, scroll down to the form section below and we will provide a tailored quote.'
+        showCustomInquiryForm(
+          'For all enquiries outside of Sydney Metro, please complete the form below and our sales team will contact you.',
+          3
         );
       }, 800);
     }
@@ -697,8 +1098,9 @@ const socialLinks = [
     var q = locInput.value.trim();
     if (!state.selectedSuburb) {
       if (q.length >= 2 && searchSuburbs(q).length === 0) {
-        showEmailResult(
-          'For all enquiries outside of Sydney Metro, scroll down to the form section below and we will provide a tailored quote.'
+        showCustomInquiryForm(
+          'For all enquiries outside of Sydney Metro, please complete the form below and our sales team will contact you.',
+          3
         );
         return;
       }
@@ -714,10 +1116,11 @@ const socialLinks = [
     state.driveMins = drive.mins;
 
     if (drive.roadKm > MAX_DISTANCE_KM) {
-      showEmailResult(
+      showCustomInquiryForm(
         'Your location (' + state.selectedSuburb.name + ') is approximately ' +
         formatDistance(drive.roadKm) + ' from PV Industries, which is outside our standard collection radius of ' +
-        MAX_DISTANCE_KM + ' km. Scroll down to the form section below for a custom quote.'
+        MAX_DISTANCE_KM + ' km. Please complete the form below and our sales team will provide a custom quote.',
+        3
       );
       return;
     }
@@ -726,7 +1129,7 @@ const socialLinks = [
     var gateFee = pricing.priceIncGst * state.panelCount;
 
     var loadingMins = LOADING_MINS_PER_PANEL * state.panelCount;
-    var roundTripMins = 2 * state.driveMins;
+    var roundTripMins = getMinimumAppliedRoundTripMins(state.driveMins);
     var totalLaborMins = loadingMins + roundTripMins;
     var totalHours = totalLaborMins / 60;
     var transportFee = totalHours * HOURLY_RATE * TOLL_MULTIPLIER;
@@ -743,11 +1146,82 @@ const socialLinks = [
     });
   });
 
-  document.getElementById('btn-restart-quote').addEventListener('click', resetCalculator);
   document.getElementById('btn-restart-email').addEventListener('click', resetCalculator);
+  optionCards.forEach(function (card) {
+    function chooseOption() {
+      state.bookingMode = card.getAttribute('data-option');
+      updateQuoteOptionSelection();
+    }
+
+    card.addEventListener('click', chooseOption);
+    card.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        chooseOption();
+      }
+    });
+  });
+  btnStep4Next.addEventListener('click', function () {
+    if (!state.bookingMode) return;
+    syncBookingStep();
+    showStep(5);
+  });
+  btnBackToQuoteOptions.addEventListener('click', function () {
+    setBookingFormStatus();
+    showStep(state.bookingOriginStep);
+  });
+  bookingForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (!bookingForm.reportValidity()) return;
+    populateBookingHiddenFields(state.bookingMode);
+    setBookingFormStatus('pending', 'Sending your request...');
+
+    var formData = new FormData(bookingForm);
+    formData.set('form-name', getBookingFormName(state.bookingMode));
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encodeFormData(formData)
+    }).then(function (response) {
+      if (!response.ok) throw new Error('Request failed');
+
+      bookingForm.reset();
+      configurePanelCountField(
+        state.bookingMode !== 'custom',
+        false,
+        state.panelCountEntered ? state.panelCount : ''
+      );
+      bookingCustomerType.value = getCustomerTypeLabel(state.customerType);
+      populateBookingHiddenFields(state.bookingMode);
+      toggleConditionalField(collectionAddressField, 'collectionAddress', state.bookingMode !== 'dropoff' && state.bookingMode !== 'custom', state.bookingMode !== 'dropoff' && state.bookingMode !== 'custom');
+      toggleConditionalField(businessField, 'businessName', state.bookingMode === 'custom' || state.customerType === 'commercial', false);
+      toggleConditionalField(abnField, 'abn', state.bookingMode !== 'custom' && state.customerType === 'commercial', false);
+      toggleConditionalField(dropOffDateField, 'preferredDropOffDate', state.bookingMode === 'dropoff', state.bookingMode === 'dropoff');
+
+      setBookingFormStatus(
+        'success',
+        state.bookingMode === 'custom'
+          ? 'Your enquiry has been sent. Our sales team will be in touch shortly.'
+          : state.bookingMode === 'dropoff'
+          ? 'Your Bankstown drop-off request has been sent. Our sales team will issue the invoice shortly.'
+          : 'Your collection request has been sent. Our sales team will be in touch shortly.'
+      );
+    }).catch(function () {
+      setBookingFormStatus(
+        'error',
+        'We could not submit your request just now. Please try again or email ' + CONTACT_EMAIL + '.'
+      );
+    });
+  });
 
   /* ──────────── INIT ─────────────────────── */
   showStep(1);
+  updateQuoteOptionSelection();
+  toggleConditionalField(collectionAddressField, 'collectionAddress', true, true);
+  toggleConditionalField(businessField, 'businessName', false, false);
+  toggleConditionalField(abnField, 'abn', false, false);
+  toggleConditionalField(dropOffDateField, 'preferredDropOffDate', false, false);
 })();
 </script>
 
@@ -858,6 +1332,18 @@ const socialLinks = [
     color: var(--color-neutral-100);
   }
 
+  .progress-step.skipped .step-dot {
+    border-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.2);
+    background: transparent;
+  }
+
+  .progress-step.skipped .step-label {
+    color: rgba(255, 255, 255, 0.24);
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+  }
+
   .progress-line {
     width: 60px;
     height: 2px;
@@ -882,7 +1368,15 @@ const socialLinks = [
   .progress-fill.filled { transform: scaleX(1); }
 
   @media (max-width: 480px) {
-    .progress-line { width: 40px; }
+    .progress-line {
+      width: 24px;
+      margin: 0 var(--space-1);
+      margin-bottom: var(--space-6);
+    }
+
+    .step-label {
+      font-size: 10px;
+    }
   }
 
   /* ══════════ Collapse wizard on results ══════════ */
@@ -893,9 +1387,9 @@ const socialLinks = [
   }
 
   .calc-steps-wrapper {
-    max-height: 800px;
+    max-height: 2400px;
     transition: max-height 0.4s ease, opacity 0.3s ease;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .calc-progress.hidden {
@@ -909,6 +1403,7 @@ const socialLinks = [
     max-height: 0;
     min-height: 0;
     opacity: 0;
+    overflow: hidden;
     pointer-events: none;
   }
 
@@ -1190,6 +1685,12 @@ const socialLinks = [
 
   .btn-back:hover { border-color: rgba(255, 255, 255, 0.3); color: var(--color-neutral-100); }
 
+  .btn-back svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
   .btn-next,
   .btn-quote {
     display: inline-flex;
@@ -1214,6 +1715,14 @@ const socialLinks = [
     box-shadow: 0 4px 12px rgba(253, 181, 0, 0.3);
   }
 
+  .btn-next:disabled {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.45);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+
   /* ══════════ Results ══════════ */
   .calc-result {
     display: none;
@@ -1225,6 +1734,8 @@ const socialLinks = [
   }
 
   .calc-result.visible { display: flex; }
+
+  .hidden { display: none !important; }
 
   .result-badge {
     width: 56px;
@@ -1261,6 +1772,86 @@ const socialLinks = [
     line-height: 1.6;
   }
 
+  .quote-options-grid {
+    width: 100%;
+    display: grid;
+    gap: var(--space-5);
+    margin-bottom: var(--space-5);
+  }
+
+  .quote-option-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    text-align: left;
+  }
+
+  .quote-option-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .quote-option-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-neutral-200);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .quote-option-card--dropoff {
+    background: rgba(253, 181, 0, 0.06);
+    border-color: rgba(253, 181, 0, 0.18);
+  }
+
+  .quote-option-selectable {
+    cursor: pointer;
+    transition: border-color var(--transition-normal), background var(--transition-normal), transform var(--transition-normal), box-shadow var(--transition-normal);
+  }
+
+  .quote-option-selectable:hover {
+    transform: translateY(-2px);
+    border-color: rgba(253, 181, 0, 0.35);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.22);
+  }
+
+  .quote-option-selectable.selected {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 1px rgba(253, 181, 0, 0.3), 0 16px 32px rgba(15, 23, 42, 0.28);
+  }
+
+  .quote-option-title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    color: var(--color-neutral-100);
+    flex: 1;
+    min-width: 0;
+  }
+
+  .quote-option-summary {
+    margin: 0 0 var(--space-5) 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-400);
+    line-height: 1.6;
+  }
+
+  .quote-value--muted {
+    color: var(--color-neutral-400);
+    font-weight: 500;
+  }
+
   /* Quote Breakdown */
   .quote-breakdown {
     width: 100%;
@@ -1294,6 +1885,141 @@ const socialLinks = [
     margin: var(--space-3) 0 0 0;
   }
 
+  .option-selection-note {
+    margin: 0 0 var(--space-6) 0;
+    color: var(--color-neutral-400);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+  }
+
+  .option-selection-note.active {
+    color: var(--color-neutral-200);
+  }
+
+  .booking-form {
+    width: 100%;
+    max-width: 720px;
+    text-align: left;
+  }
+
+  .booking-form-grid {
+    display: grid;
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+  }
+
+  .booking-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .booking-field--date {
+    position: relative;
+  }
+
+  .booking-field--date::after {
+    content: '';
+    position: absolute;
+    right: var(--space-3);
+    bottom: 8px;
+    width: 42px;
+    height: 42px;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    opacity: 0.95;
+  }
+
+  .booking-field--full {
+    grid-column: 1 / -1;
+  }
+
+  .booking-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-300);
+    font-weight: 500;
+  }
+
+  .booking-input {
+    width: 100%;
+    padding: var(--space-4);
+    font-size: var(--font-size-base);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-lg);
+    color: var(--color-neutral-100);
+    transition: border-color var(--transition-normal), background var(--transition-normal);
+  }
+
+  .booking-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  .booking-field--date .booking-input {
+    padding-right: 64px;
+  }
+
+  .booking-field--date .booking-input[type="date"] {
+    color-scheme: dark;
+  }
+
+  .booking-field--date .booking-input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 52px;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .booking-input--readonly {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-neutral-300);
+  }
+
+  .booking-form-notice {
+    max-width: 720px;
+    margin-bottom: 0;
+    padding: var(--space-4);
+    border-left: 3px solid rgba(253, 181, 0, 0.7);
+    border-radius: var(--radius-md);
+    background: rgba(253, 181, 0, 0.08);
+    color: var(--color-neutral-200);
+  }
+
+  .booking-form-status {
+    margin: 0 0 var(--space-5) 0;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+  }
+
+  .booking-form-status--pending {
+    background: rgba(37, 99, 235, 0.1);
+    color: #93c5fd;
+  }
+
+  .booking-form-status--success {
+    background: rgba(34, 197, 94, 0.12);
+    color: #86efac;
+  }
+
+  .booking-form-status--error {
+    background: rgba(239, 68, 68, 0.12);
+    color: #fca5a5;
+  }
+
   /* Result Actions */
   .result-actions {
     display: flex;
@@ -1304,8 +2030,12 @@ const socialLinks = [
     max-width: 320px;
   }
 
-  .btn-book,
-  .btn-email {
+  .step-actions--form {
+    max-width: none;
+  }
+
+  .btn-email,
+  .btn-submit {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1323,8 +2053,8 @@ const socialLinks = [
     transition: all var(--transition-normal);
   }
 
-  .btn-book:hover,
-  .btn-email:hover {
+  .btn-email:hover,
+  .btn-submit:hover {
     background: var(--color-primary-dark);
     transform: translateY(-1px);
     box-shadow: 0 4px 16px rgba(253, 181, 0, 0.3);
@@ -1458,6 +2188,16 @@ const socialLinks = [
     .calculator-layout { gap: var(--space-8); }
     .sidebar-header { margin-bottom: var(--space-8); }
     .sidebar-blocks { margin-bottom: var(--space-8); }
+    .step-actions--form { flex-direction: column; }
+    .step-actions--form .btn-back,
+    .step-actions--form .btn-submit { width: 100%; justify-content: center; }
+  }
+
+  @media (min-width: 768px) {
+    .quote-options-grid,
+    .booking-form-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   /* ══════════ Reduced Motion ══════════ */
@@ -1476,7 +2216,8 @@ const socialLinks = [
     .btn-next:hover,
     .btn-quote:hover,
     .btn-book:hover,
-    .btn-email:hover {
+    .btn-email:hover,
+    .btn-submit:hover {
       transform: none;
     }
   }
