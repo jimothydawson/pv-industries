@@ -12,6 +12,12 @@ const heroData = {
     { number: "4", suffix: "", label: "# government grants awarded" },
     { number: "2", suffix: "", label: "# patents pending" }
   ],
+  quoteTypes: [
+    { type: "residential", title: "Residential", meta: "Instant quote" },
+    { type: "commercial", title: "Commercial", meta: "Instant quote" },
+    { type: "government", title: "Government", meta: "Tailored quote" },
+    { type: "utility", title: "Utility", meta: "Tailored quote" }
+  ],
   contactEmail: "contact@pvindustries.com.au",
   locations: [
     { name: "New South Wales", mapLink: "https://www.google.com/maps" },
@@ -63,6 +69,21 @@ const heroData = {
           <a href="#future" class="button button-secondary">
             Learn more
           </a>
+        </div>
+      </div>
+
+      <div class="hero-quote-entry">
+        <p class="hero-quote-label">Start your quote by customer type</p>
+        <div class="hero-quote-grid">
+          {heroData.quoteTypes.map((quoteType) => (
+            <a
+              href={`/contact?customerType=${quoteType.type}#quote-calculator`}
+              class="hero-quote-card"
+            >
+              <span class="hero-quote-card-title">{quoteType.title}</span>
+              <span class="hero-quote-card-meta">{quoteType.meta}</span>
+            </a>
+          ))}
         </div>
       </div>
     </div>
@@ -293,6 +314,65 @@ const heroData = {
     justify-content: center;
   }
 
+  .hero-quote-entry {
+    margin-top: var(--space-8);
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+  }
+
+  .hero-quote-label {
+    margin: 0 0 var(--space-4) 0;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
+    text-align: center;
+  }
+
+  .hero-quote-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 1024px) {
+    .hero-quote-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .hero-quote-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-neutral-100);
+    text-decoration: none;
+    text-align: left;
+    transition: transform var(--transition-normal), border-color var(--transition-normal), background-color var(--transition-normal), box-shadow var(--transition-normal);
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-quote-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(253, 181, 0, 0.55);
+    background: rgba(253, 181, 0, 0.12);
+    box-shadow: 0 16px 30px rgba(15, 23, 42, 0.24);
+  }
+
+  .hero-quote-card-title {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+  }
+
+  .hero-quote-card-meta {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.72);
+  }
+
   .hero-partners-band {
     margin-top: var(--space-8);
     animation: fadeInUp 0.8s ease-out 0.55s both;
@@ -461,6 +541,10 @@ const heroData = {
 
     .hero-partners-band {
       margin-top: var(--space-6);
+    }
+
+    .hero-quote-grid {
+      grid-template-columns: 1fr;
     }
     
     .button {

@@ -536,6 +536,13 @@ const socialLinks = [
     return PRICING[type] ? PRICING[type].label : '';
   }
 
+  function isSupportedCustomerType(type) {
+    return type === 'residential' ||
+      type === 'commercial' ||
+      type === 'government' ||
+      type === 'utility';
+  }
+
   /* ───────────────── STATE ────────────────── */
   var state = {
     step: 1,
@@ -897,22 +904,43 @@ const socialLinks = [
     showStep(1);
   }
 
+  function updateSelectedTypeCards(activeType) {
+    typeCards.forEach(function (card) {
+      card.classList.toggle('selected', card.getAttribute('data-type') === activeType);
+    });
+  }
+
+  function selectCustomerType(type) {
+    if (!isSupportedCustomerType(type)) return;
+
+    state.customerType = type;
+    updateSelectedTypeCards(type);
+
+    if (type === 'government' || type === 'utility') {
+      showCustomInquiryForm(
+        'For ' + getCustomerTypeLabel(type).toLowerCase() + ' projects, we provide customised pricing tailored to your requirements.',
+        1
+      );
+      return;
+    }
+
+    setTimeout(function () { showStep(2); }, 250);
+  }
+
+  function prefillCustomerTypeFromQuery() {
+    var params = new URLSearchParams(window.location.search);
+    var type = params.get('customerType');
+
+    if (!isSupportedCustomerType(type)) return;
+
+    selectCustomerType(type);
+  }
+
   /* ──────────── STEP 1: CUSTOMER TYPE ─────── */
   typeCards.forEach(function (card) {
     card.addEventListener('click', function () {
       var type = this.getAttribute('data-type');
-      if (type === 'government' || type === 'utility') {
-        state.customerType = type;
-        showCustomInquiryForm(
-          'For ' + getCustomerTypeLabel(type).toLowerCase() + ' projects, we provide customised pricing tailored to your requirements.',
-          1
-        );
-        return;
-      }
-      state.customerType = type;
-      typeCards.forEach(function (c) { c.classList.remove('selected'); });
-      this.classList.add('selected');
-      setTimeout(function () { showStep(2); }, 250);
+      selectCustomerType(type);
     });
   });
 
@@ -1217,11 +1245,13 @@ const socialLinks = [
 
   /* ──────────── INIT ─────────────────────── */
   showStep(1);
+  updatePanelHint();
   updateQuoteOptionSelection();
   toggleConditionalField(collectionAddressField, 'collectionAddress', true, true);
   toggleConditionalField(businessField, 'businessName', false, false);
   toggleConditionalField(abnField, 'abn', false, false);
   toggleConditionalField(dropOffDateField, 'preferredDropOffDate', false, false);
+  prefillCustomerTypeFromQuery();
 })();
 </script>
 
