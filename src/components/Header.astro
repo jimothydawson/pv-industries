@@ -55,20 +55,37 @@ const contactEmail = 'contact@pvindustries.com.au';
         <ul class="nav-list">
           {navigation.map((item) => (
             <li class={`nav-item ${item.dropdown ? 'has-dropdown' : ''}`}>
-              <a
-                href={item.href}
-                class={`nav-link ${item.current ? 'current' : ''}`}
-                aria-current={item.current ? 'page' : undefined}
-                aria-haspopup={item.dropdown ? 'true' : undefined}
-                aria-expanded={item.dropdown ? 'false' : undefined}
-              >
-                {item.name}
-                {item.dropdown && (
-                  <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                )}
-              </a>
+              {item.name === 'About' ? (
+                <button
+                  type="button"
+                  class={`nav-link nav-link-button ${item.current ? 'current' : ''}`}
+                  aria-current={item.current ? 'page' : undefined}
+                  aria-haspopup={item.dropdown ? 'true' : undefined}
+                  aria-expanded={item.dropdown ? 'false' : undefined}
+                >
+                  {item.name}
+                  {item.dropdown && (
+                    <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  )}
+                </button>
+              ) : (
+                <a
+                  href={item.href}
+                  class={`nav-link ${item.current ? 'current' : ''}`}
+                  aria-current={item.current ? 'page' : undefined}
+                  aria-haspopup={item.dropdown ? 'true' : undefined}
+                  aria-expanded={item.dropdown ? 'false' : undefined}
+                >
+                  {item.name}
+                  {item.dropdown && (
+                    <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  )}
+                </a>
+              )}
               {item.dropdown && (
                 <ul class="dropdown-menu">
                   {item.dropdown.map((subItem) => (
@@ -116,17 +133,31 @@ const contactEmail = 'contact@pvindustries.com.au';
       <ul class="mobile-nav-list">
         {navigation.map((item) => (
           <li class="mobile-nav-item">
-            <a
-              href={item.href}
-              class={`mobile-nav-link ${item.current ? 'current' : ''} ${item.dropdown ? 'has-dropdown' : ''}`}
-            >
-              {item.name}
-              {item.dropdown && (
-                <svg class="mobile-dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              )}
-            </a>
+            {item.name === 'About' ? (
+              <button
+                type="button"
+                class={`mobile-nav-link mobile-nav-button ${item.current ? 'current' : ''} ${item.dropdown ? 'has-dropdown' : ''}`}
+              >
+                {item.name}
+                {item.dropdown && (
+                  <svg class="mobile-dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                )}
+              </button>
+            ) : (
+              <a
+                href={item.href}
+                class={`mobile-nav-link ${item.current ? 'current' : ''} ${item.dropdown ? 'has-dropdown' : ''}`}
+              >
+                {item.name}
+                {item.dropdown && (
+                  <svg class="mobile-dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                )}
+              </a>
+            )}
             {item.dropdown && (
               <ul class="mobile-dropdown-menu">
                 {item.dropdown.map((subItem) => (
@@ -244,11 +275,19 @@ const contactEmail = 'contact@pvindustries.com.au';
     gap: var(--space-1);
   }
 
+  .nav-link-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+  }
+
   .dropdown-icon {
     transition: transform var(--transition-normal);
   }
 
-  .nav-item.has-dropdown:hover .dropdown-icon {
+  .nav-item.has-dropdown:hover .dropdown-icon,
+  .nav-item.has-dropdown:focus-within .dropdown-icon {
     transform: rotate(180deg);
   }
 
@@ -272,7 +311,8 @@ const contactEmail = 'contact@pvindustries.com.au';
     margin-top: var(--space-2);
   }
 
-  .nav-item.has-dropdown:hover .dropdown-menu {
+  .nav-item.has-dropdown:hover .dropdown-menu,
+  .nav-item.has-dropdown:focus-within .dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -410,6 +450,15 @@ const contactEmail = 'contact@pvindustries.com.au';
     background: var(--color-primary-dark);
   }
 
+  .mobile-nav-button {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+  }
+
   /* Mobile Dropdown Styles */
   .mobile-nav-link.has-dropdown {
     display: flex;
@@ -452,6 +501,12 @@ const contactEmail = 'contact@pvindustries.com.au';
   }
 
   /* Scroll behavior */
+  .header.homepage-top {
+    background: rgba(0, 0, 0, 0.94);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+  }
+
   .header.scrolled {
     background: rgba(15, 23, 42, 0.98);
     box-shadow: var(--shadow-lg);
@@ -485,15 +540,26 @@ const contactEmail = 'contact@pvindustries.com.au';
 
   // Header scroll effect
   if (header) {
-    window.addEventListener('scroll', () => {
+    const isHomepage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+
+    const updateHeaderState = () => {
       const currentScrollY = window.scrollY;
-      
+
       if (currentScrollY > 50) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
-    });
+
+      if (isHomepage && currentScrollY <= 50) {
+        header.classList.add('homepage-top');
+      } else {
+        header.classList.remove('homepage-top');
+      }
+    };
+
+    updateHeaderState();
+    window.addEventListener('scroll', updateHeaderState);
   }
 
   // Mobile dropdown toggle functionality

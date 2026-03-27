@@ -16,6 +16,7 @@ const contactData = {
 ---
 
 <section id="contact" class="contact-section">
+  <div id="HomeContact" class="contact-anchor" aria-hidden="true"></div>
   <div class="container">
     <div class="contact-grid">
       <!-- Contact Form -->
@@ -111,7 +112,7 @@ const contactData = {
   </div>
   
   <!-- Section Background -->
-  <div id="HomeContact" class="section-background"></div>
+  <div class="section-background"></div>
 </section>
 
 <style>
@@ -121,6 +122,16 @@ const contactData = {
     background: var(--color-neutral-900);
     color: var(--color-neutral-100);
     overflow: hidden;
+    scroll-margin-top: 96px;
+  }
+
+  .contact-anchor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
   }
 
   .section-background {

@@ -1,0 +1,88 @@
+---
+import BrevoSignupForm from './BrevoSignupForm.astro';
+---
+
+<section class="news-signup-section" id="news-signup">
+  <div class="container">
+    <div class="news-signup-grid">
+      <div class="news-signup-copy">
+        <p class="news-signup-kicker">News Signup</p>
+        <h2 class="news-signup-title">Stay tuned for more news</h2>
+        <p class="news-signup-description">
+          Subscribe for updates on solar panel recycling, project milestones, grants, and industry developments from PV Industries.
+        </p>
+      </div>
+
+      <div class="news-signup-form">
+        <BrevoSignupForm />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .news-signup-section {
+    padding: var(--space-20) 0;
+    background: #000;
+    color: var(--color-neutral-100);
+  }
+
+  .news-signup-grid {
+    display: grid;
+    gap: var(--space-10);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .news-signup-grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(360px, 460px);
+      gap: var(--space-12);
+    }
+  }
+
+  .news-signup-copy {
+    max-width: 640px;
+  }
+
+  .news-signup-kicker {
+    margin: 0 0 var(--space-3) 0;
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .news-signup-title {
+    margin: 0 0 var(--space-4) 0;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.1;
+    color: var(--color-neutral-100);
+  }
+
+  .news-signup-description {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .news-signup-form {
+    width: 100%;
+  }
+
+  :global(.news-signup-form .form-card) {
+    margin: 0;
+    width: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .news-signup-section {
+      padding: var(--space-16) 0;
+    }
+
+    .news-signup-description {
+      font-size: var(--font-size-base);
+    }
+  }
+</style>

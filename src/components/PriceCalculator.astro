@@ -29,7 +29,7 @@ const socialLinks = [
 ];
 ---
 
-<section id="contact" class="calculator-section">
+<section id="quote-calculator" class="calculator-section">
   <div class="container">
     <div class="calculator-layout">
 
@@ -109,7 +109,7 @@ const socialLinks = [
                   </div>
                   <span class="type-name">Government</span>
                   <span class="type-price">Custom quote</span>
-                  <span class="type-note">Contact us</span>
+                  <span class="type-note">Form below</span>
                 </button>
                 <button class="type-card" data-type="utility" type="button">
                   <div class="type-icon">
@@ -123,7 +123,7 @@ const socialLinks = [
                   </div>
                   <span class="type-name">Utility</span>
                   <span class="type-price">Custom quote</span>
-                  <span class="type-note">Contact us</span>
+                  <span class="type-note">Form below</span>
                 </button>
               </div>
             </div>
@@ -161,7 +161,7 @@ const socialLinks = [
             <div class="calc-step" id="step-3">
               <h3 class="step-title">Where are the panels located?</h3>
               <p class="step-subtitle">Start typing your suburb or postcode to check if an instant quote is available.</p>
-              <p class="service-note">Instant quotes are currently available for Sydney Metro only. For all other areas, please contact us directly for a tailored quote.</p>
+              <p class="service-note">Instant quotes are currently available for Sydney Metro only. For all other areas, scroll down to the form section below for a tailored quote.</p>
               <div class="location-input-wrapper">
                 <div class="location-input-group">
                   <svg class="location-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -342,14 +342,14 @@ const socialLinks = [
             <div class="result-badge info">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
-            <h3 class="result-title">Contact Us Directly</h3>
+            <h3 class="result-title">Tailored Quote Required</h3>
             <p class="result-message" id="email-reason"></p>
-            <p class="result-message">Please email us with your details and we'll provide a tailored quote promptly.</p>
+            <p class="result-message">Scroll down to the form section below and share your project details. We'll get back to you with a tailored quote promptly.</p>
 
             <div class="result-actions">
-              <a class="btn-email" id="btn-email-pvi" href={`mailto:${contactEmail}`}>
+              <a class="btn-email" id="btn-email-pvi" href="#contact">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Email PV Industries
+                Scroll to Form Section
               </a>
               <button class="btn-restart" id="btn-restart-email" type="button">Get New Quote</button>
             </div>
@@ -534,6 +534,13 @@ const socialLinks = [
     if (type === 'government') return 'Government';
     if (type === 'utility') return 'Utility';
     return PRICING[type] ? PRICING[type].label : '';
+  }
+
+  function isSupportedCustomerType(type) {
+    return type === 'residential' ||
+      type === 'commercial' ||
+      type === 'government' ||
+      type === 'utility';
   }
 
   /* ───────────────── STATE ────────────────── */
@@ -897,22 +904,43 @@ const socialLinks = [
     showStep(1);
   }
 
+  function updateSelectedTypeCards(activeType) {
+    typeCards.forEach(function (card) {
+      card.classList.toggle('selected', card.getAttribute('data-type') === activeType);
+    });
+  }
+
+  function selectCustomerType(type) {
+    if (!isSupportedCustomerType(type)) return;
+
+    state.customerType = type;
+    updateSelectedTypeCards(type);
+
+    if (type === 'government' || type === 'utility') {
+      showCustomInquiryForm(
+        'For ' + getCustomerTypeLabel(type).toLowerCase() + ' projects, we provide customised pricing tailored to your requirements.',
+        1
+      );
+      return;
+    }
+
+    setTimeout(function () { showStep(2); }, 250);
+  }
+
+  function prefillCustomerTypeFromQuery() {
+    var params = new URLSearchParams(window.location.search);
+    var type = params.get('customerType');
+
+    if (!isSupportedCustomerType(type)) return;
+
+    selectCustomerType(type);
+  }
+
   /* ──────────── STEP 1: CUSTOMER TYPE ─────── */
   typeCards.forEach(function (card) {
     card.addEventListener('click', function () {
       var type = this.getAttribute('data-type');
-      if (type === 'government' || type === 'utility') {
-        state.customerType = type;
-        showCustomInquiryForm(
-          'For ' + getCustomerTypeLabel(type).toLowerCase() + ' projects, we provide customised pricing tailored to your requirements.',
-          1
-        );
-        return;
-      }
-      state.customerType = type;
-      typeCards.forEach(function (c) { c.classList.remove('selected'); });
-      this.classList.add('selected');
-      setTimeout(function () { showStep(2); }, 250);
+      selectCustomerType(type);
     });
   });
 
@@ -923,7 +951,7 @@ const socialLinks = [
       panelHint.textContent = 'Please enter at least 1 panel.';
       panelHint.className = 'panel-hint error';
     } else if (val > MAX_PANELS) {
-      panelHint.textContent = 'For jobs over ' + MAX_PANELS + ' panels, please contact us directly for pricing.';
+      panelHint.textContent = 'For jobs over ' + MAX_PANELS + ' panels, scroll down to the form section below for tailored pricing.';
       panelHint.className = 'panel-hint warning';
     } else {
       panelHint.textContent = 'Your quote will appear after you confirm a Sydney Metro location.';
@@ -987,7 +1015,7 @@ const socialLinks = [
       if (query && query.length >= 2) {
         var noMatch = document.createElement('div');
         noMatch.className = 'ac-item ac-no-match';
-        noMatch.textContent = 'Instant quotes are available for Sydney Metro only — contact us for other areas';
+        noMatch.textContent = 'Instant quotes are available for Sydney Metro only — use the form below for other areas';
         noMatch.addEventListener('mousedown', function (e) {
           e.preventDefault();
           showCustomInquiryForm(
@@ -1217,11 +1245,13 @@ const socialLinks = [
 
   /* ──────────── INIT ─────────────────────── */
   showStep(1);
+  updatePanelHint();
   updateQuoteOptionSelection();
   toggleConditionalField(collectionAddressField, 'collectionAddress', true, true);
   toggleConditionalField(businessField, 'businessName', false, false);
   toggleConditionalField(abnField, 'abn', false, false);
   toggleConditionalField(dropOffDateField, 'preferredDropOffDate', false, false);
+  prefillCustomerTypeFromQuery();
 })();
 </script>
 
