@@ -1,9 +1,10 @@
 ---
 export interface Props {
-  variant?: 'default' | 'heroGrid';
+  variant?: 'default' | 'heroGrid' | 'heroStrip';
+  startPaused?: boolean;
 }
 
-const { variant = 'default' } = Astro.props;
+const { variant = 'default', startPaused = false } = Astro.props;
 
 const partners = [
   {
@@ -12,14 +13,14 @@ const partners = [
     alt: "Sydney Landscape"
   },
   {
-    name: "UTS ISF",
-    logo: "/images/UTSISF.png",
-    alt: "UTS Institute for Sustainable Futures"
+    name: "Greentech",
+    logo: "/images/Greentech_Logo_PNG-1536x377.png",
+    alt: "Greentech"
   },
   {
-    name: "CSIRO",
-    logo: "/images/CSIRO-logo.jpeg",
-    alt: "CSIRO"
+    name: "Circular Australia",
+    logo: "/images/Circular-Australia_Master_Horizontal_10-min-768x384.png",
+    alt: "Circular Australia"
   },
   {
     name: "John Holland",
@@ -27,19 +28,19 @@ const partners = [
     alt: "John Holland"
   },
   {
-    name: "Greentech",
-    logo: "/images/Greentech_Logo_PNG-1536x377.png",
-    alt: "Greentech"
+    name: "UTS ISF",
+    logo: "/images/UTSISF.png",
+    alt: "UTS Institute for Sustainable Futures"
   },
   {
-    name: "City of Newcastle",
-    logo: "/images/City_of_Newcastle_Horizontal_RGB_cropped-1536x433.jpeg",
-    alt: "City of Newcastle"
+    name: "Australian Government DISR",
+    logo: "/images/logo_disr.png",
+    alt: "Australian Government Department of Industry, Science and Resources"
   },
   {
-    name: "Circular Australia",
-    logo: "/images/Circular-Australia_Master_Horizontal_10-min-768x384.png",
-    alt: "Circular Australia"
+    name: "CSIRO",
+    logo: "/images/CSIRO-logo.jpeg",
+    alt: "CSIRO"
   },
   {
     name: "NSW EPA",
@@ -52,14 +53,17 @@ const partners = [
     alt: "Sustainability Victoria"
   },
   {
-    name: "Australian Government DISR",
-    logo: "/images/logo_disr.png",
-    alt: "Australian Government Department of Industry, Science and Resources"
+    name: "City of Newcastle",
+    logo: "/images/City_of_Newcastle_Horizontal_RGB_cropped-1536x433.jpeg",
+    alt: "City of Newcastle"
   }
 ];
 ---
 
-<div class:list={['partners-carousel', `partners-carousel-${variant}`]}>
+<div
+  class:list={['partners-carousel', `partners-carousel-${variant}`]}
+  data-start-paused={startPaused ? 'true' : undefined}
+>
   {variant === 'heroGrid' ? (
     <div class="grid-viewport">
       <div class="grid-track">
@@ -74,7 +78,7 @@ const partners = [
     </div>
   ) : (
     <div class="carousel-viewport">
-      <div class="carousel-track" data-partners-track>
+      <div class="carousel-track" data-partners-track data-start-paused={startPaused ? 'true' : undefined}>
         {partners.map((partner) => (
           <div class="partner-slide">
             <div class="partner-logo">
@@ -102,7 +106,6 @@ const partners = [
   .carousel-viewport {
     overflow: hidden;
     position: relative;
-    border-radius: var(--radius-lg);
   }
 
   .carousel-viewport::before,
@@ -210,6 +213,40 @@ const partners = [
     filter: grayscale(0%) opacity(1);
   }
 
+  .partners-carousel-heroStrip .carousel-viewport {
+    background: transparent;
+  }
+
+  .partners-carousel-heroStrip .carousel-viewport::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0) 100%);
+  }
+
+  .partners-carousel-heroStrip .carousel-viewport::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0) 100%);
+  }
+
+  .partners-carousel-heroStrip .partner-logo {
+    background: rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .partners-carousel-heroStrip .partner-logo:hover {
+    background: rgba(15, 23, 42, 0.18);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18);
+    transform: translateY(-2px);
+  }
+
+  .partners-carousel-heroStrip .partner-logo img {
+    filter: grayscale(100%) invert(1) brightness(1.08) opacity(0.82);
+  }
+
+  .partners-carousel-heroStrip .partner-logo:hover img {
+    filter: grayscale(100%) invert(1) brightness(1.15) opacity(1);
+  }
+
   @media (min-width: 768px) {
     .carousel-track {
       width: calc(220px * 20);
@@ -258,19 +295,29 @@ const partners = [
     .partners-carousel-default .partner-logo:hover {
       transform: none;
     }
+
+    .partners-carousel-heroStrip .partner-logo:hover {
+      transform: none;
+    }
   }
 </style>
 
 <script>
   const partnerTracks = document.querySelectorAll<HTMLElement>('[data-partners-track]');
 
-  function setPartnerTrackState(state: 'paused' | 'running') {
+  function shouldRunTrack(track: HTMLElement) {
+    return !document.hidden && track.dataset.startPaused !== 'true';
+  }
+
+  function setPartnerTrackState() {
     partnerTracks.forEach((track) => {
-      track.style.animationPlayState = state;
+      track.style.animationPlayState = shouldRunTrack(track) ? 'running' : 'paused';
     });
   }
 
+  setPartnerTrackState();
+
   document.addEventListener('visibilitychange', () => {
-    setPartnerTrackState(document.hidden ? 'paused' : 'running');
+    setPartnerTrackState();
   });
 </script>

@@ -1,39 +1,84 @@
 ---
-import BrevoSignupForm from './BrevoSignupForm.astro';
-import PartnersLogoCarousel from './PartnersLogoCarousel.astro';
-
-// Hero section data
 const heroData = {
-  titlePrefix: "Solar panel recycling & collection across",
+  titlePrefix: "Solar panel recycling & collection",
   titleSuffix: "NSW, VIC, SA and ACT",
-  description: "Leading the way in solar panel recycling",
-  stats: [
-    { number: "200", suffix: "+", label: "# of customers" },
-    { number: "4", suffix: "", label: "# government grants awarded" },
-    { number: "2", suffix: "", label: "# patents pending" }
+  partnerLogos: [
+    {
+      name: "Sustainability Victoria",
+      logo: "/images/Sustainability-Victoria-Logo.png",
+      alt: "Sustainability Victoria",
+      mobileOrder: 7
+    },
+    {
+      name: "NSW EPA",
+      logo: "/images/epa_logo_coupled_fullcolour_v2.png",
+      alt: "NSW Environment Protection Authority",
+      mobileOrder: 3
+    },
+    {
+      name: "Australian Government DISR",
+      logo: "/images/logo_disr.png",
+      alt: "Australian Government Department of Industry, Science and Resources",
+      mobileOrder: 1
+    },
+    {
+      name: "CSIRO",
+      logo: "/images/CSIRO-logo.jpeg",
+      alt: "CSIRO",
+      mobileOrder: 2
+    },
+    {
+      name: "UTS ISF",
+      logo: "/images/UTSISF.png",
+      alt: "UTS Institute for Sustainable Futures",
+      mobileOrder: 5
+    },
+    {
+      name: "UNSW",
+      logo: "/images/UNSW.png",
+      alt: "UNSW Sydney",
+      mobileOrder: 4
+    },
+    {
+      name: "City of Newcastle",
+      logo: "/images/City_of_Newcastle_Horizontal_RGB_cropped-1536x433.jpeg",
+      alt: "City of Newcastle",
+      mobileOrder: 6
+    }
   ],
-  quoteTypes: [
-    { type: "residential", title: "Residential", meta: "Instant quote" },
-    { type: "commercial", title: "Commercial", meta: "Instant quote" },
-    { type: "government", title: "Government", meta: "Tailored quote" },
-    { type: "utility", title: "Utility", meta: "Tailored quote" }
-  ],
-  contactEmail: "contact@pvindustries.com.au",
-  locations: [
-    { name: "New South Wales", mapLink: "https://www.google.com/maps" },
-    { name: "Victoria", mapLink: "https://www.google.com/maps" },
-    { name: "Australian Capital Territory", mapLink: "https://www.google.com/maps" },
-    { name: "South Australia", mapLink: "https://www.google.com/maps" }
+  ctas: [
+    {
+      title: "Instant Quote",
+      href: "/contact",
+      external: false,
+      variant: "primary"
+    },
+    {
+      title: "Email Us",
+      href: "mailto:contact@pvindustries.com.au",
+      external: true,
+      variant: "secondary"
+    }
   ]
 };
 ---
 
-<section class="hero-section" id="hero">
-  <div class="hero-background"></div>
+<section class="hero-section" id="hero" data-hero-section>
+  <div class="hero-background" aria-hidden="true">
+    <video
+      class="hero-background-video"
+      data-hero-video
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+    >
+      <source src="/images/Industrial_Background_Video_Generation.mp4" type="video/mp4" />
+    </video>
+  </div>
   
   <div class="container hero-container">
-    <!-- Main Hero Content -->
-    <div class="hero-main-content">
+    <div class="hero-top-layout">
       <div class="hero-text-content">
         <h1 class="hero-title">
           {heroData.titlePrefix}
@@ -41,127 +86,88 @@ const heroData = {
           <span class="hero-title-secondary">{heroData.titleSuffix}</span>
         </h1>
       </div>
-      
-      <div class="hero-middle-content">
-        <!-- Stats -->
-        <div class="hero-stats">
-          {heroData.stats.map((stat) => (
-            <div class="hero-stat">
-              <div class="stat-label">{stat.label}</div>
-              <div class="stat-number">
-                <span class="stat-value">{stat.number}</span>
-                <span class="stat-suffix">{stat.suffix}</span>
-              </div>
+    </div>
+    <div class="hero-partners-band">
+      <div class="hero-partners-band-inner">
+        <p class="hero-partners-label">Trusted by federal, state and local governments and leading research institutions</p>
+        <div class="hero-partners-grid">
+          {heroData.partnerLogos.map((partner) => (
+            <div class="hero-partner-logo" aria-label={partner.alt} style={`--mobile-order: ${partner.mobileOrder};`}>
+              <img src={partner.logo} alt={partner.alt} loading="lazy" />
             </div>
           ))}
         </div>
       </div>
-
-      <div class="hero-description-section">
-        <p class="hero-description">{heroData.description}</p>
-        <div class="hero-actions">
-          <a href="/contact" class="button button-primary">
-            Contact Us
-            <svg class="button-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <a href="#future" class="button button-secondary">
-            Learn more
-          </a>
-        </div>
-      </div>
-
-      <div class="hero-quote-entry">
-        <p class="hero-quote-label">Start your quote by customer type</p>
-        <div class="hero-quote-grid">
-          {heroData.quoteTypes.map((quoteType) => (
-            <a
-              href={`/contact?customerType=${quoteType.type}#quote-calculator`}
-              class="hero-quote-card"
-            >
-              <span class="hero-quote-card-title">{quoteType.title}</span>
-              <span class="hero-quote-card-meta">{quoteType.meta}</span>
-            </a>
-          ))}
-        </div>
-      </div>
     </div>
-    
-    <div class="hero-partners-band">
-      <p class="hero-partners-label">Trusted by councils, researchers and circular economy partners</p>
-      <PartnersLogoCarousel />
-    </div>
-
-    <!-- Hero Bottom Content -->
-    <div class="hero-bottom-content">
-      <div class="hero-contact-grid">
-        <!-- Contact Info -->
-        <div class="contact-block">
-          <div class="contact-header">
-            <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <h3 class="contact-title">Contact us</h3>
-          </div>
-          <div class="contact-content">
-            <p class="contact-text">
-              Email: <a href={`mailto:${heroData.contactEmail}`} class="contact-link">{heroData.contactEmail}</a>
-            </p>
-          </div>
-        </div>
-        
-        <!-- Locations -->
-        <div class="contact-block">
-          <div class="contact-header">
-            <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <h3 class="contact-title">Our locations</h3>
-          </div>
-          <div class="contact-content">
-            {heroData.locations.map((location, index) => (
-              <a href={location.mapLink} target="_blank" rel="noopener noreferrer" class="location-link">
-                {location.name}{index < heroData.locations.length - 1 ? ', ' : ''}
-              </a>
-            ))}
-          </div>
-        </div>
-        
-        <!-- Newsletter Signup -->
-        <div class="signup-wrapper">
-          <BrevoSignupForm />
-        </div>
+    <div class="hero-quote-entry">
+      <div class="hero-cta-grid">
+        {heroData.ctas.map((cta) => (
+          <a
+            href={cta.href}
+            class:list={["hero-quote-card", cta.variant === "primary" ? "hero-quote-card-primary" : "hero-quote-card-secondary"]}
+            target={cta.external ? "_self" : undefined}
+          >
+            <span class="hero-quote-card-title">{cta.title}</span>
+          </a>
+        ))}
       </div>
-      
-      <div class="hero-bottom-background"></div>
     </div>
   </div>
 </section>
 
 <style>
   .hero-section {
+    --site-header-height: 80px;
     position: relative;
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    background: #000;
     color: var(--color-neutral-100);
     overflow: hidden;
   }
 
+  @media (min-width: 1024px) {
+    .hero-section {
+      height: calc(100vh - var(--site-header-height));
+      min-height: calc(100vh - var(--site-header-height));
+    }
+  }
+
   .hero-background {
     position: absolute;
-    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: linear-gradient(#0000, #0000), url('/images/Screen-Shot-2024-04-29-at-4.44.53-pm-p-1080.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -2;
+    top: auto;
+    height: 50%;
+    background: #000;
+    z-index: 0;
+  }
+
+  .hero-background::before {
+    content: "";
+    position: absolute;
+    inset: -100% 0 100% 0;
+    background: #000;
+  }
+
+  .hero-background::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.3) 100%);
+  }
+
+  .hero-background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
   }
 
   .hero-container {
@@ -170,6 +176,8 @@ const heroData = {
     padding: 80px 16px 64px 16px; /* Explicit values for easier debugging */
     box-sizing: border-box;
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   @media (min-width: 640px) {
@@ -180,12 +188,12 @@ const heroData = {
 
   @media (min-width: 1024px) {
     .hero-container {
-      padding: 80px 32px 64px 32px;
+      flex: 1 1 auto;
+      min-height: 0;
+      padding: 32px 32px 24px 32px;
+      justify-content: flex-start;
+      gap: var(--space-8);
     }
-  }
-
-  .hero-main-content {
-    margin-bottom: var(--space-10);
   }
 
   .hero-text-content {
@@ -212,170 +220,152 @@ const heroData = {
     display: inline-block;
   }
 
-  .hero-middle-content {
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  /* Stats */
-  .hero-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    animation: fadeInUp 0.8s ease-out 0.2s both;
-  }
-
-  @media (min-width: 640px) {
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-      width: 100%;
-    }
-    
-    .hero-stat {
-      min-width: 0;
-    }
-  }
-
-  .hero-stat {
-    text-align: center;
-  }
-
-  @media (min-width: 768px) {
-    .hero-stat {
-      text-align: left;
-    }
+  .hero-top-layout {
+    display: grid;
+    gap: var(--space-8);
   }
 
   @media (min-width: 1024px) {
-    .hero-stats {
-      min-width: 520px;
+    .hero-top-layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-6);
+      align-items: start;
     }
-  }
 
-  .stat-label {
-    font-size: var(--font-size-base);
-    font-weight: 500;
-    color: var(--color-neutral-100);
-    margin-bottom: var(--space-2);
-  }
-
-  .stat-number {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: var(--space-1);
-  }
-
-  @media (min-width: 768px) {
-    .stat-number {
-      justify-content: flex-start;
+    .hero-text-content {
+      margin-bottom: 0;
+      padding-top: var(--space-4);
+      max-width: 980px;
     }
-  }
-
-  .stat-value {
-    font-size: clamp(2.2rem, 3.5vw, 3rem);
-    font-weight: 600;
-    line-height: 1;
-  }
-
-  .stat-suffix {
-    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
-    font-weight: 600;
-    color: var(--color-primary);
-  }
-
-  /* Description and Actions */
-  .hero-description-section {
-    max-width: 680px;
-    margin: var(--space-8) auto 0;
-    text-align: center;
-    animation: fadeInUp 0.8s ease-out 0.4s both;
-  }
-
-  @media (max-width: 767px) {
-    .hero-description-section {
-      max-width: 100%;
-    }
-  }
-
-  .hero-description {
-    font-size: var(--font-size-base);
-    color: var(--color-neutral-100);
-    margin-bottom: var(--space-6);
-    line-height: 1.6;
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-4);
-    justify-content: center;
   }
 
   .hero-quote-entry {
-    margin-top: var(--space-8);
-    animation: fadeInUp 0.8s ease-out 0.5s both;
+    width: 100%;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
   }
 
-  .hero-quote-label {
-    margin: 0 0 var(--space-4) 0;
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.78);
-    text-align: center;
-  }
-
-  .hero-quote-grid {
+  .hero-cta-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-3);
   }
 
   @media (min-width: 1024px) {
-    .hero-quote-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+    .hero-quote-entry {
+      align-self: center;
+      width: min(100%, 640px);
     }
   }
 
   .hero-quote-card {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    padding: var(--space-4) var(--space-5);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid transparent;
+    background: rgba(0, 0, 0, 0.92);
     color: var(--color-neutral-100);
     text-decoration: none;
-    text-align: left;
     transition: transform var(--transition-normal), border-color var(--transition-normal), background-color var(--transition-normal), box-shadow var(--transition-normal);
     backdrop-filter: blur(10px);
   }
 
+  .hero-quote-card-primary {
+    background: var(--color-primary);
+    border-color: rgba(253, 181, 0, 0.95);
+    color: #000;
+  }
+
+  .hero-quote-card-secondary {
+    background: rgba(0, 0, 0, 0.92);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: var(--color-neutral-100);
+  }
+
   .hero-quote-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(253, 181, 0, 0.55);
-    background: rgba(253, 181, 0, 0.12);
     box-shadow: 0 16px 30px rgba(15, 23, 42, 0.24);
+  }
+
+  .hero-quote-card-primary:hover {
+    border-color: rgba(255, 212, 102, 1);
+    background: #e0a000;
+  }
+
+  .hero-quote-card-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.82);
+    background: rgba(12, 12, 12, 0.98);
   }
 
   .hero-quote-card-title {
     font-size: var(--font-size-base);
     font-weight: 600;
-  }
-
-  .hero-quote-card-meta {
-    font-size: var(--font-size-sm);
-    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
   }
 
   .hero-partners-band {
     margin-top: var(--space-8);
     animation: fadeInUp 0.8s ease-out 0.55s both;
+    width: 100%;
+  }
+
+  .hero-partners-band-inner {
+    width: 100%;
+  }
+
+  .hero-partners-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+    align-items: center;
+    justify-items: center;
+  }
+
+  .hero-partner-logo {
+    width: 100%;
+    max-width: 220px;
+    min-height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    background: rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-sizing: border-box;
+  }
+
+  .hero-partner-logo img {
+    max-width: 100%;
+    max-height: 54px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%) invert(1) brightness(1.08) opacity(0.82);
+  }
+
+  @media (min-width: 1024px) {
+    .hero-partners-band {
+      margin-top: var(--space-6);
+      align-self: center;
+      padding-bottom: 0;
+    }
+
+    .hero-partners-band-inner {
+      width: min(100%, 1160px);
+      margin: 0 auto;
+      padding: 0 var(--space-2);
+    }
+
+    .hero-partners-grid {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
   }
 
   .hero-partners-label {
@@ -385,170 +375,39 @@ const heroData = {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.78);
-  }
-
-  /* Hero Bottom Content */
-  .hero-bottom-content {
-    position: relative;
-    margin-top: var(--space-8);
-    animation: fadeInUp 0.8s ease-out 0.6s both;
-  }
-
-  .hero-contact-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 16px; /* Smaller gap on mobile */
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  @media (min-width: 768px) {
-    .hero-contact-grid {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 48px; /* var(--space-12) = 48px */
-    }
-    
-    .contact-block {
-      flex: 1;
-      min-width: calc(50% - 24px); /* 2 columns with gap */
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .hero-contact-grid {
-      flex-wrap: nowrap;
-      gap: 32px; /* slightly tighter gap to help fit one row */
-      align-items: stretch;
-      justify-content: space-between;
-    }
-
-    /* Make contact and locations blocks narrower so the form fits */
-    .hero-contact-grid .contact-block {
-      flex: 0 0 260px; /* fixed width for each small block */
-      max-width: 280px;
-      min-width: 0; /* allow shrinking below intrinsic width if needed */
-    }
-
-    /* Let the signup form take the remaining space */
-    .hero-contact-grid .signup-wrapper .form-card {
-      flex: 1 1 0;
-      min-width: 420px; /* ensure usable min width for the form */
-    }
-
-    /* Override with scoped selector to ensure the desired sizes */
-    .hero-contact-grid[data-astro-cid-nlow4r3u] .contact-block[data-astro-cid-nlow4r3u] {
-      flex: 0 0 298px;
-      max-width: 330px;
-      min-width: 0;
-    }
-  }
-
-  /* Signup wrapper should behave like a contact block in layout */
-  .signup-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex: 1 1 0;
-  }
-
-  .contact-block {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px; /* var(--radius-xl) = 12px */
-    padding: 24px; /* var(--space-6) = 24px */
-    transition: all var(--transition-normal);
-    box-sizing: border-box;
-    width: 100%;
-  }
-
-  .contact-block:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-  }
-
-  .contact-header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    margin-bottom: var(--space-4);
-  }
-
-  .contact-icon {
-    color: var(--color-primary);
-    flex-shrink: 0;
-  }
-
-  .contact-title {
-    color: var(--color-neutral-100);
-    font-size: var(--font-size-lg);
-    font-weight: 600;
-    margin: 0;
-  }
-
-  .contact-content {
-    color: var(--color-neutral-100);
-  }
-
-  .contact-link {
-    color: var(--color-neutral-100);
-    text-decoration: none;
-    transition: color var(--transition-normal);
-  }
-
-  .contact-link:hover {
-    color: var(--color-primary);
-  }
-
-  .location-link {
-    color: var(--color-neutral-100);
-    text-decoration: none;
-    transition: color var(--transition-normal);
-  }
-
-  .location-link:hover {
-    color: var(--color-primary);
-  }
-
-  .hero-bottom-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
-    border-radius: var(--radius-xl);
-    z-index: -1;
+    text-align: center;
   }
 
   /* Responsive adjustments */
   @media (max-width: 767px) {
+    .hero-background {
+      display: none;
+    }
+
     .hero-container {
       padding: 64px 16px 64px 16px; /* Explicit mobile padding for debugging */
     }
-    
-    .hero-stats {
-      grid-template-columns: 1fr;
-      gap: var(--space-6);
-    }
-    
-    .hero-actions {
-      flex-direction: column;
+
+    .hero-quote-entry {
+      order: 2;
     }
 
     .hero-partners-band {
+      order: 3;
+      display: block;
       margin-top: var(--space-6);
     }
 
-    .hero-quote-grid {
+    .hero-cta-grid {
       grid-template-columns: 1fr;
     }
-    
-    .button {
-      justify-content: center;
+
+    .hero-partners-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero-partner-logo {
+      order: var(--mobile-order);
     }
   }
 </style>

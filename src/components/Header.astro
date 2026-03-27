@@ -501,6 +501,12 @@ const contactEmail = 'contact@pvindustries.com.au';
   }
 
   /* Scroll behavior */
+  .header.homepage-top {
+    background: rgba(0, 0, 0, 0.94);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+  }
+
   .header.scrolled {
     background: rgba(15, 23, 42, 0.98);
     box-shadow: var(--shadow-lg);
@@ -534,15 +540,26 @@ const contactEmail = 'contact@pvindustries.com.au';
 
   // Header scroll effect
   if (header) {
-    window.addEventListener('scroll', () => {
+    const isHomepage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+
+    const updateHeaderState = () => {
       const currentScrollY = window.scrollY;
-      
+
       if (currentScrollY > 50) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
-    });
+
+      if (isHomepage && currentScrollY <= 50) {
+        header.classList.add('homepage-top');
+      } else {
+        header.classList.remove('homepage-top');
+      }
+    };
+
+    updateHeaderState();
+    window.addEventListener('scroll', updateHeaderState);
   }
 
   // Mobile dropdown toggle functionality
