@@ -262,9 +262,14 @@ const socialLinks = [
               <p class="step-subtitle" id="booking-form-intro"></p>
               <p class="result-message booking-form-notice hidden" id="booking-form-notice"></p>
 
-              <form class="booking-form" id="booking-request-form" method="POST" netlify-honeypot="bot-field">
+              <form class="booking-form" id="booking-request-form" method="POST" action="/" netlify-honeypot="bot-field">
               <input type="hidden" name="form-name" id="booking-form-name" value="collection-quote-request" />
-              <input type="hidden" name="bot-field" />
+              <p class="spam-screen" aria-hidden="true">
+                <label>Leave this field empty: <input type="text" name="bot-field" tabindex="-1" autocomplete="off" /></label>
+              </p>
+              <p class="spam-screen" aria-hidden="true">
+                <label>Website: <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+              </p>
               <input type="hidden" name="requestType" id="booking-request-type" value="Collection" />
               <input type="hidden" name="inquiryReason" id="booking-inquiry-reason" value="" />
               <input type="hidden" name="quotedSuburb" id="booking-quoted-suburb" value="" />
@@ -272,6 +277,7 @@ const socialLinks = [
               <input type="hidden" name="gateFee" id="booking-gate-fee" value="" />
               <input type="hidden" name="transportFee" id="booking-transport-fee" value="" />
               <input type="hidden" name="quoteTotal" id="booking-quote-total" value="" />
+              <input type="hidden" name="subject" id="booking-subject" value="" />
 
               <div class="booking-form-grid">
                 <label class="booking-field">
@@ -286,7 +292,11 @@ const socialLinks = [
 
                 <label class="booking-field booking-field--full" id="field-collection-address">
                   <span class="booking-label" id="booking-address-label">Collection Address</span>
-                  <input class="booking-input" type="text" name="collectionAddress" autocomplete="street-address" required />
+                  <div class="booking-location-input-group">
+                    <input class="booking-input" id="booking-location-input" type="text" name="collectionAddress" autocomplete="off" required />
+                    <div class="autocomplete-dropdown booking-autocomplete-dropdown" id="booking-location-dropdown"></div>
+                  </div>
+                  <span class="booking-field-hint hidden" id="booking-location-hint">Select a suburb/postcode, or keep your manual entry if the location is not listed.</span>
                 </label>
 
                 <label class="booking-field">
@@ -300,7 +310,7 @@ const socialLinks = [
                 </label>
 
                 <label class="booking-field">
-                  <span class="booking-label">Number of Panels</span>
+                  <span class="booking-label" id="booking-panel-label">Number of Panels</span>
                   <input class="booking-input booking-input--readonly" id="booking-panel-count" type="text" name="panelCount" readonly />
                 </label>
 
@@ -317,6 +327,11 @@ const socialLinks = [
                 <label class="booking-field booking-field--date hidden" id="field-dropoff-date">
                   <span class="booking-label">Preferred Drop-Off Date</span>
                   <input class="booking-input" type="date" name="preferredDropOffDate" />
+                </label>
+
+                <label class="booking-field booking-field--full hidden" id="field-project-details">
+                  <span class="booking-label">Project Details</span>
+                  <textarea class="booking-input booking-textarea" name="projectDetails" rows="3" placeholder="Tell us where the panels are, approximate quantity, access notes, and timing."></textarea>
                 </label>
               </div>
 
@@ -369,11 +384,14 @@ const socialLinks = [
             <input type="text" name="customerType" />
             <input type="text" name="abn" />
             <input type="text" name="preferredDropOffDate" />
+            <textarea name="projectDetails"></textarea>
             <input type="text" name="quotedSuburb" />
             <input type="text" name="quotedDistance" />
             <input type="text" name="gateFee" />
             <input type="text" name="transportFee" />
             <input type="text" name="quoteTotal" />
+            <input type="text" name="subject" />
+            <input type="text" name="website" />
           </form>
 
           <form name="bankstown-dropoff-request" data-netlify="true" netlify-honeypot="bot-field" hidden>
@@ -390,11 +408,14 @@ const socialLinks = [
             <input type="text" name="customerType" />
             <input type="text" name="abn" />
             <input type="text" name="preferredDropOffDate" />
+            <textarea name="projectDetails"></textarea>
             <input type="text" name="quotedSuburb" />
             <input type="text" name="quotedDistance" />
             <input type="text" name="gateFee" />
             <input type="text" name="transportFee" />
             <input type="text" name="quoteTotal" />
+            <input type="text" name="subject" />
+            <input type="text" name="website" />
           </form>
 
           <form name="custom-quote-request" data-netlify="true" netlify-honeypot="bot-field" hidden>
@@ -411,11 +432,14 @@ const socialLinks = [
             <input type="text" name="customerType" />
             <input type="text" name="abn" />
             <input type="text" name="preferredDropOffDate" />
+            <textarea name="projectDetails"></textarea>
             <input type="text" name="quotedSuburb" />
             <input type="text" name="quotedDistance" />
             <input type="text" name="gateFee" />
             <input type="text" name="transportFee" />
             <input type="text" name="quoteTotal" />
+            <input type="text" name="subject" />
+            <input type="text" name="website" />
           </form>
 
         </div>
@@ -548,7 +572,8 @@ const socialLinks = [
     bookingMode: null,
     bookingOriginStep: 4,
     customInquiryReason: '',
-    quoteTotals: null
+    quoteTotals: null,
+    bookingStepRenderedAt: 0
   };
 
   /* ───────────────── DOM REFS ─────────────── */
@@ -579,8 +604,13 @@ const socialLinks = [
   var bookingNameLabel = document.getElementById('booking-name-label');
   var bookingBusinessLabel = document.getElementById('booking-business-label');
   var bookingPhoneLabel = document.getElementById('booking-phone-label');
+  var bookingAddressLabel = document.getElementById('booking-address-label');
+  var bookingPanelLabel = document.getElementById('booking-panel-label');
   var bookingBackLabel = document.getElementById('booking-back-label');
   var bookingFormStatus = document.getElementById('booking-form-status');
+  var bookingLocationInput = document.getElementById('booking-location-input');
+  var bookingLocationDropdown = document.getElementById('booking-location-dropdown');
+  var bookingLocationHint = document.getElementById('booking-location-hint');
   var bookingPanelCount = document.getElementById('booking-panel-count');
   var bookingCustomerType = document.getElementById('booking-customer-type');
   var collectionAddressField = document.getElementById('field-collection-address');
@@ -592,10 +622,15 @@ const socialLinks = [
   var bookingGateFee = document.getElementById('booking-gate-fee');
   var bookingTransportFee = document.getElementById('booking-transport-fee');
   var bookingQuoteTotal = document.getElementById('booking-quote-total');
+  var bookingSubject = document.getElementById('booking-subject');
   var businessField = document.getElementById('field-business-name');
   var abnField = document.getElementById('field-abn');
   var dropOffDateField = document.getElementById('field-dropoff-date');
+  var projectDetailsField = document.getElementById('field-project-details');
   var btnBackToQuoteOptions = document.getElementById('btn-back-to-quote-options');
+  var bookingLocationHighlight = -1;
+  var australianPostcodes = null;
+  var australianPostcodesRequest = null;
 
   /* ───────────────── HELPERS ──────────────── */
   function fmt(n) {
@@ -708,6 +743,144 @@ const socialLinks = [
     bookingPanelCount.value = value == null ? '' : String(value);
   }
 
+  function closeBookingLocationDropdown() {
+    bookingLocationDropdown.classList.remove('open');
+    bookingLocationDropdown.innerHTML = '';
+    bookingLocationHighlight = -1;
+  }
+
+  function formatBookingLocation(row) {
+    return row[0] + ', ' + row[2] + ' ' + row[1];
+  }
+
+  function selectBookingLocation(row) {
+    bookingLocationInput.value = formatBookingLocation(row);
+    bookingLocationHint.classList.remove('hidden');
+    closeBookingLocationDropdown();
+  }
+
+  function renderBookingLocationMessage(message) {
+    bookingLocationDropdown.innerHTML = '';
+    bookingLocationHighlight = -1;
+
+    var item = document.createElement('div');
+    item.className = 'ac-item ac-no-match';
+    item.textContent = message;
+    bookingLocationDropdown.appendChild(item);
+    bookingLocationDropdown.classList.add('open');
+    bookingLocationHint.classList.remove('hidden');
+  }
+
+  function loadAustralianPostcodes() {
+    if (australianPostcodes) return Promise.resolve(australianPostcodes);
+    if (!australianPostcodesRequest) {
+      australianPostcodesRequest = fetch('/data/australian-postcodes.json')
+        .then(function (response) {
+          if (!response.ok) throw new Error('Could not load Australian postcodes');
+          return response.json();
+        })
+        .then(function (rows) {
+          australianPostcodes = rows;
+          return rows;
+        })
+        .catch(function () {
+          australianPostcodesRequest = null;
+          return [];
+        });
+    }
+
+    return australianPostcodesRequest;
+  }
+
+  function searchAustralianPostcodes(query) {
+    if (!australianPostcodes || !query || query.length < 2) return [];
+
+    var q = query.toLowerCase();
+    var postcodeQuery = query.replace(/\D/g, '');
+    var exactMatches = [];
+    var strongMatches = [];
+    var looseMatches = [];
+
+    for (var i = 0; i < australianPostcodes.length; i++) {
+      var row = australianPostcodes[i];
+      var suburb = row[0].toLowerCase();
+      var postcode = row[1];
+      var state = row[2].toLowerCase();
+      var postcodeMatch = postcodeQuery && postcode.indexOf(postcodeQuery) !== -1;
+      var textMatch = suburb.indexOf(q) !== -1 || state.indexOf(q) !== -1;
+
+      if (!postcodeMatch && !textMatch) continue;
+
+      if (suburb === q || postcode === postcodeQuery) {
+        exactMatches.push(row);
+      } else if (suburb.indexOf(q) === 0 || (postcodeQuery && postcode.indexOf(postcodeQuery) === 0)) {
+        strongMatches.push(row);
+      } else {
+        looseMatches.push(row);
+      }
+
+      if (exactMatches.length + strongMatches.length >= 10) break;
+    }
+
+    return exactMatches.concat(strongMatches, looseMatches).slice(0, 10);
+  }
+
+  function renderBookingLocationDropdown(results, query) {
+    bookingLocationDropdown.innerHTML = '';
+    bookingLocationHighlight = -1;
+
+    if (!query || query.length < 2) {
+      closeBookingLocationDropdown();
+      bookingLocationHint.classList.add('hidden');
+      return;
+    }
+
+    if (results.length === 0) {
+      renderBookingLocationMessage('No suburb match — you can keep typing the Australian suburb/postcode manually');
+      return;
+    }
+
+    results.forEach(function (row, idx) {
+      var item = document.createElement('div');
+      item.className = 'ac-item';
+      item.setAttribute('data-idx', idx);
+      item.textContent = formatBookingLocation(row);
+      item.addEventListener('mousedown', function (event) {
+        event.preventDefault();
+        selectBookingLocation(row);
+      });
+      bookingLocationDropdown.appendChild(item);
+    });
+    bookingLocationDropdown.classList.add('open');
+    bookingLocationHint.classList.remove('hidden');
+  }
+
+  function updateBookingLocationSuggestions() {
+    if (state.bookingMode !== 'custom') {
+      closeBookingLocationDropdown();
+      return;
+    }
+
+    var q = bookingLocationInput.value.trim();
+    if (q.length < 2) {
+      closeBookingLocationDropdown();
+      bookingLocationHint.classList.add('hidden');
+      return;
+    }
+
+    if (!australianPostcodes) {
+      renderBookingLocationMessage('Loading Australian suburbs and postcodes...');
+      loadAustralianPostcodes().then(function () {
+        if (bookingLocationInput.value.trim() === q) {
+          renderBookingLocationDropdown(searchAustralianPostcodes(q), q);
+        }
+      });
+      return;
+    }
+
+    renderBookingLocationDropdown(searchAustralianPostcodes(q), q);
+  }
+
   function showCustomInquiryForm(reason, originStep) {
     state.bookingMode = 'custom';
     state.bookingOriginStep = originStep;
@@ -774,10 +947,112 @@ const socialLinks = [
     bookingFormStatus.className = 'booking-form-status booking-form-status--' + type;
   }
 
+  function getFieldValue(formData, fieldName) {
+    return (formData.get(fieldName) || '').toString().trim();
+  }
+
+  function looksLikeUsPhone(phone) {
+    var compact = phone.replace(/[\s().-]/g, '');
+    return compact.indexOf('+1') === 0 || compact.indexOf('001') === 0;
+  }
+
+  function containsNonAustralianLocation(value) {
+    return /\b(usa|u\.s\.a\.|united states|new york|nyc|ny)\b/i.test(value);
+  }
+
+  function shouldBlockNonAustralianLead(formData) {
+    var phone = getFieldValue(formData, 'contactNumber');
+    var location = getFieldValue(formData, 'collectionAddress');
+    var details = getFieldValue(formData, 'projectDetails');
+    var business = getFieldValue(formData, 'businessName');
+    var combinedLocationText = [location, details, business].join(' ');
+
+    return looksLikeUsPhone(phone) || containsNonAustralianLocation(combinedLocationText);
+  }
+
+  function validateBookingSubmission(formData) {
+    if (getFieldValue(formData, 'bot-field') || getFieldValue(formData, 'website')) {
+      return {
+        ok: false,
+        silent: true,
+        message: 'Thanks, your request has been received.'
+      };
+    }
+
+    if (state.bookingStepRenderedAt && Date.now() - state.bookingStepRenderedAt < 1500) {
+      return {
+        ok: false,
+        message: 'Please take a moment to review your details before sending.'
+      };
+    }
+
+    if (shouldBlockNonAustralianLead(formData)) {
+      return {
+        ok: false,
+        message: 'PV Industries currently services Australian solar panel projects only. If your project is in Australia, please use an Australian project location and contact number, or email ' + CONTACT_EMAIL + '.'
+      };
+    }
+
+    if (state.bookingMode === 'custom') {
+      if (!getFieldValue(formData, 'collectionAddress')) {
+        return {
+          ok: false,
+          message: 'Please enter the Australian project location so we can prepare the right quote.'
+        };
+      }
+
+      if (!getFieldValue(formData, 'panelCount')) {
+        return {
+          ok: false,
+          message: 'Please enter the number of panels, or write "unknown" if you are not sure yet.'
+        };
+      }
+
+      if (getFieldValue(formData, 'projectDetails').length < 20) {
+        return {
+          ok: false,
+          message: 'Please add a few project details, such as access notes, timing, or where the panels are located.'
+        };
+      }
+    }
+
+    return { ok: true };
+  }
+
   function getBookingFormName(mode) {
     if (mode === 'dropoff') return 'bankstown-dropoff-request';
     if (mode === 'custom') return 'custom-quote-request';
     return 'collection-quote-request';
+  }
+
+  function padSubjectPart(value) {
+    return value < 10 ? '0' + value : '' + value;
+  }
+
+  function formatSubjectTimestamp(date) {
+    return date.getFullYear() + '-' +
+      padSubjectPart(date.getMonth() + 1) + '-' +
+      padSubjectPart(date.getDate()) + ' ' +
+      padSubjectPart(date.getHours()) + ':' +
+      padSubjectPart(date.getMinutes()) + ':' +
+      padSubjectPart(date.getSeconds());
+  }
+
+  function buildBookingSubject(mode, formData) {
+    var requestType = mode === 'custom'
+      ? 'Custom Quote Request'
+      : (mode === 'dropoff' ? 'Bankstown Drop-Off Request' : 'Collection Request');
+    var customerName = (formData.get('customerName') || '').toString().trim();
+    var customerType = getCustomerTypeLabel(state.customerType) || 'Customer';
+    var suburb = state.selectedSuburb ? state.selectedSuburb.name : '';
+    var parts = ['PV Industries', requestType];
+
+    if (customerName) parts.push(customerName);
+    parts.push(customerType);
+    if (suburb) parts.push(suburb);
+    parts.push(formatSubjectTimestamp(new Date()));
+
+    return parts.join(' | ');
   }
 
   function populateBookingHiddenFields(mode) {
@@ -800,6 +1075,7 @@ const socialLinks = [
     bookingQuoteTotal.value = state.quoteTotals && mode !== 'custom'
       ? (isDropOff ? fmt(state.quoteTotals.dropOffTotal) : fmt(state.quoteTotals.collectionTotal))
       : '';
+    bookingSubject.value = '';
   }
 
   function encodeFormData(formData) {
@@ -854,21 +1130,33 @@ const socialLinks = [
       ? ((state.customerType === 'government' || state.customerType === 'utility') ? 'Organisation Name' : 'Company Name')
       : 'Business Name';
     bookingPhoneLabel.textContent = isCustom ? 'Phone Number' : 'Contact Number';
+    bookingAddressLabel.textContent = isCustom ? 'Suburb / Postcode' : 'Collection Address';
+    bookingPanelLabel.textContent = isCustom ? 'Number of Panels (or "unknown")' : 'Number of Panels';
+    bookingLocationInput.placeholder = isCustom ? 'e.g. Parramatta or 2150' : '';
+    bookingLocationInput.setAttribute('autocomplete', isCustom ? 'off' : 'street-address');
     bookingBackLabel.textContent = state.bookingOriginStep === 4 ? 'Back to Pickup / Drop-Off Choice' : 'Back';
 
     configurePanelCountField(
       !isCustom,
-      false,
+      isCustom,
       state.panelCountEntered ? state.panelCount : ''
     );
     bookingCustomerType.value = customerTypeLabel;
     populateBookingHiddenFields(state.bookingMode);
     setBookingFormStatus();
+    closeBookingLocationDropdown();
+    bookingLocationHint.classList.toggle('hidden', !isCustom);
 
-    toggleConditionalField(collectionAddressField, 'collectionAddress', !isDropOff && !isCustom, !isDropOff && !isCustom);
+    if (isCustom && state.bookingOriginStep === 3 && !bookingForm.elements.collectionAddress.value) {
+      bookingForm.elements.collectionAddress.value = locInput.value.trim();
+    }
+
+    toggleConditionalField(collectionAddressField, 'collectionAddress', !isDropOff, !isDropOff);
     toggleConditionalField(businessField, 'businessName', isCustom || isCommercial, false);
     toggleConditionalField(abnField, 'abn', !isCustom && isCommercial, false);
     toggleConditionalField(dropOffDateField, 'preferredDropOffDate', isDropOff, isDropOff);
+    toggleConditionalField(projectDetailsField, 'projectDetails', isCustom, isCustom);
+    state.bookingStepRenderedAt = Date.now();
   }
 
   function resetCalculator() {
@@ -882,6 +1170,7 @@ const socialLinks = [
     state.bookingOriginStep = 4;
     state.customInquiryReason = '';
     state.quoteTotals = null;
+    state.bookingStepRenderedAt = 0;
 
     panelInput.value = '10';
     locInput.value = '';
@@ -890,6 +1179,8 @@ const socialLinks = [
     bookingForm.reset();
     setBookingFormStatus();
     closeDropdown();
+    closeBookingLocationDropdown();
+    bookingLocationHint.classList.add('hidden');
 
     typeCards.forEach(function (c) { c.classList.remove('selected'); });
     updateQuoteOptionSelection();
@@ -1093,6 +1384,46 @@ const socialLinks = [
     setTimeout(closeDropdown, 150);
   });
 
+  bookingLocationInput.addEventListener('input', function () {
+    updateBookingLocationSuggestions();
+  });
+
+  bookingLocationInput.addEventListener('focus', function () {
+    updateBookingLocationSuggestions();
+  });
+
+  bookingLocationInput.addEventListener('keydown', function (event) {
+    if (state.bookingMode !== 'custom') return;
+
+    var items = bookingLocationDropdown.querySelectorAll('.ac-item:not(.ac-no-match)');
+    if (!items.length) return;
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      bookingLocationHighlight = Math.min(bookingLocationHighlight + 1, items.length - 1);
+      items.forEach(function (item, index) {
+        item.classList.toggle('highlighted', index === bookingLocationHighlight);
+      });
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      bookingLocationHighlight = Math.max(bookingLocationHighlight - 1, 0);
+      items.forEach(function (item, index) {
+        item.classList.toggle('highlighted', index === bookingLocationHighlight);
+      });
+    } else if (event.key === 'Enter' && bookingLocationHighlight >= 0) {
+      event.preventDefault();
+      var idx = parseInt(items[bookingLocationHighlight].getAttribute('data-idx'), 10);
+      var results = searchAustralianPostcodes(bookingLocationInput.value.trim());
+      if (results[idx]) selectBookingLocation(results[idx]);
+    } else if (event.key === 'Escape') {
+      closeBookingLocationDropdown();
+    }
+  });
+
+  bookingLocationInput.addEventListener('blur', function () {
+    setTimeout(closeBookingLocationDropdown, 150);
+  });
+
   /* ──────────── GET QUOTE ────────────────── */
   btnQuote.addEventListener('click', function () {
     var q = locInput.value.trim();
@@ -1177,7 +1508,15 @@ const socialLinks = [
     setBookingFormStatus('pending', 'Sending your request...');
 
     var formData = new FormData(bookingForm);
+    var validation = validateBookingSubmission(formData);
+    if (!validation.ok) {
+      setBookingFormStatus(validation.silent ? 'success' : 'error', validation.message);
+      return;
+    }
+
     formData.set('form-name', getBookingFormName(state.bookingMode));
+    bookingSubject.value = buildBookingSubject(state.bookingMode, formData);
+    formData.set('subject', bookingSubject.value);
 
     fetch('/', {
       method: 'POST',
@@ -1189,15 +1528,16 @@ const socialLinks = [
       bookingForm.reset();
       configurePanelCountField(
         state.bookingMode !== 'custom',
-        false,
+        state.bookingMode === 'custom',
         state.panelCountEntered ? state.panelCount : ''
       );
       bookingCustomerType.value = getCustomerTypeLabel(state.customerType);
       populateBookingHiddenFields(state.bookingMode);
-      toggleConditionalField(collectionAddressField, 'collectionAddress', state.bookingMode !== 'dropoff' && state.bookingMode !== 'custom', state.bookingMode !== 'dropoff' && state.bookingMode !== 'custom');
+      toggleConditionalField(collectionAddressField, 'collectionAddress', state.bookingMode !== 'dropoff', state.bookingMode !== 'dropoff');
       toggleConditionalField(businessField, 'businessName', state.bookingMode === 'custom' || state.customerType === 'commercial', false);
       toggleConditionalField(abnField, 'abn', state.bookingMode !== 'custom' && state.customerType === 'commercial', false);
       toggleConditionalField(dropOffDateField, 'preferredDropOffDate', state.bookingMode === 'dropoff', state.bookingMode === 'dropoff');
+      toggleConditionalField(projectDetailsField, 'projectDetails', state.bookingMode === 'custom', state.bookingMode === 'custom');
 
       setBookingFormStatus(
         'success',
@@ -1222,6 +1562,7 @@ const socialLinks = [
   toggleConditionalField(businessField, 'businessName', false, false);
   toggleConditionalField(abnField, 'abn', false, false);
   toggleConditionalField(dropOffDateField, 'preferredDropOffDate', false, false);
+  toggleConditionalField(projectDetailsField, 'projectDetails', false, false);
 })();
 </script>
 
@@ -1902,6 +2243,14 @@ const socialLinks = [
     text-align: left;
   }
 
+  .spam-screen {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
   .booking-form-grid {
     display: grid;
     gap: var(--space-4);
@@ -1916,6 +2265,20 @@ const socialLinks = [
 
   .booking-field--date {
     position: relative;
+  }
+
+  .booking-location-input-group {
+    position: relative;
+  }
+
+  .booking-autocomplete-dropdown {
+    z-index: 30;
+  }
+
+  .booking-field-hint {
+    color: var(--color-neutral-500);
+    font-size: var(--font-size-xs);
+    line-height: 1.5;
   }
 
   .booking-field--date::after {
@@ -1961,6 +2324,11 @@ const socialLinks = [
   .booking-input:focus {
     outline: none;
     border-color: var(--color-primary);
+  }
+
+  .booking-textarea {
+    min-height: 120px;
+    resize: vertical;
   }
 
   .booking-field--date .booking-input {
