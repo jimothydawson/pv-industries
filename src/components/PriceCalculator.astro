@@ -1,6 +1,4 @@
 ---
-import suburbData from '../data/suburbs.json';
-
 const contactEmail = "contact@pvindustries.com.au";
 
 const dropOffLocations = [
@@ -534,7 +532,7 @@ const socialLinks = [
   <div class="section-bg"></div>
 </section>
 
-<script is:inline define:vars={{ SUBURBS: suburbData }}>
+<script is:inline>
 (function () {
   /* ───────────────── CONFIG ───────────────── */
   var PVI_LAT = -33.9175;
@@ -631,6 +629,9 @@ const socialLinks = [
   var bookingLocationHighlight = -1;
   var australianPostcodes = null;
   var australianPostcodesRequest = null;
+  var quoteSuburbs = null;
+  var quoteSuburbsRequest = null;
+  var quoteSearchToken = 0;
 
   /* ───────────────── HELPERS ──────────────── */
   function fmt(n) {
@@ -1065,7 +1066,7 @@ const socialLinks = [
       : (isDropOff ? 'Bankstown Drop-Off' : 'Collection');
     bookingInquiryReason.value = mode === 'custom' ? state.customInquiryReason : '';
     bookingQuotedSuburb.value = state.selectedSuburb
-      ? state.selectedSuburb.name + ' ' + state.selectedSuburb.postcode
+      ? formatSuburbLabel(state.selectedSuburb)
       : '';
     bookingQuotedDistance.value = driveEst ? formatDistance(driveEst.roadKm) : '';
     bookingGateFee.value = state.quoteTotals && mode !== 'custom' ? fmt(state.quoteTotals.gateFee) : '';
@@ -1256,18 +1257,92 @@ const socialLinks = [
   /* ─────────── STEP 3: LOCATION AUTOCOMPLETE ─ */
   var acHighlight = -1;
 
-  function searchSuburbs(query) {
-    if (!query || query.length < 2) return [];
-    var q = query.toLowerCase();
-    var results = [];
-    for (var i = 0; i < SUBURBS.length; i++) {
-      var s = SUBURBS[i];
-      if (s.name.toLowerCase().indexOf(q) !== -1 || s.postcode.indexOf(q) !== -1) {
-        results.push(s);
-      }
-      if (results.length >= 8) break;
+  function loadQuoteSuburbs() {
+    if (quoteSuburbs) return Promise.resolve(quoteSuburbs);
+    if (!quoteSuburbsRequest) {
+      quoteSuburbsRequest = fetch('/data/australian-suburbs-geocoded.json')
+        .then(function (response) {
+          if (!response.ok) throw new Error('Could not load quote suburbs');
+          return response.json();
+        })
+        .then(function (rows) {
+          quoteSuburbs = rows;
+          return rows;
+        })
+        .catch(function () {
+          quoteSuburbsRequest = null;
+          return [];
+        });
     }
-    return results;
+
+    return quoteSuburbsRequest;
+  }
+
+  function makeSuburb(row) {
+    return {
+      name: row[0],
+      postcode: row[1],
+      state: row[2],
+      lat: row[3],
+      lng: row[4]
+    };
+  }
+
+  function formatSuburbLabel(s) {
+    return s.name + ', ' + (s.state ? s.state + ' ' : '') + s.postcode;
+  }
+
+  function searchSuburbs(query) {
+    if (!quoteSuburbs || !query || query.length < 2) return [];
+
+    var q = query.toLowerCase();
+    var postcodeQuery = query.replace(/\D/g, '');
+    var exactMatches = [];
+    var strongMatches = [];
+    var looseMatches = [];
+
+    for (var i = 0; i < quoteSuburbs.length; i++) {
+      var row = quoteSuburbs[i];
+      var suburb = row[0].toLowerCase();
+      var postcode = row[1];
+      var state = row[2].toLowerCase();
+      var postcodeMatch = postcodeQuery && postcode.indexOf(postcodeQuery) !== -1;
+      var textMatch = suburb.indexOf(q) !== -1 || state.indexOf(q) !== -1;
+
+      if (!postcodeMatch && !textMatch) continue;
+
+      if (suburb === q || postcode === postcodeQuery) {
+        exactMatches.push(makeSuburb(row));
+      } else if (suburb.indexOf(q) === 0 || (postcodeQuery && postcode.indexOf(postcodeQuery) === 0)) {
+        strongMatches.push(makeSuburb(row));
+      } else {
+        looseMatches.push(makeSuburb(row));
+      }
+
+      if (exactMatches.length + strongMatches.length >= 10) break;
+    }
+
+    return exactMatches.concat(strongMatches, looseMatches).slice(0, 10);
+  }
+
+  function renderQuoteLocationMessage(message, allowCustomQuote) {
+    dropdown.innerHTML = '';
+    acHighlight = -1;
+
+    var item = document.createElement('div');
+    item.className = 'ac-item ac-no-match';
+    item.textContent = message;
+    if (allowCustomQuote !== false) {
+      item.addEventListener('mousedown', function (e) {
+        e.preventDefault();
+        showCustomInquiryForm(
+          "Our quote calculator can't yet provide an estimate for your area. Please complete the form below and our sales team will contact you.",
+          3
+        );
+      });
+    }
+    dropdown.appendChild(item);
+    dropdown.classList.add('open');
   }
 
   function renderDropdown(results, query) {
@@ -1276,18 +1351,7 @@ const socialLinks = [
 
     if (results.length === 0) {
       if (query && query.length >= 2) {
-        var noMatch = document.createElement('div');
-        noMatch.className = 'ac-item ac-no-match';
-        noMatch.textContent = 'Instant quotes are available for Sydney Metro only — contact us for other areas';
-        noMatch.addEventListener('mousedown', function (e) {
-          e.preventDefault();
-          showCustomInquiryForm(
-            "Our quote calculator can't yet provide an estimate for your area. Please complete the form below and our sales team will contact you.",
-            3
-          );
-        });
-        dropdown.appendChild(noMatch);
-        dropdown.classList.add('open');
+        renderQuoteLocationMessage('No suburb/postcode match — continue for a tailored quote');
       } else {
         closeDropdown();
       }
@@ -1298,7 +1362,7 @@ const socialLinks = [
       var item = document.createElement('div');
       item.className = 'ac-item';
       item.setAttribute('data-idx', idx);
-      item.textContent = s.name + ', ' + s.postcode;
+      item.textContent = formatSuburbLabel(s);
       item.addEventListener('mousedown', function (e) {
         e.preventDefault();
         selectSuburb(s);
@@ -1316,7 +1380,7 @@ const socialLinks = [
 
   function selectSuburb(s) {
     state.selectedSuburb = s;
-    locInput.value = s.name + ', ' + s.postcode;
+    locInput.value = formatSuburbLabel(s);
     locHint.textContent = '';
     closeDropdown();
 
@@ -1327,9 +1391,9 @@ const socialLinks = [
       state.distanceKm = straightKm;
       state.driveMins = drive.mins;
       showCustomInquiryForm(
-        'Your location (' + s.name + ') is approximately ' +
+        'Your location (' + formatSuburbLabel(s) + ') is approximately ' +
         formatDistance(drive.roadKm) + ' from PV Industries, which is outside our standard collection radius of ' +
-        MAX_DISTANCE_KM + ' km. Please complete the form below and our sales team will provide a custom quote.',
+        MAX_DISTANCE_KM + ' km from Bankstown. Please complete the form below and our sales team will provide a custom quote.',
         3
       );
     }
@@ -1340,20 +1404,51 @@ const socialLinks = [
   locInput.addEventListener('input', function () {
     state.selectedSuburb = null;
     var q = this.value.trim();
-    var results = searchSuburbs(q);
-    renderDropdown(results, q);
+    var currentToken = ++quoteSearchToken;
 
     if (noMatchTimer) clearTimeout(noMatchTimer);
+
+    if (q.length < 2) {
+      closeDropdown();
+      return;
+    }
+
+    if (!quoteSuburbs) {
+      renderQuoteLocationMessage('Loading Australian suburbs and postcodes...', false);
+      loadQuoteSuburbs().then(function () {
+        if (currentToken !== quoteSearchToken || locInput.value.trim() !== q) return;
+
+        var loadedResults = searchSuburbs(q);
+        renderDropdown(loadedResults, q);
+        if (q.length >= 3 && loadedResults.length === 0) {
+          noMatchTimer = setTimeout(function () {
+            closeDropdown();
+            showCustomInquiryForm(
+              'For all enquiries outside of our instant quote area, please complete the form below and our sales team will contact you.',
+              3
+            );
+          }, 800);
+        }
+      });
+      return;
+    }
+
+    var results = searchSuburbs(q);
+    renderDropdown(results, q);
 
     if (q.length >= 3 && results.length === 0) {
       noMatchTimer = setTimeout(function () {
         closeDropdown();
         showCustomInquiryForm(
-          'For all enquiries outside of Sydney Metro, please complete the form below and our sales team will contact you.',
+          'For all enquiries outside of our instant quote area, please complete the form below and our sales team will contact you.',
           3
         );
       }, 800);
     }
+  });
+
+  locInput.addEventListener('focus', function () {
+    if (!quoteSuburbs) loadQuoteSuburbs();
   });
 
   locInput.addEventListener('keydown', function (e) {
@@ -1428,9 +1523,16 @@ const socialLinks = [
   btnQuote.addEventListener('click', function () {
     var q = locInput.value.trim();
     if (!state.selectedSuburb) {
+      if (!quoteSuburbs && q.length >= 2) {
+        locHint.textContent = 'Still loading Australian suburbs and postcodes. Please try again in a moment.';
+        locHint.className = 'location-hint error';
+        loadQuoteSuburbs();
+        return;
+      }
+
       if (q.length >= 2 && searchSuburbs(q).length === 0) {
         showCustomInquiryForm(
-          'For all enquiries outside of Sydney Metro, please complete the form below and our sales team will contact you.',
+          'For all enquiries outside of our instant quote area, please complete the form below and our sales team will contact you.',
           3
         );
         return;
@@ -1448,9 +1550,9 @@ const socialLinks = [
 
     if (drive.roadKm > MAX_DISTANCE_KM) {
       showCustomInquiryForm(
-        'Your location (' + state.selectedSuburb.name + ') is approximately ' +
+        'Your location (' + formatSuburbLabel(state.selectedSuburb) + ') is approximately ' +
         formatDistance(drive.roadKm) + ' from PV Industries, which is outside our standard collection radius of ' +
-        MAX_DISTANCE_KM + ' km. Please complete the form below and our sales team will provide a custom quote.',
+        MAX_DISTANCE_KM + ' km from Bankstown. Please complete the form below and our sales team will provide a custom quote.',
         3
       );
       return;
