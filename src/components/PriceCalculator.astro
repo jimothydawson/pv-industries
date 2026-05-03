@@ -260,6 +260,10 @@ const socialLinks = [
 
             <!-- Step 5: Booking Request Form -->
             <div class="calc-step" id="step-5">
+              <div class="custom-quote-routing hidden" id="custom-quote-routing">
+                <h3 class="step-title custom-routing-title">Instant quote is unavailable for your postcode.</h3>
+                <h4 class="custom-routing-dropoff" id="nearest-dropoff-heading"></h4>
+              </div>
               <h3 class="step-title" id="booking-form-title">Book Collection</h3>
               <p class="step-subtitle" id="booking-form-intro"></p>
               <p class="result-message booking-form-notice hidden" id="booking-form-notice"></p>
@@ -545,19 +549,32 @@ const socialLinks = [
   var PVI_LAT = -33.9175;
   var PVI_LNG = 151.0353;
   var MAX_DISTANCE_KM = 60;
+  var MAX_DROPOFF_RECOMMENDATION_KM = 180;
   var MAX_PANELS = 90;
   var HOURLY_RATE = 100;
   var TOLL_MULTIPLIER = 1.15;
   var LOADING_MINS_PER_PANEL = 1.5;
   var MIN_TRANSPORT_MINS = 30;
   var ROAD_FACTOR = 1.5;
-  var AVG_SPEED_KPH = 35;
+  var TRUCK_AVG_SPEED_KPH = 27;
   var CONTACT_EMAIL = 'contact@pvindustries.com.au';
 
   var PRICING = {
     residential: { label: 'Residential', priceIncGst: 13.20 },
     commercial:  { label: 'Commercial',  priceIncGst: 8.80 }
   };
+
+  var DROP_OFF_POINTS = [
+    { name: 'Bankstown', state: 'NSW', lat: -33.92, lng: 151.03 },
+    { name: 'Dubbo', state: 'NSW', lat: -32.2, lng: 148.9 },
+    { name: 'Gosford', state: 'NSW', lat: -33.11, lng: 151.14 },
+    { name: 'Newcastle', state: 'NSW', lat: -32.94, lng: 151.77 },
+    { name: 'Thornleigh', state: 'NSW', lat: -33.74, lng: 151.07 },
+    { name: 'Woy Woy', state: 'NSW', lat: -33.5, lng: 151.33 },
+    { name: 'Derrimut', state: 'VIC', lat: -37.97, lng: 144.58 },
+    { name: 'East Gippsland', state: 'VIC', lat: -37.83, lng: 147.63 },
+    { name: 'Mitcham', state: 'SA', lat: -34.99, lng: 138.65 }
+  ];
 
   function getCustomerTypeLabel(type) {
     if (type === 'government') return 'Government';
@@ -577,6 +594,7 @@ const socialLinks = [
     bookingMode: null,
     bookingOriginStep: 4,
     customInquiryReason: '',
+    nearestDropOffLabel: '',
     quoteTotals: null,
     bookingStepRenderedAt: 0
   };
@@ -606,6 +624,8 @@ const socialLinks = [
   var bookingTitle = document.getElementById('booking-form-title');
   var bookingIntro = document.getElementById('booking-form-intro');
   var bookingNotice = document.getElementById('booking-form-notice');
+  var customQuoteRouting = document.getElementById('custom-quote-routing');
+  var nearestDropOffHeading = document.getElementById('nearest-dropoff-heading');
   var bookingNameLabel = document.getElementById('booking-name-label');
   var bookingBusinessLabel = document.getElementById('booking-business-label');
   var bookingPhoneLabel = document.getElementById('booking-phone-label');
@@ -660,7 +680,7 @@ const socialLinks = [
 
   function estimateDrive(straightLineKm) {
     var roadKm = straightLineKm * ROAD_FACTOR;
-    var mins = (roadKm / AVG_SPEED_KPH) * 60;
+    var mins = (roadKm / TRUCK_AVG_SPEED_KPH) * 60;
     return { roadKm: roadKm, mins: mins };
   }
 
@@ -668,27 +688,12 @@ const socialLinks = [
     return km < 1 ? (km * 1000).toFixed(0) + ' m' : km.toFixed(1) + ' km';
   }
 
-  function formatTime(mins) {
-    if (mins < 60) return Math.round(mins) + ' min';
-    var h = Math.floor(mins / 60);
-    var m = Math.round(mins % 60);
-    return h + ' hr' + (m > 0 ? ' ' + m + ' min' : '');
-  }
-
   function getMinimumAppliedRoundTripMins(driveMins) {
     return Math.max(driveMins * 2, MIN_TRANSPORT_MINS);
   }
 
-  function getMinimumAppliedDriveMins(driveMins) {
-    return Math.max(driveMins, MIN_TRANSPORT_MINS / 2);
-  }
-
   function formatMinimumDisplayDistance(km) {
     return km < 10 ? '<10 km' : formatDistance(km);
-  }
-
-  function formatMinimumDisplayTime(mins) {
-    return mins <= 15 ? '<15 min' : formatTime(mins);
   }
 
   function shouldShowSkippedMidSteps(stepNumber) {
@@ -696,6 +701,40 @@ const socialLinks = [
       state.bookingMode === 'custom' &&
       state.bookingOriginStep === 1 &&
       (state.customerType === 'government' || state.customerType === 'utility');
+  }
+
+  function getNearestDropOffRecommendation(suburb) {
+    if (!suburb || suburb.lat == null || suburb.lng == null) return null;
+
+    var nearest = null;
+
+    for (var i = 0; i < DROP_OFF_POINTS.length; i++) {
+      var point = DROP_OFF_POINTS[i];
+      var straightKm = haversine(suburb.lat, suburb.lng, point.lat, point.lng);
+      var drive = estimateDrive(straightKm);
+      var candidate = {
+        name: point.name,
+        state: point.state,
+        roadKm: drive.roadKm
+      };
+
+      if (!nearest || candidate.roadKm < nearest.roadKm) nearest = candidate;
+    }
+
+    if (!nearest || nearest.roadKm > MAX_DROPOFF_RECOMMENDATION_KM) return null;
+    return nearest;
+  }
+
+  function buildOutsidePickupReason(suburb) {
+    var reason = 'Your location (' + formatSuburbLabel(suburb) +
+      ') is outside our standard collection radius from Bankstown.';
+    var dropOff = getNearestDropOffRecommendation(suburb);
+
+    if (!dropOff) {
+      reason += ' Please complete the form below and our sales team will provide a custom quote.';
+    }
+
+    return reason;
   }
 
   /* ───────────────── NAVIGATION ──────────── */
@@ -889,11 +928,18 @@ const socialLinks = [
     renderBookingLocationDropdown(searchAustralianPostcodes(q), q);
   }
 
-  function showCustomInquiryForm(reason, originStep) {
+  function showCustomInquiryForm(reason, originStep, nearestDropOffLabel) {
     state.bookingMode = 'custom';
     state.bookingOriginStep = originStep;
     state.customInquiryReason = reason;
+    state.nearestDropOffLabel = nearestDropOffLabel || '';
     showStep(5);
+  }
+
+  function showOutsidePickupForm(suburb) {
+    var dropOff = getNearestDropOffRecommendation(suburb);
+    var dropOffLabel = dropOff ? dropOff.name + ', ' + dropOff.state : '';
+    showCustomInquiryForm(buildOutsidePickupReason(suburb), 3, dropOffLabel);
   }
 
   function showQuoteResult(gateFee, transportFee, total) {
@@ -912,19 +958,19 @@ const socialLinks = [
     state.bookingMode = null;
     state.bookingOriginStep = 4;
     state.customInquiryReason = '';
+    state.nearestDropOffLabel = '';
 
     document.getElementById('result-summary').textContent =
       pricing.label + ' quote for ' + state.panelCount + ' panel' + (state.panelCount !== 1 ? 's' : '') +
-      ' — ' + state.selectedSuburb.name + ' (' + formatMinimumDisplayDistance(driveEst.roadKm) + ', ' + formatMinimumDisplayTime(getMinimumAppliedDriveMins(driveEst.mins)) + ' drive)';
+      ' — ' + state.selectedSuburb.name + ' (' + formatMinimumDisplayDistance(driveEst.roadKm) + ' collection distance)';
     document.getElementById('collection-summary').textContent =
       'We collect from ' + state.selectedSuburb.name + ' and include transport in this quote.';
 
     document.getElementById('r-gate-detail').textContent =
       '(' + state.panelCount + ' × ' + fmt(pricing.priceIncGst) + ')';
     document.getElementById('r-gate-fee').textContent = fmt(gateFee);
-    var roundTripMinsWithMinimum = getMinimumAppliedRoundTripMins(driveEst.mins);
     document.getElementById('r-transport-detail').textContent =
-      '(~' + formatTime(roundTripMinsWithMinimum) + ' round trip minimum + loading)';
+      '(truck transport, loading and toll allowance)';
     document.getElementById('r-transport-fee').textContent = fmt(transportFee);
     document.getElementById('r-total').textContent = fmt(total);
     document.getElementById('r-dropoff-gate-detail').textContent =
@@ -1132,6 +1178,10 @@ const socialLinks = [
           ? 'The invoice will be issued shortly. The specific Bankstown drop-off address will be provided once payment is received.'
           : '');
     bookingNotice.classList.toggle('hidden', !bookingNotice.textContent);
+    customQuoteRouting.classList.toggle('hidden', !(isCustom && state.nearestDropOffLabel));
+    nearestDropOffHeading.textContent = state.nearestDropOffLabel
+      ? 'Your nearest drop off point is ' + state.nearestDropOffLabel
+      : '';
 
     bookingNameLabel.textContent = isCustom ? 'Name' : 'Customer Name';
     bookingBusinessLabel.textContent = isCustom
@@ -1177,6 +1227,7 @@ const socialLinks = [
     state.bookingMode = null;
     state.bookingOriginStep = 4;
     state.customInquiryReason = '';
+    state.nearestDropOffLabel = '';
     state.quoteTotals = null;
     state.bookingStepRenderedAt = 0;
 
@@ -1332,22 +1383,13 @@ const socialLinks = [
     return exactMatches.concat(strongMatches, looseMatches).slice(0, 10);
   }
 
-  function renderQuoteLocationMessage(message, allowCustomQuote) {
+  function renderQuoteLocationMessage(message) {
     dropdown.innerHTML = '';
     acHighlight = -1;
 
     var item = document.createElement('div');
     item.className = 'ac-item ac-no-match';
     item.textContent = message;
-    if (allowCustomQuote !== false) {
-      item.addEventListener('mousedown', function (e) {
-        e.preventDefault();
-        showCustomInquiryForm(
-          "Our quote calculator can't yet provide an estimate for your area. Please complete the form below and our sales team will contact you.",
-          3
-        );
-      });
-    }
     dropdown.appendChild(item);
     dropdown.classList.add('open');
   }
@@ -1358,7 +1400,7 @@ const socialLinks = [
 
     if (results.length === 0) {
       if (query && query.length >= 2) {
-        renderQuoteLocationMessage('No suburb/postcode match — continue for a tailored quote');
+        renderQuoteLocationMessage('No suburb/postcode match. Check the entry, or press Get Quote for a tailored quote.');
       } else {
         closeDropdown();
       }
@@ -1397,23 +1439,14 @@ const socialLinks = [
     if (drive.roadKm > MAX_DISTANCE_KM) {
       state.distanceKm = straightKm;
       state.driveMins = drive.mins;
-      showCustomInquiryForm(
-        'Your location (' + formatSuburbLabel(s) + ') is approximately ' +
-        formatDistance(drive.roadKm) + ' from PV Industries, which is outside our standard collection radius of ' +
-        MAX_DISTANCE_KM + ' km from Bankstown. Please complete the form below and our sales team will provide a custom quote.',
-        3
-      );
+      showOutsidePickupForm(s);
     }
   }
-
-  var noMatchTimer = null;
 
   locInput.addEventListener('input', function () {
     state.selectedSuburb = null;
     var q = this.value.trim();
     var currentToken = ++quoteSearchToken;
-
-    if (noMatchTimer) clearTimeout(noMatchTimer);
 
     if (q.length < 2) {
       closeDropdown();
@@ -1421,37 +1454,18 @@ const socialLinks = [
     }
 
     if (!quoteSuburbs) {
-      renderQuoteLocationMessage('Loading Australian suburbs and postcodes...', false);
+      renderQuoteLocationMessage('Loading Australian suburbs and postcodes...');
       loadQuoteSuburbs().then(function () {
         if (currentToken !== quoteSearchToken || locInput.value.trim() !== q) return;
 
         var loadedResults = searchSuburbs(q);
         renderDropdown(loadedResults, q);
-        if (q.length >= 3 && loadedResults.length === 0) {
-          noMatchTimer = setTimeout(function () {
-            closeDropdown();
-            showCustomInquiryForm(
-              'For all enquiries outside of our instant quote area, please complete the form below and our sales team will contact you.',
-              3
-            );
-          }, 800);
-        }
       });
       return;
     }
 
     var results = searchSuburbs(q);
     renderDropdown(results, q);
-
-    if (q.length >= 3 && results.length === 0) {
-      noMatchTimer = setTimeout(function () {
-        closeDropdown();
-        showCustomInquiryForm(
-          'For all enquiries outside of our instant quote area, please complete the form below and our sales team will contact you.',
-          3
-        );
-      }, 800);
-    }
   });
 
   locInput.addEventListener('focus', function () {
@@ -1556,12 +1570,7 @@ const socialLinks = [
     state.driveMins = drive.mins;
 
     if (drive.roadKm > MAX_DISTANCE_KM) {
-      showCustomInquiryForm(
-        'Your location (' + formatSuburbLabel(state.selectedSuburb) + ') is approximately ' +
-        formatDistance(drive.roadKm) + ' from PV Industries, which is outside our standard collection radius of ' +
-        MAX_DISTANCE_KM + ' km from Bankstown. Please complete the form below and our sales team will provide a custom quote.',
-        3
-      );
+      showOutsidePickupForm(state.selectedSuburb);
       return;
     }
 
@@ -1699,9 +1708,13 @@ const socialLinks = [
     align-items: start;
     max-width: 980px;
     margin: 0 auto;
+    min-width: 0;
   }
 
-  .calculator-main { order: 2; }
+  .calculator-main {
+    order: 2;
+    min-width: 0;
+  }
   .calculator-sidebar,
   .sidebar-content,
   .sidebar-blocks { display: contents; }
@@ -1731,6 +1744,8 @@ const socialLinks = [
   /* ══════════ Card ══════════ */
   .calculator-card {
     position: relative;
+    width: 100%;
+    min-width: 0;
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1751,6 +1766,7 @@ const socialLinks = [
     align-items: center;
     justify-content: center;
     gap: 0;
+    width: 100%;
     margin-bottom: var(--space-10);
   }
 
@@ -1810,6 +1826,8 @@ const socialLinks = [
 
   .progress-line {
     width: 60px;
+    flex: 1 1 24px;
+    min-width: 16px;
     height: 2px;
     background: rgba(255, 255, 255, 0.1);
     margin: 0 var(--space-3);
@@ -1832,14 +1850,27 @@ const socialLinks = [
   .progress-fill.filled { transform: scaleX(1); }
 
   @media (max-width: 480px) {
+    .calculator-card {
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+    }
+
+    .step-dot {
+      width: 30px;
+      height: 30px;
+      font-size: var(--font-size-xs);
+    }
+
     .progress-line {
-      width: 24px;
+      width: auto;
+      flex-basis: 12px;
+      min-width: 8px;
       margin: 0 var(--space-1);
       margin-bottom: var(--space-6);
     }
 
     .step-label {
-      font-size: 10px;
+      font-size: 9px;
     }
   }
 
@@ -1875,10 +1906,12 @@ const socialLinks = [
   .calc-steps-wrapper {
     position: relative;
     min-height: 280px;
+    min-width: 0;
   }
 
   .calc-step {
     display: none;
+    min-width: 0;
     animation: fadeIn 0.35s ease-out;
   }
 
@@ -1912,6 +1945,22 @@ const socialLinks = [
     color: var(--color-neutral-200);
     font-size: var(--font-size-sm);
     line-height: 1.5;
+  }
+
+  .custom-quote-routing {
+    margin-bottom: var(--space-6);
+  }
+
+  .custom-routing-title {
+    margin-bottom: var(--space-3);
+  }
+
+  .custom-routing-dropoff {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    line-height: 1.35;
   }
 
   /* ══════════ Type Grid ══════════ */
@@ -2244,6 +2293,7 @@ const socialLinks = [
   }
 
   .quote-option-card {
+    min-width: 0;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-xl);
@@ -2320,6 +2370,7 @@ const socialLinks = [
   .quote-breakdown {
     width: 100%;
     max-width: 400px;
+    min-width: 0;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-lg);
@@ -2332,12 +2383,28 @@ const socialLinks = [
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    gap: var(--space-3);
     padding: var(--space-2) 0;
   }
 
-  .quote-label { font-size: var(--font-size-sm); color: var(--color-neutral-300); }
-  .quote-detail { color: var(--color-neutral-500); font-size: var(--font-size-xs); }
-  .quote-value { font-weight: 600; color: var(--color-neutral-100); font-size: var(--font-size-sm); }
+  .quote-label {
+    min-width: 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-300);
+  }
+  .quote-detail {
+    display: block;
+    color: var(--color-neutral-500);
+    font-size: var(--font-size-xs);
+    line-height: 1.4;
+  }
+  .quote-value {
+    flex-shrink: 0;
+    font-weight: 600;
+    color: var(--color-neutral-100);
+    font-size: var(--font-size-sm);
+    text-align: right;
+  }
   .quote-divider { height: 1px; background: rgba(255, 255, 255, 0.1); margin: var(--space-2) 0; }
 
   .quote-row.total .quote-label { font-weight: 600; color: var(--color-neutral-100); font-size: var(--font-size-base); }
@@ -2363,6 +2430,7 @@ const socialLinks = [
   .booking-form {
     width: 100%;
     max-width: 720px;
+    min-width: 0;
     text-align: left;
   }
 
@@ -2605,6 +2673,7 @@ const socialLinks = [
     align-items: center;
     gap: var(--space-2);
     margin-bottom: var(--space-4);
+    min-width: 0;
   }
 
   .sidebar-icon { color: var(--color-primary); flex-shrink: 0; }
@@ -2629,6 +2698,8 @@ const socialLinks = [
     display: inline-flex;
     align-items: center;
     gap: var(--space-1);
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .sidebar-link-icon {
@@ -2705,6 +2776,38 @@ const socialLinks = [
     .step-actions--form { flex-direction: column; }
     .step-actions--form .btn-back,
     .step-actions--form .btn-submit { width: 100%; justify-content: center; }
+  }
+
+  @media (max-width: 360px) {
+    .step-dot {
+      width: 28px;
+      height: 28px;
+    }
+
+    .step-label {
+      display: none;
+    }
+
+    .progress-line {
+      margin: 0 2px;
+    }
+
+    .quote-option-head {
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .quote-breakdown {
+      padding: var(--space-4);
+    }
+
+    .quote-row {
+      align-items: flex-start;
+    }
+
+    .quote-row.total .quote-value {
+      font-size: var(--font-size-lg);
+    }
   }
 
   @media (min-width: 768px) {
