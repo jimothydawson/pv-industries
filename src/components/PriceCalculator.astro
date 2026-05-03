@@ -4,19 +4,31 @@ const contactEmail = "contact@pvindustries.com.au";
 const dropOffLocations = [
   {
     state: "NSW",
-    dropOffs: ["Bankstown", "Dubbo", "Gosford", "Newcastle", "Thornleigh", "Woy Woy"]
+    dropOffs: [
+      { name: "Bankstown", mapUrl: "https://www.google.com/maps/search/?api=1&query=Bankstown%20NSW" },
+      { name: "Dubbo", mapUrl: "https://www.google.com/maps/search/?api=1&query=Dubbo%20NSW" },
+      { name: "Gosford", mapUrl: "https://www.google.com/maps/search/?api=1&query=Gosford%20NSW" },
+      { name: "Newcastle", mapUrl: "https://www.google.com/maps/search/?api=1&query=Newcastle%20NSW" },
+      { name: "Thornleigh", mapUrl: "https://www.google.com/maps/search/?api=1&query=Thornleigh%20NSW" },
+      { name: "Woy Woy", mapUrl: "https://www.google.com/maps/search/?api=1&query=Woy%20Woy%20NSW" }
+    ]
   },
   {
     state: "VIC",
-    dropOffs: ["Derrimut", "East Gippsland"]
+    dropOffs: [
+      { name: "Derrimut", mapUrl: "https://www.google.com/maps/search/?api=1&query=Derrimut%20VIC" },
+      { name: "East Gippsland", mapUrl: "https://www.google.com/maps/place/Bairnsdale+Regional+Landfill" }
+    ]
   },
   {
     state: "SA",
-    dropOffs: ["Mitcham"]
+    dropOffs: [
+      { name: "Mitcham", mapUrl: "https://www.google.com/maps/search/?api=1&query=Mitcham%20SA" }
+    ]
   },
   {
     state: "ACT",
-    dropOffs: ["Pickup only"]
+    dropOffs: [{ name: "Pickup only", mapUrl: null }]
   }
 ];
 
@@ -489,7 +501,20 @@ const socialLinks = [
                     <div class="loc-group">
                       <p class="loc-text">{location.state}</p>
                       {location.dropOffs.map((dropOff) => (
-                        <p class="loc-subtext">{dropOff}</p>
+                        <p class="loc-subtext">
+                          {dropOff.mapUrl ? (
+                            <a
+                              class="loc-link"
+                              href={dropOff.mapUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {dropOff.name}
+                            </a>
+                          ) : (
+                            dropOff.name
+                          )}
+                        </p>
                       ))}
                     </div>
                   ))}
@@ -565,15 +590,15 @@ const socialLinks = [
   };
 
   var DROP_OFF_POINTS = [
-    { name: 'Bankstown', state: 'NSW', lat: -33.92, lng: 151.03 },
-    { name: 'Dubbo', state: 'NSW', lat: -32.2, lng: 148.9 },
-    { name: 'Gosford', state: 'NSW', lat: -33.11, lng: 151.14 },
-    { name: 'Newcastle', state: 'NSW', lat: -32.94, lng: 151.77 },
-    { name: 'Thornleigh', state: 'NSW', lat: -33.74, lng: 151.07 },
-    { name: 'Woy Woy', state: 'NSW', lat: -33.5, lng: 151.33 },
-    { name: 'Derrimut', state: 'VIC', lat: -37.97, lng: 144.58 },
-    { name: 'East Gippsland', state: 'VIC', lat: -37.83, lng: 147.63 },
-    { name: 'Mitcham', state: 'SA', lat: -34.99, lng: 138.65 }
+    { name: 'Bankstown', state: 'NSW', lat: -33.92, lng: 151.03, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Bankstown%20NSW' },
+    { name: 'Dubbo', state: 'NSW', lat: -32.2, lng: 148.9, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Dubbo%20NSW' },
+    { name: 'Gosford', state: 'NSW', lat: -33.11, lng: 151.14, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Gosford%20NSW' },
+    { name: 'Newcastle', state: 'NSW', lat: -32.94, lng: 151.77, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Newcastle%20NSW' },
+    { name: 'Thornleigh', state: 'NSW', lat: -33.74, lng: 151.07, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Thornleigh%20NSW' },
+    { name: 'Woy Woy', state: 'NSW', lat: -33.5, lng: 151.33, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Woy%20Woy%20NSW' },
+    { name: 'Derrimut', state: 'VIC', lat: -37.97, lng: 144.58, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Derrimut%20VIC' },
+    { name: 'East Gippsland', state: 'VIC', lat: -37.83, lng: 147.63, mapUrl: 'https://www.google.com/maps/place/Bairnsdale+Regional+Landfill' },
+    { name: 'Mitcham', state: 'SA', lat: -34.99, lng: 138.65, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Mitcham%20SA' }
   ];
 
   function getCustomerTypeLabel(type) {
@@ -595,6 +620,7 @@ const socialLinks = [
     bookingOriginStep: 4,
     customInquiryReason: '',
     nearestDropOffLabel: '',
+    nearestDropOffUrl: '',
     quoteTotals: null,
     bookingStepRenderedAt: 0
   };
@@ -715,6 +741,7 @@ const socialLinks = [
       var candidate = {
         name: point.name,
         state: point.state,
+        mapUrl: point.mapUrl,
         roadKm: drive.roadKm
       };
 
@@ -928,18 +955,20 @@ const socialLinks = [
     renderBookingLocationDropdown(searchAustralianPostcodes(q), q);
   }
 
-  function showCustomInquiryForm(reason, originStep, nearestDropOffLabel) {
+  function showCustomInquiryForm(reason, originStep, nearestDropOffLabel, nearestDropOffUrl) {
     state.bookingMode = 'custom';
     state.bookingOriginStep = originStep;
     state.customInquiryReason = reason;
     state.nearestDropOffLabel = nearestDropOffLabel || '';
+    state.nearestDropOffUrl = nearestDropOffUrl || '';
     showStep(5);
   }
 
   function showOutsidePickupForm(suburb) {
     var dropOff = getNearestDropOffRecommendation(suburb);
     var dropOffLabel = dropOff ? dropOff.name + ', ' + dropOff.state : '';
-    showCustomInquiryForm(buildOutsidePickupReason(suburb), 3, dropOffLabel);
+    var dropOffUrl = dropOff ? dropOff.mapUrl : '';
+    showCustomInquiryForm(buildOutsidePickupReason(suburb), 3, dropOffLabel, dropOffUrl);
   }
 
   function showQuoteResult(gateFee, transportFee, total) {
@@ -959,6 +988,7 @@ const socialLinks = [
     state.bookingOriginStep = 4;
     state.customInquiryReason = '';
     state.nearestDropOffLabel = '';
+    state.nearestDropOffUrl = '';
 
     document.getElementById('result-summary').textContent =
       pricing.label + ' quote for ' + state.panelCount + ' panel' + (state.panelCount !== 1 ? 's' : '') +
@@ -1179,9 +1209,20 @@ const socialLinks = [
           : '');
     bookingNotice.classList.toggle('hidden', !bookingNotice.textContent);
     customQuoteRouting.classList.toggle('hidden', !(isCustom && state.nearestDropOffLabel));
-    nearestDropOffHeading.textContent = state.nearestDropOffLabel
-      ? 'Your nearest drop off point is ' + state.nearestDropOffLabel
-      : '';
+    nearestDropOffHeading.textContent = '';
+    if (state.nearestDropOffLabel) {
+      nearestDropOffHeading.appendChild(document.createTextNode('Your nearest drop off point is '));
+      if (state.nearestDropOffUrl) {
+        var nearestDropOffLink = document.createElement('a');
+        nearestDropOffLink.href = state.nearestDropOffUrl;
+        nearestDropOffLink.target = '_blank';
+        nearestDropOffLink.rel = 'noopener noreferrer';
+        nearestDropOffLink.textContent = state.nearestDropOffLabel;
+        nearestDropOffHeading.appendChild(nearestDropOffLink);
+      } else {
+        nearestDropOffHeading.appendChild(document.createTextNode(state.nearestDropOffLabel));
+      }
+    }
 
     bookingNameLabel.textContent = isCustom ? 'Name' : 'Customer Name';
     bookingBusinessLabel.textContent = isCustom
@@ -1228,6 +1269,7 @@ const socialLinks = [
     state.bookingOriginStep = 4;
     state.customInquiryReason = '';
     state.nearestDropOffLabel = '';
+    state.nearestDropOffUrl = '';
     state.quoteTotals = null;
     state.bookingStepRenderedAt = 0;
 
@@ -1961,6 +2003,12 @@ const socialLinks = [
     font-size: var(--font-size-xl);
     font-weight: 600;
     line-height: 1.35;
+  }
+
+  .custom-routing-dropoff a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
   /* ══════════ Type Grid ══════════ */
@@ -2721,6 +2769,19 @@ const socialLinks = [
     padding-left: var(--space-4);
     line-height: 1.6;
     color: var(--color-neutral-400);
+  }
+
+  .loc-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgba(148, 163, 184, 0.45);
+    text-underline-offset: 3px;
+    transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
+  }
+
+  .loc-link:hover {
+    color: var(--color-primary);
+    text-decoration-color: var(--color-primary);
   }
 
   .sidebar-social {
