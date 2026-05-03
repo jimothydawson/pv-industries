@@ -33,6 +33,10 @@ const socialLinks = [
 
       <!-- Calculator Card -->
       <div class="calculator-main">
+        <div class="calculator-intro">
+          <h2 class="calculator-intro-title">Instant Quote Calculator</h2>
+        </div>
+
         <div class="calculator-card">
 
           <!-- Progress Steps -->
@@ -447,7 +451,7 @@ const socialLinks = [
       <div class="calculator-sidebar">
         <div class="sidebar-content">
           <div class="sidebar-header">
-            <h2 class="sidebar-title">Get in touch</h2>
+            <h1 class="sidebar-title">Get in touch</h1>
           </div>
 
           <div class="sidebar-blocks">
@@ -457,10 +461,13 @@ const socialLinks = [
                   <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <h3 class="sidebar-block-title">Contact us</h3>
-              </div>
-              <div class="sidebar-block-content">
-                <p>Email: <a href={`mailto:${contactEmail}`} class="sidebar-link">{contactEmail}</a></p>
+                <a href={`mailto:${contactEmail}`} class="sidebar-link sidebar-link--icon">
+                  {contactEmail}
+                  <svg class="sidebar-link-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M6 3H13V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13 3L5 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
               </div>
             </div>
 
@@ -1688,23 +1695,37 @@ const socialLinks = [
   /* ══════════ Layout ══════════ */
   .calculator-layout {
     display: grid;
-    gap: var(--space-12);
+    gap: var(--space-8);
     align-items: start;
+    max-width: 980px;
+    margin: 0 auto;
   }
 
-  @media (min-width: 1024px) {
-    .calculator-layout {
-      grid-template-columns: 1fr 380px;
-      gap: var(--space-16);
-    }
+  .calculator-main { order: 2; }
+  .calculator-sidebar,
+  .sidebar-content,
+  .sidebar-blocks { display: contents; }
+
+  .calculator-intro {
+    margin-bottom: var(--space-6);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
   }
 
-  .calculator-main { order: 1; }
-  .calculator-sidebar { order: 2; position: relative; }
+  .calculator-intro-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    color: var(--color-neutral-100);
+    margin: 0 0 var(--space-3) 0;
+  }
 
-  @media (min-width: 1024px) {
-    .calculator-main { order: 1; }
-    .calculator-sidebar { order: 2; }
+  .calculator-intro-text {
+    color: var(--color-neutral-400);
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 760px;
   }
 
   /* ══════════ Card ══════════ */
@@ -2545,25 +2566,39 @@ const socialLinks = [
   .btn-restart:hover { color: var(--color-neutral-100); }
 
   /* ══════════ Sidebar ══════════ */
-  .sidebar-content {
+  .sidebar-header,
+  .sidebar-block,
+  .sidebar-social {
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 0.8s ease-out 0.4s forwards;
   }
 
-  .sidebar-header { margin-bottom: var(--space-10); }
+  .sidebar-header {
+    order: 1;
+    margin-bottom: calc(var(--space-8) * -1);
+  }
 
   .sidebar-title {
-    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-size: clamp(2.5rem, 6vw, 4rem);
     font-weight: 600;
     color: var(--color-neutral-100);
     margin: 0;
-    max-width: 350px;
   }
 
-  .sidebar-blocks { margin-bottom: var(--space-10); }
-  .sidebar-block { margin-bottom: var(--space-8); }
-  .sidebar-block:last-child { margin-bottom: 0; }
+  .sidebar-block {
+    margin-bottom: 0;
+  }
+
+  .sidebar-block:first-child {
+    order: 1;
+    margin-top: var(--space-2);
+  }
+
+  .sidebar-block:last-child {
+    order: 3;
+    margin-top: var(--space-4);
+  }
 
   .sidebar-block-header {
     display: flex;
@@ -2585,12 +2620,23 @@ const socialLinks = [
   .sidebar-block-content p { margin: 0; line-height: 1.6; }
 
   .sidebar-link {
-    color: var(--color-neutral-100);
+    color: var(--color-primary);
     text-decoration: none;
     transition: color var(--transition-normal);
   }
 
-  .sidebar-link:hover { color: var(--color-primary); }
+  .sidebar-link--icon {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .sidebar-link-icon {
+    flex-shrink: 0;
+    transform: translateY(-1px);
+  }
+
+  .sidebar-link:hover { color: var(--color-primary-dark); }
   .loc-section + .loc-section { margin-top: var(--space-5); }
   .loc-group + .loc-group { margin-top: var(--space-3); }
   .loc-text {
@@ -2606,7 +2652,10 @@ const socialLinks = [
     color: var(--color-neutral-400);
   }
 
-  .sidebar-social { margin-top: var(--space-10); }
+  .sidebar-social {
+    order: 4;
+    margin-top: var(--space-2);
+  }
 
   .social-heading {
     font-size: var(--font-size-lg);
@@ -2648,16 +2697,11 @@ const socialLinks = [
     display: none;
   }
 
-  @media (min-width: 1024px) {
-    .sidebar-divider { display: block; }
-  }
-
   /* ══════════ Responsive ══════════ */
   @media (max-width: 767px) {
     .calculator-section { padding: var(--space-16) 0; }
     .calculator-layout { gap: var(--space-8); }
-    .sidebar-header { margin-bottom: var(--space-8); }
-    .sidebar-blocks { margin-bottom: var(--space-8); }
+    .sidebar-header { margin-bottom: calc(var(--space-6) * -1); }
     .step-actions--form { flex-direction: column; }
     .step-actions--form .btn-back,
     .step-actions--form .btn-submit { width: 100%; justify-content: center; }
@@ -2672,8 +2716,11 @@ const socialLinks = [
 
   /* ══════════ Reduced Motion ══════════ */
   @media (prefers-reduced-motion: reduce) {
+    .calculator-intro,
     .calculator-card,
-    .sidebar-content {
+    .sidebar-header,
+    .sidebar-block,
+    .sidebar-social {
       opacity: 1;
       transform: none;
       animation: none;
