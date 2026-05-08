@@ -288,7 +288,7 @@ const socialLinks = [
               <div class="booking-form-grid">
                 <label class="booking-field">
                   <span class="booking-label" id="booking-name-label">Customer Name</span>
-                  <input class="booking-input" type="text" name="customerName" autocomplete="name" required />
+                  <input class="booking-input" type="text" name="customerName" autocomplete="name" maxlength="120" required />
                 </label>
 
                 <label class="booking-field hidden" id="field-business-name">
@@ -307,12 +307,12 @@ const socialLinks = [
 
                 <label class="booking-field">
                   <span class="booking-label" id="booking-phone-label">Contact Number</span>
-                  <input class="booking-input" type="tel" name="contactNumber" autocomplete="tel" required />
+                  <input class="booking-input" type="tel" name="contactNumber" autocomplete="tel" inputmode="tel" maxlength="32" required />
                 </label>
 
                 <label class="booking-field">
                   <span class="booking-label">Email</span>
-                  <input class="booking-input" type="email" name="email" autocomplete="email" required />
+                  <input class="booking-input" type="email" name="email" autocomplete="email" maxlength="160" required />
                 </label>
 
                 <label class="booking-field">
@@ -332,7 +332,7 @@ const socialLinks = [
 
                 <label class="booking-field booking-field--date hidden" id="field-dropoff-date">
                   <span class="booking-label">Preferred Drop-Off Date</span>
-                  <input class="booking-input" type="date" name="preferredDropOffDate" />
+                  <input class="booking-input" id="booking-dropoff-date" type="date" name="preferredDropOffDate" />
                 </label>
 
                 <label class="booking-field booking-field--full hidden" id="field-project-details">
@@ -654,6 +654,7 @@ const socialLinks = [
   var businessField = document.getElementById('field-business-name');
   var abnField = document.getElementById('field-abn');
   var dropOffDateField = document.getElementById('field-dropoff-date');
+  var bookingDropOffDate = document.getElementById('booking-dropoff-date');
   var projectDetailsField = document.getElementById('field-project-details');
   var btnBackToQuoteOptions = document.getElementById('btn-back-to-quote-options');
   var bookingLocationHighlight = -1;
@@ -1008,6 +1009,69 @@ const socialLinks = [
     return (formData.get(fieldName) || '').toString().trim();
   }
 
+  function countLetters(value) {
+    var matches = value.match(/\p{L}/gu);
+    return matches ? matches.length : 0;
+  }
+
+  function looksLikePersonName(name) {
+    var trimmed = name.trim();
+    if (trimmed.length < 2) return false;
+    if (countLetters(trimmed) < 2) return false;
+    if (/https?:|www\.|@/i.test(trimmed)) return false;
+    if (/^\d+$/.test(trimmed.replace(/\s+/g, ''))) return false;
+    return true;
+  }
+
+  function getEmailParts(email) {
+    var parts = email.toLowerCase().split('@');
+    if (parts.length !== 2) return null;
+
+    return {
+      local: parts[0],
+      domain: parts[1]
+    };
+  }
+
+  function looksLikeDisposableOrSpamEmail(email) {
+    var parts = getEmailParts(email);
+    if (!parts) return true;
+
+    var numericMailbox = /^\d{7,}$/.test(parts.local);
+    var highRiskDomain = /^(qq\.com|163\.com|126\.com|mail\.ru|yandex\.ru)$/.test(parts.domain);
+
+    if (parts.domain === 'qq.com') return true;
+    if (numericMailbox && highRiskDomain) return true;
+
+    return false;
+  }
+
+  function normalizeAustralianPhone(phone) {
+    var compact = phone.replace(/[^\d+]/g, '');
+
+    if (compact.indexOf('+') > 0) return '';
+    if (compact.indexOf('+') === 0) {
+      if (compact.indexOf('+61') !== 0) return '';
+      compact = '0' + compact.slice(3);
+    } else if (compact.indexOf('0061') === 0) {
+      compact = '0' + compact.slice(4);
+    } else if (compact.indexOf('61') === 0 && compact.length === 11) {
+      compact = '0' + compact.slice(2);
+    }
+
+    return compact;
+  }
+
+  function looksLikeAustralianPhone(phone) {
+    var normalized = normalizeAustralianPhone(phone);
+
+    return /^04\d{8}$/.test(normalized) ||
+      /^0[2378]\d{8}$/.test(normalized) ||
+      /^13\d{4}$/.test(normalized) ||
+      /^1300\d{6}$/.test(normalized) ||
+      /^1800\d{6}$/.test(normalized);
+  }
+
   function looksLikeUsPhone(phone) {
     var compact = phone.replace(/[\s().-]/g, '');
     return compact.indexOf('+1') === 0 || compact.indexOf('001') === 0;
@@ -1027,6 +1091,50 @@ const socialLinks = [
     return looksLikeUsPhone(phone) || containsNonAustralianLocation(combinedLocationText);
   }
 
+  function toDateInputValue(date) {
+    return date.getFullYear() + '-' +
+      padSubjectPart(date.getMonth() + 1) + '-' +
+      padSubjectPart(date.getDate());
+  }
+
+  function getDateOnly(value) {
+    var parts = value.split('-').map(function (part) {
+      return parseInt(part, 10);
+    });
+
+    if (parts.length !== 3 || parts.some(function (part) { return isNaN(part); })) return null;
+
+    return new Date(parts[0], parts[1] - 1, parts[2]);
+  }
+
+  function isValidDropOffDate(value) {
+    var selected = getDateOnly(value);
+    if (!selected) return false;
+
+    var earliest = new Date();
+    earliest.setHours(0, 0, 0, 0);
+    earliest.setDate(earliest.getDate() + 1);
+
+    var latest = new Date();
+    latest.setHours(0, 0, 0, 0);
+    latest.setMonth(latest.getMonth() + 6);
+
+    return selected >= earliest && selected <= latest;
+  }
+
+  function setDropOffDateBounds() {
+    var earliest = new Date();
+    earliest.setHours(0, 0, 0, 0);
+    earliest.setDate(earliest.getDate() + 1);
+
+    var latest = new Date();
+    latest.setHours(0, 0, 0, 0);
+    latest.setMonth(latest.getMonth() + 6);
+
+    bookingDropOffDate.min = toDateInputValue(earliest);
+    bookingDropOffDate.max = toDateInputValue(latest);
+  }
+
   function validateBookingSubmission(formData) {
     if (getFieldValue(formData, 'bot-field') || getFieldValue(formData, 'website')) {
       return {
@@ -1043,10 +1151,38 @@ const socialLinks = [
       };
     }
 
+    if (!looksLikePersonName(getFieldValue(formData, 'customerName'))) {
+      return {
+        ok: false,
+        message: 'Please enter your real name so our team knows who to contact.'
+      };
+    }
+
+    if (looksLikeDisposableOrSpamEmail(getFieldValue(formData, 'email'))) {
+      return {
+        ok: false,
+        message: 'Please use a standard business or personal email address, or email ' + CONTACT_EMAIL + ' directly.'
+      };
+    }
+
+    if (!looksLikeAustralianPhone(getFieldValue(formData, 'contactNumber'))) {
+      return {
+        ok: false,
+        message: 'Please enter an Australian phone number, or email ' + CONTACT_EMAIL + ' if you need to use an international number.'
+      };
+    }
+
     if (shouldBlockNonAustralianLead(formData)) {
       return {
         ok: false,
         message: 'PV Industries currently services Australian solar panel projects only. If your project is in Australia, please use an Australian project location and contact number, or email ' + CONTACT_EMAIL + '.'
+      };
+    }
+
+    if (state.bookingMode === 'dropoff' && !isValidDropOffDate(getFieldValue(formData, 'preferredDropOffDate'))) {
+      return {
+        ok: false,
+        message: 'Please choose a drop-off date from tomorrow through the next six months.'
       };
     }
 
@@ -1196,6 +1332,7 @@ const socialLinks = [
     bookingLocationInput.placeholder = isCustom ? 'e.g. Parramatta or 2150' : '';
     bookingLocationInput.setAttribute('autocomplete', isCustom ? 'off' : 'street-address');
     bookingBackLabel.textContent = state.bookingOriginStep === 4 ? 'Back to Pickup / Drop-Off Choice' : 'Back';
+    setDropOffDateBounds();
 
     configurePanelCountField(
       !isCustom,
@@ -1677,6 +1814,7 @@ const socialLinks = [
   });
 
   /* ──────────── INIT ─────────────────────── */
+  setDropOffDateBounds();
   showStep(1);
   updateQuoteOptionSelection();
   toggleConditionalField(collectionAddressField, 'collectionAddress', true, true);

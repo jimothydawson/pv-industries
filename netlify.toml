@@ -5,6 +5,10 @@
 [build.environment]
   NODE_VERSION = "18"
 
+[[edge_functions]]
+  path = "/"
+  function = "filter-quote-spam"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
