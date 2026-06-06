@@ -284,6 +284,7 @@ const socialLinks = [
               <input type="hidden" name="transportFee" id="booking-transport-fee" value="" />
               <input type="hidden" name="quoteTotal" id="booking-quote-total" value="" />
               <input type="hidden" name="subject" id="booking-subject" value="" />
+              <input type="hidden" name="quoteRequestId" id="booking-quote-request-id" value="" />
 
               <div class="booking-form-grid">
                 <label class="booking-field">
@@ -397,6 +398,7 @@ const socialLinks = [
             <input type="text" name="transportFee" />
             <input type="text" name="quoteTotal" />
             <input type="text" name="subject" />
+            <input type="text" name="quoteRequestId" />
             <input type="text" name="website" />
           </form>
 
@@ -421,6 +423,7 @@ const socialLinks = [
             <input type="text" name="transportFee" />
             <input type="text" name="quoteTotal" />
             <input type="text" name="subject" />
+            <input type="text" name="quoteRequestId" />
             <input type="text" name="website" />
           </form>
 
@@ -445,6 +448,7 @@ const socialLinks = [
             <input type="text" name="transportFee" />
             <input type="text" name="quoteTotal" />
             <input type="text" name="subject" />
+            <input type="text" name="quoteRequestId" />
             <input type="text" name="website" />
           </form>
 
@@ -651,6 +655,7 @@ const socialLinks = [
   var bookingTransportFee = document.getElementById('booking-transport-fee');
   var bookingQuoteTotal = document.getElementById('booking-quote-total');
   var bookingSubject = document.getElementById('booking-subject');
+  var bookingQuoteRequestId = document.getElementById('booking-quote-request-id');
   var businessField = document.getElementById('field-business-name');
   var abnField = document.getElementById('field-abn');
   var dropOffDateField = document.getElementById('field-dropoff-date');
@@ -698,6 +703,20 @@ const socialLinks = [
 
   function formatMinimumDisplayDistance(km) {
     return km < 10 ? '<10 km' : formatDistance(km);
+  }
+
+  function createQuoteRequestId() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+      return window.crypto.randomUUID();
+    }
+    return 'quote-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+  }
+
+  function ensureQuoteRequestId() {
+    if (!bookingQuoteRequestId.value) {
+      bookingQuoteRequestId.value = createQuoteRequestId();
+    }
+    return bookingQuoteRequestId.value;
   }
 
   function shouldShowSkippedMidSteps(stepNumber) {
@@ -1376,6 +1395,7 @@ const socialLinks = [
     panelHint.textContent = '';
     locHint.textContent = '';
     bookingForm.reset();
+    bookingQuoteRequestId.value = createQuoteRequestId();
     setBookingFormStatus();
     closeDropdown();
     closeBookingLocationDropdown();
@@ -1762,6 +1782,7 @@ const socialLinks = [
   bookingForm.addEventListener('submit', function (event) {
     event.preventDefault();
     if (!bookingForm.reportValidity()) return;
+    ensureQuoteRequestId();
     populateBookingHiddenFields(state.bookingMode);
     setBookingFormStatus('pending', 'Sending your request...');
 
@@ -1784,6 +1805,7 @@ const socialLinks = [
       if (!response.ok) throw new Error('Request failed');
 
       bookingForm.reset();
+      bookingQuoteRequestId.value = createQuoteRequestId();
       configurePanelCountField(
         state.bookingMode !== 'custom',
         state.bookingMode === 'custom',
@@ -1815,6 +1837,7 @@ const socialLinks = [
 
   /* ──────────── INIT ─────────────────────── */
   setDropOffDateBounds();
+  bookingQuoteRequestId.value = createQuoteRequestId();
   showStep(1);
   updateQuoteOptionSelection();
   toggleConditionalField(collectionAddressField, 'collectionAddress', true, true);

@@ -17,6 +17,50 @@ function block(message, status = 422) {
   });
 }
 
+function getEnv(name) {
+  if (typeof Netlify !== 'undefined' && Netlify.env && typeof Netlify.env.get === 'function') {
+    return Netlify.env.get(name) || '';
+  }
+  if (typeof Deno !== 'undefined' && Deno.env && typeof Deno.env.get === 'function') {
+    return Deno.env.get(name) || '';
+  }
+  return '';
+}
+
+function formDataToPayload(formData) {
+  const payload = {};
+  for (const [key, value] of formData.entries()) {
+    if (typeof value === 'string') payload[key] = value;
+  }
+  if (!payload.quoteRequestId) {
+    payload.quoteRequestId = crypto.randomUUID();
+  }
+  return payload;
+}
+
+async function forwardQuoteToCrm(formData) {
+  const ingestUrl = getEnv('CRM_QUOTE_INGEST_URL');
+  const ingestSecret = getEnv('CRM_INGEST_SECRET');
+
+  if (!ingestUrl || !ingestSecret) return;
+
+  try {
+    const response = await fetch(ingestUrl, {
+      method: 'POST',
+      headers: {
+        'authorization': `Bearer ${ingestSecret}`,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(formDataToPayload(formData))
+    });
+    if (!response.ok) {
+      console.error('CRM quote forwarding returned status', response.status);
+    }
+  } catch (error) {
+    console.error('CRM quote forwarding failed', error);
+  }
+}
+
 function countLetters(value) {
   const matches = value.match(/\p{L}/gu);
   return matches ? matches.length : 0;
@@ -163,6 +207,8 @@ export default async function filterQuoteSpam(request, context) {
       ? block('Thanks, your request has been received.', 200)
       : block(validation.message);
   }
+
+  await forwardQuoteToCrm(formData);
 
   return context.next();
 }
