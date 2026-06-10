@@ -39,11 +39,11 @@ function formDataToPayload(formData) {
 }
 
 async function forwardQuoteToCrm(formData) {
-  const ingestUrl = getEnv('CRM_QUOTE_INGEST_URL') || 'https://pv-crm.vercel.app/api/public-quotes';
+  const ingestUrl = getEnv('CRM_QUOTE_INGEST_URL');
   const ingestSecret = getEnv('CRM_INGEST_SECRET');
 
-  if (!ingestSecret) {
-    console.error('CRM quote forwarding skipped: CRM_INGEST_SECRET is not configured.');
+  if (!ingestUrl || !ingestSecret) {
+    console.error('CRM quote forwarding skipped: CRM_QUOTE_INGEST_URL or CRM_INGEST_SECRET is not configured.');
     return;
   }
 
