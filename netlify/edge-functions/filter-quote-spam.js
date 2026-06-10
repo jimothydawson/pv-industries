@@ -39,10 +39,13 @@ function formDataToPayload(formData) {
 }
 
 async function forwardQuoteToCrm(formData) {
-  const ingestUrl = getEnv('CRM_QUOTE_INGEST_URL');
+  const ingestUrl = getEnv('CRM_QUOTE_INGEST_URL') || 'https://pv-crm.vercel.app/api/public-quotes';
   const ingestSecret = getEnv('CRM_INGEST_SECRET');
 
-  if (!ingestUrl || !ingestSecret) return;
+  if (!ingestSecret) {
+    console.error('CRM quote forwarding skipped: CRM_INGEST_SECRET is not configured.');
+    return;
+  }
 
   try {
     const response = await fetch(ingestUrl, {
@@ -54,7 +57,7 @@ async function forwardQuoteToCrm(formData) {
       body: JSON.stringify(formDataToPayload(formData))
     });
     if (!response.ok) {
-      console.error('CRM quote forwarding returned status', response.status);
+      console.error('CRM quote forwarding returned status', response.status, await response.text());
     }
   } catch (error) {
     console.error('CRM quote forwarding failed', error);
